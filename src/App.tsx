@@ -5,12 +5,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import React from "react";
-import { HomePage } from "@/pages";
+import { Home, Login, Register } from "@pages";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/home" element={<HomePage />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/register" element={<Register />} />
     </Route>
   )
 );
