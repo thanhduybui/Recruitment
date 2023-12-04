@@ -6,7 +6,7 @@ type DropDownItemProps = {
 
 export default function DropDownItem(props: DropDownItemProps) {
   return (
-    <ListItem style={{ margin: 0 }}>
+    <ListItem style={{ margin: 0, padding: 0 }}>
       <ListItemButton>
         <ListItemText primary={props.name} />
       </ListItemButton>

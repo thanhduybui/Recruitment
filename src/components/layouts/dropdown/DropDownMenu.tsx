@@ -1,11 +1,17 @@
 import { List } from "@mui/material";
 import { DropDownItem } from "@components/layouts";
 
-export default function DropDownMenu() {
+type DropDownMenuProps = {
+  children?: React.ReactNode;
+  items?: string[];
+};
+
+export default function DropDownMenu(props: DropDownMenuProps) {
   return (
     <List>
-      <DropDownItem name="Việc làm mới nhất"></DropDownItem>
-      <DropDownItem name="Việc làm đã lưu"></DropDownItem>
+      {props.items?.map((item) => (
+        <DropDownItem name={item} />
+      ))}
     </List>
   );
 }
