@@ -1,5 +1,5 @@
 import { Header } from "@components/layouts/header";
-import { RegisterForm } from "@features/authentication";
+import { RegisterForm } from "@features/authentication/components";
 
 export default function Register() {
   return (
