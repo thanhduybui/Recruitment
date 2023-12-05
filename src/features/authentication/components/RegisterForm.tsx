@@ -4,6 +4,7 @@ import {
   PassFormControl,
   NormalFormControl,
   FormHeader,
+  FormContainer,
 } from "@components/form";
 import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
@@ -11,7 +12,7 @@ import OauthLogin from "./OauthLogin";
 export default function RegisterForm() {
   return (
     <Container maxWidth="md" fixed>
-      <form className="m-auto w-2/3 p-4 pt-20">
+      <FormContainer>
         <FormHeader
           title="Chào mừng bạn đến với Jobhunt"
           subtitle="Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng"
@@ -34,7 +35,7 @@ export default function RegisterForm() {
           </Button>
         </FormGroup>
         <OauthLogin />
-      </form>
+      </FormContainer>
     </Container>
   );
 }
