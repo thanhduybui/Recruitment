@@ -1,4 +1,4 @@
-import { List } from "@mui/material";
+import List from "@mui/material/List";
 import { DropDownItem } from "@components/layouts";
 
 type DropDownMenuProps = {
