@@ -58,35 +58,60 @@ export default function AdvancedFilter() {
       <Select
         initValue={initField}
         options={fields}
-        startIcon={<BusinessOutlinedIcon color="primary" />}
+        startIcon={
+          <BusinessOutlinedIcon
+            sx={{ width: "24px", height: "24px" }}
+            color="primary"
+          />
+        }
         styles="col-span-2"
         size="sm"
       />
       <Select
         initValue={initMajor}
         options={majors}
-        startIcon={<AppsOutlinedIcon color="primary" />}
+        startIcon={
+          <AppsOutlinedIcon
+            sx={{ width: "24px", height: "24px" }}
+            color="primary"
+          />
+        }
         styles="col-span-2"
         size="sm"
       />
       <Select
         initValue={initPosition}
         options={positions}
-        startIcon={<ChairAltOutlinedIcon color="primary" />}
+        startIcon={
+          <ChairAltOutlinedIcon
+            sx={{ width: "24px", height: "24px" }}
+            color="primary"
+          />
+        }
         styles="col-span-2"
         size="sm"
       />
       <Select
         initValue={initWorkTime}
         options={workTimes}
-        startIcon={<CasesOutlinedIcon color="primary" />}
+        startIcon={
+          <CasesOutlinedIcon
+            sx={{ width: "24px", height: "24px" }}
+            color="primary"
+          />
+        }
         styles="col-span-2"
         size="sm"
       />
       <Select
         initValue={postType}
         options={postTypes}
-        startIcon={<StarBorderOutlinedIcon color="primary" />}
+        startIcon={
+          <StarBorderOutlinedIcon
+            sx={{ width: "24px", height: "24px" }}
+            color="primary"
+          />
+        }
         styles="col-span-2"
         size="sm"
       />

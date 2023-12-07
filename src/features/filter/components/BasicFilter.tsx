@@ -74,19 +74,34 @@ export default function BasicFilter() {
       <Select
         initValue={initLocation}
         options={locations}
-        startIcon={<LocationOnOutlinedIcon color="primary" />}
+        startIcon={
+          <LocationOnOutlinedIcon
+            sx={{ width: "24px", height: "24px" }}
+            color="primary"
+          />
+        }
         styles="col-span-2"
       />
       <Select
         initValue={initExpirience}
         options={expiriences}
-        startIcon={<StarBorderOutlinedIcon color="primary" />}
+        startIcon={
+          <StarBorderOutlinedIcon
+            sx={{ width: "24px", height: "24px" }}
+            color="primary"
+          />
+        }
         styles="col-span-2"
       />
       <Select
         initValue={initSalaryRange}
         options={salaryRanges}
-        startIcon={<AttachMoneyOutlinedIcon color="primary" />}
+        startIcon={
+          <AttachMoneyOutlinedIcon
+            sx={{ width: "24px", height: "24px" }}
+            color="primary"
+          />
+        }
         styles="col-span-2"
       />
       <Button

@@ -43,8 +43,8 @@ export default function Select(props: SelectProps) {
     <div ref={selectRef} className={`relative font-medium ${props.styles}`}>
       <div
         className={`bg-white w-full ${
-          props.size === "sm" ? "p-1" : "p-2"
-        }  flex items-center box-shadow border-2 text-sm
+          props.size === "sm" ? "p-1 text-xs" : "text-sm p-2"
+        }  flex items-center box-shadow border-2
        border-gray-150 rounded-md justify-between overflow-hidden ${
          open ? "border-primary-600 box-shadow inset" : ""
        }`}
