@@ -6,6 +6,7 @@ type SelectProps = {
   options?: { value: string; name: string }[];
   initValue?: { value: string; name: string };
   styles?: string;
+  size?: string;
 };
 
 export default function Select(props: SelectProps) {
@@ -41,7 +42,9 @@ export default function Select(props: SelectProps) {
   return (
     <div ref={selectRef} className={`relative font-medium ${props.styles}`}>
       <div
-        className={`bg-white w-full p-2  flex items-center box-shadow border-2 text-sm
+        className={`bg-white w-full ${
+          props.size === "sm" ? "p-1" : "p-2"
+        }  flex items-center box-shadow border-2 text-sm
        border-gray-150 rounded-md justify-between overflow-hidden ${
          open ? "border-primary-600 box-shadow inset" : ""
        }`}
@@ -63,7 +66,7 @@ export default function Select(props: SelectProps) {
       </div>
 
       <ul
-        className={`bg-gray-100 overflow-y-auto  ${
+        className={`bg-gray-100 overflow-y-auto z-20 ${
           open ? "absolute left-0 right-0 max-h-60 mt-2" : "max-h-0"
         }`}
       >

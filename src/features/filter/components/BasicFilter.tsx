@@ -66,6 +66,7 @@ const salaryRanges = [
   { value: "30", name: "30 - 50 triệu" },
   { value: "50", name: "Trên 50 triệu" },
 ];
+
 export default function BasicFilter() {
   return (
     <div className="grid grid-cols-10 gap-2 items-center py-4">

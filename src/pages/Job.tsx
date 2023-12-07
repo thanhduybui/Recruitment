@@ -1,5 +1,5 @@
 import { Header } from "@components/layouts/header";
-import { Banner, BasicFilter } from "@features/filter";
+import { Banner, Filter } from "@features/filter";
 import Container from "@mui/material/Container";
 
 export default function Job() {
@@ -10,7 +10,7 @@ export default function Job() {
         <div className="w-full m-auto">
           <Banner />
           <form className="">
-            <BasicFilter />
+            <Filter />
           </form>
         </div>
       </Container>
