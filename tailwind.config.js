@@ -8,6 +8,7 @@ export default {
       current: "currentColor",
       white: "#ffffff",
       primary: {
+        50: "#f5fbff",
         100: "#9bd2ff",
         200: "#6abcff",
         300: "#38a5ff",
@@ -19,7 +20,9 @@ export default {
         900: "#164e63",
       },
       gray: {
+        50: "#f7f7f7",
         100: "#ececec",
+        150: "#cccccc",
         200: "#7c7c7c",
         300: "#575757",
         400: "#444444",

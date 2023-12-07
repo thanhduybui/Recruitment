@@ -1,24 +1,41 @@
 import { Header } from "@components/layouts/header";
-import { Banner } from "@features/filter";
+import { Banner, Filter } from "@features/filter";
+import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
+import { JobCard } from "@features/job";
 
 export default function Job() {
   return (
     <>
       <Header />
-      <Container>
-        <div className="w-3/4 m-auto">
+      <main className="bg-gray-50">
+        <Container style={{ backgroundColor: "#ffffff", padding: 0 }}>
           <Banner />
-          <div className="filter">
-            <form className="flex gap-2 items-center py-4">
-              <input
-                className="w-1/4 text-gray-300 text-sm border-2 border-gray-200 rounded-sm outline-none focus:border-primary-600 px-4 py-2 placeholder:text-gray-200 placeholder:text-sm"
-                placeholder="Tìm công việc, vị trí ứng tuyển..."
-              ></input>
-            </form>
+          <div className="px-5">
+            <div className="w-full m-auto mb-8">
+              <form className="">
+                <Filter />
+              </form>
+            </div>
+            <Divider />
+            <div className="flex mt-4">
+              <div className="w-2/3 flex flex-col gap-3 flex-1">
+                <JobCard />
+                <JobCard />
+                <JobCard />
+                <JobCard />
+                <JobCard />
+                <JobCard />
+                <JobCard />
+                <JobCard />
+                <JobCard />
+                <JobCard />
+              </div>
+              <div className="w-1/3 flex-none">Ben tay</div>
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </main>
     </>
   );
 }
