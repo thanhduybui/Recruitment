@@ -4,11 +4,15 @@ import "./index.css";
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "@store";
+import { theme } from "@utils";
+import { ThemeProvider } from "@emotion/react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.Fragment>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </React.Fragment>
 );

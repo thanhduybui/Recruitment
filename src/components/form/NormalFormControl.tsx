@@ -26,6 +26,7 @@ export default function NormalFormControl(props: NormalFormControlProps) {
 
   const { inputValue, error, handleInputChange } = useInputValidation(
     "",
+    undefined,
     getValidationRule
   );
 
