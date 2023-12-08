@@ -25,7 +25,7 @@ export default function Footer() {
             <div className="w-1/4 flex-none">
               <div className="w-fit">
                 <Link to="/home">
-                  <div className="flex items-center justify-center w-40 h-40 bg-white self-center">
+                  <div className="flex items-start  w-40 h-fit bg-white">
                     <img
                       src={logo}
                       alt="ThanhDuy"
