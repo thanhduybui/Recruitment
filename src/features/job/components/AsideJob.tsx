@@ -14,11 +14,8 @@ export default function AsideJob() {
       </Typography>
       <div className="flex flex-col rounded-md border-2 border-primary-300">
         <RecommendedJobCard />
-
         <RecommendedJobCard />
-
         <RecommendedJobCard />
-
         <RecommendedJobCard />
       </div>
     </aside>
