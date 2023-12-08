@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { UserSetting } from "@features/userSettting";
 import { useState } from "react";
+import { LogoButton } from "@components/button";
 
 const companyData = ["Doanh nghiệp nôi bật", "Tuyển dụng nhiều nhất"];
 const jobData = ["Việc làm mới nhất", "Việc làm phù hợp"];
@@ -29,9 +30,7 @@ const Header = () => {
         maxWidth="xl"
         fixed
       >
-        <Link to="/home">
-          <a className="text-3xl font-semibold text-primary-500">Jobhunt</a>
-        </Link>
+        <LogoButton />
 
         <nav
           className={`absolute ${

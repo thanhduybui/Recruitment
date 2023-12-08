@@ -10,7 +10,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
   return (
     <List>
       {props.items?.map((item) => (
-        <DropDownItem name={item} />
+        <DropDownItem key={item} name={item} />
       ))}
     </List>
   );
