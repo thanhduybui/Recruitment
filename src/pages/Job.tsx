@@ -10,6 +10,7 @@ import { RootState } from "@store";
 import { useEffect } from "react";
 import { useAlert } from "@hooks";
 import Alert from "@mui/material/Alert";
+import { BackgroundContainer } from "@components/ui";
 
 export default function Job() {
   const [showAlert, setShowAlert] = useAlert(false);
@@ -21,8 +22,9 @@ export default function Job() {
     }
     return () => {};
   }, [setShowAlert, isLogin]);
+
   return (
-    <div className="bg-gray-50">
+    <BackgroundContainer>
       <Header />
       <Container
         style={{
@@ -83,6 +85,6 @@ export default function Job() {
         </div>
       </Container>
       <Footer />
-    </div>
+    </BackgroundContainer>
   );
 }
