@@ -6,7 +6,7 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import Avatar from "@mui/material/Avatar";
-import { UserSettingList } from "@features/userSettting";
+import { Profile, UserSettingList } from "@features/userSettting";
 
 export default function UserSetting() {
   return (
@@ -21,8 +21,8 @@ export default function UserSetting() {
           borderRadius: "5px",
         }}
       >
-        <div className="flex h-screen">
-          <div className="flex-none w-1/4 border-r border-gray-100">
+        <div className="flex">
+          <div className="flex-none w-1/4 pb-8 border-r-2 border-gray-100 ">
             <div className="pt-5 flex items-center justify-center">
               <Badge
                 overlap="circular"
@@ -50,10 +50,12 @@ export default function UserSetting() {
             </div>
             <UserSettingList></UserSettingList>
           </div>
-          <div className="flex-1 w-3/4">content</div>
+          <div className="flex-1 w-3/4">
+            <Profile />
+          </div>
         </div>
       </Container>
-      <Footer></Footer>
+      <Footer fixed={true}></Footer>
     </BackgroundContainer>
   );
 }

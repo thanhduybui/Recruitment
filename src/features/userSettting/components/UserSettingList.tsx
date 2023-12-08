@@ -9,6 +9,7 @@ import { useState } from "react";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import HomeIcon from "@mui/icons-material/Home";
+import { Link } from "react-router-dom";
 
 export default function UserSettingList() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -17,6 +18,7 @@ export default function UserSettingList() {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
   ) => {
+    console.log(event.target);
     setSelectedIndex(index);
   };
 
@@ -30,6 +32,20 @@ export default function UserSettingList() {
       }}
     >
       <List component="nav" aria-label="main mailbox folders">
+        <Link to="/find-job">
+          <ListItemButton
+            sx={{
+              borderRight: selectedIndex === 4 ? "5px solid #0572cc" : "none",
+            }}
+            selected={selectedIndex === 4}
+            onClick={(event) => handleListItemClick(event, 4)}
+          >
+            <ListItemIcon>
+              <HomeIcon sx={{ color: "#0572cc" }} />
+            </ListItemIcon>
+            <ListItemText primary="Trang chủ" />
+          </ListItemButton>
+        </Link>
         <ListItemButton
           sx={{
             borderRight: selectedIndex === 0 ? "5px solid #0572cc" : "none",
@@ -77,18 +93,6 @@ export default function UserSettingList() {
             <MarkAsUnreadIcon sx={{ color: "#0572cc" }} />
           </ListItemIcon>
           <ListItemText primary="Quản lý ứng tuyển" />
-        </ListItemButton>
-        <ListItemButton
-          sx={{
-            borderRight: selectedIndex === 4 ? "5px solid #0572cc" : "none",
-          }}
-          selected={selectedIndex === 4}
-          onClick={(event) => handleListItemClick(event, 4)}
-        >
-          <ListItemIcon>
-            <HomeIcon sx={{ color: "#0572cc" }} />
-          </ListItemIcon>
-          <ListItemText primary="Trang chủ" />
         </ListItemButton>
       </List>
     </Box>
