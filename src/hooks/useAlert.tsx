@@ -2,7 +2,7 @@ import { useEffect, useState, Dispatch, SetStateAction } from "react";
 
 export default function useAlert(
   initialState: boolean,
-  duration = 3000
+  duration = 1500
 ): [boolean, Dispatch<SetStateAction<boolean>>] {
   const [showAlert, setShowAlert] = useState<boolean>(initialState);
 

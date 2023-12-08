@@ -60,7 +60,7 @@ export default function AdvancedFilter() {
         options={fields}
         startIcon={
           <BusinessOutlinedIcon
-            sx={{ width: "24px", height: "24px" }}
+            sx={{ width: "20px", height: "20px" }}
             color="primary"
           />
         }
@@ -72,7 +72,7 @@ export default function AdvancedFilter() {
         options={majors}
         startIcon={
           <AppsOutlinedIcon
-            sx={{ width: "24px", height: "24px" }}
+            sx={{ width: "20px", height: "20px" }}
             color="primary"
           />
         }
@@ -84,7 +84,7 @@ export default function AdvancedFilter() {
         options={positions}
         startIcon={
           <ChairAltOutlinedIcon
-            sx={{ width: "24px", height: "24px" }}
+            sx={{ width: "20px", height: "20px" }}
             color="primary"
           />
         }
@@ -96,7 +96,7 @@ export default function AdvancedFilter() {
         options={workTimes}
         startIcon={
           <CasesOutlinedIcon
-            sx={{ width: "24px", height: "24px" }}
+            sx={{ width: "20px", height: "20px" }}
             color="primary"
           />
         }
@@ -108,7 +108,7 @@ export default function AdvancedFilter() {
         options={postTypes}
         startIcon={
           <StarBorderOutlinedIcon
-            sx={{ width: "24px", height: "24px" }}
+            sx={{ width: "20px", height: "20px" }}
             color="primary"
           />
         }

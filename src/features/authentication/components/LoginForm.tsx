@@ -18,7 +18,7 @@ export default function LoginForm() {
 
   const loginOnClickHandler = () => {
     dispatch(login());
-    navigate("/home");
+    navigate("/find-job");
   };
 
   return (
