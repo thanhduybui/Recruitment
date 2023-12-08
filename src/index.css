@@ -6,10 +6,6 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.job-card:hover .job-title {
-  color: #068fff; /* Change 'yourDesiredColor' to the color you want */
-}
-
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Hide scrollbar for Chrome/Safari */
 }
