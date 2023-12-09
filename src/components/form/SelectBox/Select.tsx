@@ -35,11 +35,14 @@ export default function Select(props: SelectProps) {
   const selectRef = useRef<HTMLDivElement>(null);
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+    const searchInput = e.target.value.toLowerCase();
     const filtered = props.options?.filter((option) =>
-      option.name.toLowerCase().includes(e.target.value.toLowerCase())
+      option.name.toLowerCase().includes(searchInput)
     );
-    setFilteredOptions(filtered || []);
+
+    setFilteredOptions(filtered); // Cập nhật bằng filtered hoặc props.options nếu không có filtered
+
+    setSearchValue(searchInput);
   };
 
   const onClickHandler = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
@@ -47,9 +50,17 @@ export default function Select(props: SelectProps) {
     const selectedName = e.currentTarget.textContent || "";
     setSelected({
       value: e.currentTarget.getAttribute("value") || "",
-      name: e.currentTarget.textContent || "",
+      name: e.currentTarget.getAttribute("label") || "",
     });
 
+    const updatedOptions = filteredOptions?.filter(
+      (option) => option.value !== selectedValue
+    );
+
+    setFilteredOptions(updatedOptions);
+    if (chosenSkills.find((skill) => skill.value === selectedValue)) {
+      return;
+    }
     const updatedChosenSkills = [
       ...chosenSkills,
       {
@@ -66,6 +77,25 @@ export default function Select(props: SelectProps) {
     if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
       setOpen(false);
     }
+  };
+
+  const handleDelete = (e: React.MouseEvent, value: string) => {
+    e.stopPropagation();
+    const selectedValue = e.currentTarget.getAttribute("value") || "";
+    const selectedName = e.currentTarget.textContent || "";
+    const updatedChosenSkills = chosenSkills.filter(
+      (skill) => skill.value !== value
+    );
+
+    const updatedOptions = [
+      ...filteredOptions!,
+      {
+        value: selectedValue,
+        name: selectedName,
+      },
+    ];
+    setFilteredOptions(updatedOptions);
+    setChosenSkills(updatedChosenSkills);
   };
 
   useEffect(() => {
@@ -89,24 +119,31 @@ export default function Select(props: SelectProps) {
        }`}
         onClick={() => setOpen(!open)}
       >
-        <div className="flex items-center">
+        <div
+          className={`flex items-center overflow-x-auto ${
+            props.chip ? "gap-1" : ""
+          }`}
+        >
           {props.startIcon && <div>{props.startIcon}</div>}
           {!props.chip && (
             <span
-              className="text-primary-600 font-semibold overflow-hidden whitespace-nowrap overflow-ellipsis"
+              className="text-primary-600 font-semibold overflow-hidden whitespace-nowrap"
               id={selected.value}
             >
               {selected.name}
             </span>
           )}
 
-          {props.chip && (
-            <div className="text-gray-300 overflow-hidden whitespace-nowrap overflow-ellipsis">
-              {chosenSkills.map((skill) => (
-                <Chip label={skill.name} key={skill.value} />
-              ))}
-            </div>
-          )}
+          {props.chip &&
+            chosenSkills.map((skill) => (
+              <Chip
+                color="primary"
+                variant="filled"
+                label={skill.name}
+                key={skill.value}
+                onDelete={(e) => handleDelete(e, skill.value)}
+              />
+            ))}
         </div>
 
         <div>

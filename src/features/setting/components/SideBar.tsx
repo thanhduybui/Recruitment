@@ -28,7 +28,6 @@ export default function SideBar() {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
   ) => {
-    console.log(event.target);
     dispatcher(setTabIndex(index));
   };
 
