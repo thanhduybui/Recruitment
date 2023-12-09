@@ -1,4 +1,8 @@
 export const locations = [
+  {
+    value: "0",
+    name: "Tất cả vị trí",
+  },
   { value: "1", name: "Hà Nội" },
   { value: "2", name: "Hồ Chí Minh" },
   { value: "3", name: "Đà Nẵng" },

@@ -44,6 +44,7 @@ export default function SideBar() {
       <List component="nav" aria-label="main mailbox folders">
         <Link to="/find-job">
           <ListItemButton
+            key={HOME}
             sx={{
               borderRight:
                 selectedIndex === HOME ? "5px solid #0572cc" : "none",
@@ -58,6 +59,7 @@ export default function SideBar() {
           </ListItemButton>
         </Link>
         <ListItemButton
+          key={USER_PROFILE}
           sx={{
             borderRight:
               selectedIndex === USER_PROFILE ? "5px solid #0572cc" : "none",
@@ -71,6 +73,7 @@ export default function SideBar() {
           <ListItemText primary="Thông tin cá nhân" />
         </ListItemButton>
         <ListItemButton
+          key={CV}
           sx={{
             borderRight: selectedIndex === CV ? "5px solid #0572cc" : "none",
           }}
@@ -83,6 +86,7 @@ export default function SideBar() {
           <ListItemText primary="Quản lí CV" />
         </ListItemButton>
         <ListItemButton
+          key={CV_PROFILE}
           sx={{
             borderRight:
               selectedIndex === CV_PROFILE ? "5px solid #0572cc" : "none",
@@ -96,6 +100,7 @@ export default function SideBar() {
           <ListItemText primary="Cài đặt profile CV" />
         </ListItemButton>
         <ListItemButton
+          key={APPLICATION}
           sx={{
             borderRight:
               selectedIndex === APPLICATION ? "5px solid #0572cc" : "none",

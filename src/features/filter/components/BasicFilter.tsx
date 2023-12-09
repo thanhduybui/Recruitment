@@ -8,19 +8,12 @@ import { locations } from "@data/api";
 import { expieriences } from "@data/api";
 import { salaryRanges } from "@data/api";
 
-const initLocation = {
-  value: "all",
-  name: "Tất cả vị trí",
-};
-const initExpirience = { value: "all", name: "Tất cả kinh nghiệm" };
-const initSalaryRange = { value: "all", name: "Tất cả mức lương" };
-
 export default function BasicFilter() {
   return (
     <div className="grid grid-cols-10 gap-2 items-center py-4">
       <SearchInput styles="col-span-3" />
       <Select
-        initValue={initLocation}
+        initValue={locations[0]}
         options={locations}
         startIcon={
           <LocationOnOutlinedIcon
@@ -31,7 +24,7 @@ export default function BasicFilter() {
         styles="col-span-2"
       />
       <Select
-        initValue={initExpirience}
+        initValue={expieriences[0]}
         options={expieriences}
         startIcon={
           <StarBorderOutlinedIcon
@@ -42,7 +35,7 @@ export default function BasicFilter() {
         styles="col-span-2"
       />
       <Select
-        initValue={initSalaryRange}
+        initValue={salaryRanges[0]}
         options={salaryRanges}
         startIcon={
           <AttachMoneyOutlinedIcon

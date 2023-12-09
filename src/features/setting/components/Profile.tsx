@@ -16,6 +16,7 @@ export default function Profile() {
       <div className="w-3/4 m-auto pt-10">
         <form className="w-full flex flex-col gap-4">
           <TextInput
+            labelBold={true}
             label="Họ và tên"
             defaultValue="Bùi Thanh Duy"
             id="fullName"
@@ -23,6 +24,7 @@ export default function Profile() {
           ></TextInput>
 
           <TextInput
+            labelBold={true}
             label="Số điện thoại"
             defaultValue="0383314133"
             type="phone"
@@ -30,6 +32,7 @@ export default function Profile() {
           ></TextInput>
 
           <TextInput
+            labelBold={true}
             label="Email"
             defaultValue="dtb1742002@gmail.com"
             type="email"

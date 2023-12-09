@@ -1,3 +1,5 @@
+import { FormControlLabel } from "..";
+
 type TextInputProps = {
   styles?: string;
   placeholder?: string;
@@ -6,15 +8,18 @@ type TextInputProps = {
   disabled?: boolean;
   label?: string;
   type?: string;
+  labelBold?: boolean;
 };
 
 export default function TextInput(props: TextInputProps) {
   return (
     <div>
       {props.label && (
-        <label className="text-gray-600 text-sm font-thin" htmlFor={props.id}>
-          {props.label}
-        </label>
+        <FormControlLabel
+          label={props.label}
+          htmlFor={props.id}
+          bold={props.labelBold}
+        />
       )}
       <input
         type={props.type}

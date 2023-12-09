@@ -16,17 +16,9 @@ const contactInfo = [
   "Phone: +84 383314133",
 ];
 
-type FooterProps = {
-  fixed?: boolean;
-};
-
-export default function Footer(props: FooterProps) {
+export default function Footer() {
   return (
-    <footer
-      className={`bg-white h-56 ${
-        props.fixed ? "absolute bottom-0 left-0 right-0" : ""
-      }`}
-    >
+    <footer className={`bg-white h-56`}>
       <Container>
         <div className="flex flex-col p-4 pt-6">
           <div className="flex mb-4">

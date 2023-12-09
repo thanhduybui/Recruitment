@@ -1,12 +1,11 @@
 import { Footer } from "@components/layouts/footer";
 import { Header } from "@components/layouts/header";
-import { BackgroundContainer } from "@components/ui";
 import { Container, Tooltip } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import Avatar from "@mui/material/Avatar";
-import { CvManage, CvProfile, Profile, SideBar } from "@features/userSettting";
+import { CvManage, CvProfile, Profile, SideBar } from "@features/setting";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { TabIndex } from "@data/constants";
@@ -16,7 +15,7 @@ const { USER_PROFILE, CV, CV_PROFILE } = TabIndex;
 export default function UserSetting() {
   const selectedTab = useSelector((state: RootState) => state.sidebar.tabIndex);
   return (
-    <BackgroundContainer>
+    <>
       <Header></Header>
       <Container
         style={{
@@ -27,8 +26,8 @@ export default function UserSetting() {
           borderRadius: "5px",
         }}
       >
-        <div className="flex">
-          <div className="flex-none w-1/4 pb-8 border-r-2 border-gray-100 ">
+        <div className="flex bg-gray-50">
+          <div className="flex-none w-1/4 pb-8 border-r-2 border-gray-100 h-fit bg-white">
             <div className="pt-5 flex items-center justify-center">
               <Badge
                 overlap="circular"
@@ -64,14 +63,14 @@ export default function UserSetting() {
             </div>
             <SideBar></SideBar>
           </div>
-          <div className="flex-1 w-3/4">
+          <div className="flex-1 w-3/4 bg-white">
             {selectedTab === USER_PROFILE && <Profile />}
             {selectedTab === CV_PROFILE && <CvProfile />}
             {selectedTab === CV && <CvManage />}
           </div>
         </div>
       </Container>
-      <Footer fixed={true}></Footer>
-    </BackgroundContainer>
+      <Footer></Footer>
+    </>
   );
 }

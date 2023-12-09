@@ -7,9 +7,9 @@ import { DropDownListItem, HeaderList } from "@components/layouts/header";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
-import { UserSetting } from "@features/userSettting";
+import { UserSetting } from "@features/setting";
 import { useState } from "react";
-import { LogoButton } from "@components/button";
+import { LogoButton } from "@components/ui/button";
 
 const companyData = ["Doanh nghiệp nôi bật", "Tuyển dụng nhiều nhất"];
 const jobData = ["Việc làm mới nhất", "Việc làm phù hợp"];
