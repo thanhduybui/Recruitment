@@ -5,21 +5,31 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import ListItemText from "@mui/material/ListItemText";
 import ArticleIcon from "@mui/icons-material/Article";
-import { useState } from "react";
+import { RootState } from "@store";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { setTabIndex } from "@store/sidebar";
+import { useDispatch } from "react-redux";
+import { TabIndex } from "@data/constants";
 
-export default function UserSettingList() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+const { HOME, USER_PROFILE, CV, CV_PROFILE, APPLICATION } = TabIndex;
+
+export default function SideBar() {
+  const selectedIndex = useSelector(
+    (state: RootState) => state.sidebar.tabIndex
+  );
+
+  const dispatcher = useDispatch();
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
   ) => {
     console.log(event.target);
-    setSelectedIndex(index);
+    dispatcher(setTabIndex(index));
   };
 
   return (
@@ -35,10 +45,11 @@ export default function UserSettingList() {
         <Link to="/find-job">
           <ListItemButton
             sx={{
-              borderRight: selectedIndex === 4 ? "5px solid #0572cc" : "none",
+              borderRight:
+                selectedIndex === HOME ? "5px solid #0572cc" : "none",
             }}
-            selected={selectedIndex === 4}
-            onClick={(event) => handleListItemClick(event, 4)}
+            selected={selectedIndex === HOME}
+            onClick={(event) => handleListItemClick(event, HOME)}
           >
             <ListItemIcon>
               <HomeIcon sx={{ color: "#0572cc" }} />
@@ -48,10 +59,11 @@ export default function UserSettingList() {
         </Link>
         <ListItemButton
           sx={{
-            borderRight: selectedIndex === 0 ? "5px solid #0572cc" : "none",
+            borderRight:
+              selectedIndex === USER_PROFILE ? "5px solid #0572cc" : "none",
           }}
-          selected={selectedIndex === 0}
-          onClick={(event) => handleListItemClick(event, 0)}
+          selected={selectedIndex === USER_PROFILE}
+          onClick={(event) => handleListItemClick(event, USER_PROFILE)}
         >
           <ListItemIcon>
             <AccountBoxIcon sx={{ color: "#0572cc" }} />
@@ -60,10 +72,10 @@ export default function UserSettingList() {
         </ListItemButton>
         <ListItemButton
           sx={{
-            borderRight: selectedIndex === 1 ? "5px solid #0572cc" : "none",
+            borderRight: selectedIndex === CV ? "5px solid #0572cc" : "none",
           }}
-          selected={selectedIndex === 1}
-          onClick={(event) => handleListItemClick(event, 1)}
+          selected={selectedIndex === CV}
+          onClick={(event) => handleListItemClick(event, CV)}
         >
           <ListItemIcon>
             <ArticleIcon sx={{ color: "#0572cc" }} />
@@ -72,10 +84,11 @@ export default function UserSettingList() {
         </ListItemButton>
         <ListItemButton
           sx={{
-            borderRight: selectedIndex === 2 ? "5px solid #0572cc" : "none",
+            borderRight:
+              selectedIndex === CV_PROFILE ? "5px solid #0572cc" : "none",
           }}
-          selected={selectedIndex === 2}
-          onClick={(event) => handleListItemClick(event, 2)}
+          selected={selectedIndex === CV_PROFILE}
+          onClick={(event) => handleListItemClick(event, CV_PROFILE)}
         >
           <ListItemIcon>
             <NewspaperIcon sx={{ color: "#0572cc" }} />
@@ -84,10 +97,11 @@ export default function UserSettingList() {
         </ListItemButton>
         <ListItemButton
           sx={{
-            borderRight: selectedIndex === 3 ? "5px solid #0572cc" : "none",
+            borderRight:
+              selectedIndex === APPLICATION ? "5px solid #0572cc" : "none",
           }}
-          selected={selectedIndex === 3}
-          onClick={(event) => handleListItemClick(event, 3)}
+          selected={selectedIndex === APPLICATION}
+          onClick={(event) => handleListItemClick(event, APPLICATION)}
         >
           <ListItemIcon>
             <MarkAsUnreadIcon sx={{ color: "#0572cc" }} />

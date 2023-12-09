@@ -7,7 +7,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-import { InputConstants } from "@constants";
+import { InputConstants } from "@data/constants";
 import { useInputValidation } from "@hooks";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";

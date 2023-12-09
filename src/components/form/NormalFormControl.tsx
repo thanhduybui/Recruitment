@@ -1,5 +1,5 @@
 import { FormControl, TextField } from "@mui/material";
-import { InputConstants } from "@constants";
+import { InputConstants } from "@data/constants";
 import { useInputValidation } from "@hooks";
 
 type NormalFormControlProps = {

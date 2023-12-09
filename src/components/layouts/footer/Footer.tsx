@@ -24,7 +24,7 @@ export default function Footer(props: FooterProps) {
   return (
     <footer
       className={`bg-white h-56 ${
-        props.fixed ? "fixed bottom-0 left-0 right-0" : ""
+        props.fixed ? "absolute bottom-0 left-0 right-0" : ""
       }`}
     >
       <Container>

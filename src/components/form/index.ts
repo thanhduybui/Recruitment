@@ -6,3 +6,4 @@ export { default as FormContainer } from "./FormContainer";
 export { default as TextInput } from "./TextInput";
 export { default as SelectInput } from "./SelectInput";
 export { default as Select } from "./SelectBox/Select";
+export { default as RadioButtonGroup } from "./RadioButton/RadioButtonGroup";
