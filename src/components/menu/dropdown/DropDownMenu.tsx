@@ -1,5 +1,5 @@
 import List from "@mui/material/List";
-import { DropDownItem } from "@components/layouts";
+import { DropDownItem } from "@components/menu";
 
 type DropDownMenuProps = {
   children?: React.ReactNode;

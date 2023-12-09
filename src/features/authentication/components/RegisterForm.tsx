@@ -8,7 +8,7 @@ import {
 } from "@components/form";
 import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
-import { InputConstants } from "@constants";
+import { InputConstants } from "@data/constants";
 import { useState } from "react";
 
 export default function RegisterForm() {

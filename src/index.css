@@ -6,6 +6,14 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f7f7f7;
+  margin: 0;
+}
+
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Hide scrollbar for Chrome/Safari */
 }
@@ -13,4 +21,8 @@ body {
 .scrollbar-hidden {
   -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
   scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+footer {
+  margin-top: auto;
 }

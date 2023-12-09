@@ -15,8 +15,8 @@ import Settings from "@mui/icons-material/Settings";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { useNavigate } from "react-router-dom";
-import { logout } from "@store";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "@store/auth";
 
 export default function UserSetting() {
   const dispatch = useDispatch();
@@ -80,35 +80,73 @@ export default function UserSetting() {
           Bùi Thanh Duy
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ fontSize: "16px" }}>
-          <ListItemIcon>
-            <AccountCircleOutlinedIcon fontSize="small" />
-          </ListItemIcon>
-          Thông tin cá nhân
-        </MenuItem>
+        <Link to="/user-setting">
+          <MenuItem
+            sx={{
+              fontSize: "16px",
+              "&:hover": {
+                color: "#0581e6",
+              },
+            }}
+          >
+            <ListItemIcon>
+              <AccountCircleOutlinedIcon fontSize="small" color="primary" />
+            </ListItemIcon>
+            Quản lý hồ sơ cá nhân
+          </MenuItem>
+        </Link>
         <Divider />
-        <MenuItem sx={{ fontSize: "16px" }}>
+        <MenuItem
+          sx={{
+            fontSize: "16px",
+            "&:hover": {
+              color: "#0581e6",
+            },
+          }}
+        >
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <Settings fontSize="small" color="primary" />
           </ListItemIcon>
           Cài đặt gợi ý việc làm
         </MenuItem>
-        <MenuItem sx={{ fontSize: "16px" }}>
+        <MenuItem
+          sx={{
+            fontSize: "16px",
+            "&:hover": {
+              color: "#0581e6",
+            },
+          }}
+        >
           <ListItemIcon>
-            <EmailOutlinedIcon fontSize="small" />
+            <EmailOutlinedIcon fontSize="small" color="primary" />
           </ListItemIcon>
           Cài đặt nhận mail
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ fontSize: "16px" }}>
+        <MenuItem
+          sx={{
+            fontSize: "16px",
+            "&:hover": {
+              color: "#0581e6",
+            },
+          }}
+        >
           <ListItemIcon>
-            <LockOutlinedIcon fontSize="small" />
+            <LockOutlinedIcon fontSize="small" color="primary" />
           </ListItemIcon>
           Đổi mật khẩu
         </MenuItem>
-        <MenuItem onClick={handleLogout} sx={{ fontSize: "16px" }}>
+        <MenuItem
+          onClick={handleLogout}
+          sx={{
+            fontSize: "16px",
+            "&:hover": {
+              color: "#0581e6",
+            },
+          }}
+        >
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize="small" color="primary" />
           </ListItemIcon>
           Đăng xuất
         </MenuItem>

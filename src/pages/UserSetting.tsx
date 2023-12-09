@@ -1,16 +1,21 @@
 import { Footer } from "@components/layouts/footer";
 import { Header } from "@components/layouts/header";
-import { BackgroundContainer } from "@components/ui";
-import { Container } from "@mui/material";
+import { Container, Tooltip } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import Avatar from "@mui/material/Avatar";
-import { Profile, UserSettingList } from "@features/userSettting";
+import { CvManage, CvProfile, Profile, SideBar } from "@features/setting";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
+import { TabIndex } from "@data/constants";
+
+const { USER_PROFILE, CV, CV_PROFILE } = TabIndex;
 
 export default function UserSetting() {
+  const selectedTab = useSelector((state: RootState) => state.sidebar.tabIndex);
   return (
-    <BackgroundContainer>
+    <>
       <Header></Header>
       <Container
         style={{
@@ -21,24 +26,32 @@ export default function UserSetting() {
           borderRadius: "5px",
         }}
       >
-        <div className="flex">
-          <div className="flex-none w-1/4 pb-8 border-r-2 border-gray-100 ">
+        <div className="flex bg-gray-50">
+          <div className="flex-none w-1/4 pb-8 border-r-2 border-gray-100 h-fit bg-white">
             <div className="pt-5 flex items-center justify-center">
               <Badge
                 overlap="circular"
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 badgeContent={
-                  <IconButton
-                    size="small"
-                    sx={{
-                      border: "1px solid #0572cc",
-                      backdropFilter: "blur(5px)",
-                    }}
-                    aria-label="upload picture"
-                    component="span"
-                  >
-                    <EditIcon className="text-gray-800" />
-                  </IconButton>
+                  <Tooltip title="Chỉnh sửa ảnh đại diện" placement="bottom">
+                    <IconButton
+                      size="small"
+                      sx={{
+                        border: "1px solid #0572cc",
+                        backdropFilter: "blur(5px)",
+                        backgroundColor: "#0572cc",
+                        color: "#fff",
+                        "&:hover": {
+                          backgroundColor: "#fff",
+                          color: "#575757",
+                        },
+                      }}
+                      aria-label="upload picture"
+                      component="span"
+                    >
+                      <EditIcon />
+                    </IconButton>
+                  </Tooltip>
                 }
               >
                 <Avatar
@@ -48,14 +61,16 @@ export default function UserSetting() {
                 />
               </Badge>
             </div>
-            <UserSettingList></UserSettingList>
+            <SideBar></SideBar>
           </div>
-          <div className="flex-1 w-3/4">
-            <Profile />
+          <div className="flex-1 w-3/4 bg-white">
+            {selectedTab === USER_PROFILE && <Profile />}
+            {selectedTab === CV_PROFILE && <CvProfile />}
+            {selectedTab === CV && <CvManage />}
           </div>
         </div>
       </Container>
-      <Footer fixed={true}></Footer>
-    </BackgroundContainer>
+      <Footer></Footer>
+    </>
   );
 }

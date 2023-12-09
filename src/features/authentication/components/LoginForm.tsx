@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "@store";
+import { login } from "@store/auth";
 
 export default function LoginForm() {
   const navigate = useNavigate();

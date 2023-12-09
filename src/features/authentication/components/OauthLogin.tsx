@@ -1,6 +1,6 @@
 import { FormGroup } from "@components/form";
 import Typography from "@mui/material/Typography";
-import { Oauth2Button } from "@components/button";
+import { Oauth2Button } from "@components/ui/button";
 
 export default function OauthLogin() {
   return (
