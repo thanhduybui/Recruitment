@@ -13,7 +13,7 @@ const styles = {
 
 export default function Buttons() {
   return (
-    <div className="flex items-center gap-2">
+    <>
       <div className="w-2/3">
         <Button variant="contained" color="primary" sx={styles}>
           <SendRoundedIcon />
@@ -26,6 +26,6 @@ export default function Buttons() {
           Yêu thích
         </Button>
       </div>
-    </div>
+    </>
   );
 }

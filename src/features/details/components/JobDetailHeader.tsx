@@ -1,20 +1,9 @@
 import Chip from "@mui/material/Chip";
-import Button from "@mui/material/Button";
-import { DetailHeader, LogoInformation } from "..";
+
+import { Buttons, DetailHeader, LogoInformation } from "..";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MonetizationOnRoundedIcon from "@mui/icons-material/MonetizationOnRounded";
 import PunchClockRoundedIcon from "@mui/icons-material/PunchClockRounded";
-import SendRoundedIcon from "@mui/icons-material/SendRounded";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-
-const styles = {
-  textTransform: "none",
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "0.4rem",
-};
 
 export default function JobDetailHeader() {
   return (
@@ -43,20 +32,8 @@ export default function JobDetailHeader() {
           sx={{ borderRadius: "5px" }}
         />
       </div>
-
       <div className="flex items-center gap-2">
-        <div className="w-2/3">
-          <Button variant="contained" color="primary" sx={styles}>
-            <SendRoundedIcon />
-            Ứng tuyển ngay
-          </Button>
-        </div>
-        <div className="w-1/3">
-          <Button variant="outlined" color="primary" sx={styles}>
-            <FavoriteBorderRoundedIcon />
-            Yêu thích
-          </Button>
-        </div>
+        <Buttons />
       </div>
     </div>
   );

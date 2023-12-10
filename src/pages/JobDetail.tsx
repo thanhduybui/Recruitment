@@ -1,6 +1,5 @@
 import Container from "@mui/material/Container";
-import { JobDetailHeader } from "@features/details";
-import { DetailHeader } from "@features/details";
+import { Buttons, JobDescription, JobDetailHeader } from "@features/details";
 
 export default function JobDetail() {
   return (
@@ -16,8 +15,11 @@ export default function JobDetail() {
       <div className="flex">
         <div className="flex-1 w-2/3 flex flex-col bg-gray-50">
           <JobDetailHeader />
-          <div className="h-screen bg-white mt-4 mr-4 rounded-md p-4">
-            <DetailHeader title="Chi tiết tin tuyển dụng" borderStart />
+          <div className="bg-white mt-4 mr-4 rounded-md p-4">
+            <JobDescription />
+            <div className="w-3/4 flex items-center ml-auto gap-2 my-8">
+              <Buttons />
+            </div>
           </div>
         </div>
         <aside className="flex-none w-1/3 bg-gray-50">
