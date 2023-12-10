@@ -1,5 +1,10 @@
 import Container from "@mui/material/Container";
-import { Buttons, JobDescription, JobDetailHeader } from "@features/details";
+import {
+  Aside,
+  Buttons,
+  JobDescription,
+  JobDetailHeader,
+} from "@features/details";
 
 export default function JobDetail() {
   return (
@@ -22,8 +27,8 @@ export default function JobDetail() {
             </div>
           </div>
         </div>
-        <aside className="flex-none w-1/3 bg-gray-50">
-          <div className="h-screen bg-white rounded-md"></div>
+        <aside className="flex-none w-1/3 bg-gray-50 text-gray-400">
+          <Aside />
         </aside>
       </div>
     </Container>

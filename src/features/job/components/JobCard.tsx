@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { CompanyLogo } from "@components/ui";
 
 export default function JobCard() {
   const [onHover, setOnHover] = useState(false);
@@ -22,13 +23,7 @@ export default function JobCard() {
       onMouseOut={onMouseOutHandler}
       className="job-card w-full flex gap-4 py-3 px-4 bg-primary-50 border hover:cursor-pointer hover:border-primary-400 border-gray-100 rounded-md"
     >
-      <div className="flex items-center justify-center w-20 h-20 bg-white rounded-md border-2 border-gray-150 self-center">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/800px-FPT_logo_2010.svg.png"
-          alt="Ảnh công ty"
-          className="max-w-full max-h-full"
-        />
-      </div>
+      <CompanyLogo />
       <div className="w-1/2 text-gray-500 font-medium flex flex-col gap-6">
         <div>
           <Tooltip
