@@ -15,7 +15,7 @@ import { setTabIndex } from "@store/sidebar";
 import { useDispatch } from "react-redux";
 import { TabIndex } from "@data/constants";
 
-const { HOME, USER_PROFILE, CV, CV_PROFILE, APPLICATION } = TabIndex;
+const { USER_PROFILE, CV, CV_PROFILE, APPLICATION } = TabIndex;
 
 export default function SideBar() {
   const selectedIndex = useSelector(
@@ -28,6 +28,7 @@ export default function SideBar() {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
   ) => {
+    console.log(event.currentTarget.getAttribute("value"));
     dispatcher(setTabIndex(index));
   };
 
@@ -42,15 +43,7 @@ export default function SideBar() {
     >
       <List component="nav" aria-label="main mailbox folders">
         <Link to="/find-job">
-          <ListItemButton
-            key={HOME}
-            sx={{
-              borderRight:
-                selectedIndex === HOME ? "5px solid #0572cc" : "none",
-            }}
-            selected={selectedIndex === HOME}
-            onClick={(event) => handleListItemClick(event, HOME)}
-          >
+          <ListItemButton>
             <ListItemIcon>
               <HomeIcon sx={{ color: "#0572cc" }} />
             </ListItemIcon>

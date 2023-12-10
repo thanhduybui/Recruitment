@@ -7,7 +7,7 @@ import { DropDownListItem, HeaderList } from "@components/layouts/header";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
-import { UserSetting } from "@features/setting";
+import { UserSettingButton } from "@features/setting";
 import { useState } from "react";
 import { LogoButton } from "@components/ui/button";
 
@@ -59,7 +59,7 @@ const Header = () => {
               </Link>
             </HeaderList>
           )}
-          {isLogin && <UserSetting />}
+          {isLogin && <UserSettingButton />}
         </nav>
 
         <div className="lg:hidden ml-2 self-end z-20">

@@ -65,30 +65,20 @@ export default function CvProfile() {
             <Select
               search
               label="Chọn ngành nghề"
-              initValue={majors[0]}
               options={majors}
               id="major"
             />
-            <Select
-              chip
-              search
-              label="Chọn kỹ năng"
-              initValue={skills[0]}
-              options={skills}
-            />
+            <Select chip search label="Chọn kỹ năng" options={skills} />
             <Select
               search
-              initValue={locations[0]}
               options={locations}
               label="Chọn nơi làm việc"
             ></Select>
             <Select
-              initValue={expieriences[0]}
               options={expieriences}
               label="Chọn kinh nghiệm làm việc"
             ></Select>
             <Select
-              initValue={salaryRanges[0]}
               options={salaryRanges}
               label="Chọn mức lương mong muốn"
             ></Select>

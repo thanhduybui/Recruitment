@@ -42,25 +42,25 @@ export default function Select(props: SelectProps) {
 
     setFilteredOptions(filtered); // Cập nhật bằng filtered hoặc props.options nếu không có filtered
 
-    setSearchValue(searchInput);
+    setSearchValue(e.target.value);
   };
 
   const onClickHandler = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     const selectedValue = e.currentTarget.getAttribute("value") || "";
     const selectedName = e.currentTarget.textContent || "";
     setSelected({
-      value: e.currentTarget.getAttribute("value") || "",
-      name: e.currentTarget.getAttribute("label") || "",
+      value: selectedValue,
+      name: selectedName,
     });
 
-    const updatedOptions = filteredOptions?.filter(
-      (option) => option.value !== selectedValue
-    );
+    if (!props.chip || !props.search) {
+      return;
+    }
 
-    setFilteredOptions(updatedOptions);
     if (chosenSkills.find((skill) => skill.value === selectedValue)) {
       return;
     }
+
     const updatedChosenSkills = [
       ...chosenSkills,
       {
@@ -170,8 +170,22 @@ export default function Select(props: SelectProps) {
             </div>
           </li>
         )}
-        {filteredOptions &&
+        {props.search &&
+          props.chip &&
+          filteredOptions &&
           filteredOptions.length !== 0 &&
+          filteredOptions.map((option) => (
+            <li
+              className="p-2 text-sm hover:bg-primary-500 hover:text-white transition duration-100"
+              key={option.value}
+              value={option.value}
+              onClick={onClickHandler}
+            >
+              {option.name}
+            </li>
+          ))}
+
+        {filteredOptions &&
           filteredOptions.map((option) => (
             <li
               className="p-2 text-sm hover:bg-primary-500 hover:text-white transition duration-100"
@@ -187,7 +201,6 @@ export default function Select(props: SelectProps) {
             className="p-2 text-sm hover:bg-primary-500 hover:text-white transition duration-100"
             key="-1"
             value="-1"
-            onClick={onClickHandler}
           >
             Không tìm thấy kết quả
           </li>
