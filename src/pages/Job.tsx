@@ -1,16 +1,13 @@
-import { Header } from "@components/layouts/header";
 import { Banner, Filter } from "@features/filter";
 import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
 import { AsideJob, JobCard } from "@features/job";
 import Pagination from "@mui/material/Pagination";
-import { Footer } from "@components/layouts/footer";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { useEffect } from "react";
 import { useAlert } from "@hooks";
 import Alert from "@mui/material/Alert";
-import { BackgroundContainer } from "@components/ui";
 
 export default function Job() {
   const [showAlert, setShowAlert] = useAlert(false);
@@ -24,8 +21,7 @@ export default function Job() {
   }, [setShowAlert, isLogin]);
 
   return (
-    <BackgroundContainer>
-      <Header />
+    <>
       <Container
         style={{
           backgroundColor: "#ffffff",
@@ -84,7 +80,6 @@ export default function Job() {
           </div>
         </div>
       </Container>
-      <Footer />
-    </BackgroundContainer>
+    </>
   );
 }
