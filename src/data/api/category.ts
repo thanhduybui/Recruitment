@@ -1,3 +1,4 @@
+export type Category = { value: string; name: string };
 export const fields = [
   { value: "0", name: "Tất cả lĩnh vực" },
   { value: "1", name: "Công nghệ thông tin" },

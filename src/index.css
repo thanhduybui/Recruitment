@@ -26,3 +26,22 @@ body {
 footer {
   margin-top: auto;
 }
+
+.audit-program {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0rem 1rem 0rem;
+}
+
+.audit-program h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.audit-program p {
+  padding-right: 20px;
+  line-height: 1.5;
+  margin-bottom: 5px;
+  font-size: 14px;
+}

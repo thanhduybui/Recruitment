@@ -3,6 +3,7 @@ import { IconButton, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function JobCard() {
   const [onHover, setOnHover] = useState(false);
@@ -108,14 +109,16 @@ export default function JobCard() {
           </Typography>
         </div>
         <div className="flex items-center gap-1">
-          <Button
-            color="primary"
-            size="small"
-            variant="contained"
-            sx={{ textTransform: "none" }}
-          >
-            Ứng tuyển
-          </Button>
+          <Link to="/job-detail">
+            <Button
+              color="primary"
+              size="small"
+              variant="contained"
+              sx={{ textTransform: "none" }}
+            >
+              Ứng tuyển
+            </Button>
+          </Link>
           <Tooltip title="Lưu tin" placement="top">
             <IconButton sx={{ borderRadius: "8px" }}>
               <FavoriteBorderIcon color="primary" />

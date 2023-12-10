@@ -7,12 +7,12 @@ import { DropDownListItem, HeaderList } from "@components/layouts/header";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
-import { UserSetting } from "@features/setting";
+import { UserSettingButton } from "@features/setting";
 import { useState } from "react";
 import { LogoButton } from "@components/ui/button";
 
-const companyData = ["Doanh nghiệp nôi bật", "Tuyển dụng nhiều nhất"];
-const jobData = ["Việc làm mới nhất", "Việc làm phù hợp"];
+const companyData = ["Doanh nghiệp nổi bật", "Tuyển dụng nhiều nhất"];
+const jobData = ["Tìm việc", "Việc làm phù hợp"];
 const cvCategories = ["Tạo CV mới", "CV của bạn", "Hướng dẫn tạo CV"];
 
 const Header = () => {
@@ -40,7 +40,9 @@ const Header = () => {
         lg:justify-between w-full h-screen lg:h-16`}
         >
           <HeaderList>
-            <DropDownListItem name="Việc làm" data={jobData} />
+            <Link to="/find-job">
+              <DropDownListItem name="Việc làm" data={jobData} />
+            </Link>
             <DropDownListItem name="Doanh nghiệp" data={companyData} />
             <DropDownListItem name="Quản lý CV" data={cvCategories} />
           </HeaderList>
@@ -59,7 +61,7 @@ const Header = () => {
               </Link>
             </HeaderList>
           )}
-          {isLogin && <UserSetting />}
+          {isLogin && <UserSettingButton />}
         </nav>
 
         <div className="lg:hidden ml-2 self-end z-20">

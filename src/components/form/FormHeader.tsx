@@ -8,7 +8,7 @@ type FormHeaderProps = {
 
 export default function FormHeader(props: FormHeaderProps) {
   return (
-    <div className="px-6 flex flex-col pt-8">
+    <div className="px-6 flex flex-col">
       <Typography
         className="text-primary-600"
         variant="h6"

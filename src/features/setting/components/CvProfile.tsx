@@ -1,4 +1,4 @@
-import { SearchSelect, Select, TextInput } from "@components/form";
+import { Select, TextInput } from "@components/form";
 
 import Typography from "@mui/material/Typography";
 import WorkIcon from "@mui/icons-material/Work";
@@ -12,7 +12,6 @@ import {
   majors,
   skills,
 } from "@data/api";
-import { SkillSelect } from "..";
 
 const genders = [
   {
@@ -63,29 +62,23 @@ export default function CvProfile() {
               id="position"
               type="text"
             ></TextInput>
-            <SearchSelect
+            <Select
+              search
               label="Chọn ngành nghề"
-              initValue={majors[0]}
               options={majors}
               id="major"
             />
-            <SkillSelect
-              label="Chọn kỹ năng"
-              initValue={skills[0]}
-              options={skills}
-            />
-            <SearchSelect
-              initValue={locations[0]}
+            <Select chip search label="Chọn kỹ năng" options={skills} />
+            <Select
+              search
               options={locations}
               label="Chọn nơi làm việc"
-            ></SearchSelect>
+            ></Select>
             <Select
-              initValue={expieriences[0]}
               options={expieriences}
               label="Chọn kinh nghiệm làm việc"
             ></Select>
             <Select
-              initValue={salaryRanges[0]}
               options={salaryRanges}
               label="Chọn mức lương mong muốn"
             ></Select>

@@ -1,4 +1,3 @@
-import Header from "@components/layouts/header/Header";
 import { RootState } from "@store";
 import { useSelector } from "react-redux";
 import React, { useEffect } from "react";
@@ -18,7 +17,6 @@ function HomePage() {
 
   return (
     <React.Fragment>
-      <Header />
       <Container>
         {showAlert && <Alert severity="success">Đăng nhập thành công</Alert>}
       </Container>

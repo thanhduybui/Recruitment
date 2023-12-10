@@ -7,4 +7,3 @@ export { default as TextInput } from "./Input/TextInput";
 export { default as Select } from "./SelectBox/Select";
 export { default as RadioButtonGroup } from "./RadioButton/RadioButtonGroup";
 export { default as FormControlLabel } from "./FormControlLabel";
-export { default as SearchSelect } from "./SelectBox/SearchSelect";
