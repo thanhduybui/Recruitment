@@ -10,9 +10,10 @@ import { salaryRanges } from "@data/api";
 
 export default function BasicFilter() {
   return (
-    <div className="grid grid-cols-10 gap-2 items-center py-4">
+    <div className="grid grid-cols-10 gap-2 items-center py-4 bg-white rounded-b-md">
       <SearchInput styles="col-span-3" />
       <Select
+        black
         initValue={locations[0]}
         options={locations}
         startIcon={
@@ -24,6 +25,7 @@ export default function BasicFilter() {
         styles="col-span-2"
       />
       <Select
+        black
         initValue={expieriences[0]}
         options={expieriences}
         startIcon={
@@ -35,6 +37,7 @@ export default function BasicFilter() {
         styles="col-span-2"
       />
       <Select
+        black
         initValue={salaryRanges[0]}
         options={salaryRanges}
         startIcon={

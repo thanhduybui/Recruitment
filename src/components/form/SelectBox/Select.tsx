@@ -19,6 +19,7 @@ type SelectProps = {
   id?: string;
   search?: boolean;
   chip?: boolean;
+  black?: boolean;
 };
 
 export default function Select(props: SelectProps) {
@@ -127,7 +128,9 @@ export default function Select(props: SelectProps) {
           {props.startIcon && <div>{props.startIcon}</div>}
           {!props.chip && (
             <span
-              className="text-primary-600 font-semibold overflow-hidden whitespace-nowrap"
+              className={`font-semibold overflow-hidden whitespace-nowrap ${
+                props.black ? "text-gray-600" : "text-primary-500"
+              }`}
               id={selected.value}
             >
               {selected.name}
