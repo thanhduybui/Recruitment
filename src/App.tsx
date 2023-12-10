@@ -1,5 +1,5 @@
 import { Route, RouterProvider } from "react-router-dom";
-import { Home, Login, Register, Job, UserSetting } from "@pages";
+import { Home, Login, Register, Job, UserSetting, JobDetail } from "@pages";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -14,6 +14,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/user-setting" element={<UserSetting />}></Route>
+      <Route path="job-detail" element={<JobDetail />} />
     </Route>
   )
 );
