@@ -2,11 +2,21 @@ import Tooltip from "@mui/material/Tooltip";
 import { IconButton, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CompanyLogo } from "@components/ui";
 
-export default function JobCard() {
+type JobCardProps = {
+  jobTitle?: string;
+  companyName?: string;
+  location?: string;
+  salary?: string;
+  deadline?: string;
+  favorite?: boolean;
+};
+
+export default function JobCard(props: JobCardProps) {
   const [onHover, setOnHover] = useState(false);
 
   const onMouseOverHandler = () => {
@@ -24,12 +34,9 @@ export default function JobCard() {
       className="job-card w-full flex gap-4 py-3 px-4 bg-primary-50 border hover:cursor-pointer hover:border-primary-400 border-gray-100 rounded-md"
     >
       <CompanyLogo />
-      <div className="w-1/2 text-gray-500 font-medium flex flex-col gap-6">
+      <div className="text-gray-500 font-medium flex flex-col gap-6 w-1/2">
         <div>
-          <Tooltip
-            title="Leader Marketing, Thu Nhập Từ 20 - 35 Triệu Tại Hà Nội"
-            placement="top"
-          >
+          <Tooltip title={props.jobTitle} placement="top">
             <Typography
               variant="body1"
               component="p"
@@ -40,7 +47,7 @@ export default function JobCard() {
                 color: onHover ? "#0581e6" : "#444444",
               }}
             >
-              Leader Marketing, Thu Nhập Từ 20 - 35 Triệu Tại Hà Nội
+              {props.jobTitle}
             </Typography>
           </Tooltip>
 
@@ -48,9 +55,12 @@ export default function JobCard() {
             <Typography
               variant="subtitle2"
               component="span"
-              sx={{ color: "#7c7c7c", fontSize: "0.8rem" }}
+              sx={{
+                color: "#7c7c7c",
+                fontSize: "0.8rem",
+              }}
             >
-              Công ty Cổ phần Công nghệ FPT
+              {props.companyName}
             </Typography>
           </Tooltip>
         </div>
@@ -68,9 +78,10 @@ export default function JobCard() {
                 fontWeight: 300,
               }}
             >
-              Hồ Chí Minh
+              {props.location}
             </Typography>
           </Tooltip>
+
           <Tooltip title="Còn 5 ngày để ứng tuyển" placement="bottom">
             <Typography
               variant="subtitle2"
@@ -84,7 +95,7 @@ export default function JobCard() {
                 fontWeight: 300,
               }}
             >
-              Còn 5 ngày để ứng tuyển
+              Còn {props.deadline} ngày để ứng tuyển
             </Typography>
           </Tooltip>
         </div>
@@ -100,9 +111,10 @@ export default function JobCard() {
               fontWeight: 600,
             }}
           >
-            20 - 25 triệu
+            {props.salary}
           </Typography>
         </div>
+
         <div className="flex items-center gap-1">
           <Link to="/job-detail">
             <Button
@@ -116,7 +128,8 @@ export default function JobCard() {
           </Link>
           <Tooltip title="Lưu tin" placement="top">
             <IconButton sx={{ borderRadius: "8px" }}>
-              <FavoriteBorderIcon color="primary" />
+              {props.favorite && <FavoriteRoundedIcon color="primary" />}
+              {!props.favorite && <FavoriteBorderIcon color="primary" />}
             </IconButton>
           </Tooltip>
         </div>

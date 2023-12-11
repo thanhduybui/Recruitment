@@ -2,6 +2,7 @@ type FormControlLabelProps = {
   label?: string;
   htmlFor?: string;
   bold?: boolean;
+  strict?: boolean;
 };
 
 export default function FormControlLabel(props: FormControlLabelProps) {
@@ -12,7 +13,8 @@ export default function FormControlLabel(props: FormControlLabelProps) {
       }`}
       htmlFor={props.htmlFor}
     >
-      {props.label}
+      {props.label}{" "}
+      {props.strict && <span className="text-error-400">(*)</span>}
     </label>
   );
 }

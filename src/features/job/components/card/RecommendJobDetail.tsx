@@ -13,10 +13,10 @@ export default function RecommendJobDetail(props: RecommendJobDetailProps) {
       <div className="flex items-center">
         {props.icon}
         <Typography
-          className="text-primary-500"
+          className="text-gray-300"
           variant="subtitle2"
           component="span"
-          sx={{ fontSize: "0.7rem" }}
+          sx={{ fontSize: "0.6rem" }}
         >
           {props.text}
         </Typography>

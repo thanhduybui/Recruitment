@@ -8,8 +8,9 @@ import { fields, majors, postTypes, workTimes, positions } from "@data/api";
 
 export default function AdvancedFilter() {
   return (
-    <div className="grid grid-cols-10 gap-2 items-center">
+    <div className="grid grid-cols-10 gap-2 items-center bg-white">
       <Select
+        black
         initValue={fields[0]}
         options={fields}
         startIcon={
@@ -22,6 +23,7 @@ export default function AdvancedFilter() {
         size="sm"
       />
       <Select
+        black
         initValue={majors[0]}
         options={majors}
         startIcon={
@@ -34,6 +36,7 @@ export default function AdvancedFilter() {
         size="sm"
       />
       <Select
+        black
         initValue={positions[0]}
         options={positions}
         startIcon={
@@ -46,6 +49,7 @@ export default function AdvancedFilter() {
         size="sm"
       />
       <Select
+        black
         initValue={workTimes[0]}
         options={workTimes}
         startIcon={
@@ -58,6 +62,7 @@ export default function AdvancedFilter() {
         size="sm"
       />
       <Select
+        black
         initValue={postTypes[0]}
         options={postTypes}
         startIcon={

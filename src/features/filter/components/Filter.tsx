@@ -12,7 +12,7 @@ export default function Filter() {
   };
 
   return (
-    <div>
+    <div className="bg-white p-4 rounded-md">
       <BasicFilter />
       <div className="grid grid-cols-10 gap-2 items-center mb-4">
         <div className="col-span-4">
