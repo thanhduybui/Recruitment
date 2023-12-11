@@ -9,6 +9,7 @@ type TextInputProps = {
   label?: string;
   type?: string;
   labelBold?: boolean;
+  strict?: boolean;
 };
 
 export default function TextInput(props: TextInputProps) {
@@ -19,6 +20,7 @@ export default function TextInput(props: TextInputProps) {
           label={props.label}
           htmlFor={props.id}
           bold={props.labelBold}
+          strict={props.strict}
         />
       )}
       <input

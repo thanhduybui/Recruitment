@@ -7,6 +7,7 @@ export default {
       transparent: "transparent",
       current: "currentColor",
       white: "#ffffff",
+      black: "#000000",
       primary: {
         50: "#f5fbff",
         100: "#9bd2ff",
@@ -31,6 +32,17 @@ export default {
         700: "#303030",
         800: "#292929",
         900: "#222222",
+      },
+
+      error: {
+        50: "#fff6f6",
+        100: "#ffcccc",
+        200: "#ff9999",
+        300: "#ff6666",
+        400: "#ff3333",
+        500: "#e03131",
+        600: "#cc2d2d",
+        700: "#802020",
       },
     },
   },
