@@ -7,9 +7,11 @@ import FormLabel from "@mui/material/FormLabel";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-
+import { createPortal } from "react-dom";
+import { useDispatch } from "react-redux";
 import { ListCV, UploadForm } from ".";
 import { IconButton } from "@mui/material";
+import { close } from "@store/applyJob";
 
 const formLabelStyles = {
   display: "flex",
@@ -27,13 +29,28 @@ const btnStyles = {
 
 export default function ApplicationModal() {
   const [value, setValue] = useState(1);
+  const dispatch = useDispatch();
+
+  const closeHandler = () => {
+    dispatch(close());
+  };
+
+  const handleBackdropClick = (event: React.MouseEvent<HTMLInputElement>) => {
+    if (event.target === event.currentTarget) {
+      closeHandler(); // Close modal only if the click was on the backdrop, not the modal content
+    }
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(+event.target.value);
   };
 
-  return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-30 ">
+  return createPortal(
+    <div
+      className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-30 z-50 
+      transition-opacity duration-500"
+      onClick={handleBackdropClick}
+    >
       <div className="bg-white p-4 rounded-lg w-1/3 shadow-sm flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <h1 className="text-lg mb-2">
@@ -43,7 +60,7 @@ export default function ApplicationModal() {
               Lập trình viên di động
             </span>
           </h1>
-          <IconButton>
+          <IconButton onClick={closeHandler}>
             <CloseRoundedIcon />
           </IconButton>
         </div>
@@ -107,14 +124,15 @@ export default function ApplicationModal() {
         </FormControl>
 
         <div className="flex items-center gap-3 ml-auto">
-          <Button variant="outlined" color="primary">
+          <Button variant="outlined" color="primary" onClick={closeHandler}>
             Huỷ
           </Button>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={closeHandler}>
             Ứng tuyển
           </Button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.getElementById("modal") as HTMLElement
   );
 }

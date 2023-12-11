@@ -1,7 +1,10 @@
 import Button from "@mui/material/Button";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import { useNavigate } from "react-router-dom";
+import { ApplicationJobModal } from "@features/applyJob";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@store";
+import { open } from "@store/applyJob";
 
 const styles = {
   textTransform: "none",
@@ -13,22 +16,26 @@ const styles = {
 };
 
 export default function Buttons() {
-  const navigation = useNavigate();
+  const isModalOpen = useSelector(
+    (state: RootState) => state.applyModal.isOpen
+  );
+  const dispatch = useDispatch();
 
   const clickHandler = () => {
-    navigation("/apply");
+    dispatch(open());
   };
 
   return (
     <>
+      {isModalOpen && <ApplicationJobModal />}
       <div className="w-2/3">
         <Button
           variant="contained"
           color="primary"
           onClick={clickHandler}
           sx={styles}
+          startIcon={<SendRoundedIcon />}
         >
-          <SendRoundedIcon />
           Ứng tuyển ngay
         </Button>
       </div>
@@ -38,8 +45,8 @@ export default function Buttons() {
           onClick={clickHandler}
           color="primary"
           sx={styles}
+          startIcon={<FavoriteBorderRoundedIcon />}
         >
-          <FavoriteBorderRoundedIcon />
           Yêu thích
         </Button>
       </div>
