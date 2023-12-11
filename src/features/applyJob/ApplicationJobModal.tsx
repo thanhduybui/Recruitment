@@ -11,7 +11,10 @@ import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { ListCV, UploadForm } from ".";
 import { IconButton } from "@mui/material";
-import { close } from "@store/applyJob";
+import { ModalBackdrop, ModalContentContainer } from "@components/ui/modal";
+import { modalName } from "@data/constants";
+const { APPLY_MODAL } = modalName;
+import { closeModal } from "@store/modal";
 
 const formLabelStyles = {
   display: "flex",
@@ -32,13 +35,7 @@ export default function ApplicationModal() {
   const dispatch = useDispatch();
 
   const closeHandler = () => {
-    dispatch(close());
-  };
-
-  const handleBackdropClick = (event: React.MouseEvent<HTMLInputElement>) => {
-    if (event.target === event.currentTarget) {
-      closeHandler(); // Close modal only if the click was on the backdrop, not the modal content
-    }
+    dispatch(closeModal({ modalName: APPLY_MODAL }));
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,12 +43,8 @@ export default function ApplicationModal() {
   };
 
   return createPortal(
-    <div
-      className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-30 z-50 
-      transition-opacity duration-500"
-      onClick={handleBackdropClick}
-    >
-      <div className="bg-white p-4 rounded-lg w-1/3 shadow-sm flex flex-col gap-4">
+    <ModalBackdrop modalName={APPLY_MODAL}>
+      <ModalContentContainer>
         <div className="flex items-center justify-between">
           <h1 className="text-lg mb-2">
             Ứng tuyển cho vị trí
@@ -127,12 +120,12 @@ export default function ApplicationModal() {
           <Button variant="outlined" color="primary" onClick={closeHandler}>
             Huỷ
           </Button>
-          <Button variant="contained" color="primary" onClick={closeHandler}>
+          <Button variant="contained" color="primary">
             Ứng tuyển
           </Button>
         </div>
-      </div>
-    </div>,
+      </ModalContentContainer>
+    </ModalBackdrop>,
     document.getElementById("modal") as HTMLElement
   );
 }
