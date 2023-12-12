@@ -4,7 +4,10 @@ import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded
 import { ApplicationJobModal } from "@features/applyJob";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@store";
-import { open } from "@store/applyJob";
+import { openModal } from "@store/modal";
+import { modalName } from "@data/constants";
+
+const { APPLY_MODAL } = modalName;
 
 const styles = {
   textTransform: "none",
@@ -16,18 +19,18 @@ const styles = {
 };
 
 export default function Buttons() {
-  const isModalOpen = useSelector(
-    (state: RootState) => state.applyModal.isOpen
+  const isApplyModalOpen = useSelector(
+    (state: RootState) => state.modals.applyModal
   );
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    dispatch(open());
+    dispatch(openModal({ modalName: APPLY_MODAL }));
   };
 
   return (
     <>
-      {isModalOpen && <ApplicationJobModal />}
+      {isApplyModalOpen && <ApplicationJobModal />}
       <div className="w-2/3">
         <Button
           variant="contained"
