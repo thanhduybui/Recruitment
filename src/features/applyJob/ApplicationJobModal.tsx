@@ -6,12 +6,14 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { ListCV, UploadForm } from ".";
-import { IconButton } from "@mui/material";
-import { ModalBackdrop, ModalContentContainer } from "@components/ui/modal";
+import {
+  ModalBackdrop,
+  ModalContentContainer,
+  ModalHeader,
+} from "@components/ui/modal";
 import { modalName } from "@data/constants";
 const { APPLY_MODAL } = modalName;
 import { closeModal } from "@store/modal";
@@ -45,19 +47,11 @@ export default function ApplicationModal() {
   return createPortal(
     <ModalBackdrop modalName={APPLY_MODAL}>
       <ModalContentContainer>
-        <div className="flex items-center justify-between">
-          <h1 className="text-lg mb-2">
-            Ứng tuyển cho vị trí
-            <span className="font-semibold text-primary-500">
-              {" "}
-              Lập trình viên di động
-            </span>
-          </h1>
-          <IconButton onClick={closeHandler}>
-            <CloseRoundedIcon />
-          </IconButton>
-        </div>
-
+        <ModalHeader
+          modalName={APPLY_MODAL}
+          title="Ứng tuyển cho"
+          textHighlight="Java Developer"
+        />
         <FormControl>
           <FormLabel
             id="demo-controlled-radio-buttons-group"
