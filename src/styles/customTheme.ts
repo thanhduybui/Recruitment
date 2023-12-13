@@ -8,9 +8,14 @@ const theme = createTheme({
       light: "#38a5ff",
     },
     secondary: {
-      main: "#2196f3", // Change secondary color
+      main: "#fcc419",
     },
-    // Add more color customizations if needed
+    success: {
+      main: "#2f9e44",
+    },
+    error: {
+      main: "#f03e3e", // Change
+    },
   },
 });
 
