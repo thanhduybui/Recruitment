@@ -8,7 +8,6 @@ export default function UserModalAvatar() {
       <div className="flex-1 border-2 border-gray-200 border-dashed rounded-md flex items-center justify-center">
         <Button startIcon={<FileUploadRoundedIcon />}>Tải ảnh lên</Button>
       </div>
-
       <div className="flex-none flex flex-col gap-4">
         <div className="flex items-center justify-center">
           <Avatar

@@ -45,3 +45,9 @@ footer {
   margin-bottom: 5px;
   font-size: 14px;
 }
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 80%;
+  }
+}

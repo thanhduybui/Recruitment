@@ -33,7 +33,7 @@ export default function UserSetting() {
       {isAvatarModalOpen && <AvatarModal />}
       <Container style={containerStyles}>
         <div className="flex bg-gray-50">
-          <div className="flex-none w-1/4 pb-8 border-r-2 border-gray-100 h-fit bg-white rounded-l-md">
+          <div className="flex-none lg:w-1/4 pb-8 border-r-2 border-gray-100 h-fit bg-white rounded-l-md">
             <UserAvatar></UserAvatar>
             <SideBar></SideBar>
           </div>
