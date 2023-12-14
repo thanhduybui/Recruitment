@@ -3,8 +3,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useDispatch, useSelector } from "react-redux";
 import { setTabIndex } from "@store/sidebar";
-import { IconButton, useMediaQuery } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { RootState } from "@store";
+import Tooltip from "@mui/material/Tooltip";
 
 type SideBarItemProps = {
   selectedIndex?: number;
@@ -30,7 +32,9 @@ export default function SideBarItem(props: SideBarItemProps) {
   return (
     <>
       {!isMdScreen ? (
-        <IconButton size="large">{props.icon}</IconButton>
+        <Tooltip title={props.textContent} placement="right">
+          <IconButton size="large">{props.icon}</IconButton>
+        </Tooltip>
       ) : (
         <ListItemButton
           key={props.tabIndex}

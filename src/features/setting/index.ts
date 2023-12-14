@@ -1,4 +1,4 @@
-export { default as UserSettingButton } from "./components/UserSettingButton";
+export { default as UserSettingMenu } from "./components/UserSettingMenu";
 export { default as SideBar } from "./components/sidebar/SideBar";
 export { default as Profile } from "./components/Profile";
 export { default as CvProfile } from "./components/CvProfile";
