@@ -1,7 +1,7 @@
 import { HeaderList } from "@components/layouts/header";
 import Divider from "@mui/material/Divider";
 import Menu from "@mui/material/Menu";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Logout from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
@@ -12,10 +12,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "@store/auth";
 import { NotiButton, UserSettingButton } from "@components/ui/button";
 import { SettingMenuItem } from "@components/menu";
+import { RootState } from "@store";
+import { Roles } from "@data/constants";
 
 export default function UserSettingMenu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const role = useSelector((state: RootState) => state.role.role);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -56,14 +59,19 @@ export default function UserSettingMenu() {
           />
         </Link>
         <Divider />
-        <SettingMenuItem
-          icon={<Settings fontSize="small" color="primary" />}
-          text="Cài đặt gợi ý việc làm"
-        />
-        <SettingMenuItem
-          icon={<EmailOutlinedIcon fontSize="small" color="primary" />}
-          text="Cài đặt nhận mail"
-        />
+        {role === Roles.CANDIDATE && (
+          <>
+            <SettingMenuItem
+              icon={<Settings fontSize="small" color="primary" />}
+              text="Cài đặt gợi ý việc làm"
+            />
+
+            <SettingMenuItem
+              icon={<EmailOutlinedIcon fontSize="small" color="primary" />}
+              text="Cài đặt nhận mail"
+            />
+          </>
+        )}
         <Divider />
         <SettingMenuItem
           icon={<LockOutlinedIcon fontSize="small" color="primary" />}
