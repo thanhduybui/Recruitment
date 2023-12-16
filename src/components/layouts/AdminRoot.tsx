@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setRole } from "@store/role";
 import { Roles } from "@data/constants";
+import { Footer } from "./footer";
 
 export default function AdminRoot() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function AdminRoot() {
     <>
       <AdminHeader></AdminHeader>
       <Outlet />
+      <Footer />
     </>
   );
 }
