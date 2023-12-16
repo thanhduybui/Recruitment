@@ -1,10 +1,11 @@
-import { JobCard } from "@features/job";
+import { JobCard, TimeOrder } from "@features/job";
 import Pagination from "@mui/material/Pagination";
 import { JobCardContainer } from "@features/job/";
 
 export default function FindJobMainSection() {
   return (
     <>
+      <TimeOrder />
       <JobCardContainer>
         <JobCard
           jobTitle="Lập trình viên Fontend lương 20 - 25 triệu"

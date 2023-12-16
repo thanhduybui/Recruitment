@@ -25,12 +25,12 @@ export default function HeaderListItem(props: HeaderListItemProps) {
       onMouseOver={() => setShowItem(true)}
       onMouseLeave={() => setShowItem(false)}
     >
-      <a
+      <p
         className={`transition-all text-center block duration-100 text-md lg:text-sm font-semibold text-gray-400 px-5 py-2
     ${showItem ? "bg-gray-100  text-primary-500" : ""} cursor-pointer`}
       >
         {props.name}
-      </a>
+      </p>
       {props.data && displayItem}
     </li>
   );

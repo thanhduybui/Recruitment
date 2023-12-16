@@ -9,8 +9,10 @@ import { Link } from "react-router-dom";
 import { TabIndex } from "@data/constants";
 import SideBarItem from "./SideBarItem";
 import { useMediaQuery } from "@mui/material";
+import CameraAltRoundedIcon from "@mui/icons-material/CameraAltRounded";
 
-const { HOME, USER_PROFILE, CV, CV_PROFILE, APPLICATION } = TabIndex;
+const { CHANGE_AVATAR, HOME, USER_PROFILE, CV, CV_PROFILE, APPLICATION } =
+  TabIndex;
 
 export default function SideBar() {
   const isMdScreen = useMediaQuery("(min-width: 768px)");
@@ -43,6 +45,13 @@ export default function SideBar() {
           tabIndex={USER_PROFILE}
           icon={<AccountBoxIcon sx={{ color: "#0572cc" }} />}
         ></SideBarItem>
+        {!isMdScreen && (
+          <SideBarItem
+            textContent="Thay ảnh đại diện"
+            icon={<CameraAltRoundedIcon sx={{ color: "#0572cc" }} />}
+            tabIndex={CHANGE_AVATAR}
+          ></SideBarItem>
+        )}
         <SideBarItem
           textContent="Quản lý CV"
           tabIndex={CV}

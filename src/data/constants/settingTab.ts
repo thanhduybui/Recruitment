@@ -4,4 +4,5 @@ export const TabIndex = {
   CV: 1,
   CV_PROFILE: 2,
   APPLICATION: 3,
+  CHANGE_AVATAR: 5,
 };
