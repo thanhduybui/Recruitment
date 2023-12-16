@@ -16,6 +16,7 @@ type SelectProps = {
   styles?: string;
   size?: string;
   label?: string;
+  strict?: boolean;
   id?: string;
   search?: boolean;
   chip?: boolean;
@@ -109,7 +110,11 @@ export default function Select(props: SelectProps) {
   return (
     <div ref={selectRef} className={`relative font-medium ${props.styles}`}>
       {props.label && (
-        <FormControlLabel htmlFor={props.id} label={props.label} />
+        <FormControlLabel
+          htmlFor={props.id}
+          label={props.label}
+          strict={props.strict}
+        />
       )}
       <div
         className={`bg-white w-full ${

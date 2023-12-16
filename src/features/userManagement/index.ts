@@ -3,3 +3,8 @@ export { default as UserTableFilter } from "./components/UserTableFilter";
 export { default as UserDataRow } from "./components/UserDataRow";
 export { default as FilterTypeUser } from "./components/FilterTypeUser";
 export { default as UserDataList } from "./components/UserDataList";
+export { default as AddUserModal } from "./components/AddUserModal";
+export { default as AddAdminTab } from "./components/tab/AddAdminTab";
+export { default as AddCompanyTab } from "./components/tab/AddCompanyTab";
+export { default as AddCandidateTab } from "./components/tab/AddCandidateTab";
+export { default as FormWrapper } from "./components/form/FormWrapper";
