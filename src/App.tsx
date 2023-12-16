@@ -1,21 +1,8 @@
 import { RouterProvider } from "react-router-dom";
 import { Home, Login, Register, Job, UserSetting, JobDetail } from "@pages";
-import { AdminHome } from "@pages/admin";
+import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
 import { createBrowserRouter } from "react-router-dom";
 import { Root, AdminRoot } from "@components/layouts";
-
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" element={<Root />}>
-//       <Route index element={<Home />} />
-//       <Route path="/find-job" element={<Job />} />
-//       <Route path="/login" element={<Login />} />
-//       <Route path="/register" element={<Register />} />
-//       <Route path="/user-setting" element={<UserSetting />}></Route>
-//       <Route path="/job-detail" element={<JobDetail />} />
-//     </Route>
-//   )
-// );
 
 const router = createBrowserRouter([
   {
@@ -46,7 +33,15 @@ const router = createBrowserRouter([
   {
     path: "admin",
     element: <AdminRoot />,
-    children: [{ path: "", element: <AdminHome /> }],
+    children: [
+      { path: "", element: <AdminDashboard /> },
+      {
+        path: "jobs",
+        element: <AdminJob />,
+      },
+      { path: "users", element: <AdminUser /> },
+      { path: "others", element: <AdminOther /> },
+    ],
   },
 ]);
 

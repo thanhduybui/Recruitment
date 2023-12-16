@@ -5,7 +5,7 @@ import { Container } from "@mui/material";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import { UserTable } from "@features/userManagement";
 
-export default function AdminHome() {
+export default function AdminUser() {
   return (
     <div className="mt-2">
       <Container maxWidth="xl" fixed>

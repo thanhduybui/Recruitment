@@ -1,4 +1,4 @@
-import { DropDownListItem, HeaderWrapper } from ".";
+import { HeaderWrapper } from ".";
 import { LogoButton } from "@components/ui/button";
 import { UserSettingMenu } from "@features/setting";
 import { HeaderList } from ".";
@@ -6,6 +6,8 @@ import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import { HeaderNavItem } from "@components/layouts/header";
+import { NavLink } from "react-router-dom";
 
 export default function AdminHeader() {
   const [showNav, setShowNav] = useState(false);
@@ -20,9 +22,39 @@ export default function AdminHeader() {
     lg:justify-between w-full h-screen lg:h-16`}
       >
         <HeaderList>
-          <DropDownListItem name="Việc làm" />
-          <DropDownListItem name="Ứng viên" />
-          <DropDownListItem name="Nhà tuyển dụng" />
+          <NavLink
+            to="/admin/"
+            end
+            className={({ isActive }) =>
+              isActive ? "text-primary-500 bg-gray-100" : ""
+            }
+          >
+            <HeaderNavItem name="Dashboard" />
+          </NavLink>
+          <NavLink
+            to="/admin/jobs"
+            className={({ isActive }) =>
+              isActive ? "text-primary-500 bg-gray-100" : ""
+            }
+          >
+            <HeaderNavItem name="Việc làm" />
+          </NavLink>
+          <NavLink
+            to="/admin/users"
+            className={({ isActive }) =>
+              isActive ? "text-primary-500 bg-gray-100" : ""
+            }
+          >
+            <HeaderNavItem name="Người dùng" />
+          </NavLink>
+          <NavLink
+            to="/admin/others"
+            className={({ isActive }) =>
+              isActive ? "text-primary-500 bg-gray-100" : ""
+            }
+          >
+            <HeaderNavItem name="Khác" />
+          </NavLink>
         </HeaderList>
 
         <UserSettingMenu />
