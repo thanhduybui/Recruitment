@@ -4,7 +4,8 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import { AdminHeadSection } from "@components/admin";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-import { AdminJobFilter } from "@features/jobManagement";
+import { AdminJobFilter, JobDataList } from "@features/jobManagement";
+import { Divider } from "@mui/material";
 
 export default function AdminJob() {
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -50,6 +51,8 @@ export default function AdminJob() {
           </AdminCardContainer>
           <div className="bg-white px-4 pt-2 pb-10 rounded-md mb-10">
             <AdminJobFilter />
+            <Divider />
+            <JobDataList />
           </div>
         </div>
       </Container>
