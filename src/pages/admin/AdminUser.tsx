@@ -1,22 +1,40 @@
-import { Breadcrumb } from "@components/ui";
-import Typography from "@mui/material/Typography";
-import { AdminCard } from "@components/ui/card";
+import { AdminCard, AdminCardContainer } from "@components/ui/card";
 import { Container } from "@mui/material";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import { UserTable } from "@features/userManagement";
+import { AdminHeadSection } from "@components/admin";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 
 export default function AdminUser() {
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    event.preventDefault();
+  }
+
+  const breadcrumbs = [
+    <Link
+      underline="hover"
+      key="1"
+      color="inherit"
+      href="/"
+      onClick={handleClick}
+    >
+      Dashboard
+    </Link>,
+    <Typography key="3" color="text.primary">
+      Quản lý người dùng
+    </Typography>,
+  ];
+
   return (
     <div className="mt-2">
       <Container maxWidth="xl" fixed>
         <div className="flex flex-col gap-2 bg-gray-50">
-          <div className="bg-white flex  flex-col gap-2 px-4 py-2 rounded-md">
-            <Breadcrumb />
-            <Typography variant="h6" className="text-primary-600">
-              Quản lý người dùng
-            </Typography>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+          <AdminHeadSection
+            title="Quản lý người dùng"
+            breadcrumbs={breadcrumbs}
+          />
+          <AdminCardContainer>
             <AdminCard
               title="Người dùng"
               value="100"
@@ -32,7 +50,7 @@ export default function AdminUser() {
               value="98"
               icon={<PeopleAltOutlinedIcon />}
             />
-          </div>
+          </AdminCardContainer>
           <div className="bg-white px-4 pt-2 pb-10 rounded-md mb-10">
             <UserTable />
           </div>

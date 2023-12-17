@@ -3,36 +3,40 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { ReactElement } from "react";
 
-export default function Breadcrumb() {
+type BreadcrumbProps = {
+  breadcrumps: ReactElement[];
+};
+
+export default function Breadcrumb(props: BreadcrumbProps) {
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
-    console.info("You clicked a breadcrumb.");
   }
 
-  const breadcrumbs = [
-    <Link
-      underline="hover"
-      key="1"
-      color="inherit"
-      href="/"
-      onClick={handleClick}
-    >
-      MUI
-    </Link>,
-    <Link
-      underline="hover"
-      key="2"
-      color="inherit"
-      href="/material-ui/getting-started/installation/"
-      onClick={handleClick}
-    >
-      Core
-    </Link>,
-    <Typography key="3" color="text.primary">
-      Breadcrumb
-    </Typography>,
-  ];
+  // const breadcrumbs = [
+  //   <Link
+  //     underline="hover"
+  //     key="1"
+  //     color="inherit"
+  //     href="/"
+  //     onClick={handleClick}
+  //   >
+  //     MUI
+  //   </Link>,
+  //   <Link
+  //     underline="hover"
+  //     key="2"
+  //     color="inherit"
+  //     href="/material-ui/getting-started/installation/"
+  //     onClick={handleClick}
+  //   >
+  //     Core
+  //   </Link>,
+  //   <Typography key="3" color="text.primary">
+  //     Breadcrumb
+  //   </Typography>,
+  // ];
 
   return (
     <Stack spacing={2}>
@@ -40,7 +44,7 @@ export default function Breadcrumb() {
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
       >
-        {breadcrumbs}
+        {props.breadcrumps}
       </Breadcrumbs>
     </Stack>
   );

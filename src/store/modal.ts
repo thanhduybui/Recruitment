@@ -11,6 +11,7 @@ interface ModalPayload {
 const initialState: ModalsState = {
   avatarModal: false,
   applyModal: false,
+  addUserModal: false,
 };
 
 const modalsSlice = createSlice({

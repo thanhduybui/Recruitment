@@ -71,6 +71,9 @@ export default function FilterTypeUser() {
             <MenuItem onClick={handleClose}>
               <ListItemText inset>Quản trị viên</ListItemText>
             </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <ListItemText inset>Tài khoản chờ xét duyệt</ListItemText>
+            </MenuItem>
           </MenuList>
         </Paper>
       </Popover>
