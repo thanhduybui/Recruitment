@@ -5,8 +5,15 @@ import { UserTable } from "@features/userManagement";
 import { AdminHeadSection } from "@components/admin";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
+import { UserDetailModal } from "@features/userManagement";
 
 export default function AdminUser() {
+  const isDetailModalOpen = useSelector(
+    (state: RootState) => state.modals.userDetailModal
+  );
+
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
   }
@@ -28,6 +35,7 @@ export default function AdminUser() {
 
   return (
     <div className="mt-2">
+      {isDetailModalOpen && <UserDetailModal />}
       <Container maxWidth="xl" fixed>
         <div className="flex flex-col gap-2 bg-gray-50">
           <AdminHeadSection

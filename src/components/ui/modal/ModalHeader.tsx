@@ -15,7 +15,7 @@ export default function ModalHeader(props: ModalHeaderProps) {
     dispatch(closeModal({ modalName: props.modalName }));
   };
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between border-b-4 border-primary-500">
       <h1 className="text-lg font-semibold">
         {props.title}
         <span className="font-semibold text-primary-500">

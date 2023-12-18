@@ -1,6 +1,6 @@
 import SearchInput from "@components/form/Input/SearchInput";
 import Button from "@mui/material/Button";
-import { FilterTypeUser } from "..";
+import { FilterTypeUser } from "../..";
 import AddIcon from "@mui/icons-material/Add";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import IconButton from "@mui/material/IconButton";
