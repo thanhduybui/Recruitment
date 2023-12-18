@@ -12,6 +12,7 @@ const initialState: ModalsState = {
   avatarModal: false,
   applyModal: false,
   addUserModal: false,
+  userDetailModal: false,
 };
 
 const modalsSlice = createSlice({

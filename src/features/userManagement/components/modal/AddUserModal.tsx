@@ -9,7 +9,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { AddAdminTab, AddCompanyTab, AddCandidateTab } from "..";
+import { AddAdminTab, AddCompanyTab, AddCandidateTab } from "../..";
 
 export default function AddUserModal() {
   const [value, setValue] = useState(0);

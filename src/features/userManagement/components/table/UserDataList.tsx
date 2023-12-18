@@ -5,7 +5,7 @@ const userData = [
     id: "20011",
     name: "John Doe",
     email: "johndoe@gmail.com",
-    date: "2015-03-25",
+    status: "Hoạt động",
     role: "Admin",
   },
 ];
@@ -17,7 +17,7 @@ for (let i = 1; i <= 10; i++) {
     id: (parseInt(userData[0].id) + i).toString(),
     name: `User ${i}`,
     email: `user${i}@example.com`,
-    date: "2023-12-15", // Update the dates as needed
+    status: "Hoạt động", // Update the dates as needed
     role: "User",
   });
 }
@@ -30,7 +30,7 @@ export default function UserDataList() {
         id="ID"
         name="Tên"
         email="Email"
-        date="Ngày tham gia"
+        status="Trạng thái"
         role="Vai trò"
       />
       {additionalUsers.map((userData) => (

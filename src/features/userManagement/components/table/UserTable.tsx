@@ -1,7 +1,7 @@
 import Pagination from "@mui/material/Pagination";
 import Divider from "@mui/material/Divider";
 import UserDataList from "./UserDataList";
-import UserTableFilter from "./UserTableFilter";
+import UserTableFilter from "../filter/UserTableFilter";
 
 export default function UserTable() {
   return (

@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { AdminJobFilter, JobDataList } from "@features/jobManagement";
 import { Divider } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 
 export default function AdminJob() {
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -53,6 +54,14 @@ export default function AdminJob() {
             <AdminJobFilter />
             <Divider />
             <JobDataList />
+            <div className="flex justify-end">
+              <Pagination
+                count={10}
+                shape="rounded"
+                color="primary"
+                size="medium"
+              ></Pagination>
+            </div>
           </div>
         </div>
       </Container>
