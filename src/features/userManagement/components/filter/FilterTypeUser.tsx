@@ -6,6 +6,7 @@ import {
   MenuList,
   MenuItem,
   ListItemIcon,
+  ListItemText,
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CheckIcon from "@mui/icons-material/Check";
@@ -85,7 +86,11 @@ const FilterTypeUser = () => {
                     <CheckIcon />
                   </ListItemIcon>
                 )}
-                {item.text}
+                {index === item.tab ? (
+                  <p>{item.text}</p>
+                ) : (
+                  <ListItemText inset>{item.text}</ListItemText>
+                )}
               </MenuItem>
             ))}
           </MenuList>
