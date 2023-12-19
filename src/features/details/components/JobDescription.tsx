@@ -1,11 +1,11 @@
+import { TextHeading } from "@components/heading";
 import { InformationSection } from "@features/details";
-import { DetailHeader } from "@features/details";
 import { HTMLContent } from "@features/details";
 
 export default function JobDescription() {
   return (
     <>
-      <DetailHeader title="Chi tiết tin tuyển dụng" borderStart />
+      <TextHeading title="Chi tiết tin tuyển dụng" borderStart />
       <InformationSection
         html
         header="Yêu cầu công việc"

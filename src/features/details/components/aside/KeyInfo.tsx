@@ -1,10 +1,10 @@
-import { DetailHeader } from "@features/details";
+import { TextHeading } from "@components/heading";
 import Chip from "@mui/material/Chip";
 export default function KeyInfo() {
   return (
     <>
       <div className="major mb-4">
-        <DetailHeader title="Ngành nghề/ lĩnh vực" />
+        <TextHeading title="Ngành nghề/ lĩnh vực" />
         <div className="inline-block mt-2">
           <Chip
             label="Lập trình"
@@ -21,7 +21,7 @@ export default function KeyInfo() {
         </div>
       </div>
       <div className="skills">
-        <DetailHeader title="Kỹ năng" />
+        <TextHeading title="Kỹ năng" />
         <div className="inline-block mt-2">
           <Chip
             label="Java"

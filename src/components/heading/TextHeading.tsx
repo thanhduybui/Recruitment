@@ -1,10 +1,10 @@
-type JobTitleProps = {
+type TextHeadingProps = {
   title?: string;
   borderStart?: boolean;
   small?: boolean;
 };
 
-export default function JobTitle(props: JobTitleProps) {
+export default function TextHeading(props: TextHeadingProps) {
   return (
     <h1
       className={`tracking-wider text-lg font-semibold text-gray-400 ${

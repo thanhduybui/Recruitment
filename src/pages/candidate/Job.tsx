@@ -1,5 +1,4 @@
 import { Banner, Filter } from "@features/filter";
-import Container from "@mui/material/Container";
 import { AsideJob, FindJobMainSection } from "@features/job";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
@@ -7,6 +6,7 @@ import { useEffect } from "react";
 import { useAlert } from "@hooks";
 import Alert from "@mui/material/Alert";
 import { RightAsideLayout } from "@components/layouts";
+import { MediumContainer } from "@components/ui";
 
 export default function Job() {
   const [showAlert, setShowAlert] = useAlert(false);
@@ -20,15 +20,7 @@ export default function Job() {
   }, [setShowAlert, isLogin]);
 
   return (
-    <Container
-      style={{
-        backgroundColor: "f",
-        padding: 0,
-        marginBottom: "2.4rem",
-        marginTop: "0.6rem",
-        position: "relative",
-      }}
-    >
+    <MediumContainer>
       {showAlert && (
         <Alert
           severity="success"
@@ -57,6 +49,6 @@ export default function Job() {
           />
         </div>
       </div>
-    </Container>
+    </MediumContainer>
   );
 }
