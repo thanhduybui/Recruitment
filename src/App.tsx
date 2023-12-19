@@ -1,5 +1,13 @@
 import { RouterProvider } from "react-router-dom";
-import { Home, Login, Register, Job, UserSetting, JobDetail } from "@pages";
+import {
+  Home,
+  Login,
+  Register,
+  Job,
+  UserSetting,
+  JobDetail,
+  ConfirmPage,
+} from "@pages";
 import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
 import { createBrowserRouter } from "react-router-dom";
 import { Root, AdminRoot } from "@components/layouts";
@@ -28,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "job-detail",
         element: <JobDetail />,
+      },
+      {
+        path: "confirm-account",
+        element: <ConfirmPage />,
       },
     ],
   },

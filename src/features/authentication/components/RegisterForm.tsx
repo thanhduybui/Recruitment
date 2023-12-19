@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
 import { InputConstants } from "@data/constants";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function RegisterForm() {
   const [passwordValue, setPasswordValue] = useState("");
@@ -49,13 +50,19 @@ export default function RegisterForm() {
             passwordValue={passwordValue}
           />
 
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ width: "100%", textTransform: "none", fontSize: "1.1rem" }}
-          >
-            Đăng ký
-          </Button>
+          <Link to="/confirm-account">
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                width: "100%",
+                textTransform: "none",
+                fontSize: "1.1rem",
+              }}
+            >
+              Đăng ký
+            </Button>
+          </Link>
         </FormGroup>
         <OauthLogin />
       </FormContainer>
