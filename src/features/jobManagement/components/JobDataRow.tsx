@@ -4,9 +4,18 @@ import ModeEditOutlineRoundedIcon from "@mui/icons-material/ModeEditOutlineRound
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { JobDataRowProps } from "../interface";
 import { DataRowContainer } from "@components/ui";
+import { useDispatch } from "react-redux";
+import { openModal } from "@store/modal";
+import { modalName } from "@data/constants";
 
 export default function JobDataRow(props: JobDataRowProps) {
   const { id, title, company, applyNumber, isHead, deadline } = props;
+  const dispatch = useDispatch();
+
+  const onClickSeeDetailHandler = (id: string | undefined) => {
+    console.log(id);
+    dispatch(openModal({ modalName: modalName.JOB_DETAIL_MODAL }));
+  };
   return (
     <>
       <DataRowContainer isHead={isHead}>
@@ -22,7 +31,10 @@ export default function JobDataRow(props: JobDataRowProps) {
         {!isHead && (
           <div className="flex gap-2 min-w-[200px] max-w-[200px]">
             <IconButton>
-              <ModeEditOutlineRoundedIcon color="primary" />
+              <ModeEditOutlineRoundedIcon
+                color="primary"
+                onClick={() => onClickSeeDetailHandler(id)}
+              />
             </IconButton>
             <IconButton>
               <DeleteOutlineOutlinedIcon color="error" />
