@@ -9,8 +9,40 @@ import ViewCompactOutlinedIcon from "@mui/icons-material/ViewCompactOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import { locations } from "@data/api";
 import Button from "@mui/material/Button";
+import { InputConstants } from "@data/constants";
+import { useEffect, useState } from "react";
 
 export default function EmployerRegisterPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const handleInputChange = (
+    value: string,
+    setter: (value: string) => void
+  ) => {
+    setter(value);
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsFormValid(
+        email !== "" &&
+          password !== "" &&
+          confirmPassword !== "" &&
+          fullName !== "" &&
+          phoneNumber !== "" &&
+          companyName !== ""
+      );
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [email, password, confirmPassword, fullName, phoneNumber, companyName]);
+
   return (
     <MediumContainer>
       <div className="bg-white  w-full flex rounded-md">
@@ -24,6 +56,8 @@ export default function EmployerRegisterPage() {
             <TextInput
               label="Nhập email liên hệ"
               placeholder="Nhập email liên hệ"
+              inputChange={(value) => handleInputChange(value, setEmail)}
+              name={InputConstants.EMAIL}
               strict
               startIcon={<MailOutlineIcon />}
             />
@@ -31,6 +65,8 @@ export default function EmployerRegisterPage() {
               placeholder="Nhập mật khẩu"
               label="Nhập mật khẩu"
               strict
+              inputChange={(value) => handleInputChange(value, setPassword)}
+              name={InputConstants.PASSWORD}
               type="password"
               startIcon={<LockOutlinedIcon />}
             />
@@ -39,6 +75,11 @@ export default function EmployerRegisterPage() {
               label="Nhập lại mật khẩu"
               strict
               type="password"
+              name={InputConstants.CONFIRM_PASSWORD}
+              inputChange={(value) =>
+                handleInputChange(value, setConfirmPassword)
+              }
+              passwordValue={password}
               startIcon={<LockOutlinedIcon />}
             />
           </div>
@@ -49,12 +90,14 @@ export default function EmployerRegisterPage() {
               strict
               type="text"
               placeholder="Nhập họ và tên"
+              inputChange={(value) => handleInputChange(value, setFullName)}
               startIcon={<PersonOutlineOutlinedIcon />}
             />
             <TextInput
               label="Số điện thoại"
               strict
               type="text"
+              inputChange={(value) => handleInputChange(value, setPhoneNumber)}
               placeholder="Nhập số điện thoại"
               startIcon={<LocalPhoneOutlinedIcon />}
             />
@@ -62,6 +105,7 @@ export default function EmployerRegisterPage() {
               label="Tên công ty"
               strict
               type="text"
+              inputChange={(value) => handleInputChange(value, setCompanyName)}
               placeholder="Nhập tên công ty"
               startIcon={<ViewCompactOutlinedIcon />}
             />
@@ -74,9 +118,20 @@ export default function EmployerRegisterPage() {
             />
           </div>
           <div className="m-auto">
-            <Button variant="contained" sx={{ textTransform: "none" }} disabled>
-              Đăng ký
-            </Button>
+            {isFormValid && (
+              <Button variant="contained" sx={{ textTransform: "none" }}>
+                Đăng ký
+              </Button>
+            )}
+            {!isFormValid && (
+              <Button
+                variant="contained"
+                sx={{ textTransform: "none" }}
+                disabled
+              >
+                Đăng ký
+              </Button>
+            )}
           </div>
         </form>
         <div className="w-5/12 rounded-r-md bg-gradient-to-br from-primary-600 to-primary-200">
