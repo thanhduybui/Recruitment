@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { Alert, Container } from "@mui/material";
 import { useAlert } from "@hooks";
 import { useLocation } from "react-router-dom";
+import { Slider } from "@components/ui";
 
 function HomePage() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function HomePage() {
     <React.Fragment>
       <Container>
         {showAlert && <Alert severity="success">Đăng nhập thành công</Alert>}
+        <Slider />
       </Container>
     </React.Fragment>
   );
