@@ -11,3 +11,5 @@ export { default as SearchInput } from "./Input/SearchInput";
 export { default as Textarea } from "./Textarea";
 export { default as TextEditor } from "./TextEditor";
 export { default as LongDescriptionBox } from "./LongDescriptionBox";
+export { default as SearchSelect } from "./SelectBox/SearchSelect";
+export { default as NormalSelect } from "./SelectBox/NormalSelect";

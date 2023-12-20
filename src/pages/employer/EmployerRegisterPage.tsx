@@ -1,4 +1,4 @@
-import { FormHeader, Select, TextInput } from "@components/form";
+import { FormHeader, SearchSelect, TextInput } from "@components/form";
 import { TextHeading } from "@components/heading";
 import { MediumContainer } from "@components/ui";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -65,11 +65,10 @@ export default function EmployerRegisterPage() {
               placeholder="Nhập tên công ty"
               startIcon={<ViewCompactOutlinedIcon />}
             />
-            <Select
+            <SearchSelect
               startIcon={<LocationOnOutlinedIcon />}
-              search
               label="Vị trí làm việc"
-              strict
+              required
               options={locations}
               initValue={locations[0]}
             />
