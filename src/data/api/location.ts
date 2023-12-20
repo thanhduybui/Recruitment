@@ -1,7 +1,7 @@
 export const locations = [
   {
     value: "0",
-    name: "Tất cả vị trí",
+    name: "Chọn nơi làm việc",
   },
   { value: "1", name: "Hà Nội" },
   { value: "2", name: "Hồ Chí Minh" },

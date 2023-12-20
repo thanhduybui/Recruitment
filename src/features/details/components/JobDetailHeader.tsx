@@ -1,14 +1,15 @@
 import Chip from "@mui/material/Chip";
 
-import { Buttons, DetailHeader, LogoInformation } from "..";
+import { Buttons, LogoInformation } from "..";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MonetizationOnRoundedIcon from "@mui/icons-material/MonetizationOnRounded";
 import PunchClockRoundedIcon from "@mui/icons-material/PunchClockRounded";
+import { TextHeading } from "@components/heading";
 
 export default function JobDetailHeader() {
   return (
     <div className="job-detail-head p-6 flex flex-col gap-4 bg-white mr-4 rounded-md">
-      <DetailHeader title="Frontend Developer" />
+      <TextHeading title="Frontend Developer" />
       <div className="flex items-center justify-between">
         <LogoInformation
           label="Địa điểm:"

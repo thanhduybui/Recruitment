@@ -4,11 +4,21 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import { AdminHeadSection } from "@components/admin";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-import { AdminJobFilter, JobDataList } from "@features/jobManagement";
+import {
+  AdminJobFilter,
+  JobDataList,
+  JobDetailModal,
+} from "@features/jobManagement";
 import { Divider } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
 
 export default function AdminJob() {
+  const detailJobOpen = useSelector(
+    (state: RootState) => state.modals.jobDetailModal
+  );
+
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
   }
@@ -30,6 +40,7 @@ export default function AdminJob() {
 
   return (
     <div className="mt-2">
+      {detailJobOpen && <JobDetailModal />}
       <Container maxWidth="xl" fixed>
         <div className="flex flex-col gap-2 bg-gray-50">
           <AdminHeadSection title="Quản việc làm" breadcrumbs={breadcrumbs} />

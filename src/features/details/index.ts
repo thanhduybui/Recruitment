@@ -1,5 +1,3 @@
-export { default as JobDetailHeader } from "./components/JobDetailHeader";
-export { default as DetailHeader } from "./components/DetailHeader";
 export { default as LogoInformation } from "./components/LogoInformation";
 export { default as InformationSection } from "./components/InformationSection";
 export { default as HTMLContent } from "./components/HTMLContent";
@@ -10,3 +8,4 @@ export { default as AsideChildContainer } from "./components/aside/AsideChildCon
 export { default as GeneralInfo } from "./components/aside/GeneralInfo";
 export { default as Aside } from "./components/aside/Aside";
 export { default as KeyInfo } from "./components/aside/KeyInfo";
+export { default as JobDetailHeader } from "./components/JobDetailHeader";

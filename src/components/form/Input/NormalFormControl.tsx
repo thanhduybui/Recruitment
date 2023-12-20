@@ -6,6 +6,7 @@ type NormalFormControlProps = {
   label: string;
   type: string;
   name?: string;
+  sm?: boolean;
 };
 
 export default function NormalFormControl(props: NormalFormControlProps) {
@@ -38,6 +39,7 @@ export default function NormalFormControl(props: NormalFormControlProps) {
         label={props.label}
         helperText={error && getValidationRule(inputValue)}
         onChange={handleInputChange}
+        size={props.sm ? "small" : "medium"}
       />
     </FormControl>
   );

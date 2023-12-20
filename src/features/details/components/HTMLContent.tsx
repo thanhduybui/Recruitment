@@ -16,9 +16,5 @@ const htmlContent = `<div class="audit-program">
 `;
 
 export default function HtmlContent() {
-  return (
-    <div>
-      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-    </div>
-  );
+  return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
 }

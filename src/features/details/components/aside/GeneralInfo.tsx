@@ -1,14 +1,15 @@
-import { DetailHeader, LogoInformation } from "@features/details";
+import { LogoInformation } from "@features/details";
 import StarsRoundedIcon from "@mui/icons-material/StarsRounded";
 import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import BusinessCenterRoundedIcon from "@mui/icons-material/BusinessCenterRounded";
 import WcRoundedIcon from "@mui/icons-material/WcRounded";
+import { TextHeading } from "@components/heading";
 
 export default function GeneralInfo() {
   return (
     <>
-      <DetailHeader title="Thông tin chung" />
+      <TextHeading title="Thông tin chung" />
       <div className="flex flex-col gap-6 mt-6">
         <LogoInformation
           label="Cấp bậc"

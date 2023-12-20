@@ -1,14 +1,24 @@
 import { RouterProvider } from "react-router-dom";
-import { Home, Login, Register, Job, UserSetting, JobDetail } from "@pages";
+import {
+  Home,
+  Login,
+  Register,
+  Job,
+  UserSetting,
+  JobDetail,
+  ConfirmPage,
+} from "@pages";
 import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
 import { createBrowserRouter } from "react-router-dom";
 import { Root, AdminRoot } from "@components/layouts";
+import { NotFoundPage } from "@components/error";
+import { EmployerRegisterPage } from "@pages/employer";
 
 const router = createBrowserRouter([
   {
-    path: "",
+    path: "/",
     element: <Root />,
-
+    errorElement: <NotFoundPage />,
     children: [
       { index: true, path: "home", element: <Home /> },
       { path: "find-job", element: <Job /> },
@@ -28,11 +38,23 @@ const router = createBrowserRouter([
         path: "job-detail",
         element: <JobDetail />,
       },
+      {
+        path: "confirm-account",
+        element: <ConfirmPage />,
+      },
     ],
   },
   {
-    path: "admin",
+    path: "/employer",
+    element: <Root />,
+    errorElement: <NotFoundPage />,
+    children: [{ path: "register", element: <EmployerRegisterPage /> }],
+  },
+
+  {
+    path: "/admin",
     element: <AdminRoot />,
+    errorElement: <NotFoundPage />,
     children: [
       { path: "", element: <AdminDashboard /> },
       {

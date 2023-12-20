@@ -1,6 +1,7 @@
-export { default as Home } from "./Home";
-export { default as Login } from "./Login";
-export { default as Register } from "./Register";
-export { default as Job } from "./Job";
-export { default as UserSetting } from "./UserSetting";
-export { default as JobDetail } from "./JobDetail";
+export { default as Home } from "./candidate/Home";
+export { default as Login } from "./candidate/Login";
+export { default as Register } from "./candidate/Register";
+export { default as Job } from "./candidate/Job";
+export { default as UserSetting } from "./candidate/UserSetting";
+export { default as JobDetail } from "./candidate/JobDetail";
+export { default as ConfirmPage } from "./candidate/ConfirmPage";
