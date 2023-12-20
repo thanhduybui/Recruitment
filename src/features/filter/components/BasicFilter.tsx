@@ -3,7 +3,7 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import Button from "@mui/material/Button";
 import SearchInput from "@components/form/Input/SearchInput";
-import { Select } from "@components/form";
+import { NormalSelect, SearchSelect } from "@components/form";
 import { locations } from "@data/api";
 import { expieriences } from "@data/api";
 import { salaryRanges } from "@data/api";
@@ -15,42 +15,45 @@ export default function BasicFilter() {
         styles="col-span-3"
         placeholder="Tìm kiếm việc làm, công ty"
       />
-      <Select
-        black
-        initValue={locations[0]}
-        options={locations}
-        startIcon={
-          <LocationOnOutlinedIcon
-            sx={{ width: "24px", height: "24px" }}
-            color="primary"
-          />
-        }
-        styles="col-span-2"
-      />
-      <Select
-        black
-        initValue={expieriences[0]}
-        options={expieriences}
-        startIcon={
-          <StarBorderOutlinedIcon
-            sx={{ width: "24px", height: "24px" }}
-            color="primary"
-          />
-        }
-        styles="col-span-2"
-      />
-      <Select
-        black
-        initValue={salaryRanges[0]}
-        options={salaryRanges}
-        startIcon={
-          <AttachMoneyOutlinedIcon
-            sx={{ width: "24px", height: "24px" }}
-            color="primary"
-          />
-        }
-        styles="col-span-2"
-      />
+      <div className="col-span-2">
+        <SearchSelect
+          bold
+          options={locations}
+          startIcon={
+            <LocationOnOutlinedIcon
+              sx={{ width: "24px", height: "24px" }}
+              color="primary"
+            />
+          }
+        />
+      </div>
+
+      <div className="col-span-2">
+        <NormalSelect
+          bold
+          options={expieriences}
+          startIcon={
+            <StarBorderOutlinedIcon
+              sx={{ width: "24px", height: "24px" }}
+              color="primary"
+            />
+          }
+        />
+      </div>
+
+      <div className="col-span-2">
+        <NormalSelect
+          bold
+          options={salaryRanges}
+          startIcon={
+            <AttachMoneyOutlinedIcon
+              sx={{ width: "24px", height: "24px" }}
+              color="primary"
+            />
+          }
+        />
+      </div>
+
       <Button
         color="primary"
         variant="contained"

@@ -1,5 +1,5 @@
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
-import { Select } from "@components/form";
+import { NormalSelect, SearchSelect } from "@components/form";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import ChairAltOutlinedIcon from "@mui/icons-material/ChairAltOutlined";
@@ -9,71 +9,77 @@ import { fields, majors, postTypes, workTimes, positions } from "@data/api";
 export default function AdvancedFilter() {
   return (
     <div className="grid grid-cols-10 gap-2 items-center bg-white">
-      <Select
-        black
-        initValue={fields[0]}
-        options={fields}
-        startIcon={
-          <BusinessOutlinedIcon
-            sx={{ width: "20px", height: "20px" }}
-            color="primary"
-          />
-        }
-        styles="col-span-2"
-        size="sm"
-      />
-      <Select
-        black
-        initValue={majors[0]}
-        options={majors}
-        startIcon={
-          <AppsOutlinedIcon
-            sx={{ width: "20px", height: "20px" }}
-            color="primary"
-          />
-        }
-        styles="col-span-2"
-        size="sm"
-      />
-      <Select
-        black
-        initValue={positions[0]}
-        options={positions}
-        startIcon={
-          <ChairAltOutlinedIcon
-            sx={{ width: "20px", height: "20px" }}
-            color="primary"
-          />
-        }
-        styles="col-span-2"
-        size="sm"
-      />
-      <Select
-        black
-        initValue={workTimes[0]}
-        options={workTimes}
-        startIcon={
-          <CasesOutlinedIcon
-            sx={{ width: "20px", height: "20px" }}
-            color="primary"
-          />
-        }
-        styles="col-span-2"
-        size="sm"
-      />
-      <Select
-        black
-        initValue={postTypes[0]}
-        options={postTypes}
-        startIcon={
-          <StarBorderOutlinedIcon
-            sx={{ width: "20px", height: "20px" }}
-            color="primary"
-          />
-        }
-        styles="col-span-2"
-        size="sm"
-      />
+      <div className="col-span-2">
+        {" "}
+        <SearchSelect
+          small
+          bold
+          options={fields}
+          startIcon={
+            <BusinessOutlinedIcon
+              sx={{ width: "20px", height: "20px" }}
+              color="primary"
+            />
+          }
+        />
+      </div>
+      <div className="col-span-2">
+        {" "}
+        <SearchSelect
+          options={majors}
+          small
+          bold
+          startIcon={
+            <AppsOutlinedIcon
+              sx={{ width: "20px", height: "20px" }}
+              color="primary"
+            />
+          }
+        />
+      </div>
+      <div className="col-span-2">
+        {" "}
+        <NormalSelect
+          options={positions}
+          small
+          bold
+          startIcon={
+            <ChairAltOutlinedIcon
+              sx={{ width: "20px", height: "20px" }}
+              color="primary"
+            />
+          }
+        />
+      </div>
+      <div className="col-span-2">
+        {" "}
+        <NormalSelect
+          options={workTimes}
+          small
+          bold
+          startIcon={
+            <CasesOutlinedIcon
+              sx={{ width: "20px", height: "20px" }}
+              color="primary"
+            />
+          }
+        />
+      </div>
+
+      <div className="col-span-2">
+        {" "}
+        <NormalSelect
+          options={postTypes}
+          small
+          bold
+          startIcon={
+            <StarBorderOutlinedIcon
+              sx={{ width: "20px", height: "20px" }}
+              color="primary"
+            />
+          }
+        />
+      </div>
     </div>
   );
 }

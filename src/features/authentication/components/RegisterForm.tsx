@@ -27,12 +27,6 @@ export default function RegisterForm() {
         />
         <FormGroup>
           <NormalFormControl
-            label="Tên đăng nhập"
-            type="text"
-            name={InputConstants.USERNAME}
-          />
-
-          <NormalFormControl
             label="Email"
             type="email"
             name={InputConstants.EMAIL}
@@ -50,19 +44,21 @@ export default function RegisterForm() {
             passwordValue={passwordValue}
           />
 
-          <Link to="/confirm-account">
-            <Button
-              variant="contained"
-              color="primary"
-              style={{
-                width: "100%",
-                textTransform: "none",
-                fontSize: "1.1rem",
-              }}
-            >
-              Đăng ký
-            </Button>
-          </Link>
+          <div className="w-full">
+            <Link to="/confirm-account">
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  width: "100%",
+                  textTransform: "none",
+                  fontSize: "1.1rem",
+                }}
+              >
+                Đăng ký
+              </Button>
+            </Link>
+          </div>
         </FormGroup>
         <OauthLogin />
       </FormContainer>
