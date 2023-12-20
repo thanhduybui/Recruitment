@@ -16,6 +16,7 @@ type PassFormControllProps = {
   label: string;
   name?: string;
   passwordValue?: string;
+  sm?: boolean;
   onChange?: (value: string) => void;
 };
 
@@ -59,6 +60,7 @@ export default function PassFormControl(props: PassFormControllProps) {
       <OutlinedInput
         error={error}
         // id="outlined-adornment-password"
+        size={props.sm ? "small" : "medium"}
         type={showPassword ? "text" : "password"}
         onChange={handleInputChange}
         endAdornment={

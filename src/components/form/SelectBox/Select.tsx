@@ -9,6 +9,7 @@ type Option = {
   value: string;
   name: string;
 };
+
 type SelectProps = {
   startIcon?: React.ReactNode;
   options?: Option[];
@@ -130,7 +131,9 @@ export default function Select(props: SelectProps) {
             props.chip ? "gap-1" : ""
           }`}
         >
-          {props.startIcon && <div>{props.startIcon}</div>}
+          {props.startIcon && (
+            <div className="text-primary-500">{props.startIcon}</div>
+          )}
           {!props.chip && (
             <span
               className={`font-semibold overflow-hidden whitespace-nowrap ${
@@ -178,6 +181,7 @@ export default function Select(props: SelectProps) {
             </div>
           </li>
         )}
+
         {props.search &&
           props.chip &&
           filteredOptions &&
