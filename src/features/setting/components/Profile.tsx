@@ -1,20 +1,20 @@
-import Typography from "@mui/material/Typography";
+import { MainSectionContainer } from "@components/ui";
 import Button from "@mui/material/Button";
 import { TextInput } from "@components/form";
+import { useAlert } from "@hooks";
+import { Alert } from "@mui/material";
 
 export default function Profile() {
+  const [showAlert, setShowAlert] = useAlert(false, 3000);
   return (
-    <div className="p-4">
-      <Typography
-        variant="h6"
-        component="h6"
-        sx={{ fontWeight: 600 }}
-        className="text-primary-600"
-      >
-        Thông tin của bạn
-      </Typography>
+    <MainSectionContainer heading="Thông tin cá nhân">
       <div className="w-3/4 m-auto pt-10">
         <form className="w-full flex flex-col gap-4">
+          {showAlert && (
+            <Alert severity="success">
+              Cập nhật thông tin cá nhân thành công!
+            </Alert>
+          )}
           <TextInput
             labelBold={true}
             label="Họ và tên"
@@ -42,6 +42,7 @@ export default function Profile() {
 
           <Button
             variant="contained"
+            onClick={() => setShowAlert(true)}
             sx={{
               textTransform: "none",
               width: "fit-content",
@@ -53,6 +54,6 @@ export default function Profile() {
           </Button>
         </form>
       </div>
-    </div>
+    </MainSectionContainer>
   );
 }

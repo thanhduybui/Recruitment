@@ -6,7 +6,7 @@ export { default as FormContainer } from "./FormContainer";
 export { default as TextInput } from "./Input/TextInput";
 export { default as Select } from "./SelectBox/Select";
 export { default as RadioButtonGroup } from "./RadioButton/RadioButtonGroup";
-export { default as FormControlLabel } from "./FormControlLabel";
+export { default as CustomFormControlLabel } from "./FormControlLabel";
 export { default as SearchInput } from "./Input/SearchInput";
 export { default as Textarea } from "./Textarea";
 export { default as TextEditor } from "./TextEditor";

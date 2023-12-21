@@ -1,5 +1,5 @@
 import { IconButton } from "@mui/material";
-import { FormControlLabel } from "..";
+import { CustomFormControlLabel } from "..";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useInputValidation } from "@hooks";
@@ -14,7 +14,7 @@ type TextInputProps = {
   label?: string;
   type?: string;
   labelBold?: boolean;
-  strict?: boolean;
+  required?: boolean;
   startIcon?: React.ReactNode;
   name?: string;
   passwordValue?: string;
@@ -64,11 +64,11 @@ export default function TextInput(props: TextInputProps) {
   return (
     <div>
       {props.label && (
-        <FormControlLabel
+        <CustomFormControlLabel
           label={props.label}
           htmlFor={props.id}
           bold={props.labelBold}
-          strict={props.strict}
+          strict={props.required}
         />
       )}
       <div className="relative flex items-center">
