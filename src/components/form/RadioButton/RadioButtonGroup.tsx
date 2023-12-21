@@ -1,5 +1,6 @@
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
+import { CustomFormControlLabel } from "..";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
@@ -9,6 +10,7 @@ import { Gender } from "@data/constants";
 type RadioButtonGroupProps = {
   label?: string;
   values?: string[];
+  sm?: boolean;
 };
 
 export default function RadioButtonGroup(props: RadioButtonGroupProps) {
@@ -19,12 +21,19 @@ export default function RadioButtonGroup(props: RadioButtonGroupProps) {
   };
   return (
     <FormControl>
-      <FormLabel
-        id="demo-row-radio-buttons-group-label"
-        sx={{ color: "#3d3d3d", fontWeight: 600, fontSize: "1rem" }}
-      >
-        {props.label}
-      </FormLabel>
+      {!props.sm && (
+        <FormLabel
+          id="demo-row-radio-buttons-group-label"
+          sx={{
+            color: "#3d3d3d",
+            fontWeight: 600,
+            fontSize: "1rem",
+          }}
+        >
+          {props.label}
+        </FormLabel>
+      )}
+      {props.sm && <CustomFormControlLabel label={props.label} />}
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"

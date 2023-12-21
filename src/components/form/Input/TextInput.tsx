@@ -1,5 +1,5 @@
 import { IconButton } from "@mui/material";
-import { FormControlLabel } from "..";
+import { CustomFormControlLabel } from "..";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useInputValidation } from "@hooks";
@@ -64,7 +64,7 @@ export default function TextInput(props: TextInputProps) {
   return (
     <div>
       {props.label && (
-        <FormControlLabel
+        <CustomFormControlLabel
           label={props.label}
           htmlFor={props.id}
           bold={props.labelBold}

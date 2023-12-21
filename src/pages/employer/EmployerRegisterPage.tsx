@@ -1,4 +1,9 @@
-import { FormHeader, SearchSelect, TextInput } from "@components/form";
+import {
+  FormHeader,
+  RadioButtonGroup,
+  SearchSelect,
+  TextInput,
+} from "@components/form";
 import { TextHeading } from "@components/heading";
 import { MediumContainer } from "@components/ui";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -51,7 +56,7 @@ export default function EmployerRegisterPage() {
             title="Đăng ký tài khoản Nhà tuyển dụng"
             subtitle="Cùng tạo dựng lợi thế cho doanh nghiệp bằng cách tìm kiếm những ứng viên ưu tú nhất."
           />
-          <div className="px-6 flex flex-col gap-4">
+          <div className="px-6 flex flex-col gap-6">
             <TextHeading title="Thông tin tài khoản" borderStart small />
             <TextInput
               label="Nhập email liên hệ"
@@ -83,32 +88,41 @@ export default function EmployerRegisterPage() {
               startIcon={<LockOutlinedIcon />}
             />
           </div>
-          <div className="px-6 flex flex-col gap-4">
+          <div className="px-6 flex flex-col gap-6 mt-10">
             <TextHeading title="Thông tin nhà tuyển dụng" borderStart small />
-            <TextInput
-              label="Họ và tên"
-              strict
-              type="text"
-              placeholder="Nhập họ và tên"
-              inputChange={(value) => handleInputChange(value, setFullName)}
-              startIcon={<PersonOutlineOutlinedIcon />}
-            />
-            <TextInput
-              label="Số điện thoại"
-              strict
-              type="text"
-              inputChange={(value) => handleInputChange(value, setPhoneNumber)}
-              placeholder="Nhập số điện thoại"
-              startIcon={<LocalPhoneOutlinedIcon />}
-            />
-            <TextInput
-              label="Tên công ty"
-              strict
-              type="text"
-              inputChange={(value) => handleInputChange(value, setCompanyName)}
-              placeholder="Nhập tên công ty"
-              startIcon={<ViewCompactOutlinedIcon />}
-            />
+            <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+              <TextInput
+                label="Họ và tên"
+                strict
+                type="text"
+                placeholder="Nhập họ và tên"
+                inputChange={(value) => handleInputChange(value, setFullName)}
+                startIcon={<PersonOutlineOutlinedIcon />}
+              />
+              <div className="flex items-center">
+                <RadioButtonGroup label="Giới tính" values={["Nam", "Nữ"]} sm />
+              </div>
+              <TextInput
+                label="Số điện thoại"
+                strict
+                type="text"
+                inputChange={(value) =>
+                  handleInputChange(value, setPhoneNumber)
+                }
+                placeholder="Nhập số điện thoại"
+                startIcon={<LocalPhoneOutlinedIcon />}
+              />
+              <TextInput
+                label="Tên công ty"
+                strict
+                type="text"
+                inputChange={(value) =>
+                  handleInputChange(value, setCompanyName)
+                }
+                placeholder="Nhập tên công ty"
+                startIcon={<ViewCompactOutlinedIcon />}
+              />
+            </div>
             <SearchSelect
               startIcon={<LocationOnOutlinedIcon />}
               label="Vị trí làm việc"
@@ -117,7 +131,7 @@ export default function EmployerRegisterPage() {
               initValue={locations[0]}
             />
           </div>
-          <div className="m-auto">
+          <div className="m-auto mt-6">
             {isFormValid && (
               <Button variant="contained" sx={{ textTransform: "none" }}>
                 Đăng ký

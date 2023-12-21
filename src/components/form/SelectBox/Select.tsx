@@ -1,6 +1,6 @@
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useState, useRef, useEffect } from "react";
-import { FormControlLabel } from "..";
+import { CustomFormControlLabel } from "..";
 import SearchIcon from "@mui/icons-material/Search";
 import Chip from "@mui/material/Chip";
 import { Category } from "@data/api";
@@ -111,7 +111,7 @@ export default function Select(props: SelectProps) {
   return (
     <div ref={selectRef} className={`relative font-medium ${props.styles}`}>
       {props.label && (
-        <FormControlLabel
+        <CustomFormControlLabel
           htmlFor={props.id}
           label={props.label}
           strict={props.strict}
