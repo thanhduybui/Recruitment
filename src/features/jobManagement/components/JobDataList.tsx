@@ -75,9 +75,6 @@ const jobData: JobDataRowProps[] = [
   },
 ];
 
-// Example usage:
-console.log(jobData); // Outputs the array of job data with ten rows
-
 export default function JobDataList() {
   return (
     <div className="flex flex-col gap-2 mt-4 mb-10 overflow-x-auto">

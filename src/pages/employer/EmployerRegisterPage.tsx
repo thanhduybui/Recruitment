@@ -63,13 +63,13 @@ export default function EmployerRegisterPage() {
               placeholder="Nhập email liên hệ"
               inputChange={(value) => handleInputChange(value, setEmail)}
               name={InputConstants.EMAIL}
-              strict
+              required
               startIcon={<MailOutlineIcon />}
             />
             <TextInput
               placeholder="Nhập mật khẩu"
               label="Nhập mật khẩu"
-              strict
+              required
               inputChange={(value) => handleInputChange(value, setPassword)}
               name={InputConstants.PASSWORD}
               type="password"
@@ -78,7 +78,7 @@ export default function EmployerRegisterPage() {
             <TextInput
               placeholder="Nhập lại mật khẩu"
               label="Nhập lại mật khẩu"
-              strict
+              required
               type="password"
               name={InputConstants.CONFIRM_PASSWORD}
               inputChange={(value) =>
@@ -93,7 +93,7 @@ export default function EmployerRegisterPage() {
             <div className="grid grid-cols-2 gap-x-8 gap-y-6">
               <TextInput
                 label="Họ và tên"
-                strict
+                required
                 type="text"
                 placeholder="Nhập họ và tên"
                 inputChange={(value) => handleInputChange(value, setFullName)}
@@ -104,7 +104,7 @@ export default function EmployerRegisterPage() {
               </div>
               <TextInput
                 label="Số điện thoại"
-                strict
+                required
                 type="text"
                 inputChange={(value) =>
                   handleInputChange(value, setPhoneNumber)
@@ -114,7 +114,7 @@ export default function EmployerRegisterPage() {
               />
               <TextInput
                 label="Tên công ty"
-                strict
+                required
                 type="text"
                 inputChange={(value) =>
                   handleInputChange(value, setCompanyName)

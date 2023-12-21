@@ -1,13 +1,12 @@
-import { SettingHeader } from "@features/setting";
 import { CvLib } from "@features/setting";
+import { MainSectionContainer } from "@components/ui";
 
 export default function CvManage() {
   return (
-    <div className="p-4">
-      <SettingHeader />
+    <MainSectionContainer heading="Quản lý CV">
       <div className="m-auto p-5">
         <CvLib />
       </div>
-    </div>
+    </MainSectionContainer>
   );
 }
