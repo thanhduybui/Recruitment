@@ -1,13 +1,12 @@
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
-import FileUploadRoundedIcon from "@mui/icons-material/FileUploadRounded";
+import { FileDropZone } from "@components/form/File";
+// import FileUploadRoundedIcon from "@mui/icons-material/FileUploadRounded";
 
 export default function UserModalAvatar() {
   return (
-    <div className="flex items-stretch px-10 pb-10 gap-4">
-      <div className="flex-1 border-2 border-gray-200 border-dashed rounded-md flex items-center justify-center">
-        <Button startIcon={<FileUploadRoundedIcon />}>Tải ảnh lên</Button>
-      </div>
+    <div className="flex items-stretch px-2 pb-10 gap-4">
+      <FileDropZone></FileDropZone>
       <div className="flex-none flex flex-col gap-4">
         <div className="flex items-center justify-center">
           <Avatar

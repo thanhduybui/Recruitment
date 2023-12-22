@@ -46,6 +46,13 @@ footer {
   font-size: 14px;
 }
 
+.dropzone {
+  /* Your styling properties */
+  border: 2px dashed #ccc;
+  padding: 20px;
+  /* Add other styles as needed */
+}
+
 @media screen and (max-width: 768px) {
   html {
     font-size: 80%;
