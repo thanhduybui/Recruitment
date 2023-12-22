@@ -8,9 +8,10 @@ import {
 } from "@components/form";
 import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "@store/auth";
+import { Typography } from "@mui/material";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -31,7 +32,23 @@ export default function LoginForm() {
         <FormGroup>
           <NormalFormControl label="Tên đăng nhập" type="text" />
 
-          <PassFormControl label="Mật khẩu" />
+          <div className="flex flex-col gap-2">
+            <PassFormControl label="Mật khẩu" />
+            <Link to="/forgot-password">
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  color: "#575757",
+                  "&:hover": {
+                    color: "#0572cc",
+                  },
+                  transition: "all 0.3s ease-in-out",
+                }}
+              >
+                Quên mật khẩu?
+              </Typography>
+            </Link>
+          </div>
 
           <Button
             onClick={loginOnClickHandler}
@@ -41,8 +58,21 @@ export default function LoginForm() {
           >
             Đăng nhập
           </Button>
+
+          <div className="m-auto text-gray-300">
+            <Typography sx={{ fontSize: "16px" }}>
+              Chưa có tài khoản?{" "}
+              <Link to="/register">
+                <span className="text-primary-500 font-semibold">Đăng ký</span>
+              </Link>
+            </Typography>
+          </div>
         </FormGroup>
-        <OauthLogin />
+        <FormGroup>
+          <div className="m-auto flex flex-col gap-4">
+            <OauthLogin />
+          </div>
+        </FormGroup>
       </FormContainer>
     </Container>
   );
