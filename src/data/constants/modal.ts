@@ -5,4 +5,5 @@ export const modalName = {
   USER_DETAIL_MODAL: "userDetailModal",
   JOB_DETAIL_MODAL: "jobDetailModal",
   INFORM_MODAL: "informModal",
+  DELETE_MODAL: "deleteModal",
 };

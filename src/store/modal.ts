@@ -15,6 +15,7 @@ const initialState: ModalsState = {
   userDetailModal: false,
   jobDetailModal: false,
   informModal: false,
+  deleteModal: false,
 };
 
 const modalsSlice = createSlice({

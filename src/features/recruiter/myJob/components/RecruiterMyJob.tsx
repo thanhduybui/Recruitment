@@ -5,6 +5,9 @@ import Tabs from "@mui/material/Tabs";
 import { useState } from "react";
 import TabPanel from "./TabPanel";
 import { RecruiterJobCard } from "..";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
+import { DeleteModal } from "@components/ui/modal";
 
 function a11yProps(index: number) {
   return {
@@ -14,14 +17,20 @@ function a11yProps(index: number) {
 }
 
 export default function RecruiterMyJob() {
+  const isDeleteModalOpen = useSelector(
+    (state: RootState) => state.modals.deleteModal
+  );
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
+  console.log(isDeleteModalOpen);
+
   return (
     <MainSectionContainer heading="Quản lý việc làm của bạn">
+      <DeleteModal></DeleteModal>
       <Box sx={{ width: "100%", mt: "0.2rem", mb: "2rem", height: "100vh" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
@@ -52,7 +61,7 @@ export default function RecruiterMyJob() {
         </Box>
         <TabPanel value={value} index={0}>
           {Array.from({ length: 5 }, (_, index) => (
-            <RecruiterJobCard key={index} />
+            <RecruiterJobCard key={index} id={index + ""} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={1}>
