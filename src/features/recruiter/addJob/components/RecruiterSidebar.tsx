@@ -5,7 +5,6 @@ import ArticleIcon from "@mui/icons-material/Article";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import HomeIcon from "@mui/icons-material/Home";
-import { Link } from "react-router-dom";
 import { recruiterTabIndex } from "@data/constants";
 import { SideBarItem } from "@components/sidebar";
 import { useMediaQuery } from "@mui/material";
@@ -23,6 +22,7 @@ const {
 
 export default function RecruiterSidebar() {
   const isMdScreen = useMediaQuery("(min-width: 768px)");
+
   return (
     <Box
       sx={{
@@ -40,44 +40,49 @@ export default function RecruiterSidebar() {
           flexDirection: isMdScreen ? "row" : "column",
         }}
       >
-        <Link to="/find-job">
-          <SideBarItem
-            textContent="Về trang chủ"
-            tabIndex={RECRUITER_HOME}
-            icon={<HomeIcon sx={{ color: "#0572cc" }} />}
-          ></SideBarItem>
-        </Link>
+        <SideBarItem
+          textContent="Về trang chủ"
+          tabIndex={RECRUITER_HOME}
+          icon={<HomeIcon sx={{ color: "#0572cc" }} />}
+          isRecruiter
+        ></SideBarItem>
         <SideBarItem
           textContent="Thêm việc mới"
           tabIndex={RECRUITER_ADD_JOB}
           icon={<ArticleIcon sx={{ color: "#0572cc" }} />}
+          isRecruiter
         ></SideBarItem>
         <SideBarItem
           textContent="Việc đã đăng tuyển"
           tabIndex={RECRUITER_JOB}
           icon={<NewspaperIcon sx={{ color: "#0572cc" }} />}
+          isRecruiter
         ></SideBarItem>
         <SideBarItem
           textContent="Đơn ứng tuyển"
           tabIndex={RECRUITER_APPLICATION}
           icon={<MarkAsUnreadIcon sx={{ color: "#0572cc" }} />}
+          isRecruiter
         ></SideBarItem>
         <SideBarItem
           textContent="Thông tin cá nhân"
           tabIndex={RECRUITER_PROFILE}
           icon={<AccountBoxIcon sx={{ color: "#0572cc" }} />}
+          isRecruiter
         ></SideBarItem>
 
         <SideBarItem
           textContent="Công ty"
           tabIndex={RECRUITER_COMPANY}
           icon={<MarkAsUnreadIcon sx={{ color: "#0572cc" }} />}
+          isRecruiter
         ></SideBarItem>
         {!isMdScreen && (
           <SideBarItem
             textContent="Thay ảnh đại diện"
             icon={<CameraAltRoundedIcon sx={{ color: "#0572cc" }} />}
             tabIndex={RECRUITER_CHANGE_AVATAR}
+            isRecruiter
           ></SideBarItem>
         )}
       </List>
