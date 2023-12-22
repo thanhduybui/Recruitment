@@ -4,7 +4,7 @@ import {
   NormalSelect,
   SearchSelect,
 } from "@components/form";
-import { MainSectionContainer } from "@components/ui";
+import { MainSectionContainer, ScrollContainer } from "@components/ui";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef } from "react";
 import {
@@ -23,7 +23,7 @@ export default function AddJobMain() {
 
   return (
     <MainSectionContainer heading="Tạo bài tuyển dụng mới">
-      <div className="h-screen overflow-y-scroll border-2 border-gray-100 rounded-md">
+      <ScrollContainer>
         <form className="p-4">
           <TextHeading title="Thông tin chung" borderStart small />
           <div className="flex gap-4 mt-3">
@@ -54,15 +54,6 @@ export default function AddJobMain() {
             <SearchSelect label="Lĩnh vực" options={fields} required />
             <SearchSelect label="Ngành nghề" options={majors} required />
           </div>
-
-          {/* <div className="mt-5">
-          <RadioButtonGroup
-            label="Giới tính"
-            values={["Nam", "Nữ", "Khác"]}
-            sm
-          ></RadioButtonGroup>
-        </div> */}
-
           <div className="mt-10">
             <TextHeading title="Mô tả công việc" borderStart small />
             <div className="mt-2">
@@ -171,7 +162,7 @@ export default function AddJobMain() {
             </div>
           </div>
         </form>
-      </div>
+      </ScrollContainer>
       <div className="flex justify-end my-10 gap-4">
         <Button variant="outlined" color="primary" size="large">
           Huỷ thay đổi

@@ -60,7 +60,11 @@ export default function RegisterForm() {
             </Link>
           </div>
         </FormGroup>
-        <OauthLogin />
+        <FormGroup>
+          <div className="m-auto flex flex-col gap-4">
+            <OauthLogin />
+          </div>
+        </FormGroup>
       </FormContainer>
     </Container>
   );

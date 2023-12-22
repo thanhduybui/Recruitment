@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { TabIndex } from "@data/constants";
 
 interface SidebarState {
   tabIndex: number;
 }
 
 const initialState: SidebarState = {
-  tabIndex: 0,
+  tabIndex: TabIndex.HOME,
 };
 
 const sidebarSlice = createSlice({
