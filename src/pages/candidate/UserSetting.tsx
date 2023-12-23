@@ -4,11 +4,11 @@ import {
   Profile,
   SideBar,
   UserAvatar,
-} from "@features/setting";
+} from "@features/candidate/setting";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { TabIndex } from "@data/constants";
-import { AvatarModal } from "@features/setting";
+import { AvatarModal } from "@features/candidate/setting";
 import { LeftLayoutContainer, LeftSidebarLayout } from "@components/layouts";
 
 const { USER_PROFILE, CV, CV_PROFILE } = TabIndex;

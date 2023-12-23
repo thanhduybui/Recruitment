@@ -1,4 +1,4 @@
-import { Banner, Filter } from "@features/filter";
+import { Banner, Filter } from "@features/candidate/filter";
 import { AsideJob, FindJobMainSection } from "@features/job";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";

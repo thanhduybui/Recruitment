@@ -1,4 +1,4 @@
-import { CvLib } from "@features/setting";
+import { CvLib } from "@features/candidate/setting";
 import { MainSectionContainer } from "@components/ui";
 
 export default function CvManage() {

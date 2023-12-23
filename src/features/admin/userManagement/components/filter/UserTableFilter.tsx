@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
-import { AddUserModal } from "@features/userManagement";
+import { AddUserModal } from "@features/admin/userManagement";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@store";
 import { modalName } from "@data/constants";

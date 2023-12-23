@@ -7,10 +7,11 @@ import {
   UserSetting,
   JobDetail,
   ConfirmPage,
+  CompanyPage,
 } from "@pages";
 import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
 import { createBrowserRouter } from "react-router-dom";
-import { Root, AdminRoot } from "@components/layouts";
+import { Root, AdminRoot, RecruiterRoot } from "@components/layouts";
 import { NotFoundPage } from "@components/error";
 import { RecruiterManagementPage, EmployerRegisterPage } from "@pages/employer";
 
@@ -42,11 +43,15 @@ const router = createBrowserRouter([
         path: "confirm-account",
         element: <ConfirmPage />,
       },
+      {
+        path: "company",
+        element: <CompanyPage />,
+      },
     ],
   },
   {
-    path: "/employer",
-    element: <Root />,
+    path: "/recruiter",
+    element: <RecruiterRoot />,
     errorElement: <NotFoundPage />,
     children: [
       { path: "register", element: <EmployerRegisterPage /> },
