@@ -2,7 +2,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useState, useRef, useEffect } from "react";
 import { CustomFormControlLabel } from "..";
 import { Option } from "@data/interface";
-import Options from "./\bOptions";
+import Options from "./Options";
 import SelectedValue from "./SelectedValue";
 
 type SearchSelectProps = {

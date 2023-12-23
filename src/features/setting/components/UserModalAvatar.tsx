@@ -1,7 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
 import { FileDropZone } from "@components/form/File";
-// import FileUploadRoundedIcon from "@mui/icons-material/FileUploadRounded";
 
 export default function UserModalAvatar() {
   return (
