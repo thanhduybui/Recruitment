@@ -8,7 +8,7 @@ import {
   AdminJobFilter,
   JobDataList,
   JobDetailModal,
-} from "@features/jobManagement";
+} from "@features/admin/jobManagement";
 import { Divider } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import { useSelector } from "react-redux";

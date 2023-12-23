@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import { ApplicationJobModal } from "@features/applyJob";
+import { ApplicationJobModal } from "@features/candidate/applyJob";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@store";
 import { openModal } from "@store/modal";

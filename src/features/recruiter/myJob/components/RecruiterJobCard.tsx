@@ -26,6 +26,11 @@ export default function RecruiterJobCard(props: RecruiterJobCardProps) {
     dispatch(openModal({ modalName: modalName.DELETE_MODAL }));
   };
 
+  const onOpenEditModal = (id?: string) => {
+    console.log(id);
+    dispatch(openModal({ modalName: modalName.EDIT_JOB_MODAL }));
+  };
+
   return (
     <Card sx={{ display: "flex", bgcolor: "#f5fbff" }}>
       <CardContent>
@@ -41,7 +46,7 @@ export default function RecruiterJobCard(props: RecruiterJobCardProps) {
           </IconButton>
         </Tooltip>
         <Tooltip title="Chỉnh sửa">
-          <IconButton>
+          <IconButton onClick={() => onOpenEditModal(id)}>
             <EditOutlinedIcon color="primary"></EditOutlinedIcon>
           </IconButton>
         </Tooltip>

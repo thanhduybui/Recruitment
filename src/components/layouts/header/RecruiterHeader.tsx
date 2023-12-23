@@ -10,7 +10,7 @@ import { HeaderNavItem } from "@components/layouts/header";
 import { NavLink } from "react-router-dom";
 import HeaderNavWrapper from "./HeaderNavWrapper";
 
-export default function AdminHeader() {
+export default function RecruiterHeader() {
   const [showNav, setShowNav] = useState(false);
   return (
     <HeaderWrapper>
@@ -18,40 +18,23 @@ export default function AdminHeader() {
       <HeaderNavWrapper showNav={showNav}>
         <HeaderList>
           <NavLink
-            to="/admin/"
+            to="/recruiter/find-job"
+            className={({ isActive }) =>
+              isActive ? "text-primary-500 bg-gray-100" : ""
+            }
             end
-            className={({ isActive }) =>
-              isActive ? "text-primary-500 bg-gray-100" : ""
-            }
-          >
-            <HeaderNavItem name="Dashboard" />
-          </NavLink>
-          <NavLink
-            to="/admin/jobs"
-            className={({ isActive }) =>
-              isActive ? "text-primary-500 bg-gray-100" : ""
-            }
           >
             <HeaderNavItem name="Việc làm" />
           </NavLink>
           <NavLink
-            to="/admin/users"
+            to="/recruiter/setting"
             className={({ isActive }) =>
               isActive ? "text-primary-500 bg-gray-100" : ""
             }
           >
-            <HeaderNavItem name="Người dùng" />
-          </NavLink>
-          <NavLink
-            to="/admin/others"
-            className={({ isActive }) =>
-              isActive ? "text-primary-500 bg-gray-100" : ""
-            }
-          >
-            <HeaderNavItem name="Khác" />
+            <HeaderNavItem name="Quản lý" />
           </NavLink>
         </HeaderList>
-
         <UserSettingMenu />
       </HeaderNavWrapper>
       <div className="lg:hidden ml-2 self-end z-20">

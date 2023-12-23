@@ -1,8 +1,8 @@
 import { Select, TextInput } from "@components/form";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import { AddUserTabProps } from "@features/userManagement/interface";
-import { FormWrapper } from "@features/userManagement";
+import { AddUserTabProps } from "@features/admin/userManagement/interface";
+import { FormWrapper } from "@features/admin/userManagement";
 
 const companyOptions = [
   { value: "1", name: "Công ty 1" },

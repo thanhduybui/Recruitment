@@ -1,17 +1,13 @@
 import Button from "@mui/material/Button";
-import { DropDownListItem, HeaderList } from "@components/layouts/header";
-import { Link } from "react-router-dom";
-import { UserSettingMenu } from "@features/setting";
+import { HeaderList, HeaderNavItem } from "@components/layouts/header";
+import { Link, NavLink } from "react-router-dom";
+import { UserSettingMenu } from "@features/candidate/setting";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { RootState } from "@store";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
-
-const companyData = ["Doanh nghiệp nổi bật", "Tuyển dụng nhiều nhất"];
-const jobData = ["Tìm việc", "Việc làm phù hợp"];
-const cvCategories = ["Tạo CV mới", "CV của bạn", "Hướng dẫn tạo CV"];
 
 export default function HeaderNav() {
   const isLogin = useSelector((state: RootState) => state.auth.isAuthenticated);
@@ -26,11 +22,31 @@ export default function HeaderNav() {
     lg:justify-between w-full h-screen lg:h-16`}
       >
         <HeaderList>
-          <Link to="/find-job">
-            <DropDownListItem name="Việc làm" data={jobData} />
-          </Link>
-          <DropDownListItem name="Doanh nghiệp" data={companyData} />
-          <DropDownListItem name="Quản lý CV" data={cvCategories} />
+          <NavLink
+            to="/find-job"
+            end
+            className={({ isActive }) =>
+              isActive ? "text-primary-500 bg-gray-100" : ""
+            }
+          >
+            <HeaderNavItem name="Việc làm" />
+          </NavLink>
+          <NavLink
+            to="/company"
+            className={({ isActive }) =>
+              isActive ? "text-primary-500 bg-gray-100" : ""
+            }
+          >
+            <HeaderNavItem name="Doanh nghiệp" />
+          </NavLink>
+          <NavLink
+            to="/user-setting"
+            className={({ isActive }) =>
+              isActive ? "text-primary-500 bg-gray-100" : ""
+            }
+          >
+            <HeaderNavItem name="Quản lý " />
+          </NavLink>
         </HeaderList>
 
         {!isLogin && (

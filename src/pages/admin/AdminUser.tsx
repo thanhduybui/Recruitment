@@ -1,13 +1,13 @@
 import { AdminCard, AdminCardContainer } from "@components/ui/card";
 import { Container } from "@mui/material";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import { UserTable } from "@features/userManagement";
+import { UserTable } from "@features/admin/userManagement";
 import { AdminHeadSection } from "@components/admin";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
-import { UserDetailModal } from "@features/userManagement";
+import { UserDetailModal } from "@features/admin/userManagement";
 
 export default function AdminUser() {
   const isDetailModalOpen = useSelector(

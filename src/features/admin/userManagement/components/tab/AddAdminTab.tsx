@@ -1,10 +1,10 @@
 import { TextInput } from "@components/form";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import { AddUserTabProps } from "@features/userManagement/interface";
-import { FormWrapper } from "@features/userManagement";
+import { AddUserTabProps } from "@features/admin/userManagement/interface";
+import { FormWrapper } from "@features/admin/userManagement";
 
-export default function AddCandidateTab(props: AddUserTabProps) {
+export default function AddAdminTab(props: AddUserTabProps) {
   return (
     <div
       role="tabpanel"
@@ -21,8 +21,7 @@ export default function AddCandidateTab(props: AddUserTabProps) {
           <FormWrapper>
             <TextInput label="Tên đăng nhập" type="text" strict />
             <TextInput label="Mật khẩu" type="text" strict />
-            <TextInput label="Email" type="phoneNumber" strict />
-            <TextInput label="Số điện thoại" type="phoneNumber" />
+            <TextInput label="Số điện thoại" type="phoneNumber" strict />
             <Button variant="contained" color="primary">
               Thêm
             </Button>

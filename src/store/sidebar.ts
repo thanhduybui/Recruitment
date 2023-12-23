@@ -6,7 +6,7 @@ interface SidebarState {
 }
 
 const initialState: SidebarState = {
-  tabIndex: TabIndex.HOME,
+  tabIndex: TabIndex.USER_PROFILE,
 };
 
 const sidebarSlice = createSlice({
