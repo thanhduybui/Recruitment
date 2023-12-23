@@ -2,7 +2,7 @@ import {
   ModalBackdrop,
   ModalContentContainer,
   ModalHeader,
-  ModalScrollContainer,
+  ScrollModalContainer,
 } from "@components/ui/modal";
 import { LongDescriptionBox, TextInput, Textarea } from "@components/form";
 import { createPortal } from "react-dom";
@@ -24,7 +24,7 @@ export default function JobDetailModal() {
           title="Chi tiết việc làm"
           modalName={modalName.JOB_DETAIL_MODAL}
         />
-        <ModalScrollContainer wide={true}>
+        <ScrollModalContainer wide={true}>
           <form className="px-8 flex flex-col gap-4">
             <div className="flex gap-8 justify-center">
               <div className="flex w-3/5 flex-col gap-2">
@@ -71,7 +71,7 @@ export default function JobDetailModal() {
             <LongDescriptionBox label="Yêu cầu công việc" />
             <LongDescriptionBox label="Đãi ngộ" />
           </form>
-        </ModalScrollContainer>
+        </ScrollModalContainer>
         <div className="my-6 flex justify-end px-8">
           <Button color="primary" variant="contained" onClick={onCloseHandler}>
             Đóng

@@ -2,8 +2,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useState, useRef, useEffect } from "react";
 import { CustomFormControlLabel } from "..";
 import { Option } from "@data/interface";
-import Options from "./\bOptions";
 import SelectedValue from "./SelectedValue";
+import Options from "./Options";
 
 type SelectProps = {
   startIcon?: React.ReactNode;

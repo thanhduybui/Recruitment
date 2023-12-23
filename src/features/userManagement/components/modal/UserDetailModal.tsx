@@ -3,7 +3,7 @@ import {
   ModalBackdrop,
   ModalContentContainer,
   ModalHeader,
-  ModalScrollContainer,
+  ScrollModalContainer,
 } from "@components/ui/modal";
 import { modalName } from "@data/constants";
 import { createPortal } from "react-dom";
@@ -25,7 +25,7 @@ export default function UserDetailModal() {
           title="Chi tiết tài khoản"
           modalName={modalName.USER_DETAIL_MODAL}
         />
-        <ModalScrollContainer>
+        <ScrollModalContainer>
           <form className="flex gap-6">
             <div className="flex flex-col gap-4">
               <TextInput
@@ -86,7 +86,7 @@ export default function UserDetailModal() {
               />
             </div>
           </form>
-        </ModalScrollContainer>
+        </ScrollModalContainer>
         <div className="my-6 flex justify-end">
           <Button color="primary" variant="contained" onClick={closeHandler}>
             Đóng

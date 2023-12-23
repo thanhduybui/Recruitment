@@ -6,7 +6,7 @@ import { useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
-import CvCard from "./Cv";
+import CvCard from "./CvItem";
 import CvLibContainer from "./CvLibContainer";
 
 export default function CvLib() {

@@ -9,8 +9,23 @@ import {
   Tooltip,
 } from "@mui/material";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import { useDispatch } from "react-redux";
+import { modalName } from "@data/constants";
+import { openModal } from "@store/modal";
 
-export default function RecruiterJobCard() {
+type RecruiterJobCardProps = {
+  id?: string;
+};
+
+export default function RecruiterJobCard(props: RecruiterJobCardProps) {
+  const { id } = props;
+  const dispatch = useDispatch();
+
+  const onDeletePostHandler = (id?: string) => {
+    console.log(id);
+    dispatch(openModal({ modalName: modalName.DELETE_MODAL }));
+  };
+
   return (
     <Card sx={{ display: "flex", bgcolor: "#f5fbff" }}>
       <CardContent>
@@ -31,7 +46,7 @@ export default function RecruiterJobCard() {
           </IconButton>
         </Tooltip>
         <Tooltip title="Xoá">
-          <IconButton>
+          <IconButton onClick={() => onDeletePostHandler(id)}>
             <DeleteOutlineOutlinedIcon color="error"></DeleteOutlineOutlinedIcon>
           </IconButton>
         </Tooltip>
