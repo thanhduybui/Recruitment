@@ -13,7 +13,11 @@ import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
 import { createBrowserRouter } from "react-router-dom";
 import { Root, AdminRoot, RecruiterRoot } from "@components/layouts";
 import { NotFoundPage } from "@components/error";
-import { RecruiterManagementPage, EmployerRegisterPage } from "@pages/employer";
+import {
+  RecruiterManagementPage,
+  EmployerRegisterPage,
+  JobApplicationPage,
+} from "@pages/employer";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +60,10 @@ const router = createBrowserRouter([
     children: [
       { path: "register", element: <EmployerRegisterPage /> },
       { path: "setting", element: <RecruiterManagementPage /> },
+      {
+        path: "job-application/:id",
+        element: <JobApplicationPage />,
+      },
     ],
   },
 
