@@ -7,4 +7,6 @@ export const modalName = {
   INFORM_MODAL: "informModal",
   DELETE_MODAL: "deleteModal",
   EDIT_JOB_MODAL: "editJobModal",
+  BLACKLIST_MODAL: "blacklistModal",
+  JOB_APPLICATION_MODAL: "jobApplicationModal",
 };

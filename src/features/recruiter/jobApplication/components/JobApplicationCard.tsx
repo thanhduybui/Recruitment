@@ -2,6 +2,9 @@ import { Avatar, Box, Button, IconButton, Tooltip } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { InformationRow } from "..";
 import FlagIcon from "@mui/icons-material/Flag";
+import { useDispatch } from "react-redux";
+import { openModal } from "@store/modal";
+import { modalName } from "@data/constants";
 
 type JobApplicationCardProps = {
   id?: string;
@@ -14,7 +17,18 @@ type JobApplicationCardProps = {
 };
 
 export default function JobApplicationCard(props: JobApplicationCardProps) {
-  const { isBackListed, avatar, name, phone, email, seen } = props;
+  const { id, isBackListed, avatar, name, phone, email, seen } = props;
+  const dispatch = useDispatch();
+
+  const onOpenBlacklistDetailModal = (id?: string) => {
+    console.log(id);
+    dispatch(openModal({ modalName: modalName.BLACKLIST_MODAL }));
+  };
+
+  const onOpenJobApplicationtDetailModal = (id?: string) => {
+    console.log(id);
+    dispatch(openModal({ modalName: modalName.JOB_APPLICATION_MODAL }));
+  };
 
   return (
     <div
@@ -57,13 +71,19 @@ export default function JobApplicationCard(props: JobApplicationCardProps) {
       >
         {isBackListed && (
           <Tooltip title="Đã đưa vào danh sách đen">
-            <IconButton size="small" color="error" sx={{ borderRadius: "8px" }}>
+            <IconButton
+              size="small"
+              color="error"
+              sx={{ borderRadius: "8px" }}
+              onClick={() => onOpenBlacklistDetailModal(id)}
+            >
               <FlagIcon />
             </IconButton>
           </Tooltip>
         )}
 
         <Button
+          onClick={() => onOpenJobApplicationtDetailModal(id)}
           variant="contained"
           color="primary"
           size="small"

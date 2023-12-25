@@ -1,15 +1,20 @@
 import { Breadcrumb, MediumContainer } from "@components/ui";
 import { Box, Grid, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setRecruiterTabIndex } from "@store/recruiterSidebar";
 import { recruiterTabIndex } from "@data/constants";
 import { useNavigate } from "react-router-dom";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useState } from "react";
-import { JobApplicationCard } from "@features/recruiter/jobApplication";
+import {
+  BlacklistModal,
+  JobApplicationCard,
+  JobApplicationModal,
+} from "@features/recruiter/jobApplication";
 import { Pagination } from "@mui/material";
+import { RootState } from "@store";
 
 function a11yProps(index: number) {
   return {
@@ -20,10 +25,14 @@ function a11yProps(index: number) {
 
 export default function JobApplicationPage() {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
   const [value, setValue] = useState(0);
+  const isBlackListModalOpen = useSelector(
+    (state: RootState) => state.modals.blacklistModal
+  );
+  const isJobApplicationModalOpen = useSelector(
+    (state: RootState) => state.modals.jobApplicationModal
+  );
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -65,6 +74,8 @@ export default function JobApplicationPage() {
 
   return (
     <MediumContainer>
+      {isBlackListModalOpen && <BlacklistModal></BlacklistModal>}
+      {isJobApplicationModalOpen && <JobApplicationModal></JobApplicationModal>}
       <div className="className p-4 bg-white rounded-md">
         <Breadcrumb breadcrumps={breadcrumbs} />
         <Box
@@ -125,8 +136,8 @@ export default function JobApplicationPage() {
         </Grid>
         <Box
           sx={{
-            mt: "2rem",
-            mb: "2rem",
+            my: "3rem",
+
             display: "flex",
             alignItems: "center",
             justifyContent: "end",
