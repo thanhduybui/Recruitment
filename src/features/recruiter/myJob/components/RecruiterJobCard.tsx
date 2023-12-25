@@ -12,6 +12,7 @@ import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import { useDispatch } from "react-redux";
 import { modalName } from "@data/constants";
 import { openModal } from "@store/modal";
+import { Link } from "react-router-dom";
 
 type RecruiterJobCardProps = {
   id?: string;
@@ -40,11 +41,14 @@ export default function RecruiterJobCard(props: RecruiterJobCardProps) {
         <Typography variant="body2">Hạn ứng tuyển: 20/11/2024</Typography>
       </CardContent>
       <CardActions sx={{ marginLeft: "auto" }}>
-        <Tooltip title="Xem đơn ứng tuyển">
-          <IconButton>
-            <SendOutlinedIcon color="success"></SendOutlinedIcon>
-          </IconButton>
-        </Tooltip>
+        <Link to={"/recruiter/job-application/" + id}>
+          <Tooltip title="Xem đơn ứng tuyển">
+            <IconButton>
+              <SendOutlinedIcon color="success"></SendOutlinedIcon>
+            </IconButton>
+          </Tooltip>
+        </Link>
+
         <Tooltip title="Chỉnh sửa">
           <IconButton onClick={() => onOpenEditModal(id)}>
             <EditOutlinedIcon color="primary"></EditOutlinedIcon>
