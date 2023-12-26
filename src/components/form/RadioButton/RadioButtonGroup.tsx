@@ -11,6 +11,7 @@ type RadioButtonGroupProps = {
   label?: string;
   values?: string[];
   sm?: boolean;
+  labelBold?: boolean;
 };
 
 export default function RadioButtonGroup(props: RadioButtonGroupProps) {
@@ -33,7 +34,9 @@ export default function RadioButtonGroup(props: RadioButtonGroupProps) {
           {props.label}
         </FormLabel>
       )}
-      {props.sm && <CustomFormControlLabel label={props.label} />}
+      {props.sm && (
+        <CustomFormControlLabel label={props.label} bold={props.labelBold} />
+      )}
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"

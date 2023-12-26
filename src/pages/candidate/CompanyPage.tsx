@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function CompanyPage() {
   const companyCards = Array.from({ length: 9 }, (_, i) => (
-    <Link to={`/id`} key={i}>
+    <Link to={`${i}`} key={i}>
       <CompanyCard />
     </Link>
   ));

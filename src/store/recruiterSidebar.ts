@@ -6,7 +6,7 @@ interface SidebarState {
 }
 
 const initialState: SidebarState = {
-  recruiterTabIndex: recruiterTabIndex.RECRUITER_HOME,
+  recruiterTabIndex: recruiterTabIndex.RECRUITER_PROFILE,
 };
 
 const sidebarSlice = createSlice({

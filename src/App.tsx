@@ -8,6 +8,7 @@ import {
   JobDetail,
   ConfirmPage,
   CompanyPage,
+  CompanyDetailPage,
 } from "@pages";
 import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
 import { createBrowserRouter } from "react-router-dom";
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "company",
         element: <CompanyPage />,
+      },
+      {
+        path: "company/:id",
+        element: <CompanyDetailPage />,
       },
     ],
   },
