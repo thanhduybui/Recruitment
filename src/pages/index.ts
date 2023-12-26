@@ -6,3 +6,4 @@ export { default as UserSetting } from "./candidate/UserSetting";
 export { default as JobDetail } from "./candidate/JobDetail";
 export { default as ConfirmPage } from "./candidate/ConfirmPage";
 export { default as CompanyPage } from "./candidate/CompanyPage";
+export { default as CompanyDetailPage } from "./candidate/CompanyDetailPage";

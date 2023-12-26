@@ -42,12 +42,12 @@ export default function Job() {
             <Filter />
           </form>
         </div>
-        <div className="flex mt-4 gap-4">
-          <RightAsideLayout
-            main={<FindJobMainSection />}
-            aside={<AsideJob />}
-          />
-        </div>
+        <RightAsideLayout
+          mt
+          mainPadding
+          main={<FindJobMainSection />}
+          aside={<AsideJob />}
+        />
       </div>
     </MediumContainer>
   );

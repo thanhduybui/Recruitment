@@ -17,9 +17,6 @@ function a11yProps(index: number) {
 }
 
 export default function RecruiterMyJob() {
-  const isDeleteModalOpen = useSelector(
-    (state: RootState) => state.modals.deleteModal
-  );
   const isEditModalOpen = useSelector(
     (state: RootState) => state.modals.editJobModal
   );
@@ -28,8 +25,6 @@ export default function RecruiterMyJob() {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-  console.log(isDeleteModalOpen);
 
   return (
     <MainSectionContainer heading="Quản lý việc làm của bạn">
