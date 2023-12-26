@@ -1,6 +1,7 @@
 import { UserInfo } from "@components/form";
 import { MainSectionContainer } from "@components/ui";
 import Button from "@mui/material/Button";
+import { CompanyInformation } from "..";
 
 export default function RecruiterInfo() {
   return (
@@ -24,6 +25,7 @@ export default function RecruiterInfo() {
           </Button>
         </div>
       </div>
+      <CompanyInformation></CompanyInformation>
     </MainSectionContainer>
   );
 }
