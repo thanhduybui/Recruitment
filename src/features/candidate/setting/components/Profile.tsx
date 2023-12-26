@@ -1,6 +1,6 @@
 import { MainSectionContainer } from "@components/ui";
 import Button from "@mui/material/Button";
-import { TextInput } from "@components/form";
+import { UserInfo } from "@components/form";
 import { useAlert } from "@hooks";
 import { Alert } from "@mui/material";
 
@@ -15,31 +15,7 @@ export default function Profile() {
               Cập nhật thông tin cá nhân thành công!
             </Alert>
           )}
-          <TextInput
-            labelBold={true}
-            label="Họ và tên"
-            defaultValue="Bùi Thanh Duy"
-            id="fullName"
-            type="text"
-          ></TextInput>
-
-          <TextInput
-            labelBold={true}
-            label="Số điện thoại"
-            defaultValue="0383314133"
-            type="phone"
-            id="phoneNumber"
-          ></TextInput>
-
-          <TextInput
-            labelBold={true}
-            label="Email"
-            defaultValue="dtb1742002@gmail.com"
-            type="email"
-            id="email"
-            disabled={true}
-          ></TextInput>
-
+          <UserInfo />
           <Button
             variant="contained"
             onClick={() => setShowAlert(true)}
