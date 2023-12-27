@@ -6,20 +6,82 @@ import {
   FormContainer,
 } from "@components/form";
 import Button from "@mui/material/Button";
+import Cookies from "js-cookie";
+import { useRef, useState } from "react";
+import api from "@utils/axios";
+import { useDispatch } from "react-redux";
+import { InformModal } from "@components/ui/modal";
+import { openModal } from "@store/modal";
+import { modalName } from "@data/constants";
 
 export default function ConfirmForm() {
+  const dispatch = useDispatch();
+  const [message, setMessage] = useState();
+  const verificationCodeRef = useRef<HTMLInputElement>(null);
+  const email = Cookies.get("email");
+
+  const resendVerifycationHandler = () => {
+    api
+      .get(`/auth/resend-verify-code?email=${email}`)
+      .then(function (res) {
+        setMessage(res.data.message);
+        dispatch(openModal({ modalName: modalName.INFORM_MODAL }));
+      })
+      .catch(function (error) {
+        if (error.response) {
+          const message = error.response.data.message;
+          console.log(message);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+      });
+  };
+
+  const confirmVerifycationHandler = () => {
+    console.log(email);
+    console.log(verificationCodeRef.current?.value);
+
+    api
+      .post("/auth/verify", {
+        email: email,
+        otp: verificationCodeRef.current?.value,
+      })
+      .then(function (res) {
+        console.log(res.data);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          const message = error.response.data.message;
+          setMessage(message);
+          dispatch(openModal({ modalName: modalName.INFORM_MODAL }));
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+      });
+  };
+
   return (
     <Container maxWidth="md" fixed>
+      <InformModal content={message}></InformModal>
       <FormContainer>
         <FormHeader
           title="Xác thực tài khoản của bạn"
           subtitle="Một email đã được gửi đến email của bạn. Vui lòng nhập mã xác nhận để hoàn tất đăng ký."
         />
         <FormGroup>
-          <NormalFormControl label="Nhập mã xác nhận" type="text" />
+          <NormalFormControl
+            ref={verificationCodeRef}
+            label="Nhập mã xác nhận"
+            type="text"
+          />
 
           <div className="w-full flex gap-4 items-center">
             <Button
+              disabled={!email}
               variant="outlined"
               color="primary"
               style={{
@@ -27,10 +89,12 @@ export default function ConfirmForm() {
                 textTransform: "none",
                 fontSize: "1rem",
               }}
+              onClick={resendVerifycationHandler}
             >
               Gửi lại mã
             </Button>
             <Button
+              disabled={!email}
               variant="contained"
               color="primary"
               style={{
@@ -38,6 +102,7 @@ export default function ConfirmForm() {
                 textTransform: "none",
                 fontSize: "1rem",
               }}
+              onClick={confirmVerifycationHandler}
             >
               Xác nhận
             </Button>

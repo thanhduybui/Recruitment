@@ -4,9 +4,9 @@ export const modalName = {
   ADD_USER_MODAL: "addUserModal",
   USER_DETAIL_MODAL: "userDetailModal",
   JOB_DETAIL_MODAL: "jobDetailModal",
-  INFORM_MODAL: "informModal",
   DELETE_MODAL: "deleteModal",
   EDIT_JOB_MODAL: "editJobModal",
   BLACKLIST_MODAL: "blacklistModal",
   JOB_APPLICATION_MODAL: "jobApplicationModal",
+  INFORM_MODAL: "informModal",
 };

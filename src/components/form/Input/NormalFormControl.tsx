@@ -1,6 +1,7 @@
 import { FormControl, TextField } from "@mui/material";
 import { InputConstants } from "@data/constants";
 import { useInputValidation } from "@hooks";
+import React from "react";
 
 type NormalFormControlProps = {
   label: string;
@@ -11,7 +12,10 @@ type NormalFormControlProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function NormalFormControl(props: NormalFormControlProps) {
+const NormalFormControl = React.forwardRef<
+  HTMLInputElement,
+  NormalFormControlProps
+>((props, ref) => {
   const getValidationRule = (value: string) => {
     switch (props.name) {
       case InputConstants.FULL_NAME:
@@ -36,6 +40,7 @@ export default function NormalFormControl(props: NormalFormControlProps) {
   return (
     <FormControl sx={{ width: "100%" }} variant="outlined">
       <TextField
+        inputRef={ref}
         error={error}
         type={props.type}
         name={props.name}
@@ -46,4 +51,6 @@ export default function NormalFormControl(props: NormalFormControlProps) {
       />
     </FormControl>
   );
-}
+});
+
+export default NormalFormControl;
