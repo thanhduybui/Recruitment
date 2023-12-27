@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useState } from "react";
 
 export default function useValidationRegisterForm(
+  fullName: string,
   email: string,
   password: string,
   confirmPassword: string
@@ -10,17 +11,17 @@ export default function useValidationRegisterForm(
   const validateRegisterForm = useCallback(() => {
     let valid = true;
 
-    // Validate email
-    if (!email) {
+    if (!fullName || !/^[a-zA-Z\s\p{L}]*$/u.test(fullName)) {
       valid = false;
-    } else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email)) {
+    }
+
+    // Validate email
+    if (!email || !/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email)) {
       valid = false;
     }
 
     // Validate password
-    if (!password) {
-      valid = false;
-    } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+    if (!password || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
       valid = false;
     }
 
@@ -30,7 +31,7 @@ export default function useValidationRegisterForm(
     }
 
     return valid;
-  }, [email, password, confirmPassword]);
+  }, [email, password, confirmPassword, fullName]);
 
   useEffect(() => {
     setIsFormValid(() => validateRegisterForm());

@@ -14,9 +14,9 @@ type NormalFormControlProps = {
 export default function NormalFormControl(props: NormalFormControlProps) {
   const getValidationRule = (value: string) => {
     switch (props.name) {
-      case InputConstants.USERNAME:
-        return !/^[A-Za-z0-9]+$/.test(value)
-          ? "Tên đăng nhập chỉ chứa chữ cái và số"
+      case InputConstants.FULL_NAME:
+        return !/^[a-zA-Z\s\p{L}]*$/u.test(value)
+          ? "Họ tên chỉ chứa chữ cái"
           : "";
       case InputConstants.EMAIL:
         return !/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(value)

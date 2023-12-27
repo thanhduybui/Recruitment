@@ -10,17 +10,28 @@ import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
 import { InputConstants } from "@data/constants";
 import { useState } from "react";
-import useValidationRegisterForm from "../hooks/useValidationRegisterForm";
+import { useValidationRegisterForm } from "..";
+import api from "@utils/axios";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
   const [passwordValue, setPasswordValue] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const { isFormValid } = useValidationRegisterForm(
+    fullName,
     email,
     passwordValue,
     confirmPassword
   );
+
+  const onFullNameChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFullName(event.target.value);
+  };
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordValue(event.target.value);
@@ -36,7 +47,23 @@ export default function RegisterForm() {
     setConfirmPassword(event.target.value);
   };
 
-  const hanldeClick = () => {};
+  const hanldeClick = () => {
+    console.log(email, passwordValue, confirmPassword);
+    api
+      .post("/auth/register", {
+        fullName: fullName,
+        email: email,
+        password: passwordValue,
+        confirmPassword: confirmPassword,
+      })
+      .then(function (response) {
+        console.log(response);
+        navigate("/confirm-account");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <Container maxWidth="md" fixed>
@@ -46,6 +73,13 @@ export default function RegisterForm() {
           subtitle="Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng"
         />
         <FormGroup>
+          <NormalFormControl
+            label="Họ và tên"
+            type="text"
+            value={fullName}
+            name={InputConstants.FULL_NAME}
+            onChange={onFullNameChangeHandler}
+          />
           <NormalFormControl
             label="Email"
             type="email"
