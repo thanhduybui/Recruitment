@@ -16,8 +16,9 @@ type PassFormControllProps = {
   label: string;
   name?: string;
   passwordValue?: string;
+  value?: string;
   sm?: boolean;
-  onChange?: (value: string) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function PassFormControl(props: PassFormControllProps) {
@@ -62,6 +63,7 @@ export default function PassFormControl(props: PassFormControllProps) {
         // id="outlined-adornment-password"
         size={props.sm ? "small" : "medium"}
         type={showPassword ? "text" : "password"}
+        name={props.name}
         onChange={handleInputChange}
         endAdornment={
           <InputAdornment position="end">

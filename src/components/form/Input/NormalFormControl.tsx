@@ -7,6 +7,8 @@ type NormalFormControlProps = {
   type: string;
   name?: string;
   sm?: boolean;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function NormalFormControl(props: NormalFormControlProps) {
@@ -27,7 +29,7 @@ export default function NormalFormControl(props: NormalFormControlProps) {
 
   const { inputValue, error, handleInputChange } = useInputValidation(
     "",
-    undefined,
+    props.onChange || undefined,
     getValidationRule
   );
 
@@ -36,6 +38,7 @@ export default function NormalFormControl(props: NormalFormControlProps) {
       <TextField
         error={error}
         type={props.type}
+        name={props.name}
         label={props.label}
         helperText={error && getValidationRule(inputValue)}
         onChange={handleInputChange}
