@@ -5,4 +5,5 @@ export const InputConstants = {
   FIRSTNAME: "firstname",
   LASTNAME: "lastname",
   CONFIRM_PASSWORD: "confirmPassword",
+  FULL_NAME: "fullname",
 };

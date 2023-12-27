@@ -8,7 +8,7 @@ type ValidationRule = (
 
 export default function useInputValidation(
   initialValue: string,
-  onChange: ((value: string) => void) | undefined,
+  onChange: ((e: React.ChangeEvent<HTMLInputElement>) => void) | undefined,
   validationRule: ValidationRule,
   name?: string
 ) {
@@ -30,7 +30,7 @@ export default function useInputValidation(
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-    onChange && onChange(e.target.value);
+    onChange && onChange(e);
   };
 
   return { inputValue, error, handleInputChange };
