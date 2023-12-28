@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 
 type ValidationRule = (
   value: string,
-  name: string | undefined,
+  name?: string,
   passwordValue?: string
 ) => string;
 
 export default function useInputValidation(
   initialValue: string,
   onChange: ((e: React.ChangeEvent<HTMLInputElement>) => void) | undefined,
-  validationRule: ValidationRule,
-  name?: string
+  validationRule: ValidationRule
 ) {
   const [inputValue, setInputValue] = useState(initialValue);
   const [error, setError] = useState(false);
@@ -22,11 +21,11 @@ export default function useInputValidation(
     }
 
     const timeout = setTimeout(() => {
-      setError(!!validationRule(inputValue, name));
+      setError(!!validationRule(inputValue));
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [inputValue, validationRule, name]);
+  }, [inputValue, validationRule]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);

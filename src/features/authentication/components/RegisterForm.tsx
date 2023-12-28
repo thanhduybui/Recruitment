@@ -13,6 +13,12 @@ import { useState } from "react";
 import { useValidationRegisterForm } from "..";
 import api from "@utils/axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import moment from "moment";
+import { useDispatch } from "react-redux";
+import { InformModal } from "@components/ui/modal";
+import { openModal } from "@store/modal";
+import { modalName } from "@data/constants";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -20,6 +26,9 @@ export default function RegisterForm() {
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [message, setMessage] = useState("");
+  const dispatch = useDispatch();
+
   const { isFormValid } = useValidationRegisterForm(
     fullName,
     email,
@@ -58,15 +67,27 @@ export default function RegisterForm() {
       })
       .then(function (response) {
         console.log(response);
+        Cookies.set("email", email, {
+          expires: moment().add(30, "minutes").toDate(),
+        });
         navigate("/confirm-account");
       })
       .catch(function (error) {
-        console.log(error);
+        if (error.response) {
+          const message = error.response.data.message;
+          setMessage(message);
+          dispatch(openModal({ modalName: modalName.INFORM_MODAL }));
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
       });
   };
 
   return (
     <Container maxWidth="md" fixed>
+      <InformModal content={message}></InformModal>
       <FormContainer>
         <FormHeader
           title="Chào mừng bạn đến với Jobhunt"
@@ -87,7 +108,6 @@ export default function RegisterForm() {
             name={InputConstants.EMAIL}
             onChange={onEmailChangeHandler}
           />
-
           <PassFormControl
             label="Mật khẩu"
             value={passwordValue}

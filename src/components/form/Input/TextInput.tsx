@@ -3,7 +3,7 @@ import { CustomFormControlLabel } from "..";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useInputValidation } from "@hooks";
-import { InputConstants } from "@data/constants";
+import { getValidationRule } from "@utils/validationUtils";
 
 type TextInputProps = {
   styles?: string;
@@ -16,41 +16,19 @@ type TextInputProps = {
   labelBold?: boolean;
   required?: boolean;
   startIcon?: React.ReactNode;
-  name?: string;
+  name: string;
   passwordValue?: string;
-  inputChange?: (value: string) => void;
+  inputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function TextInput(props: TextInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
-  const getValidationRule = (value: string) => {
-    switch (props.name) {
-      case InputConstants.USERNAME:
-        return !/^[A-Za-z0-9]+$/.test(value)
-          ? "Tên đăng nhập chỉ chứa chữ cái và số"
-          : "";
-      case InputConstants.PASSWORD:
-        return !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value)
-          ? "Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất một chữ cái và một số"
-          : "";
-      case InputConstants.EMAIL:
-        return !/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(value)
-          ? "Email không hợp lệ"
-          : "";
-      case InputConstants.CONFIRM_PASSWORD:
-        return value !== props.passwordValue
-          ? "Mật khẩu xác nhận không khớp"
-          : "";
-      default:
-        return "";
-    }
-  };
-
   const { inputValue, error, handleInputChange } = useInputValidation(
     "",
     props.inputChange,
-    getValidationRule
+    (value: string) =>
+      getValidationRule(value, props.name || "", props.passwordValue)
   );
 
   const inputClasses = `transition duration-75 w-full ${
@@ -101,10 +79,14 @@ export default function TextInput(props: TextInputProps) {
           </div>
         )}
       </div>
-      {error && inputValue && (
+      {error && (
         <div>
           <p className="transition-all duration-75 text-error-400 text-xs p-1">
-            {getValidationRule(inputValue)}
+            {getValidationRule(
+              inputValue,
+              props.name || "",
+              props.passwordValue
+            )}
           </p>
         </div>
       )}

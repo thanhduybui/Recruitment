@@ -4,6 +4,7 @@ import modalReducer from "./modal.ts";
 import roleReducer from "./role.ts";
 import userFilterTabReducer from "./userFilterTab.ts";
 import recruiterSidebarReducer from "./recruiterSidebar.ts";
+import registerEmailReducer from "./register.ts";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     role: roleReducer,
     userFilterTab: userFilterTabReducer,
     recruiterSidebar: recruiterSidebarReducer,
+    registerEmail: registerEmailReducer,
   },
 });
 

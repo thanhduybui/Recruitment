@@ -1,12 +1,20 @@
 import { useEffect, useCallback, useState } from "react";
+import { RecruiterRegisterInfo } from "..";
 
-export default function useValidationRegisterForm(
-  fullName: string,
-  email: string,
-  password: string,
-  confirmPassword: string
+export default function useRecruiterFormValid(
+  initValue: boolean,
+  recruiterRegistrationInfo: RecruiterRegisterInfo
 ) {
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(initValue);
+
+  const {
+    fullName,
+    email,
+    password,
+    confirmPassword,
+    phoneNumber,
+    companyName,
+  } = recruiterRegistrationInfo;
 
   const validateRegisterForm = useCallback(() => {
     let valid = true;
@@ -25,17 +33,21 @@ export default function useValidationRegisterForm(
       valid = false;
     }
 
-    // Validate confirm password
+    if (!companyName) return false;
+
+    if (!phoneNumber || !/^(\+?\d{1,3}[- ]?)?\d{9,}$/.test(phoneNumber))
+      return false;
+
     if (password !== confirmPassword) {
       valid = false;
     }
 
     return valid;
-  }, [email, password, confirmPassword, fullName]);
+  }, [email, password, confirmPassword, fullName, phoneNumber, companyName]);
 
   useEffect(() => {
     setIsFormValid(() => validateRegisterForm());
-  }, [email, password, confirmPassword, validateRegisterForm]);
+  }, [recruiterRegistrationInfo, validateRegisterForm]);
 
   return { isFormValid };
 }
