@@ -24,12 +24,11 @@ type TextInputProps = {
 export default function TextInput(props: TextInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
-  const getValidation = () => getValidationRule("", props.name);
-
   const { inputValue, error, handleInputChange } = useInputValidation(
     "",
     props.inputChange,
-    getValidation
+    (value: string) =>
+      getValidationRule(value, props.name || "", props.passwordValue)
   );
 
   const inputClasses = `transition duration-75 w-full ${
@@ -83,7 +82,11 @@ export default function TextInput(props: TextInputProps) {
       {error && (
         <div>
           <p className="transition-all duration-75 text-error-400 text-xs p-1">
-            {getValidationRule(inputValue, props.name)}
+            {getValidationRule(
+              inputValue,
+              props.name || "",
+              props.passwordValue
+            )}
           </p>
         </div>
       )}

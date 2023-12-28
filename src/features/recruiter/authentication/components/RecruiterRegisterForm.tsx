@@ -14,8 +14,9 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import { positions } from "@data/api";
 import Button from "@mui/material/Button";
 import { InputConstants } from "@data/constants";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FileDropZone } from "@components/form/File";
+import { useRecruiterFormValid, RecruiterRegisterInfo } from "..";
 
 export default function RecruiterRegisterForm() {
   const [email, setEmail] = useState("");
@@ -24,7 +25,17 @@ export default function RecruiterRegisterForm() {
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [isFormValid, setIsFormValid] = useState(false);
+
+  const info: RecruiterRegisterInfo = {
+    email: email,
+    password: password,
+    confirmPassword: confirmPassword,
+    fullName: fullName,
+    phoneNumber: phoneNumber,
+    companyName: companyName,
+  };
+
+  const { isFormValid } = useRecruiterFormValid(false, info);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -32,21 +43,6 @@ export default function RecruiterRegisterForm() {
   ) => {
     setter(e.target.value);
   };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsFormValid(
-        email !== "" &&
-          password !== "" &&
-          confirmPassword !== "" &&
-          fullName !== "" &&
-          phoneNumber !== "" &&
-          companyName !== ""
-      );
-    }, 500);
-
-    return () => clearTimeout(timeout);
-  }, [email, password, confirmPassword, fullName, phoneNumber, companyName]);
 
   return (
     <form className="w-7/12 px-4 py-10 flex flex-col gap-4">
