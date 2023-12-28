@@ -1,5 +1,6 @@
 import { FileWithPath, useDropzone } from "react-dropzone";
 import { useMemo, CSSProperties } from "react";
+import FormControlLabel from "../FormControlLabel";
 
 const baseStyle: CSSProperties = {
   flex: 1,
@@ -30,7 +31,14 @@ const rejectStyle: CSSProperties = {
   borderColor: "#ff1744",
 };
 
-export default function FileDropZone() {
+type FileDropZoneProps = {
+  label?: string;
+  content?: string;
+  description?: string;
+};
+
+export default function FileDropZone(props: FileDropZoneProps) {
+  const { label, content, description } = props;
   const {
     acceptedFiles,
     getRootProps,
@@ -58,6 +66,7 @@ export default function FileDropZone() {
 
   return (
     <section className="w-full">
+      {label && <FormControlLabel></FormControlLabel>}
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         {files.length !== 0 && (
@@ -67,7 +76,7 @@ export default function FileDropZone() {
         )}
         {files.length === 0 && (
           <p className="text-sm text-gray-200 m-auto px-8 font-semibold hover:cursor-pointer">
-            Kéo thả hoặc kích chuột để tải file lên
+            {content}
           </p>
         )}
         {files.length !== 0 && (
@@ -76,9 +85,7 @@ export default function FileDropZone() {
           </p>
         )}
       </div>
-      <p className="text-xs text-gray-200 my-2">
-        File phải có kích thước bé hơn 10MB và định dạng png, jpeg hoặc jpg.
-      </p>
+      <p className="text-xs text-gray-200 my-2">{description}</p>
     </section>
   );
 }

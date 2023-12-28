@@ -5,10 +5,11 @@ export const getValidationRule = (
   name: string,
   passwordValue?: string
 ) => {
+  console.log(value, name);
   switch (name) {
-    case InputConstants.USERNAME:
-      return !/^[A-Za-z0-9]+$/.test(value)
-        ? "Tên đăng nhập chỉ chứa chữ cái và số"
+    case InputConstants.FULL_NAME:
+      return !/^[\p{L}\p{M}\s]+$/u.test(value)
+        ? "Họ và tên chỉ chứa chữ cái"
         : "";
     case InputConstants.PASSWORD:
       return !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value)
@@ -20,6 +21,12 @@ export const getValidationRule = (
         : "";
     case InputConstants.CONFIRM_PASSWORD:
       return value !== passwordValue ? "Mật khẩu xác nhận không khớp" : "";
+    case InputConstants.COMPANY_NAME:
+      return !value ? "Tên công ty không được bỏ trống" : "";
+    case InputConstants.PHONE_NUMBER:
+      return !/^(\+?\d{1,3}[- ]?)?\d{9,}$/.test(value)
+        ? "Số điện thoại không hợp lệ"
+        : "";
     default:
       return "";
   }

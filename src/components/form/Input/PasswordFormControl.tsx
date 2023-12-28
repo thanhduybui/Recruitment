@@ -7,7 +7,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-import { InputConstants } from "@data/constants";
+import { getValidationRule } from "@utils/validationUtils";
 import { useInputValidation } from "@hooks";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
@@ -24,26 +24,11 @@ type PassFormControllProps = {
 export default function PassFormControl(props: PassFormControllProps) {
   const [showPassword, setShowPassword] = useState(false);
 
-  const getValidationRule = (value: string) => {
-    switch (props.name) {
-      case InputConstants.PASSWORD:
-        // Adjust the regex pattern for password strength validation
-        return !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value)
-          ? "Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất một chữ cái và một số"
-          : "";
-      case InputConstants.CONFIRM_PASSWORD:
-        return value !== props.passwordValue
-          ? "Mật khẩu xác nhận không khớp"
-          : "";
-      default:
-        return "";
-    }
-  };
-
   const { inputValue, error, handleInputChange } = useInputValidation(
     "",
     props.onChange || undefined,
-    getValidationRule
+    (value: string) =>
+      getValidationRule(value, props.name || "", props.passwordValue)
   );
 
   const handleShowPasswordClick = () => {
@@ -80,7 +65,7 @@ export default function PassFormControl(props: PassFormControllProps) {
       />
       {error && (
         <FormHelperText sx={{ color: "red" }}>
-          {getValidationRule(inputValue)}
+          {getValidationRule(inputValue, props.name || "")}
         </FormHelperText>
       )}
     </FormControl>

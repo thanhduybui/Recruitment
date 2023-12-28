@@ -1,5 +1,5 @@
 import { FormControl, TextField } from "@mui/material";
-import { InputConstants } from "@data/constants";
+import { getValidationRule } from "@utils/validationUtils";
 import { useInputValidation } from "@hooks";
 import React from "react";
 
@@ -16,25 +16,10 @@ const NormalFormControl = React.forwardRef<
   HTMLInputElement,
   NormalFormControlProps
 >((props, ref) => {
-  const getValidationRule = (value: string) => {
-    switch (props.name) {
-      case InputConstants.FULL_NAME:
-        return !/^[a-zA-Z\s\p{L}]*$/u.test(value)
-          ? "Họ tên chỉ chứa chữ cái"
-          : "";
-      case InputConstants.EMAIL:
-        return !/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(value)
-          ? "Email không hợp lệ"
-          : "";
-      default:
-        return "";
-    }
-  };
-
   const { inputValue, error, handleInputChange } = useInputValidation(
     "",
     props.onChange || undefined,
-    getValidationRule
+    (value: string) => getValidationRule(value, props.name || "")
   );
 
   return (
@@ -45,7 +30,7 @@ const NormalFormControl = React.forwardRef<
         type={props.type}
         name={props.name}
         label={props.label}
-        helperText={error && getValidationRule(inputValue)}
+        helperText={error && getValidationRule(inputValue, props.name || "")}
         onChange={handleInputChange}
         size={props.sm ? "small" : "medium"}
       />

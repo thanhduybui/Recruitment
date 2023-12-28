@@ -76,6 +76,7 @@ export default function ConfirmForm() {
           <NormalFormControl
             ref={verificationCodeRef}
             label="Nhập mã xác nhận"
+            name="verificationCode"
             type="text"
           />
 

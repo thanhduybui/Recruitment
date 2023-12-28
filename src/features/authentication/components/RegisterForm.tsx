@@ -108,7 +108,6 @@ export default function RegisterForm() {
             name={InputConstants.EMAIL}
             onChange={onEmailChangeHandler}
           />
-
           <PassFormControl
             label="Mật khẩu"
             value={passwordValue}

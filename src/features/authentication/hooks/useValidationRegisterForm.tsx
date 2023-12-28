@@ -11,7 +11,7 @@ export default function useValidationRegisterForm(
   const validateRegisterForm = useCallback(() => {
     let valid = true;
 
-    if (!fullName || !/^[a-zA-Z\s\p{L}]*$/u.test(fullName)) {
+    if (!fullName || !/^[\p{L}\p{M}\s]+$/u.test(fullName)) {
       valid = false;
     }
 
