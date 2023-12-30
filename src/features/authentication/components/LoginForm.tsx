@@ -9,31 +9,45 @@ import {
 import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "@store/auth";
+
 import { Typography } from "@mui/material";
+import React from "react";
+import api from "@utils/axios";
+import { LoginDTO } from "..";
+import Cookies from "js-cookie";
 
 export default function LoginForm() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const emailRef = React.useRef<HTMLInputElement>(null);
+  const passwordRef = React.useRef<HTMLInputElement>(null);
 
-  const loginOnClickHandler = () => {
-    dispatch(login());
-    navigate("/find-job");
+  const navigate = useNavigate();
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const loginData: LoginDTO = {
+      email: emailRef.current?.value,
+      password: passwordRef.current?.value,
+    };
+
+    const res = await api.post("/auth/login", loginData);
+    const resData = res.data.data;
+    console.log(resData.access_token);
+    Cookies.set("access_token", resData.access_token);
+    navigate("/home", { state: { from: "/login" } });
   };
 
   return (
     <Container maxWidth="md" fixed>
-      <FormContainer>
+      <FormContainer onSubmit={onSubmitHandler}>
         <FormHeader
           title="Chào mừng bạn đã quay trở lại"
           subtitle="Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng"
         />
         <FormGroup>
-          <NormalFormControl label="Tên đăng nhập" type="text" />
+          <NormalFormControl ref={emailRef} label="Tên đăng nhập" type="text" />
 
           <div className="flex flex-col gap-2">
-            <PassFormControl label="Mật khẩu" />
+            <PassFormControl ref={passwordRef} label="Mật khẩu" />
             <Link to="/forgot-password">
               <Typography
                 sx={{
@@ -51,7 +65,7 @@ export default function LoginForm() {
           </div>
 
           <Button
-            onClick={loginOnClickHandler}
+            type="submit"
             variant="contained"
             color="primary"
             style={{ width: "100%", textTransform: "none", fontSize: "1.1rem" }}

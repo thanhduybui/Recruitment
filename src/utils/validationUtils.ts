@@ -5,7 +5,6 @@ export const getValidationRule = (
   name: string,
   passwordValue?: string
 ) => {
-  console.log(value, name);
   switch (name) {
     case InputConstants.FULL_NAME:
       return !/^[\p{L}\p{M}\s]+$/u.test(value)

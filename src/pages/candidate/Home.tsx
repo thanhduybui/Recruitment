@@ -1,22 +1,20 @@
-import { RootState } from "@store";
-import { useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { Alert, Container } from "@mui/material";
 import { useAlert } from "@hooks";
-import { useLocation } from "react-router-dom";
+import { useLocation, useRouteLoaderData } from "react-router-dom";
 import { Slider } from "@components/ui";
 
 function HomePage() {
   const location = useLocation();
   const [showAlert, setShowAlert] = useAlert(false);
-  const isLogin = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const token = useRouteLoaderData("root");
 
   useEffect(() => {
-    if (isLogin && location.pathname === "/login") {
+    if (token && location.state && location.state.from === "/login") {
       setShowAlert(true);
     }
     return () => {};
-  }, [setShowAlert, isLogin, location]);
+  }, [setShowAlert, token, location.state]);
 
   return (
     <React.Fragment>
