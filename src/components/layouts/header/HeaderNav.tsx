@@ -4,14 +4,15 @@ import { Link, NavLink } from "react-router-dom";
 import { UserSettingMenu } from "@features/candidate/setting";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { RootState } from "@store";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
 
 export default function HeaderNav() {
-  const isLogin = useSelector((state: RootState) => state.auth.isAuthenticated);
   const [showNav, setShowNav] = useState(false);
+  const isLogin = useSelector((state: RootState) => state.auth.isAuthenticated);
+
   return (
     <>
       <nav

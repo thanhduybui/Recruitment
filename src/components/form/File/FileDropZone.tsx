@@ -1,6 +1,6 @@
 import { FileWithPath, useDropzone } from "react-dropzone";
 import { useMemo, CSSProperties } from "react";
-import FormControlLabel from "../FormControlLabel";
+import FormControlLabel from "../FormUI/FormControlLabel";
 
 const baseStyle: CSSProperties = {
   flex: 1,

@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getAccessToken } from "@utils/authUtils";
 
 interface AuthState {
-  isFirstTime: boolean;
   isAuthenticated: boolean;
 }
 
 const initialState: AuthState = {
-  isFirstTime: false,
-  isAuthenticated: false,
+  isAuthenticated: getAccessToken() ? true : false,
 };
 
 const loginSlide = createSlice({

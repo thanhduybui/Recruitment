@@ -14,6 +14,7 @@ import { NotiButton, UserSettingButton } from "@components/ui/button";
 import { SettingMenuItem } from "@components/menu";
 import { RootState } from "@store";
 import { Roles } from "@data/constants";
+import Cookies from "js-cookie";
 
 export default function UserSettingMenu() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export default function UserSettingMenu() {
   const handleLogout = () => {
     dispatch(logout());
     setAnchorEl(null);
+    Cookies.remove("access_token");
     navigate("/login");
   };
 
@@ -60,7 +62,7 @@ export default function UserSettingMenu() {
         </Link>
         <Divider />
         {role === Roles.CANDIDATE && (
-          <>
+          <div>
             <SettingMenuItem
               icon={<Settings fontSize="small" color="primary" />}
               text="Cài đặt gợi ý việc làm"
@@ -70,7 +72,7 @@ export default function UserSettingMenu() {
               icon={<EmailOutlinedIcon fontSize="small" color="primary" />}
               text="Cài đặt nhận mail"
             />
-          </>
+          </div>
         )}
         <Divider />
         <SettingMenuItem

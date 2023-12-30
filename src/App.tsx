@@ -19,12 +19,15 @@ import {
   EmployerRegisterPage,
   JobApplicationPage,
 } from "@pages/employer";
+import { checkAuthLoader, tokenLoader } from "@utils/authUtils";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <NotFoundPage />,
+    id: "root",
+    loader: tokenLoader,
     children: [
       { index: true, path: "home", element: <Home /> },
       { path: "find-job", element: <Job /> },
@@ -39,6 +42,7 @@ const router = createBrowserRouter([
       {
         path: "user-setting",
         element: <UserSetting />,
+        loader: checkAuthLoader,
       },
       {
         path: "job-detail",

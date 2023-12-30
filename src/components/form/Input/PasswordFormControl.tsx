@@ -11,6 +11,7 @@ import { getValidationRule } from "@utils/validationUtils";
 import { useInputValidation } from "@hooks";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
+import React from "react";
 
 type PassFormControllProps = {
   label: string;
@@ -21,7 +22,10 @@ type PassFormControllProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function PassFormControl(props: PassFormControllProps) {
+const PasswordFormControl = React.forwardRef<
+  HTMLInputElement,
+  PassFormControllProps
+>((props, ref) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { inputValue, error, handleInputChange } = useInputValidation(
@@ -45,6 +49,7 @@ export default function PassFormControl(props: PassFormControllProps) {
       </InputLabel>
       <OutlinedInput
         error={error}
+        inputRef={ref}
         // id="outlined-adornment-password"
         size={props.sm ? "small" : "medium"}
         type={showPassword ? "text" : "password"}
@@ -70,4 +75,6 @@ export default function PassFormControl(props: PassFormControllProps) {
       )}
     </FormControl>
   );
-}
+});
+
+export default PasswordFormControl;
