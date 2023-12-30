@@ -1,16 +1,18 @@
 import Button from "@mui/material/Button";
 import { HeaderList, HeaderNavItem } from "@components/layouts/header";
-import { Link, NavLink, useRouteLoaderData } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { UserSettingMenu } from "@features/candidate/setting";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
 
 export default function HeaderNav() {
   const [showNav, setShowNav] = useState(false);
+  const isLogin = useSelector((state: RootState) => state.auth.isAuthenticated);
 
-  const token = useRouteLoaderData("root");
   return (
     <>
       <nav
@@ -48,7 +50,7 @@ export default function HeaderNav() {
           </NavLink>
         </HeaderList>
 
-        {!token && (
+        {!isLogin && (
           <HeaderList>
             <Link to="/login">
               <Button variant="outlined" color="primary">
@@ -62,7 +64,7 @@ export default function HeaderNav() {
             </Link>
           </HeaderList>
         )}
-        {token ? <UserSettingMenu /> : ""}
+        {isLogin && <UserSettingMenu />}
       </nav>
       <div className="lg:hidden ml-2 self-end z-20">
         <IconButton

@@ -9,21 +9,22 @@ import {
 import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 import { Typography } from "@mui/material";
 import React from "react";
 import api from "@utils/axios";
 import { LoginDTO } from "..";
 import Cookies from "js-cookie";
+import { login } from "@store/auth";
 
 export default function LoginForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const loginData: LoginDTO = {
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
@@ -31,8 +32,8 @@ export default function LoginForm() {
 
     const res = await api.post("/auth/login", loginData);
     const resData = res.data.data;
-    console.log(resData.access_token);
     Cookies.set("access_token", resData.access_token);
+    dispatch(login());
     navigate("/home", { state: { from: "/login" } });
   };
 
