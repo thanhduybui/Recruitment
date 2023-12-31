@@ -11,7 +11,8 @@ import { RootState } from "@store";
 
 export default function HeaderNav() {
   const [showNav, setShowNav] = useState(false);
-  const isLogin = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const auth = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, role } = auth;
 
   return (
     <>
@@ -40,17 +41,29 @@ export default function HeaderNav() {
           >
             <HeaderNavItem name="Doanh nghiệp" />
           </NavLink>
-          <NavLink
-            to="/user-setting"
-            className={({ isActive }) =>
-              isActive ? "text-primary-500 bg-gray-100" : ""
-            }
-          >
-            <HeaderNavItem name="Quản lý " />
-          </NavLink>
+          {role === "CANDIDATE" && (
+            <NavLink
+              to="/setting"
+              className={({ isActive }) =>
+                isActive ? "text-primary-500 bg-gray-100" : ""
+              }
+            >
+              <HeaderNavItem name="Quản lý " />
+            </NavLink>
+          )}
+          {role === "RECRUITER" && (
+            <NavLink
+              to="/recruiter/setting"
+              className={({ isActive }) =>
+                isActive ? "text-primary-500 bg-gray-100" : ""
+              }
+            >
+              <HeaderNavItem name="Quản lý " />
+            </NavLink>
+          )}
         </HeaderList>
 
-        {!isLogin && (
+        {!isAuthenticated && (
           <HeaderList>
             <Link to="/login">
               <Button variant="outlined" color="primary">
@@ -64,7 +77,7 @@ export default function HeaderNav() {
             </Link>
           </HeaderList>
         )}
-        {isLogin && <UserSettingMenu />}
+        {isAuthenticated && <UserSettingMenu />}
       </nav>
       <div className="lg:hidden ml-2 self-end z-20">
         <IconButton

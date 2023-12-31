@@ -13,12 +13,14 @@ import { useDispatch } from "react-redux";
 import { InformModal } from "@components/ui/modal";
 import { openModal } from "@store/modal";
 import { modalName } from "@data/constants";
+import { useNavigate } from "react-router-dom";
 
 export default function ConfirmForm() {
   const dispatch = useDispatch();
   const [message, setMessage] = useState();
   const verificationCodeRef = useRef<HTMLInputElement>(null);
   const email = Cookies.get("email");
+  const navigate = useNavigate();
 
   const resendVerifycationHandler = () => {
     api
@@ -40,16 +42,16 @@ export default function ConfirmForm() {
   };
 
   const confirmVerifycationHandler = () => {
-    console.log(email);
-    console.log(verificationCodeRef.current?.value);
-
     api
       .post("/auth/verify", {
         email: email,
         otp: verificationCodeRef.current?.value,
       })
       .then(function (res) {
-        console.log(res.data);
+        navigate("/login", {
+          state: { from: "/confirm-account", message: res.data.message },
+          replace: true,
+        });
       })
       .catch(function (error) {
         if (error.response) {

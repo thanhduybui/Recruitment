@@ -8,42 +8,84 @@ import {
 } from "@components/form";
 import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Typography } from "@mui/material";
-import React from "react";
+import { Alert, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import api from "@utils/axios";
 import { LoginDTO } from "..";
 import Cookies from "js-cookie";
 import { login } from "@store/auth";
+import { AxiosError } from "axios";
+import { useAlert } from "@hooks";
+
+type ErrorReponseData = {
+  message: string;
+  status: string;
+};
 
 export default function LoginForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const location = useLocation();
+  const [showAlert, setShowAlert] = useAlert(false, 3000);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      location.state &&
+      location.state.from === "/confirm-account" &&
+      location.state.message !== undefined
+    ) {
+      setShowAlert(true);
+    }
+    return () => {};
+  }, [setShowAlert, location.state]);
+
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const loginData: LoginDTO = {
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
     };
 
-    const res = await api.post("/auth/login", loginData);
-    const resData = res.data.data;
-    Cookies.set("access_token", resData.access_token);
-    dispatch(login());
-    navigate("/home", { state: { from: "/login" } });
+    try {
+      const res = await api.post("/auth/login", loginData);
+      const resData = res.data;
+
+      if (resData.status === "success") {
+        Cookies.set("access_token", resData.data.access_token);
+        dispatch(login());
+        navigate("/home", {
+          state: { from: "/login", message: resData.message },
+        });
+      } else {
+        console.log(resData.message);
+        // Handle other cases or show appropriate error messages based on the response
+      }
+    } catch (error) {
+      const typedError = error as AxiosError;
+      const data = typedError.response?.data as ErrorReponseData;
+      setErrorMessage(data.message);
+    }
   };
 
   return (
     <Container maxWidth="md" fixed>
+      {showAlert && <Alert severity="success">{location.state?.message}</Alert>}
       <FormContainer onSubmit={onSubmitHandler}>
         <FormHeader
           title="Chào mừng bạn đã quay trở lại"
           subtitle="Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng"
         />
+        {errorMessage && (
+          <Alert severity="error" sx={{ mt: "1rem" }}>
+            {errorMessage}
+          </Alert>
+        )}
         <FormGroup>
           <NormalFormControl ref={emailRef} label="Tên đăng nhập" type="text" />
 

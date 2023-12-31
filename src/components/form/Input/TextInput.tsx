@@ -58,10 +58,12 @@ export default function TextInput(props: TextInputProps) {
         <input
           type={showPassword ? "text" : props.type}
           id={props.id}
+          value={inputValue}
           disabled={props.disabled}
           onChange={handleInputChange}
           defaultValue={props.defaultValue}
           className={inputClasses}
+          name={props.name}
           placeholder={props.placeholder}
         />
         {props.type === "password" && (
