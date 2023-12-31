@@ -15,16 +15,11 @@ import Button from "@mui/material/Button";
 import { Gender, InputConstants } from "@data/constants";
 import { FormEvent, useState } from "react";
 import { useRecruiterFormValid, RecruiterRegisterInfo } from "..";
-import { useRouteLoaderData } from "react-router-dom";
+import { useNavigate, useRouteLoaderData } from "react-router-dom";
 import { Option } from "@data/interface";
-
-// interface PostionInteface extends Option {
-//   id: string;
-//   name: string;
-//   description: string;
-//   createdAt: string;
-//   status: string;
-// }
+import api from "@utils/axios";
+import Cookies from "js-cookie";
+import { AxiosError, AxiosResponse } from "axios";
 
 export default function RecruiterRegisterForm() {
   const [email, setEmail] = useState("");
@@ -37,8 +32,7 @@ export default function RecruiterRegisterForm() {
   const positions: Option[] = useRouteLoaderData(
     "recruiterRegister"
   ) as Option[];
-
-  console.log(positions);
+  const navigate = useNavigate();
 
   const info: RecruiterRegisterInfo = {
     email: email,
@@ -48,6 +42,7 @@ export default function RecruiterRegisterForm() {
     phoneNumber: phoneNumber,
     companyName: companyName,
     gender: gender,
+    role: "RECRUITER",
   };
 
   const { isFormValid } = useRecruiterFormValid(false, info);
@@ -63,10 +58,27 @@ export default function RecruiterRegisterForm() {
     setGender(value);
   };
 
-  const onSubmitHanlder = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmitHanlder = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log(info);
+    try {
+      const res: AxiosResponse = await api.post(
+        "/auth/recruiter/register",
+        info
+      );
+      console.log(res.data);
+      Cookies.set("email", email);
+      navigate("/confirm-account", {
+        state: {
+          from: "/recruiter/register",
+          message: res.data.message,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      const typeError = error as AxiosError;
+      const message = typeError.response?.data;
+      console.log(message);
+    }
   };
 
   return (
