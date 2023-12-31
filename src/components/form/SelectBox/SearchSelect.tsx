@@ -21,7 +21,7 @@ export default function SearchSelect(props: SearchSelectProps) {
   const selectRef = useRef<HTMLDivElement>(null);
 
   const [selected, setSelected] = useState({
-    value: props.options && props.options[0]?.value,
+    id: props.options && props.options[0]?.id,
     name: props.options && props.options[0]?.name,
   });
 

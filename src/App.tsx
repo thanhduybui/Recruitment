@@ -17,11 +17,18 @@ import {
   EmployerRegisterPage,
   JobApplicationPage,
 } from "@pages/employer";
-import { Routes, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 
-function App() {
-  return (
-    <Routes>
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+import { positionLoader } from "@services";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
       <Route path="/" element={<Root />} errorElement={<NotFoundPage />}>
         <Route path="home" element={<Home />} />
         <Route path="find-job" element={<Job />} />
@@ -37,7 +44,12 @@ function App() {
       </Route>
 
       <Route path="/recruiter" element={<Root />}>
-        <Route path="register" element={<EmployerRegisterPage />} />
+        <Route
+          path="register"
+          element={<EmployerRegisterPage />}
+          id="recruiterRegister"
+          loader={positionLoader}
+        />
         <Route element={<ProtectedRoute allowRole="RECRUITER" />}>
           <Route path="setting" element={<RecruiterManagementPage />} />
           <Route path="job-application/:id" element={<JobApplicationPage />} />
@@ -52,8 +64,12 @@ function App() {
           <Route path="others" element={<AdminOther />} />
         </Route>
       </Route>
-    </Routes>
-  );
+    </Route>
+  )
+);
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;
