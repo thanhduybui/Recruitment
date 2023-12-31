@@ -12,7 +12,11 @@ function HomePage() {
   const isLogin = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   useEffect(() => {
-    if (location.state && location.state.from === "/login") {
+    if (
+      location.state &&
+      location.state.from === "/login" &&
+      location.state.message !== undefined
+    ) {
       setShowAlert(true);
     }
     return () => {};
@@ -22,7 +26,7 @@ function HomePage() {
     <React.Fragment>
       <Container>
         {isLogin && showAlert && (
-          <Alert severity="success">Đăng nhập thành công</Alert>
+          <Alert severity="success">{location.state.message}</Alert>
         )}
         <Slider />
       </Container>

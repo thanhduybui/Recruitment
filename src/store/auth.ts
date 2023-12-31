@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAccessToken } from "@utils/authUtils";
+import { getAccessToken, getUserRole } from "@utils/authUtils";
 
 interface AuthState {
   isAuthenticated: boolean;
+  role?: string;
 }
 
 const initialState: AuthState = {
   isAuthenticated: getAccessToken() ? true : false,
+  role: getUserRole(),
 };
 
 const loginSlide = createSlice({
@@ -15,9 +17,11 @@ const loginSlide = createSlice({
   reducers: {
     login: (state) => {
       state.isAuthenticated = true;
+      state.role = getUserRole();
     },
     logout: (state) => {
       state.isAuthenticated = false;
+      state.role = undefined;
     },
   },
 });

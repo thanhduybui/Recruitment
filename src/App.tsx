@@ -1,4 +1,3 @@
-import { RouterProvider } from "react-router-dom";
 import {
   Home,
   Login,
@@ -11,89 +10,50 @@ import {
   CompanyDetailPage,
 } from "@pages";
 import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
-import { createBrowserRouter } from "react-router-dom";
-import { Root, AdminRoot, RecruiterRoot } from "@components/layouts";
-import { NotFoundPage } from "@components/error";
+import { Root, AdminRoot } from "@components/layouts";
+import { NotFoundPage, ProtectedRoute } from "@components/auth";
 import {
   RecruiterManagementPage,
   EmployerRegisterPage,
   JobApplicationPage,
 } from "@pages/employer";
-import { checkAuthLoader, tokenLoader } from "@utils/authUtils";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    errorElement: <NotFoundPage />,
-    id: "root",
-    loader: tokenLoader,
-    children: [
-      { index: true, path: "home", element: <Home /> },
-      { path: "find-job", element: <Job /> },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "register",
-        element: <Register />,
-      },
-      {
-        path: "user-setting",
-        element: <UserSetting />,
-        loader: checkAuthLoader,
-      },
-      {
-        path: "job-detail",
-        element: <JobDetail />,
-      },
-      {
-        path: "confirm-account",
-        element: <ConfirmPage />,
-      },
-      {
-        path: "company",
-        element: <CompanyPage />,
-      },
-      {
-        path: "company/:id",
-        element: <CompanyDetailPage />,
-      },
-    ],
-  },
-  {
-    path: "/recruiter",
-    element: <RecruiterRoot />,
-    errorElement: <NotFoundPage />,
-    children: [
-      { path: "register", element: <EmployerRegisterPage /> },
-      { path: "setting", element: <RecruiterManagementPage /> },
-      {
-        path: "job-application/:id",
-        element: <JobApplicationPage />,
-      },
-    ],
-  },
-
-  {
-    path: "/admin",
-    element: <AdminRoot />,
-    errorElement: <NotFoundPage />,
-    children: [
-      { path: "", element: <AdminDashboard /> },
-      {
-        path: "jobs",
-        element: <AdminJob />,
-      },
-      { path: "users", element: <AdminUser /> },
-      { path: "others", element: <AdminOther /> },
-    ],
-  },
-]);
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Routes>
+      <Route path="/" element={<Root />} errorElement={<NotFoundPage />}>
+        <Route path="home" element={<Home />} />
+        <Route path="find-job" element={<Job />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="confirm-account" element={<ConfirmPage />} />
+        <Route element={<ProtectedRoute allowRole="CANDIDATE" />}>
+          <Route path="setting" element={<UserSetting />} />
+        </Route>
+        <Route path="job-detail" element={<JobDetail />} />
+        <Route path="company" element={<CompanyPage />} />
+        <Route path="company/:id" element={<CompanyDetailPage />} />
+      </Route>
+
+      <Route path="/recruiter" element={<Root />}>
+        <Route path="register" element={<EmployerRegisterPage />} />
+        <Route element={<ProtectedRoute allowRole="RECRUITER" />}>
+          <Route path="setting" element={<RecruiterManagementPage />} />
+          <Route path="job-application/:id" element={<JobApplicationPage />} />
+        </Route>
+      </Route>
+
+      <Route path="/admin" element={<AdminRoot />}>
+        <Route element={<ProtectedRoute allowRole="ADMIN" />}>
+          <Route path="" element={<AdminDashboard />} />
+          <Route path="jobs" element={<AdminJob />} />
+          <Route path="users" element={<AdminUser />} />
+          <Route path="others" element={<AdminOther />} />
+        </Route>
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;

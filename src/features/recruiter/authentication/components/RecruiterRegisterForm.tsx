@@ -15,7 +15,6 @@ import { positions } from "@data/api";
 import Button from "@mui/material/Button";
 import { InputConstants } from "@data/constants";
 import { useState } from "react";
-import { FileDropZone } from "@components/form/File";
 import { useRecruiterFormValid, RecruiterRegisterInfo } from "..";
 
 export default function RecruiterRegisterForm() {
@@ -120,11 +119,6 @@ export default function RecruiterRegisterForm() {
           inputChange={(e) => handleInputChange(e, setCompanyName)}
           placeholder="Nhập tên công ty"
           startIcon={<ViewCompactOutlinedIcon />}
-        />
-
-        <FileDropZone
-          content="Tải giấy chứng nhận kinh doanh lên"
-          description="File không được lớn hơn 10MB và định dạnh file là pdf hoặc docx"
         />
       </div>
       <div className="m-auto mt-6">
