@@ -60,6 +60,7 @@ export default function ConfirmForm() {
         otp: verificationCodeRef.current?.value,
       })
       .then(function (res) {
+        Cookies.remove("email");
         navigate("/login", {
           state: { from: "/confirm-account", message: res.data.message },
           replace: true,
