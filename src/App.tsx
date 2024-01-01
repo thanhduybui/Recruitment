@@ -24,14 +24,19 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { positionLoader } from "@services";
+import { findJobPageLoader, positionLoader } from "@services";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Root />} errorElement={<NotFoundPage />}>
         <Route path="home" element={<Home />} />
-        <Route path="find-job" element={<Job />} />
+        <Route
+          path="find-job"
+          element={<Job />}
+          id="findJob"
+          loader={findJobPageLoader}
+        />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="confirm-account" element={<ConfirmPage />} />

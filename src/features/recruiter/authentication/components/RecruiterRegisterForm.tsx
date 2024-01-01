@@ -32,6 +32,7 @@ export default function RecruiterRegisterForm() {
   const positions: Option[] = useRouteLoaderData(
     "recruiterRegister"
   ) as Option[];
+  console.log(positions);
   const navigate = useNavigate();
 
   const info: RecruiterRegisterInfo = {
