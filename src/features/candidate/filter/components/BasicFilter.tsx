@@ -4,11 +4,18 @@ import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import Button from "@mui/material/Button";
 import SearchInput from "@components/form/Input/SearchInput";
 import { NormalSelect, SearchSelect } from "@components/form";
+
 import { locations } from "@data/api";
-import { expieriences } from "@data/api";
-import { salaryRanges } from "@data/api";
+import { useRouteLoaderData } from "react-router-dom";
+import { Option } from "@data/interface";
 
 export default function BasicFilter() {
+  const data = useRouteLoaderData("findJob");
+  const { experienceRanges, salaryRanges } = data as {
+    experienceRanges: Option[];
+    salaryRanges: Option[];
+  };
+
   return (
     <div className="grid grid-cols-10 gap-2 items-center py-4 bg-white rounded-b-md">
       <SearchInput
@@ -31,7 +38,7 @@ export default function BasicFilter() {
       <div className="col-span-2">
         <NormalSelect
           bold
-          options={expieriences}
+          options={experienceRanges}
           startIcon={
             <StarBorderOutlinedIcon
               sx={{ width: "24px", height: "24px" }}

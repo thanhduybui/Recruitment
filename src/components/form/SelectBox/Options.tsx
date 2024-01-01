@@ -1,5 +1,5 @@
 import { Option } from "@data/interface";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 
 type OptionProps = {
@@ -16,24 +16,28 @@ export default function Options({
   search,
 }: OptionProps) {
   const [searchValue, setSearchValue] = useState<string>("");
-  const [filteredOptions, setFilteredOptions] = useState<Option[] | undefined>(
-    options
+  const [filteredOptions, setFilteredOptions] = useState<Option[]>(
+    options || []
   );
 
+  useEffect(() => {
+    if (options && Array.isArray(options)) {
+      const filtered = options.filter((option) =>
+        option.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setFilteredOptions(filtered);
+    }
+  }, [options, searchValue]);
+
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchInput = e.target.value.toLowerCase();
-    const filtered = options?.filter((option) =>
-      option.name.toLowerCase().includes(searchInput)
-    );
-    setFilteredOptions(filtered);
     setSearchValue(e.target.value);
   };
 
   const onClickHandler = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    const selectedValue = e.currentTarget.getAttribute("value") || "";
-    const selectedName = e.currentTarget.textContent || "";
+    const selectedId = e.currentTarget.getAttribute("id") + "";
+    const selectedName = e.currentTarget.textContent + "";
     onSelect({
-      value: selectedValue,
+      id: selectedId,
       name: selectedName,
     });
   };
@@ -59,19 +63,18 @@ export default function Options({
         </li>
       )}
 
-      {filteredOptions &&
+      {filteredOptions.length > 0 ? (
         filteredOptions.map((option) => (
           <li
             className="p-2 text-sm hover:bg-primary-500 hover:text-white transition duration-100"
-            key={option.value}
-            value={option.value}
+            key={option.id}
+            value={option.id}
             onClick={onClickHandler}
           >
             {option.name}
           </li>
-        ))}
-
-      {filteredOptions?.length === 0 && (
+        ))
+      ) : (
         <li
           className="p-2 text-sm hover:bg-primary-500 hover:text-white transition duration-100"
           key="-1"

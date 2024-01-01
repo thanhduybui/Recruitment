@@ -13,7 +13,10 @@ import { useDispatch } from "react-redux";
 import { InformModal } from "@components/ui/modal";
 import { openModal } from "@store/modal";
 import { modalName } from "@data/constants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Alert } from "@mui/material";
+import { useAlert } from "@hooks";
+import { useEffect } from "react";
 
 export default function ConfirmForm() {
   const dispatch = useDispatch();
@@ -21,6 +24,15 @@ export default function ConfirmForm() {
   const verificationCodeRef = useRef<HTMLInputElement>(null);
   const email = Cookies.get("email");
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useAlert(false, 3000);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state && location.state.message !== undefined) {
+      setShowAlert(true);
+    }
+    return () => {};
+  }, [setShowAlert, location.state]);
 
   const resendVerifycationHandler = () => {
     api
@@ -48,6 +60,7 @@ export default function ConfirmForm() {
         otp: verificationCodeRef.current?.value,
       })
       .then(function (res) {
+        Cookies.remove("email");
         navigate("/login", {
           state: { from: "/confirm-account", message: res.data.message },
           replace: true,
@@ -69,6 +82,7 @@ export default function ConfirmForm() {
   return (
     <Container maxWidth="md" fixed>
       <InformModal content={message}></InformModal>
+      {showAlert && <Alert security="success">{location.state.message}</Alert>}
       <FormContainer>
         <FormHeader
           title="Xác thực tài khoản của bạn"

@@ -5,21 +5,26 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useState } from "react";
-import { Gender } from "@data/constants";
 
 type RadioButtonGroupProps = {
   label?: string;
-  values?: string[];
-  sm?: boolean;
+  options?: Record<string, string>;
   labelBold?: boolean;
+  onChosen: (value: string) => void;
+  sm?: boolean;
 };
 
 export default function RadioButtonGroup(props: RadioButtonGroupProps) {
-  const [option, setOption] = useState(Gender.MALE);
+  const [option, setOption] = useState(
+    Object.keys(props.options ?? {})[0] || ""
+  );
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOption(event.target.value);
+    props.onChosen(event.target.value);
   };
+  const optionsKeys = Object.keys(props.options ?? {});
+
   return (
     <FormControl>
       {!props.sm && (
@@ -44,19 +49,14 @@ export default function RadioButtonGroup(props: RadioButtonGroupProps) {
         value={option}
         onChange={changeHandler}
       >
-        {props.values?.map((value) => (
+        {optionsKeys.map((key) => (
           <FormControlLabel
-            value={value}
+            key={key}
+            value={key}
             control={
-              <Radio
-                sx={{
-                  "& .MuiSvgIcon-root": {
-                    fontSize: "20px",
-                  },
-                }}
-              />
+              <Radio sx={{ "& .MuiSvgIcon-root": { fontSize: "20px" } }} />
             }
-            label={value}
+            label={props.options?.[key]}
           />
         ))}
       </RadioGroup>

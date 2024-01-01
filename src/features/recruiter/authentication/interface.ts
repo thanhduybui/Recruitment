@@ -5,4 +5,6 @@ export interface RecruiterRegisterInfo {
   fullName: string;
   phoneNumber: string;
   companyName: string;
+  gender: string;
+  role: string;
 }

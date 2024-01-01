@@ -4,9 +4,18 @@ import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import ChairAltOutlinedIcon from "@mui/icons-material/ChairAltOutlined";
 import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
-import { fields, majors, postTypes, workTimes, positions } from "@data/api";
+import { majors, postTypes } from "@data/api";
+import { useRouteLoaderData } from "react-router-dom";
+import { Option } from "@data/interface";
 
 export default function AdvancedFilter() {
+  const data = useRouteLoaderData("findJob");
+  const { positions, fields, workModes } = data as {
+    positions: Option[];
+    fields: Option[];
+    workModes: Option[];
+  };
+
   return (
     <div className="grid grid-cols-10 gap-2 items-center bg-white">
       <div className="col-span-2">
@@ -54,7 +63,7 @@ export default function AdvancedFilter() {
       <div className="col-span-2">
         {" "}
         <NormalSelect
-          options={workTimes}
+          options={workModes}
           small
           bold
           startIcon={

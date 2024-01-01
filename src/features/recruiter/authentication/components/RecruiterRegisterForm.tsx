@@ -11,11 +11,15 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import ViewCompactOutlinedIcon from "@mui/icons-material/ViewCompactOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import { positions } from "@data/api";
 import Button from "@mui/material/Button";
-import { InputConstants } from "@data/constants";
-import { useState } from "react";
+import { Gender, InputConstants } from "@data/constants";
+import { FormEvent, useState } from "react";
 import { useRecruiterFormValid, RecruiterRegisterInfo } from "..";
+import { useNavigate, useRouteLoaderData } from "react-router-dom";
+import { Option } from "@data/interface";
+import api from "@utils/axios";
+import Cookies from "js-cookie";
+import { AxiosError, AxiosResponse } from "axios";
 
 export default function RecruiterRegisterForm() {
   const [email, setEmail] = useState("");
@@ -24,6 +28,12 @@ export default function RecruiterRegisterForm() {
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [companyName, setCompanyName] = useState("");
+  const [gender, setGender] = useState("MALE");
+  const positions: Option[] = useRouteLoaderData(
+    "recruiterRegister"
+  ) as Option[];
+  console.log(positions);
+  const navigate = useNavigate();
 
   const info: RecruiterRegisterInfo = {
     email: email,
@@ -32,6 +42,8 @@ export default function RecruiterRegisterForm() {
     fullName: fullName,
     phoneNumber: phoneNumber,
     companyName: companyName,
+    gender: gender,
+    role: "RECRUITER",
   };
 
   const { isFormValid } = useRecruiterFormValid(false, info);
@@ -43,8 +55,39 @@ export default function RecruiterRegisterForm() {
     setter(e.target.value);
   };
 
+  const onChosenHandler = (value: string) => {
+    setGender(value);
+  };
+
+  const onSubmitHanlder = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const res: AxiosResponse = await api.post(
+        "/auth/recruiter/register",
+        info
+      );
+      console.log(res.data);
+      Cookies.set("email", email);
+      navigate("/confirm-account", {
+        state: {
+          from: "/recruiter/register",
+          message: res.data.message,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      const typeError = error as AxiosError;
+      const message = typeError.response?.data;
+      console.log(message);
+    }
+  };
+
   return (
-    <form className="w-7/12 px-4 py-10 flex flex-col gap-4" method="post">
+    <form
+      className="w-7/12 px-4 py-10 flex flex-col gap-4"
+      method="post"
+      onSubmit={onSubmitHanlder}
+    >
       <FormHeader
         title="Đăng ký tài khoản Nhà tuyển dụng"
         subtitle="Cùng tạo dựng lợi thế cho doanh nghiệp bằng cách tìm kiếm những ứng viên ưu tú nhất."
@@ -92,7 +135,12 @@ export default function RecruiterRegisterForm() {
             startIcon={<PersonOutlineOutlinedIcon />}
           />
           <div className="flex items-center">
-            <RadioButtonGroup label="Giới tính" values={["Nam", "Nữ"]} sm />
+            <RadioButtonGroup
+              label="Giới tính"
+              onChosen={onChosenHandler}
+              options={Gender}
+              sm
+            />
           </div>
           <TextInput
             name={InputConstants.PHONE_NUMBER}
