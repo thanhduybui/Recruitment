@@ -5,12 +5,14 @@ import Button from "@mui/material/Button";
 import SearchInput from "@components/form/Input/SearchInput";
 import { NormalSelect, SearchSelect } from "@components/form";
 
-import { locations } from "@data/api";
 import { useRouteLoaderData } from "react-router-dom";
 import { Option } from "@data/interface";
+import { useLocationAPI } from "@hooks";
 
 export default function BasicFilter() {
   const data = useRouteLoaderData("findJob");
+  const locations = useLocationAPI();
+
   const { experienceRanges, salaryRanges } = data as {
     experienceRanges: Option[];
     salaryRanges: Option[];
@@ -26,6 +28,7 @@ export default function BasicFilter() {
         <SearchSelect
           bold
           options={locations}
+          initValue={{ id: "0", name: "Chọn địa điểm" }}
           startIcon={
             <LocationOnOutlinedIcon
               sx={{ width: "24px", height: "24px" }}
@@ -39,6 +42,7 @@ export default function BasicFilter() {
         <NormalSelect
           bold
           options={experienceRanges}
+          initValue={{ id: "0", name: "Chọn kinh nghiệm" }}
           startIcon={
             <StarBorderOutlinedIcon
               sx={{ width: "24px", height: "24px" }}
@@ -52,6 +56,7 @@ export default function BasicFilter() {
         <NormalSelect
           bold
           options={salaryRanges}
+          initValue={{ id: "0", name: "Chọn mức lương" }}
           startIcon={
             <AttachMoneyOutlinedIcon
               sx={{ width: "24px", height: "24px" }}

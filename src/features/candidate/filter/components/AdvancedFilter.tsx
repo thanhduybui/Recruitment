@@ -19,11 +19,11 @@ export default function AdvancedFilter() {
   return (
     <div className="grid grid-cols-10 gap-2 items-center bg-white">
       <div className="col-span-2">
-        {" "}
         <SearchSelect
           small
           bold
           options={fields}
+          initValue={{ id: "0", name: "Chọn lĩnh vực" }}
           startIcon={
             <BusinessOutlinedIcon
               sx={{ width: "20px", height: "20px" }}
@@ -33,11 +33,11 @@ export default function AdvancedFilter() {
         />
       </div>
       <div className="col-span-2">
-        {" "}
         <SearchSelect
           options={majors}
           small
           bold
+          initValue={{ id: "0", name: "Chọn ngành nghề" }}
           startIcon={
             <AppsOutlinedIcon
               sx={{ width: "20px", height: "20px" }}
@@ -47,11 +47,11 @@ export default function AdvancedFilter() {
         />
       </div>
       <div className="col-span-2">
-        {" "}
         <NormalSelect
           options={positions}
           small
           bold
+          initValue={{ id: "0", name: "Chọn chức vụ" }}
           startIcon={
             <ChairAltOutlinedIcon
               sx={{ width: "20px", height: "20px" }}
@@ -61,11 +61,11 @@ export default function AdvancedFilter() {
         />
       </div>
       <div className="col-span-2">
-        {" "}
         <NormalSelect
           options={workModes}
           small
           bold
+          initValue={{ id: "0", name: "Chọn hình thức" }}
           startIcon={
             <CasesOutlinedIcon
               sx={{ width: "20px", height: "20px" }}
@@ -76,11 +76,11 @@ export default function AdvancedFilter() {
       </div>
 
       <div className="col-span-2">
-        {" "}
         <NormalSelect
           options={postTypes}
           small
           bold
+          initValue={{ id: "0", name: "Khác" }}
           startIcon={
             <StarBorderOutlinedIcon
               sx={{ width: "20px", height: "20px" }}
