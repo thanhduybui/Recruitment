@@ -24,7 +24,6 @@ export default async function findJobPageLoader(): Promise<{
       api.get("/work-modes"),
     ]);
 
-    // Process the responses here
     const positions = positionRes.data?.data?.positions || [];
     const salaryRanges = salaryRes.data?.data?.salary_ranges || [];
     const fields = fieldRes.data?.data?.fields || [];

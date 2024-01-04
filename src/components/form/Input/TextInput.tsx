@@ -25,7 +25,7 @@ export default function TextInput(props: TextInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const { inputValue, error, handleInputChange } = useInputValidation(
-    "",
+    props.defaultValue || "",
     props.inputChange,
     (value: string) =>
       getValidationRule(value, props.name || "", props.passwordValue)
@@ -61,7 +61,6 @@ export default function TextInput(props: TextInputProps) {
           value={inputValue}
           disabled={props.disabled}
           onChange={handleInputChange}
-          defaultValue={props.defaultValue}
           className={inputClasses}
           name={props.name}
           placeholder={props.placeholder}

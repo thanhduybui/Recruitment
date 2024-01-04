@@ -8,7 +8,7 @@ import SelectedValue from "./SelectedValue";
 type SearchSelectProps = {
   startIcon?: React.ReactNode;
   options: Option[];
-  initValue?: { value: string; name: string };
+  initValue?: Option;
   small?: boolean;
   label?: string;
   required?: boolean;
@@ -21,8 +21,8 @@ export default function SearchSelect(props: SearchSelectProps) {
   const selectRef = useRef<HTMLDivElement>(null);
 
   const [selected, setSelected] = useState({
-    id: props.options && props.options[0]?.id,
-    name: props.options && props.options[0]?.name,
+    id: props.initValue?.id,
+    name: props.initValue?.name,
   });
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -64,7 +64,7 @@ export default function SearchSelect(props: SearchSelectProps) {
           <div className="text-primary-500">{props.startIcon}</div>
         )}
 
-        <SelectedValue value={selected} bold={props.bold} />
+        <SelectedValue value={selected as Option} bold={props.bold} />
 
         <ArrowDropDownIcon color="primary" sx={{ marginLeft: "auto" }} />
       </div>

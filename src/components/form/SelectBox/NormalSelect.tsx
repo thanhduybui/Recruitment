@@ -8,7 +8,7 @@ import Options from "./Options";
 type SelectProps = {
   startIcon?: React.ReactNode;
   options: Option[];
-  initValue?: { value: string; name: string };
+  initValue?: Option;
   small?: boolean;
   bold?: boolean;
   label?: string;
@@ -20,9 +20,9 @@ export default function NormalSelect(props: SelectProps) {
   const [open, setOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
-  const [selected, setSelected] = useState<Option>({
-    value: props.options && props.options[0]?.value,
-    name: props.options && props.options[0]?.name,
+  const [selected, setSelected] = useState({
+    id: props.initValue?.id || "",
+    name: props.initValue?.name || "",
   });
 
   const handleClickOutside = (e: MouseEvent) => {
