@@ -23,7 +23,7 @@ export const getValidationRule = (
     case InputConstants.COMPANY_NAME:
       return !value ? "Tên công ty không được bỏ trống" : "";
     case InputConstants.PHONE_NUMBER:
-      return !/^(\+?\d{1,3}[- ]?)?\d{9,}$/.test(value)
+      return !/^(\+?\d{1,3}[- ]?)?\d{9,15}$/.test(value)
         ? "Số điện thoại không hợp lệ"
         : "";
     default:

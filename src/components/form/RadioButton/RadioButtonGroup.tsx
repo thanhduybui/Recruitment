@@ -11,13 +11,12 @@ type RadioButtonGroupProps = {
   options?: Record<string, string>;
   labelBold?: boolean;
   onChosen: (value: string) => void;
+  value?: string;
   sm?: boolean;
 };
 
 export default function RadioButtonGroup(props: RadioButtonGroupProps) {
-  const [option, setOption] = useState(
-    Object.keys(props.options ?? {})[0] || ""
-  );
+  const [option, setOption] = useState(props.value);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOption(event.target.value);
