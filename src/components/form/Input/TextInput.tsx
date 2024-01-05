@@ -16,7 +16,7 @@ type TextInputProps = {
   labelBold?: boolean;
   required?: boolean;
   startIcon?: React.ReactNode;
-  name: string;
+  name?: string;
   passwordValue?: string;
   inputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };

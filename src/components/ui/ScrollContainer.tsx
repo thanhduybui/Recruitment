@@ -4,9 +4,8 @@ type ScrollContainerProps = {
 
 export default function ScrollContainer({ children }: ScrollContainerProps) {
   return (
-    // <div className="h-screen overflow-y-scroll border-2 border-gray-100 rounded-md">
-    //   {children}
-    // </div>
-    <div>{children}</div>
+    <div className="h-screen md:h-[500px] lg:h-[700px] overflow-y-scroll  rounded-md">
+      {children}
+    </div>
   );
 }

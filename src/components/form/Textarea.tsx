@@ -21,7 +21,7 @@ export default function Textarea(props: TextareaProps) {
           props.disabled ? "text-gray-200" : "text-gray-300"
         }`}
         disabled={props.disabled}
-        defaultValue={props.defaultValue}
+        value={props.defaultValue}
       />
     </div>
   );

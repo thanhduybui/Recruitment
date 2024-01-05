@@ -9,4 +9,5 @@ export const modalName = {
   BLACKLIST_MODAL: "blacklistModal",
   JOB_APPLICATION_MODAL: "jobApplicationModal",
   INFORM_MODAL: "informModal",
+  UPDATE_COMPANY_MODAL: "updateCompanyModal",
 };

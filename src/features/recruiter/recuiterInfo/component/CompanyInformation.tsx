@@ -1,17 +1,30 @@
 import { TextHeading } from "@components/heading";
-import { CompanyInfoRow, InfoContainer } from "..";
+import { CompanyInfoRow, InfoContainer, UpdateCompanyModal } from "..";
 import { HTMLContent } from "@features/details";
 import Button from "@mui/material/Button";
 import { useRouteLoaderData } from "react-router-dom";
 import { CompanyInfo } from "@data/interface";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@store";
+import { openModal } from "@store/modal";
+import { modalName } from "@data/constants";
 
 export default function CompanyInformation() {
   const data = useRouteLoaderData("recruiterInfo");
+  const isShowModal = useSelector(
+    (state: RootState) => state.modals.updateCompanyModal
+  );
+  const dispatch = useDispatch();
 
   const { companyInfo } = data as { companyInfo: CompanyInfo };
 
+  const onClickHandler = () => {
+    dispatch(openModal({ modalName: modalName.UPDATE_COMPANY_MODAL }));
+  };
+
   return (
     <div className="my-8 px-2">
+      {isShowModal && <UpdateCompanyModal />}
       <TextHeading title="Thông tin công ty" borderStart></TextHeading>
       <InfoContainer>
         <CompanyInfoRow label="Tên công ty" value={companyInfo.name} />
@@ -30,6 +43,7 @@ export default function CompanyInformation() {
           variant="contained"
           color="primary"
           sx={{ textTransform: "none" }}
+          onClick={onClickHandler}
         >
           Cập nhật
         </Button>
