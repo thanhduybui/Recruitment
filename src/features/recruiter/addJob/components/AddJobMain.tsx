@@ -7,19 +7,23 @@ import {
 import { MainSectionContainer, ScrollContainer } from "@components/ui";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef } from "react";
-import {
-  salaryRanges,
-  expieriences,
-  positions,
-  fields,
-  majors,
-} from "@data/api";
+import { majors } from "@data/api";
 import { Editor as TinyMCEEditor } from "tinymce";
 import { TextHeading } from "@components/heading";
 import Button from "@mui/material/Button";
+import { useRouteLoaderData } from "react-router-dom";
+import { Option } from "@data/interface";
 
 export default function AddJobMain() {
   const editorRef = useRef<TinyMCEEditor | null>(null);
+  const data = useRouteLoaderData("recruiterInfo");
+
+  const { positions, salaryRanges, experienceRanges, fields } = data as {
+    positions: Option[];
+    salaryRanges: Option[];
+    experienceRanges: Option[];
+    fields: Option[];
+  };
 
   return (
     <MainSectionContainer heading="Tạo bài tuyển dụng mới">
@@ -48,7 +52,7 @@ export default function AddJobMain() {
             <NormalSelect label="Mức lương" options={salaryRanges} required />
             <NormalSelect
               label="Mức kinh nghiệm"
-              options={expieriences}
+              options={experienceRanges}
               required
             />
             <SearchSelect label="Lĩnh vực" options={fields} required />

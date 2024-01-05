@@ -24,11 +24,14 @@ export default function AddJobPage() {
   );
 
   return (
-    <LeftLayoutContainer>
-      <LeftSidebarLayout
-        sidebar={<RecruiterSidebar />}
-        main={main}
-      ></LeftSidebarLayout>
-    </LeftLayoutContainer>
+    <>
+      {" "}
+      <LeftLayoutContainer>
+        <LeftSidebarLayout
+          sidebar={<RecruiterSidebar />}
+          main={main}
+        ></LeftSidebarLayout>
+      </LeftLayoutContainer>
+    </>
   );
 }

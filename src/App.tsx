@@ -18,13 +18,17 @@ import {
   JobApplicationPage,
 } from "@pages/employer";
 import { Route } from "react-router-dom";
-
+import "react-toastify/dist/ReactToastify.css";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { findJobPageLoader, positionLoader } from "@services";
+import {
+  findJobPageLoader,
+  positionLoader,
+  recruiterInfoLoader,
+} from "@services";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,7 +60,12 @@ const router = createBrowserRouter(
           loader={positionLoader}
         />
         <Route element={<ProtectedRoute allowRole="RECRUITER" />}>
-          <Route path="setting" element={<RecruiterManagementPage />} />
+          <Route
+            path="setting"
+            element={<RecruiterManagementPage />}
+            id="recruiterInfo"
+            loader={recruiterInfoLoader}
+          />
           <Route path="job-application/:id" element={<JobApplicationPage />} />
         </Route>
       </Route>

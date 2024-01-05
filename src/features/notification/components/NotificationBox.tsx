@@ -12,66 +12,49 @@ type NotificationBoxProps = {
 
 const notifications = [
   {
+    id: 1,
     title: "Tìm thấy một công việc phù hợp với bạn",
     content:
       "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nàoCông ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
   },
   {
+    id: 2,
     title: "Tìm thấy một công việc phù hợp với bạn",
     content:
       "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
   },
   {
+    id: 3,
     title: "Tìm thấy một công việc phù hợp với bạn",
     content:
       "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
   },
   {
+    id: 4,
     title: "Tìm thấy một công việc phù hợp với bạn",
     content:
       "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
   },
   {
+    id: 5,
     title: "Tìm thấy một công việc phù hợp với bạn",
     content:
       "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
   },
   {
+    id: 6,
     title: "Tìm thấy một công việc phù hợp với bạn",
     content:
       "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
   },
   {
+    id: 7,
     title: "Tìm thấy một công việc phù hợp với bạn",
     content:
       "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
   },
   {
-    title: "Tìm thấy một công việc phù hợp với bạn",
-    content:
-      "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
-  },
-  {
-    title: "Tìm thấy một công việc phù hợp với bạn",
-    content:
-      "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
-  },
-  {
-    title: "Tìm thấy một công việc phù hợp với bạn",
-    content:
-      "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
-  },
-  {
-    title: "Tìm thấy một công việc phù hợp với bạn",
-    content:
-      "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
-  },
-  {
-    title: "Tìm thấy một công việc phù hợp với bạn",
-    content:
-      "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
-  },
-  {
+    id: 8,
     title: "Tìm thấy một công việc phù hợp với bạn",
     content:
       "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
@@ -97,7 +80,11 @@ export default function NotificationBox(props: NotificationBoxProps) {
         <Divider />
         <div className="flex flex-col gap-2 max-h-[500px] lg:max-h-[700px] overflow-y-auto">
           {notifications.map((noti) => (
-            <Notification title={noti.title} content={noti.content} />
+            <Notification
+              key={noti.id}
+              title={noti.title}
+              content={noti.content}
+            />
           ))}
         </div>
       </div>
