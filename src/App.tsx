@@ -18,7 +18,7 @@ import {
   JobApplicationPage,
 } from "@pages/employer";
 import { Route } from "react-router-dom";
-
+import "react-toastify/dist/ReactToastify.css";
 import {
   createBrowserRouter,
   createRoutesFromElements,

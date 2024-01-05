@@ -8,13 +8,86 @@ import {
 import { InputConstants, modalName } from "@data/constants";
 import { createPortal } from "react-dom";
 import { Editor } from "@tinymce/tinymce-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Editor as TinyMCEEditor } from "tinymce";
 import FormControlLabel from "@components/form/FormUI/FormControlLabel";
 import { Button } from "@mui/material";
+import { CompanyInfo } from "@data/interface";
+import { useDispatch } from "react-redux";
+import { closeModal } from "@store/modal";
+import api from "@utils/axios";
+import { getAccessToken } from "@utils/authUtils";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
-export default function UpdateCompanyModal() {
+type UpdateCompanyModalProps = {
+  companyInfo: CompanyInfo;
+};
+
+export default function UpdateCompanyModal({
+  companyInfo,
+}: UpdateCompanyModalProps) {
   const editorRef = useRef<TinyMCEEditor | null>(null);
+  const dispatch = useDispatch();
+  const [companyName, setCompanyName] = useState(companyInfo.name);
+  const [companyAddress, setCompanyAddress] = useState(companyInfo.address);
+  const [companyEmail, setCompanyEmail] = useState(companyInfo.email);
+  const [companyPhone, setCompanyPhone] = useState(companyInfo.phone);
+  const [companyScale, setCompanyScale] = useState(companyInfo.scale);
+  const [companyWebUrl, setCompanyWebUrl] = useState(companyInfo.webUrl);
+  const onCloseHandler = () => {
+    dispatch(closeModal({ modalName: modalName.UPDATE_COMPANY_MODAL }));
+  };
+
+  const onClickHandler = async () => {
+    try {
+      const res = await api.put(
+        "/companies/profile",
+        {
+          name: companyName,
+          address: companyAddress,
+          email: companyEmail,
+          phone: companyPhone,
+          scale: companyScale,
+          webUrl: companyWebUrl,
+          description: editorRef.current?.getContent(),
+        },
+        {
+          headers: { Authorization: `Bearer ${getAccessToken()}` },
+        }
+      );
+
+      dispatch(closeModal({ modalName: modalName.UPDATE_COMPANY_MODAL }));
+      toast.success(res.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      const typedError = error as AxiosError;
+      const data = typedError.response?.data as {
+        message: string;
+        status: number;
+      };
+      const errorMesage = data.message || "Lỗi cập nhật";
+      toast.error(errorMesage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
   return createPortal(
     <ModalBackdrop modalName={modalName.UPDATE_COMPANY_MODAL}>
       <ModalContentContainer>
@@ -22,28 +95,38 @@ export default function UpdateCompanyModal() {
           title="Chỉnh sửa thông tin công ty"
           modalName={modalName.UPDATE_COMPANY_MODAL}
         ></ModalHeader>
+
         <ScrollContainer>
           <div className="w-4/5 m-auto flex flex-col gap-4">
             <Textarea
               label="Tên công ty"
               required
               labelBold
-              defaultValue="Công ty ấy"
+              onChange={(e) => {
+                setCompanyName(e.target.value);
+              }}
+              defaultValue={companyInfo.name}
             ></Textarea>
             <Textarea
               label="Địa chỉ"
               required
               labelBold
-              defaultValue="Tầng 3, Tòa 17T4 Hapulico, số 1 Nguyễn Huy Tưởng, Thanh Xuân, Hà Nội"
+              onChange={(e) => {
+                setCompanyAddress(e.target.value);
+              }}
+              defaultValue={companyInfo.address}
             ></Textarea>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="w-full">
                 <TextInput
                   label="Email liên hệ"
                   labelBold
+                  inputChange={(e) => {
+                    setCompanyEmail(e.target.value);
+                  }}
                   type="email"
                   name={InputConstants.EMAIL}
-                  defaultValue="dtb1742002@gmail.com"
+                  defaultValue={companyInfo.email}
                 ></TextInput>
               </div>
               <div className="w-full">
@@ -51,28 +134,38 @@ export default function UpdateCompanyModal() {
                   label="Hotline"
                   labelBold
                   type="phone"
+                  inputChange={(e) => {
+                    setCompanyPhone(e.target.value);
+                  }}
                   name={InputConstants.PHONE_NUMBER}
-                  defaultValue="0123433738"
+                  defaultValue={companyInfo.phone}
                 ></TextInput>
               </div>
               <div className="w-full">
                 <TextInput
                   label="Quy mô công ty"
                   labelBold
+                  inputChange={(e) => {
+                    setCompanyScale(e.target.value);
+                  }}
                   type="text"
-                  defaultValue="0123433738"
+                  defaultValue={companyInfo.scale}
                 ></TextInput>
               </div>
             </div>
             <TextInput
-              label="Địa chỉ công ty"
+              label="Địa chỉ web"
               labelBold
               type="text"
-              defaultValue="https://www.topcv.vn/cong-ty/cong-ty-cp-cong-nghe-giao-duc-truong-hoc-truc-tuyen-onschool/126682.html"
+              inputChange={(e) => {
+                setCompanyWebUrl(e.target.value);
+              }}
+              defaultValue={companyInfo.webUrl}
             ></TextInput>
             <div className="flex flex-col gap-1">
               <FormControlLabel label="Mô tả chi tiết" bold />
               <Editor
+                initialValue={companyInfo.description}
                 apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
                 onInit={(evt, editor) => (editorRef.current = editor)}
                 init={{
@@ -110,6 +203,7 @@ export default function UpdateCompanyModal() {
             variant="outlined"
             color="error"
             sx={{ textTransform: "none" }}
+            onClick={onCloseHandler}
           >
             Huỷ
           </Button>
@@ -117,6 +211,7 @@ export default function UpdateCompanyModal() {
             variant="contained"
             color="primary"
             sx={{ textTransform: "none" }}
+            onClick={onClickHandler}
           >
             Cập nhật
           </Button>

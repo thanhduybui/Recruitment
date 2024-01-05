@@ -6,6 +6,7 @@ type TextareaProps = {
   defaultValue?: string;
   required?: boolean;
   labelBold?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export default function Textarea(props: TextareaProps) {

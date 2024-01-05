@@ -24,7 +24,7 @@ export default function CompanyInformation() {
 
   return (
     <div className="my-8 px-2">
-      {isShowModal && <UpdateCompanyModal />}
+      {isShowModal && <UpdateCompanyModal companyInfo={companyInfo} />}
       <TextHeading title="Thông tin công ty" borderStart></TextHeading>
       <InfoContainer>
         <CompanyInfoRow label="Tên công ty" value={companyInfo.name} />
