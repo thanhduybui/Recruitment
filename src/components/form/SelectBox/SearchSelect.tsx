@@ -14,6 +14,7 @@ type SearchSelectProps = {
   required?: boolean;
   bold?: boolean;
   id?: string;
+  onSelect?: (option: Option) => void;
 };
 
 export default function SearchSelect(props: SearchSelectProps) {
@@ -33,6 +34,7 @@ export default function SearchSelect(props: SearchSelectProps) {
 
   const selectValueHandler = (option: Option) => {
     setSelected(option);
+    props.onSelect && props.onSelect(option);
   };
 
   useEffect(() => {
