@@ -14,6 +14,7 @@ type SelectProps = {
   label?: string;
   required?: boolean;
   id?: string;
+  onSelect?: (option: Option) => void;
 };
 
 export default function NormalSelect(props: SelectProps) {
@@ -33,6 +34,7 @@ export default function NormalSelect(props: SelectProps) {
 
   const selectValueHandler = (option: Option) => {
     setSelected(option);
+    props.onSelect && props.onSelect(option);
   };
 
   useEffect(() => {

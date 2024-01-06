@@ -68,7 +68,7 @@ export default function Options({
           <li
             className="p-2 text-sm hover:bg-primary-500 hover:text-white transition duration-100"
             key={option.id}
-            value={option.id}
+            id={option.id}
             onClick={onClickHandler}
           >
             {option.name}
