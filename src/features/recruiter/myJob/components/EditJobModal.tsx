@@ -13,19 +13,34 @@ import {
 } from "@components/form";
 import { Editor } from "@tinymce/tinymce-react";
 import { Editor as TinyMCEEditor } from "tinymce";
-import {
-  salaryRanges,
-  expieriences,
-  positions,
-  fields,
-  majors,
-} from "@data/api";
+import { majors } from "@data/api";
 import { useRef } from "react";
 import { TextHeading } from "@components/heading";
 import { Button } from "@mui/material";
+import { CompanyInfo, Option } from "@data/interface";
+import { useRouteLoaderData } from "react-router-dom";
 
 export default function EditJobModal() {
   const editorRef = useRef<TinyMCEEditor | null>(null);
+
+  const data = useRouteLoaderData("recruiterInfo");
+
+  const {
+    companyInfo,
+    positions,
+    salaryRanges,
+    experienceRanges,
+    fields,
+    workModes,
+  } = data as {
+    companyInfo: CompanyInfo;
+    positions: Option[];
+    salaryRanges: Option[];
+    experienceRanges: Option[];
+    fields: Option[];
+    workModes: Option[];
+  };
+
   return (
     <ModalBackdrop modalName={modalName.EDIT_JOB_MODAL}>
       <ModalContentContainer>
@@ -40,7 +55,7 @@ export default function EditJobModal() {
               <div className="w-2/5">
                 <Textarea
                   label="Công ty"
-                  defaultValue="Công ty TNHH Bảo An Ninh Liên Hiệp Quốc Việt Nam Phải Không Đó"
+                  defaultValue={companyInfo.name}
                   disabled
                   required
                 />
@@ -55,11 +70,16 @@ export default function EditJobModal() {
               <NormalSelect label="Mức lương" options={salaryRanges} required />
               <NormalSelect
                 label="Mức kinh nghiệm"
-                options={expieriences}
+                options={experienceRanges}
                 required
               />
               <SearchSelect label="Lĩnh vực" options={fields} required />
               <SearchSelect label="Ngành nghề" options={majors} required />
+              <NormalSelect
+                label="Chế độ làm việc"
+                options={workModes}
+                required
+              />
             </div>
             <div className="mt-10">
               <TextHeading title="Mô tả công việc" borderStart small />

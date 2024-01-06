@@ -8,6 +8,9 @@ import { EditJobModal, RecruiterJobCard } from "..";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { DeleteModal } from "@components/ui/modal";
+import { useCompanyJob } from "@hooks";
+import { useRouteLoaderData } from "react-router-dom";
+import { CompanyInfo } from "@data/interface";
 
 function a11yProps(index: number) {
   return {
@@ -20,6 +23,9 @@ export default function RecruiterMyJob() {
   const isEditModalOpen = useSelector(
     (state: RootState) => state.modals.editJobModal
   );
+  const data = useRouteLoaderData("recruiterInfo");
+  const { companyInfo } = data as { companyInfo: CompanyInfo };
+  const { jobs } = useCompanyJob(companyInfo.id + "");
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -59,18 +65,18 @@ export default function RecruiterMyJob() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          {Array.from({ length: 5 }, (_, index) => (
-            <RecruiterJobCard key={index} id={index + ""} />
+          {jobs.map((job) => (
+            <RecruiterJobCard key={job.id} {...job} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          {Array.from({ length: 3 }, (_, index) => (
-            <RecruiterJobCard key={index} />
+          {jobs.map((job) => (
+            <RecruiterJobCard key={job.id} {...job} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={2}>
-          {Array.from({ length: 2 }, (_, index) => (
-            <RecruiterJobCard key={index} />
+          {jobs.map((job) => (
+            <RecruiterJobCard key={job.id} {...job} />
           ))}
         </TabPanel>
       </Box>
