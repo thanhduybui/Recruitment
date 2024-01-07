@@ -16,3 +16,10 @@ export type CompanyInfo = {
   phone: string;
   status: string;
 };
+
+export type RecruiterJobCardProps = {
+  id?: string;
+  title?: string;
+  dueDate?: string;
+  hotJob?: boolean;
+};

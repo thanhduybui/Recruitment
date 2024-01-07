@@ -13,13 +13,10 @@ import { useDispatch } from "react-redux";
 import { modalName } from "@data/constants";
 import { openModal } from "@store/modal";
 import { Link } from "react-router-dom";
-
-type RecruiterJobCardProps = {
-  id?: string;
-};
+import { RecruiterJobCardProps } from "@data/interface";
 
 export default function RecruiterJobCard(props: RecruiterJobCardProps) {
-  const { id } = props;
+  const { id, title, dueDate } = props;
   const dispatch = useDispatch();
 
   const onDeletePostHandler = (id?: string) => {
@@ -36,9 +33,9 @@ export default function RecruiterJobCard(props: RecruiterJobCardProps) {
     <Card sx={{ display: "flex", bgcolor: "#f5fbff" }}>
       <CardContent>
         <Typography variant="body1" color="primary" fontWeight={600}>
-          Fresher Java tiếng Nhật
+          {title}
         </Typography>
-        <Typography variant="body2">Hạn ứng tuyển: 20/11/2024</Typography>
+        <Typography variant="body2">Hạn ứng tuyển: {dueDate}</Typography>
       </CardContent>
       <CardActions sx={{ marginLeft: "auto" }}>
         <Link to={"/recruiter/job-application/" + id}>
