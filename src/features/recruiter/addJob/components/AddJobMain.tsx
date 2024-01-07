@@ -18,6 +18,7 @@ import { getAccessToken } from "@utils/authUtils";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import { AxiosError } from "axios";
+import { FormControlLabel, Switch } from "@mui/material";
 
 export default function AddJobMain() {
   const descriptionRef = useRef<TinyMCEEditor | null>(null);
@@ -34,6 +35,7 @@ export default function AddJobMain() {
   const [wordMode, setWorkMode] = useState("0");
   const [slot, setSlot] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
+  const [isHot, setIsHot] = useState(false);
 
   const data = useRouteLoaderData("recruiterInfo");
 
@@ -53,6 +55,10 @@ export default function AddJobMain() {
     workModes: Option[];
   };
 
+  const changeHandler = () => {
+    setIsHot(!isHot);
+  };
+
   const onAddJobHandler = async () => {
     const jobData = {
       title: jobNameRef.current?.value,
@@ -70,6 +76,7 @@ export default function AddJobMain() {
       work_time: workTimeRef.current?.value,
       work_location: workLocationRef.current?.value,
       deadline: deadline,
+      isHot: isHot,
     };
 
     console.log(jobData);
@@ -154,6 +161,13 @@ export default function AddJobMain() {
               label="Hạn ứng tuyển"
               type="datetime-local"
               inputChange={(e) => setDeadline(e.target.value)}
+            />
+            <FormControlLabel
+              control={
+                <Switch defaultChecked={isHot} onChange={changeHandler} />
+              }
+              label="Việc gấp"
+              sx={{ margin: "auto" }}
             />
           </div>
           <div className="grid grid-cols-3 mt-5 gap-4">

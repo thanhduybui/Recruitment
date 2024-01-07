@@ -11,6 +11,7 @@ import { DeleteModal } from "@components/ui/modal";
 import { useCompanyJob } from "@hooks";
 import { useRouteLoaderData } from "react-router-dom";
 import { CompanyInfo } from "@data/interface";
+import { ToastContainer } from "react-toastify";
 
 function a11yProps(index: number) {
   return {
@@ -33,53 +34,67 @@ export default function RecruiterMyJob() {
   };
 
   return (
-    <MainSectionContainer heading="Quản lý việc làm của bạn">
-      <DeleteModal></DeleteModal>
-      {isEditModalOpen && <EditJobModal></EditJobModal>}
-      <Box sx={{ width: "100%", mt: "0.2rem", mb: "2rem", height: "100vh" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-            textColor="primary"
-          >
-            <Tab
-              label="Đang tuyển"
-              {...a11yProps(0)}
-              sx={{
-                textTransform: "none",
-                fontSize: "0.9rem",
-              }}
-            />
-            <Tab
-              label="Đã đóng"
-              {...a11yProps(1)}
-              sx={{ textTransform: "none", fontSize: "0.9rem" }}
-            />
-            <Tab
-              label="Tuyển gấp"
-              {...a11yProps(2)}
-              sx={{ textTransform: "none", fontSize: "0.9rem" }}
-            />
-          </Tabs>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <MainSectionContainer heading="Quản lý việc làm của bạn">
+        <DeleteModal></DeleteModal>
+        {isEditModalOpen && <EditJobModal></EditJobModal>}
+        <Box sx={{ width: "100%", mt: "0.2rem", mb: "2rem", height: "100vh" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+              textColor="primary"
+            >
+              <Tab
+                label="Đang tuyển"
+                {...a11yProps(0)}
+                sx={{
+                  textTransform: "none",
+                  fontSize: "0.9rem",
+                }}
+              />
+              <Tab
+                label="Đã đóng"
+                {...a11yProps(1)}
+                sx={{ textTransform: "none", fontSize: "0.9rem" }}
+              />
+              <Tab
+                label="Tuyển gấp"
+                {...a11yProps(2)}
+                sx={{ textTransform: "none", fontSize: "0.9rem" }}
+              />
+            </Tabs>
+          </Box>
+          <TabPanel value={value} index={0}>
+            {jobs.map((job) => (
+              <RecruiterJobCard key={job.id} {...job} />
+            ))}
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            {jobs.map((job) => (
+              <RecruiterJobCard key={job.id} {...job} />
+            ))}
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            {jobs.map((job) => (
+              <RecruiterJobCard key={job.id} {...job} />
+            ))}
+          </TabPanel>
         </Box>
-        <TabPanel value={value} index={0}>
-          {jobs.map((job) => (
-            <RecruiterJobCard key={job.id} {...job} />
-          ))}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {jobs.map((job) => (
-            <RecruiterJobCard key={job.id} {...job} />
-          ))}
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          {jobs.map((job) => (
-            <RecruiterJobCard key={job.id} {...job} />
-          ))}
-        </TabPanel>
-      </Box>
-    </MainSectionContainer>
+      </MainSectionContainer>
+    </>
   );
 }
