@@ -16,14 +16,18 @@ import { Editor as TinyMCEEditor } from "tinymce";
 import { majors } from "@data/api";
 import { useRef } from "react";
 import { TextHeading } from "@components/heading";
-import { Button } from "@mui/material";
+import { Button, FormControlLabel, Switch } from "@mui/material";
 import { CompanyInfo, Option } from "@data/interface";
 import { useRouteLoaderData } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
 
 export default function EditJobModal() {
   const editorRef = useRef<TinyMCEEditor | null>(null);
 
   const data = useRouteLoaderData("recruiterInfo");
+
+  const jobs = useSelector((state: RootState) => state.jobDetail.jobDetail);
 
   const {
     companyInfo,
@@ -49,8 +53,22 @@ export default function EditJobModal() {
           <form className="p-4">
             <TextHeading title="Thông tin chung" borderStart small />
             <div className="flex gap-4 mt-3">
-              <div className="flex-1 w-3/5">
-                <Textarea label="Tên công việc" required />
+              <div className="flex-1 w-3/5 flex flex-col gap-4">
+                <Textarea
+                  label="Tên công việc"
+                  defaultValue={jobs?.title}
+                  required
+                />
+                <Textarea
+                  label="Địa điểm làm việc"
+                  defaultValue={jobs?.workLocation}
+                  required
+                />
+                <Textarea
+                  label="Thời gian làm việc"
+                  defaultValue={jobs?.workTime}
+                  required
+                />
               </div>
               <div className="w-2/5">
                 <Textarea
@@ -62,23 +80,52 @@ export default function EditJobModal() {
               </div>
             </div>
             <div className="grid grid-cols-3 mt-5 gap-4">
-              <TextInput label="Số lượng ứng tuyển" type="number" />
-              <TextInput label="Hạn ứng tuyển" type="date" />
+              <TextInput
+                label="Số lượng ứng tuyển"
+                type="number"
+                defaultValue={jobs?.slots + ""}
+              />
+              <TextInput
+                label="Hạn ứng tuyển"
+                type="datetime-local"
+                defaultValue={jobs?.deadline}
+              />
+              <FormControlLabel
+                control={<Switch defaultChecked />}
+                label="Việc gấp"
+                sx={{ margin: "auto" }}
+              />
             </div>
             <div className="grid grid-cols-3 mt-5 gap-4">
-              <NormalSelect label="Chức vụ" options={positions} required />
-              <NormalSelect label="Mức lương" options={salaryRanges} required />
+              <NormalSelect
+                label="Chức vụ"
+                options={positions}
+                initValue={jobs?.position}
+              />
+              <NormalSelect
+                label="Mức lương"
+                options={salaryRanges}
+                initValue={jobs?.salaryRange}
+              />
               <NormalSelect
                 label="Mức kinh nghiệm"
                 options={experienceRanges}
-                required
+                initValue={jobs?.experienceRange}
               />
-              <SearchSelect label="Lĩnh vực" options={fields} required />
-              <SearchSelect label="Ngành nghề" options={majors} required />
+              <SearchSelect
+                label="Lĩnh vực"
+                options={fields}
+                initValue={jobs?.field}
+              />
+              <SearchSelect
+                label="Ngành nghề"
+                options={majors}
+                initValue={jobs?.major}
+              />
               <NormalSelect
                 label="Chế độ làm việc"
                 options={workModes}
-                required
+                initValue={jobs?.workMode}
               />
             </div>
             <div className="mt-10">
@@ -87,6 +134,7 @@ export default function EditJobModal() {
                 <Editor
                   apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
                   onInit={(evt, editor) => (editorRef.current = editor)}
+                  initialValue={jobs?.description}
                   init={{
                     menubar: false,
                     language: "vi",
@@ -121,6 +169,7 @@ export default function EditJobModal() {
               <TextHeading title="Yêu cầu công việc" borderStart small />
               <div className="mt-2">
                 <Editor
+                  initialValue={jobs?.requirement}
                   apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
                   onInit={(evt, editor) => (editorRef.current = editor)}
                   init={{
@@ -157,6 +206,7 @@ export default function EditJobModal() {
               <TextHeading title="Đãi ngộ" borderStart small />
               <div className="mt-2">
                 <Editor
+                  initialValue={jobs?.benefit}
                   apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
                   onInit={(evt, editor) => (editorRef.current = editor)}
                   init={{
