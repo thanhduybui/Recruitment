@@ -7,7 +7,6 @@ export const getAccessToken = (): string | null => {
   if (!token) {
     return null;
   }
-  console.log(token);
   const tokenDuration = getTokenDuration();
   if (tokenDuration < 0) {
     return "EXPIRED";

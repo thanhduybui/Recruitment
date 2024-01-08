@@ -26,8 +26,8 @@ export default function RecruiterMyJob() {
   );
   const data = useRouteLoaderData("recruiterInfo");
   const { companyInfo } = data as { companyInfo: CompanyInfo };
-  const { jobs } = useCompanyJob(companyInfo.id + "");
   const [value, setValue] = useState(0);
+  const { jobs } = useCompanyJob(companyInfo.id + "", value);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

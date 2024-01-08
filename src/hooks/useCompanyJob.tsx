@@ -3,15 +3,21 @@ import { useState, useCallback, useEffect } from "react";
 import api from "@utils/axios";
 import { convertToDDMMYYYY } from "@utils/datetimeUtil";
 
-export default function useCompanyJob(id: string) {
+export default function useCompanyJob(id: string, index: number) {
   const [jobs, setJobs] = useState<RecruiterJobCardProps[]>([]);
   const [currentPage, setCurrentPage] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
   const [totalItems, setTotalItems] = useState(null);
 
-  const fetchCompanyJob = useCallback(async (id: string) => {
+  const fetchCompanyJob = useCallback(async (id: string, index: number) => {
     try {
-      const res = await api.get(`/companies/${id}/jobs`);
+      let type: string = "ACTIVE";
+      if (index === 1) {
+        type = "EXPIRED";
+      } else if (index === 2) {
+        type = "HOT";
+      }
+      const res = await api.get(`/companies/${id}/jobs?type=${type}`);
       const listJobs = res.data.data.jobs.listData;
 
       const recruiterJobCards: RecruiterJobCardProps[] = listJobs.map(
@@ -35,8 +41,8 @@ export default function useCompanyJob(id: string) {
   }, []);
 
   useEffect(() => {
-    fetchCompanyJob(id);
-  }, [fetchCompanyJob, id]);
+    fetchCompanyJob(id, index);
+  }, [fetchCompanyJob, id, index]);
 
   return { jobs, currentPage, totalItems, totalPages };
 }
