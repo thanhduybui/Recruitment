@@ -35,7 +35,7 @@ export default function CompanyInformation() {
         <CompanyInfoRow label="Địa chỉ web" value={companyInfo.webUrl} />
         <CompanyInfoRow label="Mô tả" />
         <div>
-          <HTMLContent />
+          <HTMLContent htmlContent={companyInfo.description} />
         </div>
       </InfoContainer>
       <div className="flex items-center justify-center gap-2 mt-8">

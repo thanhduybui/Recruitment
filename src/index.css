@@ -53,6 +53,10 @@ footer {
   /* Add other styles as needed */
 }
 
+ol {
+  list-style-type: decimal; /* or other desired list style type */
+}
+
 @media screen and (max-width: 768px) {
   html {
     font-size: 80%;
