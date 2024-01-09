@@ -1,0 +1,7 @@
+.html-content ol {
+  list-style-type: decimal; /* or other desired list style type */
+}
+
+.html-content ul {
+  list-style-type: circle;
+}

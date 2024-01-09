@@ -8,6 +8,6 @@ export default async function positionLoader() {
   } catch (err) {
     const typeError = err as AxiosError;
     console.log(typeError.message);
-    return null;
+    throw new Error(typeError.message);
   }
 }

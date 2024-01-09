@@ -61,6 +61,43 @@ export default function HeaderNav() {
               <HeaderNavItem name="Quản lý " />
             </NavLink>
           )}
+          {role == "ADMIN" && (
+            <>
+              <NavLink
+                to="/admin/"
+                end
+                className={({ isActive }) =>
+                  isActive ? "text-primary-500 bg-gray-100" : ""
+                }
+              >
+                <HeaderNavItem name="Dashboard" />
+              </NavLink>
+              <NavLink
+                to="/admin/jobs"
+                className={({ isActive }) =>
+                  isActive ? "text-primary-500 bg-gray-100" : ""
+                }
+              >
+                <HeaderNavItem name="Việc làm" />
+              </NavLink>
+              <NavLink
+                to="/admin/users"
+                className={({ isActive }) =>
+                  isActive ? "text-primary-500 bg-gray-100" : ""
+                }
+              >
+                <HeaderNavItem name="Người dùng" />
+              </NavLink>
+              <NavLink
+                to="/admin/others"
+                className={({ isActive }) =>
+                  isActive ? "text-primary-500 bg-gray-100" : ""
+                }
+              >
+                <HeaderNavItem name="Khác" />
+              </NavLink>
+            </>
+          )}
         </HeaderList>
 
         {!isAuthenticated && (
