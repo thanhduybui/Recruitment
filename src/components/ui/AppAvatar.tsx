@@ -10,7 +10,12 @@ import { modalName } from "@data/constants";
 const { AVATAR_MODAL } = modalName;
 import { useMediaQuery } from "@mui/material";
 
-export default function AvatarModal() {
+type AppAvatarProps = {
+  link?: string;
+  title?: string;
+};
+
+export default function AvatarComponent({ link, title }: AppAvatarProps) {
   const dispatch = useDispatch();
   const isMdScreen = useMediaQuery("(min-width: 768px)");
 
@@ -55,7 +60,7 @@ export default function AvatarModal() {
                 height: 200,
                 border: "3px solid #0581e6",
               }}
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU"
+              src={link}
             />
           </Badge>
           <Typography
@@ -67,7 +72,7 @@ export default function AvatarModal() {
               fontSize: "1.2rem",
             }}
           >
-            Bùi Thanh Duy
+            {title}
           </Typography>
         </div>
       )}

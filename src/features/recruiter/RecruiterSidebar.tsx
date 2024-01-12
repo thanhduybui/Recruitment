@@ -13,6 +13,7 @@ const {
   RECRUITER_CHANGE_AVATAR,
   RECRUITER_JOB,
   RECRUITER_PROFILE,
+  RECRUITER_PAPER,
 } = recruiterTabIndex;
 
 export default function RecruiterSidebar() {
@@ -51,6 +52,12 @@ export default function RecruiterSidebar() {
         <SideBarItem
           textContent="Việc đã đăng tuyển"
           tabIndex={RECRUITER_JOB}
+          icon={<NewspaperIcon sx={{ color: "#0572cc" }} />}
+          isRecruiter
+        ></SideBarItem>
+        <SideBarItem
+          textContent="Giấy xác nhận"
+          tabIndex={RECRUITER_PAPER}
           icon={<NewspaperIcon sx={{ color: "#0572cc" }} />}
           isRecruiter
         ></SideBarItem>

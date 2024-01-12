@@ -3,8 +3,8 @@ import {
   CvProfile,
   Profile,
   SideBar,
-  UserAvatar,
 } from "@features/candidate/setting";
+import { AppAvatar } from "@components/ui";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { TabIndex } from "@data/constants";
@@ -21,7 +21,7 @@ export default function UserSetting() {
 
   const sidebar = (
     <>
-      <UserAvatar></UserAvatar>
+      <AppAvatar></AppAvatar>
       <SideBar></SideBar>
     </>
   );
