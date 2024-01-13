@@ -51,3 +51,16 @@ export type JobDetailType = {
   workTime: string;
   workLocation: string;
 };
+
+export type CandidateJob = {
+  id?: string;
+  title?: string;
+  companyName?: string;
+  companyLogo?: string;
+  location?: string;
+  salaryRange?: string;
+  deadline?: number;
+  isFavorite?: boolean;
+  isHot?: boolean;
+  status?: string;
+};

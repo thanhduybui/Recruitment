@@ -7,6 +7,7 @@ import recruiterSidebarReducer from "./recruiterSidebar.ts";
 import registerEmailReducer from "./register.ts";
 import jobDetailReducer from "./jobDetail.ts";
 import changeCompanyAvatarReducer from "./changeCompanyAvatar.ts";
+import jobFilterReducer from "./filterOption.ts";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
@@ -20,6 +21,7 @@ export const store = configureStore({
     registerEmail: registerEmailReducer,
     jobDetail: jobDetailReducer,
     changeCompanyAvatar: changeCompanyAvatarReducer,
+    jobFilter: jobFilterReducer,
   },
 });
 
