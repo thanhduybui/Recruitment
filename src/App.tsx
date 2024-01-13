@@ -10,8 +10,8 @@ import {
   CompanyDetailPage,
 } from "@pages";
 import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
-import { Root, AdminRoot } from "@components/layouts";
-import { NotFoundPage, ProtectedRoute } from "@components/auth";
+import { Root } from "@components/layouts";
+import { ErrorBoundary, ProtectedRoute } from "@components/auth";
 import {
   RecruiterManagementPage,
   EmployerRegisterPage,
@@ -29,30 +29,38 @@ import {
   positionLoader,
   recruiterInfoLoader,
 } from "@services";
+import tokenLoader from "@services/tokenLoader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
-      <Route path="/" element={<Root />} errorElement={<NotFoundPage />}>
-        <Route path="home" element={<Home />} />
-        <Route
-          path="find-job"
-          element={<Job />}
-          id="findJob"
-          loader={findJobPageLoader}
-        />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="confirm-account" element={<ConfirmPage />} />
-        <Route element={<ProtectedRoute allowRole="CANDIDATE" />}>
-          <Route path="setting" element={<UserSetting />} />
-        </Route>
-        <Route path="job-detail" element={<JobDetail />} />
-        <Route path="company" element={<CompanyPage />} />
-        <Route path="company/:id" element={<CompanyDetailPage />} />
-      </Route>
+    <Route
+      path="/"
+      element={<Root />}
+      id="root"
+      loader={tokenLoader}
+      errorElement={<ErrorBoundary />}
+    >
+      {/* general routes */}
+      <Route path="" element={<Home />} index />
+      <Route
+        path="find-job"
+        element={<Job />}
+        id="findJob"
+        loader={findJobPageLoader}
+      />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="confirm-account" element={<ConfirmPage />} />
 
-      <Route path="/recruiter" element={<Root />}>
+      <Route path="job-detail" element={<JobDetail />} />
+      <Route path="company" element={<CompanyPage />} />
+      <Route path="company/:id" element={<CompanyDetailPage />} />
+      {/* candidate routes */}
+      <Route element={<ProtectedRoute allowRole="CANDIDATE" />}>
+        <Route path="setting" element={<UserSetting />} />
+      </Route>
+      {/*recruiter routes  */}
+      <Route path="/recruiter">
         <Route
           path="register"
           element={<EmployerRegisterPage />}
@@ -69,8 +77,8 @@ const router = createBrowserRouter(
           <Route path="job-application/:id" element={<JobApplicationPage />} />
         </Route>
       </Route>
-
-      <Route path="/admin" element={<AdminRoot />}>
+      {/* admin routes */}
+      <Route path="/admin" element={<Root />}>
         <Route element={<ProtectedRoute allowRole="ADMIN" />}>
           <Route path="" element={<AdminDashboard />} />
           <Route path="jobs" element={<AdminJob />} />

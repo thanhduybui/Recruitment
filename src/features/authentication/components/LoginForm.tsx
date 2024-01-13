@@ -58,8 +58,14 @@ export default function LoginForm() {
 
       if (resData.status === "success") {
         Cookies.set("access_token", resData.data.access_token);
+        Cookies.remove("email");
+
+        const expiration = new Date();
+        expiration.setHours(expiration.getHours() + 24);
+        Cookies.set("expiration", expiration.toISOString());
+
         dispatch(login());
-        navigate("/home", {
+        navigate("/", {
           state: { from: "/login", message: resData.message },
         });
       } else {

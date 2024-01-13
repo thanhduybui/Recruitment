@@ -2,7 +2,10 @@ import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
 import { FileDropZone } from "@components/form/File";
 
-export default function UserModalAvatar() {
+type UserModalAvatarProps = {
+  image?: string;
+};
+export default function UserModalAvatar({ image }: UserModalAvatarProps) {
   return (
     <div className="flex items-stretch px-2 pb-10 gap-4">
       <FileDropZone></FileDropZone>
@@ -11,7 +14,7 @@ export default function UserModalAvatar() {
           <Avatar
             alt="Travis Howard"
             sx={{ width: 100, height: 100, border: "4px solid #0581e6" }}
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU"
+            src={image}
           />
         </div>
         <Button color="primary" variant="contained" size="small">
