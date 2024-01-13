@@ -1,9 +1,10 @@
 import JobCard from "./JobCard";
 import { useEffect, useState } from "react";
 import { RootState } from "@store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AxiosRequestConfig } from "axios";
 import axios from "axios";
+import { setTotalFoundJobs } from "@store/totalFoundJobs";
 
 type CandidateJob = {
   id?: string;
@@ -21,6 +22,7 @@ type CandidateJob = {
 export default function JobCardContainer() {
   const jobFilter = useSelector((state: RootState) => state.jobFilter);
   const [jobs, setJobs] = useState<CandidateJob[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const requestConfig: AxiosRequestConfig = {
@@ -32,13 +34,15 @@ export default function JobCardContainer() {
     };
     axios(requestConfig)
       .then((res) => {
-        console.log(res.data.data.jobs.listData);
+        console.log(res.data.data.jobs);
         setJobs(res.data.data.jobs.listData);
+        dispatch(setTotalFoundJobs(res.data.data.jobs.totalItems));
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [jobFilter]);
+  }, [jobFilter, dispatch]);
+
   return (
     <div className="transiton duration-75 overflow-y-auto flex flex-col gap-3 scrollbar-hidden bg-white">
       {jobs?.map((job) => (

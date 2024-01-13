@@ -7,9 +7,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CompanyLogo } from "@components/ui";
 import { CandidateJob } from "@data/interface";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
+import { toast } from "react-toastify";
+import { toastTifyOptions } from "@utils/toastifyUtils";
 
 export default function JobCard(props: CandidateJob) {
   const [onHover, setOnHover] = useState(false);
+  const auth = useSelector((state: RootState) => state.auth);
 
   const onMouseOverHandler = () => {
     setOnHover(true);
@@ -17,6 +22,17 @@ export default function JobCard(props: CandidateJob) {
 
   const onMouseOutHandler = () => {
     setOnHover(false);
+  };
+
+  const saveFavoriteJobHandler = () => {
+    if (!auth.isAuthenticated) {
+      toast.warning(
+        "Bạn cần đăng nhập để thực hiện chức năng này",
+        toastTifyOptions
+      );
+    } else {
+      toast.success("Chức năng này đang được phát triển", toastTifyOptions);
+    }
   };
 
   return (
@@ -134,7 +150,11 @@ export default function JobCard(props: CandidateJob) {
             </Button>
           </Link>
           <Tooltip title="Lưu tin" placement="top">
-            <IconButton sx={{ borderRadius: "8px" }}>
+            <IconButton
+              sx={{ borderRadius: "8px" }}
+              itemID={props.id}
+              onClick={saveFavoriteJobHandler}
+            >
               {props.isFavorite && <FavoriteRoundedIcon color="primary" />}
               {!props.isFavorite && <FavoriteBorderIcon color="primary" />}
             </IconButton>

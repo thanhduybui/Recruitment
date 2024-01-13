@@ -29,6 +29,7 @@ import api from "@utils/axios";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { closeModal } from "@store/modal";
+import { editor_key } from "@config/key";
 
 export default function EditJobModal() {
   const data = useRouteLoaderData("recruiterInfo");
@@ -228,7 +229,7 @@ export default function EditJobModal() {
               <TextHeading title="Mô tả công việc" borderStart small />
               <div className="mt-2">
                 <Editor
-                  apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
+                  apiKey={editor_key}
                   onInit={(evt, editor) => (descriptionRef.current = editor)}
                   initialValue={jobs?.description}
                   init={{
@@ -266,7 +267,7 @@ export default function EditJobModal() {
               <div className="mt-2">
                 <Editor
                   initialValue={jobs?.requirement}
-                  apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
+                  apiKey={editor_key}
                   onInit={(evt, editor) => (requirementRef.current = editor)}
                   init={{
                     menubar: false,
@@ -303,7 +304,7 @@ export default function EditJobModal() {
               <div className="mt-2">
                 <Editor
                   initialValue={jobs?.benefit}
-                  apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
+                  apiKey={editor_key}
                   onInit={(evt, editor) => (benefitRef.current = editor)}
                   init={{
                     menubar: false,
