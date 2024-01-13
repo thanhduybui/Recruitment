@@ -1,5 +1,6 @@
 type CompanyLogoProps = {
   sm?: boolean;
+  src?: string;
 };
 
 export default function CompanyLogo(props: CompanyLogoProps) {
@@ -10,7 +11,7 @@ export default function CompanyLogo(props: CompanyLogoProps) {
       }`}
     >
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/800px-FPT_logo_2010.svg.png"
+        src={props.src}
         alt="Ảnh công ty"
         className="max-w-full max-h-full"
       />

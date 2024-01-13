@@ -6,17 +6,9 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CompanyLogo } from "@components/ui";
+import { CandidateJob } from "@data/interface";
 
-type JobCardProps = {
-  jobTitle?: string;
-  companyName?: string;
-  location?: string;
-  salary?: string;
-  deadline?: string;
-  favorite?: boolean;
-};
-
-export default function JobCard(props: JobCardProps) {
+export default function JobCard(props: CandidateJob) {
   const [onHover, setOnHover] = useState(false);
 
   const onMouseOverHandler = () => {
@@ -33,10 +25,10 @@ export default function JobCard(props: JobCardProps) {
       onMouseOut={onMouseOutHandler}
       className="job-card w-full flex gap-4 py-3 px-4 bg-primary-50 border hover:cursor-pointer hover:border-primary-400 border-gray-100 rounded-md"
     >
-      <CompanyLogo />
+      <CompanyLogo src={props.companyLogo} />
       <div className="text-gray-500 font-medium flex flex-col gap-6 w-1/2">
         <div>
-          <Tooltip title={props.jobTitle} placement="top">
+          <Tooltip title={props.title} placement="top">
             <Typography
               variant="body1"
               component="p"
@@ -47,11 +39,11 @@ export default function JobCard(props: JobCardProps) {
                 color: onHover ? "#0581e6" : "#444444",
               }}
             >
-              {props.jobTitle}
+              {props.title}
             </Typography>
           </Tooltip>
 
-          <Tooltip title="Công ty Cổ phần Công nghệ FPT" placement="top">
+          <Tooltip title={props.companyName} placement="top">
             <Typography
               variant="subtitle2"
               component="span"
@@ -65,7 +57,7 @@ export default function JobCard(props: JobCardProps) {
           </Tooltip>
         </div>
         <div className="flex gap-1">
-          <Tooltip title="Hồ Chí Minh" placement="bottom">
+          <Tooltip title={props.location} placement="bottom">
             <Typography
               variant="subtitle2"
               component="span"
@@ -82,7 +74,16 @@ export default function JobCard(props: JobCardProps) {
             </Typography>
           </Tooltip>
 
-          <Tooltip title="Còn 5 ngày để ứng tuyển" placement="bottom">
+          <Tooltip
+            title={`${
+              props.deadline === null
+                ? "Còn hạn ứng tuyển"
+                : props.deadline && props.deadline < 0
+                ? "Hết hạn ứng tuyển"
+                : `Còn ${props.deadline} ngày để ứng tuyển`
+            }`}
+            placement="bottom"
+          >
             <Typography
               variant="subtitle2"
               component="span"
@@ -95,7 +96,13 @@ export default function JobCard(props: JobCardProps) {
                 fontWeight: 300,
               }}
             >
-              Còn {props.deadline} ngày để ứng tuyển
+              {`${
+                props.deadline === null
+                  ? "Còn hạn ứng tuyển"
+                  : props.deadline && props.deadline < 0
+                  ? "Hết hạn ứng tuyển"
+                  : `Còn ${props.deadline} ngày để ứng tuyển`
+              }`}
             </Typography>
           </Tooltip>
         </div>
@@ -111,7 +118,7 @@ export default function JobCard(props: JobCardProps) {
               fontWeight: 600,
             }}
           >
-            {props.salary}
+            {props.salaryRange}
           </Typography>
         </div>
 
@@ -128,8 +135,8 @@ export default function JobCard(props: JobCardProps) {
           </Link>
           <Tooltip title="Lưu tin" placement="top">
             <IconButton sx={{ borderRadius: "8px" }}>
-              {props.favorite && <FavoriteRoundedIcon color="primary" />}
-              {!props.favorite && <FavoriteBorderIcon color="primary" />}
+              {props.isFavorite && <FavoriteRoundedIcon color="primary" />}
+              {!props.isFavorite && <FavoriteBorderIcon color="primary" />}
             </IconButton>
           </Tooltip>
         </div>
