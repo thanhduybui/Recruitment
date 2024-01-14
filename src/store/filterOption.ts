@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface FilterState {
+export interface FilterState {
   searchKeyword: string;
   location: string;
   position: string;

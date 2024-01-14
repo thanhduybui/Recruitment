@@ -6,3 +6,4 @@ export { default as JobCardContainer } from "./components/card/JobCardContainer"
 export { default as FindJobMainSection } from "./components/FindJobMainSection";
 export { default as TimeOrder } from "./components/TimeOrder";
 export { default as convertLocation } from "./services/convertLocation";
+export { default as requestJobConfig } from "./services/fetchJobConfig";

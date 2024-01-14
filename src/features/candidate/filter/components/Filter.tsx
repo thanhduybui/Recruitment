@@ -12,8 +12,8 @@ export default function Filter() {
   const onOpenFilterHandler = (value: boolean) => {
     setAdvancedFilterOpen(value);
   };
-  const jobNumbers = useSelector(
-    (state: RootState) => state.totalFoundJobs.total
+  const paginationData = useSelector(
+    (state: RootState) => state.paginationData.paginationData
   );
 
   return (
@@ -24,7 +24,7 @@ export default function Filter() {
           <Typography variant="subtitle2" component="span">
             Tìm thấy{" "}
             <span className="text-primary-600 font-bold text-lg">
-              {jobNumbers}
+              {paginationData.totalItems}
             </span>{" "}
             việc làm phù hợp với yêu cầu của bạn
           </Typography>

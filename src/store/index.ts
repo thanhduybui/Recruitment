@@ -8,7 +8,7 @@ import registerEmailReducer from "./register.ts";
 import jobDetailReducer from "./jobDetail.ts";
 import changeCompanyAvatarReducer from "./changeCompanyAvatar.ts";
 import jobFilterReducer from "./filterOption.ts";
-import totalFoundJobsReducer from "./totalFoundJobs.ts";
+import paginationDataReducer from "./paginationData.ts";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
@@ -23,7 +23,7 @@ export const store = configureStore({
     jobDetail: jobDetailReducer,
     changeCompanyAvatar: changeCompanyAvatarReducer,
     jobFilter: jobFilterReducer,
-    totalFoundJobs: totalFoundJobsReducer,
+    paginationData: paginationDataReducer,
   },
 });
 
