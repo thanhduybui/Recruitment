@@ -3,7 +3,7 @@ import { IconButton, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CompanyLogo } from "@components/ui";
 import { CandidateJob } from "@data/interface";
@@ -11,10 +11,14 @@ import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { toast } from "react-toastify";
 import { toastTifyOptions } from "@utils/toastifyUtils";
+import { convertLocation } from "@features/job";
+import FlashOnIcon from "@mui/icons-material/FlashOn";
 
 export default function JobCard(props: CandidateJob) {
   const [onHover, setOnHover] = useState(false);
   const auth = useSelector((state: RootState) => state.auth);
+
+  const [location, setLocation] = useState("");
 
   const onMouseOverHandler = () => {
     setOnHover(true);
@@ -35,12 +39,33 @@ export default function JobCard(props: CandidateJob) {
     }
   };
 
+  useEffect(() => {
+    const fetchLocation = async () => {
+      const data = await convertLocation(props.location || "");
+      setLocation(data);
+    };
+    fetchLocation();
+  }, [props.location]);
+
   return (
     <div
       onMouseOver={onMouseOverHandler}
       onMouseOut={onMouseOutHandler}
-      className="job-card w-full flex gap-4 py-3 px-4 bg-primary-50 border hover:cursor-pointer hover:border-primary-400 border-gray-100 rounded-md"
+      className="relative job-card w-full flex gap-4 py-3 px-4 bg-primary-50 border hover:cursor-pointer hover:border-primary-400 border-gray-100 rounded-md"
     >
+      {props.isHot && (
+        <Tooltip title="Việc làm gấp" placement="right">
+          <FlashOnIcon
+            sx={{
+              position: "absolute",
+              top: "-0.5rem",
+              left: "1rem",
+              color: "#fab005",
+            }}
+          />
+        </Tooltip>
+      )}
+
       <CompanyLogo src={props.companyLogo} />
       <div className="text-gray-500 font-medium flex flex-col gap-6 w-1/2">
         <div>
@@ -73,7 +98,7 @@ export default function JobCard(props: CandidateJob) {
           </Tooltip>
         </div>
         <div className="flex gap-1">
-          <Tooltip title={props.location} placement="bottom">
+          <Tooltip title={location} placement="bottom">
             <Typography
               variant="subtitle2"
               component="span"
@@ -86,7 +111,7 @@ export default function JobCard(props: CandidateJob) {
                 fontWeight: 300,
               }}
             >
-              {props.location}
+              {location}
             </Typography>
           </Tooltip>
 

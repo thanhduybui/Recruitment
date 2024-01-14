@@ -5,3 +5,4 @@ export { default as RecommendJobDetail } from "./components/card/RecommendJobDet
 export { default as JobCardContainer } from "./components/card/JobCardContainer";
 export { default as FindJobMainSection } from "./components/FindJobMainSection";
 export { default as TimeOrder } from "./components/TimeOrder";
+export { default as convertLocation } from "./services/convertLocation";

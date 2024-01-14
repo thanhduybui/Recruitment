@@ -34,7 +34,6 @@ export default function JobCardContainer() {
     };
     axios(requestConfig)
       .then((res) => {
-        console.log(res.data.data.jobs);
         setJobs(res.data.data.jobs.listData);
         dispatch(setTotalFoundJobs(res.data.data.jobs.totalItems));
       })
@@ -44,7 +43,7 @@ export default function JobCardContainer() {
   }, [jobFilter, dispatch]);
 
   return (
-    <div className="transiton duration-75 overflow-y-auto flex flex-col gap-3 scrollbar-hidden bg-white">
+    <div className="transiton duration-75 overflow-y-auto flex flex-col gap-3 scrollbar-hidden bg-white py-2">
       {jobs?.map((job) => (
         <JobCard
           key={job.id}

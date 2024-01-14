@@ -9,7 +9,7 @@ interface FilterState {
   field: string;
   major: string;
   workMode: string;
-  isHot: boolean;
+  isHot: boolean | null;
 }
 
 const initialState: FilterState = {
@@ -21,7 +21,7 @@ const initialState: FilterState = {
   field: "0",
   major: "0",
   workMode: "0",
-  isHot: false,
+  isHot: null,
 };
 
 const jobFilterSlice = createSlice({
