@@ -1,5 +1,5 @@
 import { TextHeading } from "@components/heading";
-import { LogoInformation } from "@features/details";
+import { LogoInformation } from "@features/jobDetails";
 import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import PlaceIcon from "@mui/icons-material/Place";

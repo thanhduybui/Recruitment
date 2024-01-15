@@ -1,4 +1,4 @@
-import { LogoInformation } from "@features/details";
+import { LogoInformation } from "@features/jobDetails";
 import { CompanyLogo } from "@components/ui";
 import { Typography } from "@mui/material";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";

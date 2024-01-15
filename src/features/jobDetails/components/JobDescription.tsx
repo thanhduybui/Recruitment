@@ -1,6 +1,6 @@
 import { TextHeading } from "@components/heading";
-import { InformationSection } from "@features/details";
-import { HTMLContent } from "@features/details";
+import { InformationSection } from "@features/jobDetails";
+import { HTMLContent } from "@features/jobDetails";
 
 export default function JobDescription() {
   return (

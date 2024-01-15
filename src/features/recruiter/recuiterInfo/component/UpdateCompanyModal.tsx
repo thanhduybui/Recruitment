@@ -19,6 +19,8 @@ import api from "@utils/axios";
 import { getAccessToken } from "@utils/authUtils";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { toastTifyOptions } from "@utils/toastifyUtils";
+import { editor_key } from "@config/key";
 
 type UpdateCompanyModalProps = {
   companyInfo: CompanyInfo;
@@ -58,16 +60,7 @@ export default function UpdateCompanyModal({
       );
 
       dispatch(closeModal({ modalName: modalName.UPDATE_COMPANY_MODAL }));
-      toast.success(res.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.success(res.data.message, toastTifyOptions);
     } catch (error) {
       const typedError = error as AxiosError;
       const data = typedError.response?.data as {
@@ -75,16 +68,7 @@ export default function UpdateCompanyModal({
         status: number;
       };
       const errorMesage = data.message || "Lỗi cập nhật";
-      toast.error(errorMesage, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error(errorMesage, toastTifyOptions);
     }
   };
 
@@ -166,7 +150,7 @@ export default function UpdateCompanyModal({
               <FormControlLabel label="Mô tả chi tiết" bold />
               <Editor
                 initialValue={companyInfo.description}
-                apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
+                apiKey={editor_key}
                 onInit={(evt, editor) => (editorRef.current = editor)}
                 init={{
                   menubar: false,

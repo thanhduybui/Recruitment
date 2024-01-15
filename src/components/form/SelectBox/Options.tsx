@@ -71,7 +71,7 @@ export default function Options({
             id={option.id}
             onClick={onClickHandler}
           >
-            {option.name}
+            {option.name} + {option.id}
           </li>
         ))
       ) : (

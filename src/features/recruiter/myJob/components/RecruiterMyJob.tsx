@@ -12,6 +12,7 @@ import { useCompanyJob } from "@hooks";
 import { useRouteLoaderData } from "react-router-dom";
 import { CompanyInfo } from "@data/interface";
 import { ToastContainer } from "react-toastify";
+import { toastContainerOptions } from "@utils/toastifyUtils";
 
 function a11yProps(index: number) {
   return {
@@ -35,18 +36,7 @@ export default function RecruiterMyJob() {
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+      <ToastContainer {...toastContainerOptions} />
       <MainSectionContainer heading="Quản lý việc làm của bạn">
         <DeleteModal></DeleteModal>
         {isEditModalOpen && <EditJobModal></EditJobModal>}

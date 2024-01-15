@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import HtmlContent from "@features/details/components/HTMLContent";
+import HtmlContent from "@features/jobDetails/components/HTMLContent";
 
 type LongDescriptionBoxProps = {
   content?: React.ReactNode;

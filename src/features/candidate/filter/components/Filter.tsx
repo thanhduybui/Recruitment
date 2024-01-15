@@ -4,12 +4,17 @@ import Button from "@mui/material/Button";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import FilterAltOffOutlinedIcon from "@mui/icons-material/FilterAltOffOutlined";
 import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
 
 export default function Filter() {
   const [advancedFilterOpen, setAdvancedFilterOpen] = useState(false);
   const onOpenFilterHandler = (value: boolean) => {
     setAdvancedFilterOpen(value);
   };
+  const paginationData = useSelector(
+    (state: RootState) => state.paginationData.paginationData
+  );
 
   return (
     <div className="bg-white p-4 rounded-md">
@@ -18,8 +23,10 @@ export default function Filter() {
         <div className="col-span-4">
           <Typography variant="subtitle2" component="span">
             Tìm thấy{" "}
-            <span className="text-primary-600 font-bold text-lg">50</span> việc
-            làm phù hợp với yêu cầu của bạn
+            <span className="text-primary-600 font-bold text-lg">
+              {paginationData.totalItems}
+            </span>{" "}
+            việc làm phù hợp với yêu cầu của bạn
           </Typography>
         </div>
         <div className="col-span-2 col-end-11 justify-self-end">

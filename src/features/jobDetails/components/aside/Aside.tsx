@@ -1,5 +1,9 @@
-import { AsideChildContainer, GeneralInfo, KeyInfo } from "@features/details";
-import { CompanyShortProfile } from "@features/details";
+import {
+  AsideChildContainer,
+  GeneralInfo,
+  KeyInfo,
+} from "@features/jobDetails";
+import { CompanyShortProfile } from "@features/jobDetails";
 
 export default function Aside() {
   return (

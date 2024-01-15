@@ -19,6 +19,8 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import { AxiosError } from "axios";
 import { FormControlLabel, Switch } from "@mui/material";
+import { toastContainerOptions, toastTifyOptions } from "@utils/toastifyUtils";
+import { editor_key } from "@config/key";
 
 export default function AddJobMain() {
   const descriptionRef = useRef<TinyMCEEditor | null>(null);
@@ -79,55 +81,24 @@ export default function AddJobMain() {
       isHot: isHot,
     };
 
-    console.log(jobData);
-
     try {
       const res = await api.post("/jobs", jobData, {
         headers: { Authorization: `Bearer ${getAccessToken()}` },
       });
-      toast.success(res.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.success(res.data.message, toastTifyOptions);
     } catch (error) {
       const typedError = error as AxiosError;
       const data = typedError.response?.data as {
         message: string;
         status: number;
       };
-      toast.error(data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error(data.message, toastTifyOptions);
     }
   };
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+      <ToastContainer {...toastContainerOptions} />
       <MainSectionContainer heading="Tạo bài tuyển dụng mới">
         <form className="p-4">
           <TextHeading title="Thông tin chung" borderStart small />
@@ -212,7 +183,7 @@ export default function AddJobMain() {
             <TextHeading title="Mô tả công việc" borderStart small />
             <div className="mt-2">
               <Editor
-                apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
+                apiKey={editor_key}
                 onInit={(evt, editor) => (descriptionRef.current = editor)}
                 init={{
                   menubar: false,
@@ -248,7 +219,7 @@ export default function AddJobMain() {
             <TextHeading title="Yêu cầu công việc" borderStart small />
             <div className="mt-2">
               <Editor
-                apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
+                apiKey={editor_key}
                 onInit={(evt, editor) => (requirementRef.current = editor)}
                 init={{
                   menubar: false,
@@ -284,7 +255,7 @@ export default function AddJobMain() {
             <TextHeading title="Đãi ngộ" borderStart small />
             <div className="mt-2">
               <Editor
-                apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
+                apiKey={editor_key}
                 onInit={(evt, editor) => (benefitRef.current = editor)}
                 init={{
                   menubar: false,
