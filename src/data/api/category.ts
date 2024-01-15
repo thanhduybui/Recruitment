@@ -16,7 +16,6 @@ export const fields = [
 ];
 
 export const majors: Option[] = [
-  { id: "0", name: "Tất cả ngành nghề" },
   { id: "1", name: "Sales" },
   { id: "2", name: "Thiết kế đồ họa" },
   { id: "3", name: "Lập trình di động" },
@@ -36,11 +35,7 @@ export const positions: Option[] = [
   { id: "5", name: "Khác" },
 ];
 
-export const postTypes: Option[] = [
-  { id: "0", name: "Tất cả loại tin" },
-  { id: "1", name: "Vị trí tuyển dụng gấp" },
-  { id: "2", name: "Vị trí hot nhất" },
-];
+export const postTypes: Option[] = [{ id: "1", name: "Vị trí tuyển dụng gấp" }];
 
 export const skills: Option[] = [
   { id: "0", name: "Tất cả kỹ năng" },

@@ -20,10 +20,20 @@ type SelectProps = {
 export default function NormalSelect(props: SelectProps) {
   const [open, setOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+  let choseOption: Option | undefined;
+
+  if (props.initValue) {
+    if (props.initValue.id === "0") {
+      choseOption = props.initValue;
+    }
+    choseOption = props.options.find(
+      (option) => option.id === props.initValue?.id
+    );
+  }
 
   const [selected, setSelected] = useState({
-    id: props.initValue?.id || "",
-    name: props.initValue?.name || "",
+    id: choseOption?.id || "",
+    name: choseOption?.name || "",
   });
 
   const handleClickOutside = (e: MouseEvent) => {

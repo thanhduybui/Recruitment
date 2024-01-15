@@ -20,10 +20,17 @@ type SearchSelectProps = {
 export default function SearchSelect(props: SearchSelectProps) {
   const [open, setOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+  let choseOption: Option | undefined;
+
+  if (props.initValue) {
+    choseOption = props.options.find(
+      (option) => option.id === props.initValue?.id
+    );
+  }
 
   const [selected, setSelected] = useState({
-    id: props.initValue?.id,
-    name: props.initValue?.name,
+    id: choseOption?.id,
+    name: choseOption?.name,
   });
 
   const handleClickOutside = (e: MouseEvent) => {

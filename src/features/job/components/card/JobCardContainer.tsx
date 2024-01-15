@@ -58,6 +58,8 @@ export default function JobCardContainer() {
     }
   };
 
+  console.log(jobs);
+
   return (
     <>
       <div className="transiton duration-75 overflow-y-auto flex flex-col gap-3 scrollbar-hidden bg-white py-2">

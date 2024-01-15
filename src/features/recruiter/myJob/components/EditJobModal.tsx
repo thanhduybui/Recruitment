@@ -30,6 +30,10 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { closeModal } from "@store/modal";
 import { editor_key } from "@config/key";
+import { toastTifyOptions } from "@utils/toastifyUtils";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 export default function EditJobModal() {
   const data = useRouteLoaderData("recruiterInfo");
@@ -80,7 +84,7 @@ export default function EditJobModal() {
       requirement: requirementRef.current?.getContent(),
       benefit: benefitRef.current?.getContent(),
       isHot: isHot,
-      deadline: deadline?.format("YYYY-MM-DDTHH:mm:ss"),
+      deadline: deadline?.format("YYYY-MM-DDTHH:mm"),
     };
     try {
       const res = await api.put(`jobs/${jobs?.id}`, updateJob, {
@@ -88,16 +92,7 @@ export default function EditJobModal() {
           Authorization: `Bearer ${getAccessToken()}`,
         },
       });
-      toast.success(res.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.success(res.data.message, toastTifyOptions);
       dispatch(closeModal({ modalName: modalName.EDIT_JOB_MODAL }));
     } catch (error) {
       const typedError = error as AxiosError;
@@ -105,16 +100,7 @@ export default function EditJobModal() {
         message: string;
         status: number;
       };
-      toast.error(data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error(data.message, toastTifyOptions);
     }
   };
 
@@ -164,7 +150,7 @@ export default function EditJobModal() {
                 <CustomFormControlLabel label="Hạn ứng tuyển" />
                 <DesktopDateTimePicker
                   defaultValue={
-                    jobs?.deadline !== null ? dayjs(jobs?.deadline) : null
+                    jobs?.deadline !== null ? dayjs.utc(jobs?.deadline) : null
                   }
                   onChange={(value) => {
                     setDeadline(value);

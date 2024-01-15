@@ -1,6 +1,6 @@
 import { TextHeading } from "@components/heading";
 import { CompanyInfoRow, InfoContainer, UpdateCompanyModal } from "..";
-import { HTMLContent } from "@features/details";
+import { HTMLContent } from "@features/jobDetails";
 import Button from "@mui/material/Button";
 import { useRouteLoaderData } from "react-router-dom";
 import { CompanyInfo } from "@data/interface";

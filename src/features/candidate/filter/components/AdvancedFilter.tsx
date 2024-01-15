@@ -23,7 +23,7 @@ export default function AdvancedFilter() {
           small
           bold
           options={fields}
-          initValue={{ id: "0", name: "Chọn lĩnh vực" }}
+          initValue={{ id: "0", name: "Tất cả lĩnh vực" }}
           startIcon={
             <BusinessOutlinedIcon
               sx={{ width: "20px", height: "20px" }}
@@ -37,7 +37,7 @@ export default function AdvancedFilter() {
           options={majors}
           small
           bold
-          initValue={{ id: "0", name: "Chọn ngành nghề" }}
+          initValue={{ id: "0", name: "Tất cả ngành nghề" }}
           startIcon={
             <AppsOutlinedIcon
               sx={{ width: "20px", height: "20px" }}
@@ -51,7 +51,7 @@ export default function AdvancedFilter() {
           options={positions}
           small
           bold
-          initValue={{ id: "0", name: "Chọn chức vụ" }}
+          initValue={{ id: "0", name: "Tất cả chức vụ" }}
           startIcon={
             <ChairAltOutlinedIcon
               sx={{ width: "20px", height: "20px" }}
@@ -65,7 +65,7 @@ export default function AdvancedFilter() {
           options={workModes}
           small
           bold
-          initValue={{ id: "0", name: "Chọn hình thức" }}
+          initValue={{ id: "0", name: "Tất cả hình thức" }}
           startIcon={
             <CasesOutlinedIcon
               sx={{ width: "20px", height: "20px" }}
@@ -80,7 +80,7 @@ export default function AdvancedFilter() {
           options={postTypes}
           small
           bold
-          initValue={{ id: "0", name: "Khác" }}
+          initValue={{ id: "0", name: "Tất cả loại tin" }}
           startIcon={
             <StarBorderOutlinedIcon
               sx={{ width: "20px", height: "20px" }}

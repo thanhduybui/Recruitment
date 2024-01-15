@@ -118,7 +118,7 @@ export default function JobCard(props: CandidateJob) {
           <Tooltip
             title={`${
               props.deadline === null
-                ? "Còn hạn ứng tuyển"
+                ? `Đang tuyển`
                 : props.deadline && props.deadline < 0
                 ? "Hết hạn ứng tuyển"
                 : `Còn ${props.deadline} ngày để ứng tuyển`
@@ -139,7 +139,7 @@ export default function JobCard(props: CandidateJob) {
             >
               {`${
                 props.deadline === null
-                  ? "Còn hạn ứng tuyển"
+                  ? `Đang tuyển`
                   : props.deadline && props.deadline < 0
                   ? "Hết hạn ứng tuyển"
                   : `Còn ${props.deadline} ngày để ứng tuyển`

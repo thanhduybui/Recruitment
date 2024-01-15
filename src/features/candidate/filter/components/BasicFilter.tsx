@@ -8,14 +8,24 @@ import { NormalSelect, SearchSelect } from "@components/form";
 import { useRouteLoaderData } from "react-router-dom";
 import { Option } from "@data/interface";
 import { useLocationAPI } from "@hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { setJobFilter } from "@store/filterOption";
+import { RootState } from "@store";
 
 export default function BasicFilter() {
   const data = useRouteLoaderData("findJob");
   const locations = useLocationAPI();
+  const dispatch = useDispatch();
+  const jobFilter = useSelector((state: RootState) => state.jobFilter);
 
   const { experienceRanges, salaryRanges } = data as {
     experienceRanges: Option[];
     salaryRanges: Option[];
+  };
+
+  const onSelectLocationHandler = (option: Option) => {
+    dispatch(setJobFilter({ ...jobFilter, location: option.id }));
+    console.log(jobFilter);
   };
 
   return (
@@ -24,11 +34,14 @@ export default function BasicFilter() {
         styles="col-span-3"
         placeholder="Tìm kiếm việc làm, công ty"
       />
+
       <div className="col-span-2">
         <SearchSelect
           bold
           options={locations}
-          initValue={{ id: "0", name: "Chọn địa điểm" }}
+          initValue={{ id: "0", name: "Tất cả địa điểm" }}
+          id="location"
+          onSelect={(option: Option) => onSelectLocationHandler(option)}
           startIcon={
             <LocationOnOutlinedIcon
               sx={{ width: "24px", height: "24px" }}
@@ -42,7 +55,7 @@ export default function BasicFilter() {
         <NormalSelect
           bold
           options={experienceRanges}
-          initValue={{ id: "0", name: "Chọn kinh nghiệm" }}
+          initValue={{ id: "0", name: "Tất cả kinh nghiệm" }}
           startIcon={
             <StarBorderOutlinedIcon
               sx={{ width: "24px", height: "24px" }}
@@ -56,7 +69,7 @@ export default function BasicFilter() {
         <NormalSelect
           bold
           options={salaryRanges}
-          initValue={{ id: "0", name: "Chọn mức lương" }}
+          initValue={{ id: "0", name: "Tất cả mức lương" }}
           startIcon={
             <AttachMoneyOutlinedIcon
               sx={{ width: "24px", height: "24px" }}
@@ -65,7 +78,6 @@ export default function BasicFilter() {
           }
         />
       </div>
-
       <Button
         color="primary"
         variant="contained"

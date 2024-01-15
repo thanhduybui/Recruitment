@@ -1,4 +1,4 @@
-import { LogoInformation } from "@features/details";
+import { LogoInformation } from "@features/jobDetails";
 import StarsRoundedIcon from "@mui/icons-material/StarsRounded";
 import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";

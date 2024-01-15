@@ -4,7 +4,7 @@ import {
   Buttons,
   JobDescription,
   JobDetailHeader,
-} from "@features/details";
+} from "@features/jobDetails";
 
 export default function JobDetail() {
   return (
