@@ -5,7 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CompanyLogo } from "@components/ui";
+import { CompanyLogo } from "@features/company";
 import { CandidateJob } from "@data/interface";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";

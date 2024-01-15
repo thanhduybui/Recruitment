@@ -1,5 +1,5 @@
 import { LogoInformation } from "@features/jobDetails";
-import { CompanyLogo } from "@components/ui";
+import { CompanyLogo } from "@features/company";
 import { Typography } from "@mui/material";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import FmdGoodRoundedIcon from "@mui/icons-material/FmdGoodRounded";
