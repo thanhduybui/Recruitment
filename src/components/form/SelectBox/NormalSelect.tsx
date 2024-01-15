@@ -4,6 +4,7 @@ import { CustomFormControlLabel } from "..";
 import { Option } from "@data/interface";
 import SelectedValue from "./SelectedValue";
 import Options from "./Options";
+import { handleOptionData } from "@services";
 
 type SelectProps = {
   startIcon?: React.ReactNode;
@@ -20,16 +21,10 @@ type SelectProps = {
 export default function NormalSelect(props: SelectProps) {
   const [open, setOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
-  let choseOption: Option | undefined;
-
-  if (props.initValue) {
-    if (props.initValue.id === "0") {
-      choseOption = props.initValue;
-    }
-    choseOption = props.options.find(
-      (option) => option.id === props.initValue?.id
-    );
-  }
+  const choseOption: Option | undefined = handleOptionData(
+    props.initValue,
+    props.options
+  );
 
   const [selected, setSelected] = useState({
     id: choseOption?.id || "",
