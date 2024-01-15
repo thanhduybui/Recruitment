@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default async function convertLocation(id: string) {
   let result = "";
-
   if (!id) return "Chưa xác định";
 
   try {

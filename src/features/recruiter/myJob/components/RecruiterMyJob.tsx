@@ -2,8 +2,8 @@ import { MainSectionContainer } from "@components/ui";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
+import { TabPanel, a11yProps } from "@components/tab";
 import { useState } from "react";
-import TabPanel from "./TabPanel";
 import { EditJobModal, RecruiterJobCard } from "..";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
@@ -13,13 +13,6 @@ import { useRouteLoaderData } from "react-router-dom";
 import { CompanyInfo } from "@data/interface";
 import { ToastContainer } from "react-toastify";
 import { toastContainerOptions } from "@utils/toastifyUtils";
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
 
 export default function RecruiterMyJob() {
   const isEditModalOpen = useSelector(

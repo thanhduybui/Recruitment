@@ -1,4 +1,4 @@
-import JobCard from "./JobCard";
+import { JobCard } from "@features/job";
 import { useEffect, useState } from "react";
 import { RootState } from "@store";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,19 +6,7 @@ import axios from "axios";
 import { setTotalFoundJobs } from "@store/paginationData";
 import { requestJobConfig } from "@features/job";
 import Pagination from "@mui/material/Pagination";
-
-type CandidateJob = {
-  id?: string;
-  title?: string;
-  companyImage?: string;
-  companyName?: string;
-  locationId?: string;
-  salaryRange?: string;
-  restAppliedDays?: number;
-  isFavorite?: boolean;
-  status?: string;
-  isHot?: boolean;
-};
+import { CandidateJob } from "@data/interface";
 
 export default function JobCardContainer() {
   const jobFilter = useSelector((state: RootState) => state.jobFilter);
@@ -27,6 +15,8 @@ export default function JobCardContainer() {
   const pagination = useSelector(
     (state: RootState) => state.paginationData.paginationData
   );
+
+  console.log(jobs);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,8 +48,6 @@ export default function JobCardContainer() {
     }
   };
 
-  console.log(jobs);
-
   return (
     <>
       <div className="transiton duration-75 overflow-y-auto flex flex-col gap-3 scrollbar-hidden bg-white py-2">
@@ -70,13 +58,14 @@ export default function JobCardContainer() {
             title={job.title}
             companyLogo={job.companyImage}
             companyName={job.companyName}
-            location={job.locationId}
+            locationId={job.locationId}
             salaryRange={job.salaryRange}
             deadline={job.restAppliedDays}
             status={job.status}
             isFavorite={false}
             isHot={job.isHot}
-          ></JobCard>
+            isSaved={false}
+          />
         ))}
       </div>
       <div className="py-20 flex items-center justify-center">
