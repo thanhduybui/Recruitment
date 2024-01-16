@@ -28,6 +28,14 @@ export default function BasicFilter() {
     console.log(jobFilter);
   };
 
+  const onSelectExpHandler = (option: Option) => {
+    dispatch(setJobFilter({ ...jobFilter, experienceRange: option.id }));
+  };
+
+  const onSalarySelectHandler = (option: Option) => {
+    dispatch(setJobFilter({ ...jobFilter, salaryRange: option.id }));
+  };
+
   return (
     <div className="grid grid-cols-10 gap-2 items-center py-4 bg-white rounded-b-md">
       <SearchInput
@@ -62,6 +70,7 @@ export default function BasicFilter() {
               color="primary"
             />
           }
+          onSelect={(option: Option) => onSelectExpHandler(option)}
         />
       </div>
 
@@ -70,6 +79,7 @@ export default function BasicFilter() {
           bold
           options={salaryRanges}
           initValue={{ id: "0", name: "Tất cả mức lương" }}
+          onSelect={(option: Option) => onSalarySelectHandler(option)}
           startIcon={
             <AttachMoneyOutlinedIcon
               sx={{ width: "24px", height: "24px" }}
