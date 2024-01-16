@@ -16,8 +16,6 @@ export default function JobCardContainer() {
     (state: RootState) => state.paginationData.paginationData
   );
 
-  console.log(jobs);
-
   useEffect(() => {
     const fetchData = async () => {
       try {

@@ -2,9 +2,9 @@ import { MainSectionContainer } from "@components/ui";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import { TabPanel, a11yProps } from "@components/tab";
+import { RecruiterPanelContent, TabPanel, a11yProps } from "@components/tab";
 import { useState } from "react";
-import { EditJobModal, RecruiterJobCard } from "..";
+import { EditJobModal } from "..";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { DeleteModal } from "@components/ui/modal";
@@ -21,7 +21,7 @@ export default function RecruiterMyJob() {
   const data = useRouteLoaderData("recruiterInfo");
   const { companyInfo } = data as { companyInfo: CompanyInfo };
   const [value, setValue] = useState(0);
-  const { jobs } = useCompanyJob(companyInfo.id + "", value);
+  const { jobs, totalPages } = useCompanyJob(companyInfo.id + "", value);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -62,19 +62,22 @@ export default function RecruiterMyJob() {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            {jobs.map((job) => (
-              <RecruiterJobCard key={job.id} {...job} />
-            ))}
+            <RecruiterPanelContent
+              jobs={jobs}
+              totalPages={totalPages}
+            ></RecruiterPanelContent>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            {jobs.map((job) => (
-              <RecruiterJobCard key={job.id} {...job} />
-            ))}
+            <RecruiterPanelContent
+              jobs={jobs}
+              totalPages={totalPages}
+            ></RecruiterPanelContent>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            {jobs.map((job) => (
-              <RecruiterJobCard key={job.id} {...job} />
-            ))}
+            <RecruiterPanelContent
+              jobs={jobs}
+              totalPages={totalPages}
+            ></RecruiterPanelContent>
           </TabPanel>
         </Box>
       </MainSectionContainer>
