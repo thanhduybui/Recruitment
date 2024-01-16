@@ -4,6 +4,7 @@ import { CustomFormControlLabel } from "..";
 import { Option } from "@data/interface";
 import Options from "./Options";
 import SelectedValue from "./SelectedValue";
+import { handleOptionData } from "@services";
 
 type SearchSelectProps = {
   startIcon?: React.ReactNode;
@@ -20,14 +21,10 @@ type SearchSelectProps = {
 export default function SearchSelect(props: SearchSelectProps) {
   const [open, setOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
-  let choseOption: Option | undefined;
-
-  if (props.initValue) {
-    choseOption = props.options.find(
-      (option) => option.id === props.initValue?.id
-    );
-  }
-
+  const choseOption: Option | undefined = handleOptionData(
+    props.initValue,
+    props.options
+  );
   const [selected, setSelected] = useState({
     id: choseOption?.id,
     name: choseOption?.name,

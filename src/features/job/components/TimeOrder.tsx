@@ -13,22 +13,10 @@ export default function TimeOrder() {
         defaultValue={1}
       >
         <FormControlLabel
-          value={1}
-          control={<Radio size="small" />}
-          label="Mặc định"
-          sx={{ fontSize: "12px" }}
-        />
-        <FormControlLabel
           control={<Radio size="small" />}
           label="Mới nhất"
-          value={2}
+          value={1}
           sx={{ fontSize: "12px" }}
-        />
-        <FormControlLabel
-          control={<Radio size="small" />}
-          label="Cũ nhất"
-          value={3}
-          sx={{ fontSize: "12spx" }}
         />
       </RadioGroup>
     </FormControl>

@@ -1,4 +1,4 @@
-import { AdminCard, AdminCardContainer } from "@components/ui/card";
+import { AdminCard, AdminCardContainer } from "@components/card";
 import { Container } from "@mui/material";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import { UserTable } from "@features/admin/userManagement";

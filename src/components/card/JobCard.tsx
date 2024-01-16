@@ -5,7 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CompanyLogo } from "@components/ui";
+import { CompanyLogo } from "@features/company";
 import { CandidateJob } from "@data/interface";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
@@ -13,8 +13,11 @@ import { toast } from "react-toastify";
 import { toastTifyOptions } from "@utils/toastifyUtils";
 import { convertLocation } from "@features/job";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
+import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 
-export default function JobCard(props: CandidateJob) {
+type JobCardProps = CandidateJob & { isSaved: boolean };
+
+export default function JobCard(props: JobCardProps) {
   const [onHover, setOnHover] = useState(false);
   const auth = useSelector((state: RootState) => state.auth);
 
@@ -41,11 +44,11 @@ export default function JobCard(props: CandidateJob) {
 
   useEffect(() => {
     const fetchLocation = async () => {
-      const data = await convertLocation(props.location || "");
+      const data = await convertLocation(props.locationId || "");
       setLocation(data);
     };
     fetchLocation();
-  }, [props.location]);
+  }, [props.locationId]);
 
   return (
     <div
@@ -174,16 +177,28 @@ export default function JobCard(props: CandidateJob) {
               Ứng tuyển
             </Button>
           </Link>
-          <Tooltip title="Lưu tin" placement="top">
-            <IconButton
-              sx={{ borderRadius: "8px" }}
-              itemID={props.id}
-              onClick={saveFavoriteJobHandler}
-            >
-              {props.isFavorite && <FavoriteRoundedIcon color="primary" />}
-              {!props.isFavorite && <FavoriteBorderIcon color="primary" />}
-            </IconButton>
-          </Tooltip>
+          {!props.isSaved ? (
+            <Tooltip title="Lưu tin" placement="top">
+              <IconButton
+                sx={{ borderRadius: "8px" }}
+                itemID={props.id}
+                onClick={saveFavoriteJobHandler}
+              >
+                {props.isFavorite && <FavoriteRoundedIcon color="primary" />}
+                {!props.isFavorite && <FavoriteBorderIcon color="primary" />}
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Bỏ lưu" placement="top">
+              <IconButton
+                sx={{ borderRadius: "8px" }}
+                itemID={props.id}
+                onClick={saveFavoriteJobHandler}
+              >
+                <TurnedInNotIcon color="primary" />
+              </IconButton>
+            </Tooltip>
+          )}
         </div>
       </div>
     </div>

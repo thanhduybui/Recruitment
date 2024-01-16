@@ -4,15 +4,20 @@ import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import ArticleIcon from "@mui/icons-material/Article";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
-import HomeIcon from "@mui/icons-material/Home";
-import { Link } from "react-router-dom";
 import { TabIndex } from "@data/constants";
 import { SideBarItem } from "@components/sidebar";
 import { useMediaQuery } from "@mui/material";
 import CameraAltRoundedIcon from "@mui/icons-material/CameraAltRounded";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const { CHANGE_AVATAR, HOME, USER_PROFILE, CV, CV_PROFILE, APPLICATION } =
-  TabIndex;
+const {
+  CHANGE_AVATAR,
+  USER_PROFILE,
+  CV,
+  CV_PROFILE,
+  APPLICATION,
+  FAVORITE_JOB,
+} = TabIndex;
 
 export default function SideBar() {
   const isMdScreen = useMediaQuery("(min-width: 768px)");
@@ -33,13 +38,6 @@ export default function SideBar() {
           flexDirection: isMdScreen ? "row" : "column",
         }}
       >
-        <Link to="/find-job">
-          <SideBarItem
-            textContent="Về trang chủ"
-            tabIndex={HOME}
-            icon={<HomeIcon sx={{ color: "#0572cc" }} />}
-          ></SideBarItem>
-        </Link>
         <SideBarItem
           textContent="Thông tin cá nhân"
           tabIndex={USER_PROFILE}
@@ -52,6 +50,11 @@ export default function SideBar() {
             tabIndex={CHANGE_AVATAR}
           ></SideBarItem>
         )}
+        <SideBarItem
+          textContent="Công việc yêu thích"
+          tabIndex={FAVORITE_JOB}
+          icon={<FavoriteIcon sx={{ color: "#0572cc" }} />}
+        ></SideBarItem>
         <SideBarItem
           textContent="Quản lý CV"
           tabIndex={CV}

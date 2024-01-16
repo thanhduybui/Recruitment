@@ -57,10 +57,12 @@ export type CandidateJob = {
   title?: string;
   companyName?: string;
   companyLogo?: string;
-  location?: string;
+  locationId?: string;
   salaryRange?: string;
   deadline?: number;
+  companyImage?: string;
   isFavorite?: boolean;
+  restAppliedDays?: number;
   isHot?: boolean;
   status?: string;
 };

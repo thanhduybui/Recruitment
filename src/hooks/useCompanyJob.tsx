@@ -5,9 +5,9 @@ import { convertToDDMMYYYY } from "@utils/datetimeUtil";
 
 export default function useCompanyJob(id: string, index: number) {
   const [jobs, setJobs] = useState<RecruiterJobCardProps[]>([]);
-  const [currentPage, setCurrentPage] = useState(null);
-  const [totalPages, setTotalPages] = useState(null);
-  const [totalItems, setTotalItems] = useState(null);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [totalItems, setTotalItems] = useState<number>(0);
 
   const fetchCompanyJob = useCallback(async (id: string, index: number) => {
     try {

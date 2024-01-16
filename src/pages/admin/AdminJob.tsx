@@ -1,5 +1,5 @@
 import Container from "@mui/material/Container";
-import { AdminCard, AdminCardContainer } from "@components/ui/card";
+import { AdminCard, AdminCardContainer } from "@components/card";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import { AdminHeadSection } from "@components/admin";
 import Typography from "@mui/material/Typography";

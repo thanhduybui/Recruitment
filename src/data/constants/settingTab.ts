@@ -5,6 +5,7 @@ export const TabIndex = {
   CV_PROFILE: 2,
   APPLICATION: 3,
   CHANGE_AVATAR: 5,
+  FAVORITE_JOB: 6,
 };
 
 export const recruiterTabIndex = {

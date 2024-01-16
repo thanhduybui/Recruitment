@@ -3,7 +3,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { RecommendJobDetail } from "../..";
 import { IconButton, Tooltip } from "@mui/material";
-import { CompanyLogo } from "@components/ui";
+import { CompanyLogo } from "@features/company";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 export default function RecommendedJobCard() {

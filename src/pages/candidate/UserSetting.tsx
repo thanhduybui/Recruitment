@@ -10,8 +10,9 @@ import { RootState } from "@store";
 import { TabIndex } from "@data/constants";
 import { AvatarModal } from "@features/candidate/setting";
 import { LeftLayoutContainer, LeftSidebarLayout } from "@components/layouts";
+import { FavoriteJobs } from "@features/candidate/favoriteJob";
 
-const { USER_PROFILE, CV, CV_PROFILE } = TabIndex;
+const { USER_PROFILE, CV, CV_PROFILE, FAVORITE_JOB } = TabIndex;
 
 export default function UserSetting() {
   const selectedTab = useSelector((state: RootState) => state.sidebar.tabIndex);
@@ -31,6 +32,7 @@ export default function UserSetting() {
       {selectedTab === USER_PROFILE && <Profile />}
       {selectedTab === CV_PROFILE && <CvProfile />}
       {selectedTab === CV && <CvManage />}
+      {selectedTab == FAVORITE_JOB && <FavoriteJobs />}
     </>
   );
 
