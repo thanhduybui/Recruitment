@@ -19,10 +19,11 @@ export default function UserSetting() {
   const isAvatarModalOpen = useSelector(
     (state: RootState) => state.modals.avatarModal
   );
+  const avatarUser = useSelector((state: RootState) => state.userAvatar);
 
   const sidebar = (
     <>
-      <AppAvatar></AppAvatar>
+      <AppAvatar link={avatarUser.url}></AppAvatar>
       <SideBar></SideBar>
     </>
   );

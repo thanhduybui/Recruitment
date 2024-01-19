@@ -1,6 +1,7 @@
 import { FileWithPath, useDropzone } from "react-dropzone";
 import { useMemo, CSSProperties } from "react";
 import FormControlLabel from "../FormUI/FormControlLabel";
+import { Avatar } from "@mui/material";
 
 const baseStyle: CSSProperties = {
   flex: 1,
@@ -35,10 +36,11 @@ type FileDropZoneProps = {
   label?: string;
   content?: string;
   description?: string;
+  onSelectFile: (file: FileWithPath) => void;
 };
 
 export default function FileDropZone(props: FileDropZoneProps) {
-  const { label, content, description } = props;
+  const { label, content, description, onSelectFile } = props;
   const {
     acceptedFiles,
     getRootProps,
@@ -46,7 +48,12 @@ export default function FileDropZone(props: FileDropZoneProps) {
     isFocused,
     isDragAccept,
     isDragReject,
-  } = useDropzone();
+  } = useDropzone({
+    accept: {
+      "image/*": [".jpeg", ".png", ".jpg"],
+    },
+    onDrop: (file) => onSelectFile(file[0]),
+  });
 
   const style = useMemo(
     () => ({
@@ -70,8 +77,14 @@ export default function FileDropZone(props: FileDropZoneProps) {
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         {files.length !== 0 && (
-          <div className="self-start">
-            <ul>{files}</ul>
+          <div className="m-auto flex flex-col items-center gap-2">
+            <Avatar
+              src={URL.createObjectURL(acceptedFiles[0])}
+              sx={{ width: "200px", height: "200px" }}
+            />
+            <p className="text-sm text-gray-200 m-auto px-8 font-semibold hover:cursor-pointer">
+              Click để loại bỏ file đã chọn
+            </p>
           </div>
         )}
         {files.length === 0 && (
@@ -79,12 +92,7 @@ export default function FileDropZone(props: FileDropZoneProps) {
             {content}
           </p>
         )}
-        {files.length !== 0 && (
-          <p className="text-sm text-gray-200 m-auto px-8 font-semibold hover:cursor-pointer">
-            Loại bỏ file đã chọn
-          </p>
-        )}
-      </div>
+      </div>{" "}
       <p className="text-xs text-gray-200 my-2">{description}</p>
     </section>
   );

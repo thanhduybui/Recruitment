@@ -66,3 +66,11 @@ export type CandidateJob = {
   isHot?: boolean;
   status?: string;
 };
+
+export type UserProfile = {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  gender: string;
+  avatar: string;
+};
