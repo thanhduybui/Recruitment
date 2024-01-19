@@ -26,10 +26,7 @@ export default function SideBarItem(props: SideBarItemProps) {
     return state.recruiterSidebar.recruiterTabIndex;
   });
 
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
-  ) => {
+  const handleListItemClick = (index: number) => {
     if (props.isRecruiter) {
       dispatcher(setRecruiterTabIndex(index));
     } else {
@@ -51,7 +48,7 @@ export default function SideBarItem(props: SideBarItemProps) {
               selectdTabIndex === props.tabIndex ? "5px solid #0572cc" : "none",
           }}
           selected={selectdTabIndex === props.tabIndex}
-          onClick={(event) => handleListItemClick(event, props.tabIndex)}
+          onClick={() => handleListItemClick(props.tabIndex)}
         >
           <ListItemIcon sx={{ padding: 0, margin: 0 }}>
             {props.icon}

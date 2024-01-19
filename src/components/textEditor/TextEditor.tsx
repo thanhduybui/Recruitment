@@ -13,7 +13,7 @@ export default function TextEditor() {
     <div>
       <Editor
         apiKey="rx76hjl3edecutx7ny0rxd59u482ut6k660pxq6uomzeowpg"
-        onInit={(evt, editor) => (editorRef.current = editor)}
+        onInit={(_, editor) => (editorRef.current = editor)}
         initialValue="<p>This is the initial content of the editor.</p>"
         init={{
           height: 500,

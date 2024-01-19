@@ -33,7 +33,7 @@ export default function Profile() {
       }
     };
     fetchCandidateProfile();
-  }, []);
+  }, [dispatch]);
 
   return (
     <MainSectionContainer heading="Thông tin cá nhân">
