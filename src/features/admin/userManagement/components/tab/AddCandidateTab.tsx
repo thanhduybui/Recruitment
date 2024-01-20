@@ -19,9 +19,9 @@ export default function AddCandidateTab(props: AddUserTabProps) {
             bắt buộc
           </Typography>
           <FormWrapper>
-            <TextInput label="Tên đăng nhập" type="text" strict />
-            <TextInput label="Mật khẩu" type="text" strict />
-            <TextInput label="Email" type="phoneNumber" strict />
+            <TextInput label="Tên đăng nhập" type="text" required />
+            <TextInput label="Mật khẩu" type="text" required />
+            <TextInput label="Email" type="phoneNumber" required />
             <TextInput label="Số điện thoại" type="phoneNumber" />
             <Button variant="contained" color="primary">
               Thêm

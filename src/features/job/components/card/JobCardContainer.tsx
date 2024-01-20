@@ -34,7 +34,7 @@ export default function JobCardContainer() {
   }, [jobFilter, dispatch]);
 
   const changePageHandler = async (
-    event: React.ChangeEvent<unknown>,
+    _: React.ChangeEvent<unknown>,
     value: number
   ) => {
     try {

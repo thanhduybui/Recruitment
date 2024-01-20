@@ -11,9 +11,9 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-EXPOSE 3000
+EXPOSE 5173
 
 # Build the TypeScript files and create the production build
 RUN npm run build
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

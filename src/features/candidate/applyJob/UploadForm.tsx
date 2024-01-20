@@ -15,11 +15,11 @@ export default function UploadForm() {
       </Typography>
       <form className="px-4 my-4 flex flex-col gap-2">
         <div>
-          <TextInput label="Tên đầy đủ" type="text" strict />
+          <TextInput label="Tên đầy đủ" type="text" required />
         </div>
         <div className="grid grid-cols-2 gap-x-2">
-          <TextInput label="Số điện thoại" type="phone" strict />
-          <TextInput label="Email" type="email" strict />
+          <TextInput label="Số điện thoại" type="phone" required />
+          <TextInput label="Email" type="email" required />
         </div>
 
         <Divider sx={{ margin: "12px 0px 12px" }} />

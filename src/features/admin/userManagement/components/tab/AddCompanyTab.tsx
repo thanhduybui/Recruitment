@@ -54,8 +54,8 @@ export default function AddUserTab(props: AddUserTabProps) {
           </Typography>
           <FormWrapper>
             <div className="flex flex-col gap-2">
-              <TextInput label="Tên đăng nhập" type="text" strict />
-              <TextInput label="Mật khẩu" type="text" strict />
+              <TextInput label="Tên đăng nhập" type="text" required />
+              <TextInput label="Mật khẩu" type="text" required />
             </div>
             <div className="flex flex-col gap-2">
               <Select
@@ -64,8 +64,8 @@ export default function AddUserTab(props: AddUserTabProps) {
                 options={companyOptions}
                 strict
               />
-              <TextInput label="Số điện thoại" type="phoneNumber" strict />
-              <TextInput label="Email" type="email" strict />
+              <TextInput label="Số điện thoại" type="phoneNumber" required />
+              <TextInput label="Email" type="email" required />
               <Button variant="contained" color="primary">
                 Thêm
               </Button>
