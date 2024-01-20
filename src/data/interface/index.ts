@@ -33,7 +33,7 @@ export type JobDetailType = {
   salaryRange: Option;
   position: Option;
   location: Option;
-  company: Option;
+  company: CompanyInfo;
   field: Option;
   major: Option;
   experienceRange: Option;
@@ -41,6 +41,8 @@ export type JobDetailType = {
   isHot: boolean;
   workMode: Option;
   createdAt: string;
+  restAppliedDays: number;
+  locationId: number;
   updatedAt: string;
   createdBy: string;
   view: number;
@@ -65,4 +67,12 @@ export type CandidateJob = {
   restAppliedDays?: number;
   isHot?: boolean;
   status?: string;
+};
+
+export type UserProfile = {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  gender: string;
+  avatar: string;
 };

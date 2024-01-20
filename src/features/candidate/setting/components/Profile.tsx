@@ -3,12 +3,15 @@ import { UserInfo } from "@components/form";
 import { useEffect, useState } from "react";
 import api from "@utils/axios";
 import { getAccessToken } from "@utils/authUtils";
-import { UserProfile } from "@features/recruiter/recuiterInfo";
+import { UserProfile } from "@data/interface";
 import { Box, CircularProgress } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { setUserAvatar } from "@store/avatar";
 
 export default function Profile() {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCandidateProfile = async () => {
@@ -21,6 +24,7 @@ export default function Profile() {
           },
         });
         const profile = res.data.data.profile as UserProfile;
+        dispatch(setUserAvatar({ url: profile.avatar, alt: profile.fullName }));
         setUserProfile(profile);
       } catch (error) {
         console.log(error);
@@ -29,7 +33,7 @@ export default function Profile() {
       }
     };
     fetchCandidateProfile();
-  }, []);
+  }, [dispatch]);
 
   return (
     <MainSectionContainer heading="Thông tin cá nhân">

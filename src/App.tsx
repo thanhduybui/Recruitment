@@ -17,12 +17,12 @@ import {
   EmployerRegisterPage,
   JobApplicationPage,
 } from "@pages/employer";
-import { Route } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
+  Route,
 } from "react-router-dom";
 import {
   findJobPageLoader,
@@ -30,6 +30,7 @@ import {
   recruiterInfoLoader,
 } from "@services";
 import tokenLoader from "@services/tokenLoader";
+import { jobDetailLoader } from "@services";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,17 +43,23 @@ const router = createBrowserRouter(
     >
       {/* general routes */}
       <Route path="" element={<Home />} index />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="confirm-account" element={<ConfirmPage />} />
       <Route
         path="find-job"
         element={<Job />}
         id="findJob"
         loader={findJobPageLoader}
       />
-      <Route path="login" element={<Login />} />
-      <Route path="register" element={<Register />} />
-      <Route path="confirm-account" element={<ConfirmPage />} />
-
-      <Route path="job-detail" element={<JobDetail />} />
+      <Route
+        path="job-detail/:id"
+        element={<JobDetail />}
+        id="jobDetail"
+        loader={(params) => {
+          return jobDetailLoader(params);
+        }}
+      />
       <Route path="company" element={<CompanyPage />} />
       <Route path="company/:id" element={<CompanyDetailPage />} />
       {/* candidate routes */}

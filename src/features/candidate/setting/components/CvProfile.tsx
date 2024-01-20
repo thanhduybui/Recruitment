@@ -5,13 +5,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import Button from "@mui/material/Button";
 import { Gender } from "@data/constants";
 
-import {
-  locations,
-  expieriences,
-  salaryRanges,
-  majors,
-  skills,
-} from "@data/api";
+import { expieriences, salaryRanges } from "@data/api";
 
 const genders = [
   {
@@ -62,18 +56,9 @@ export default function CvProfile() {
               id="position"
               type="text"
             ></TextInput>
-            <Select
-              search
-              label="Chọn ngành nghề"
-              options={majors}
-              id="major"
-            />
-            <Select chip search label="Chọn kỹ năng" options={skills} />
-            <Select
-              search
-              options={locations}
-              label="Chọn nơi làm việc"
-            ></Select>
+            <Select search label="Chọn ngành nghề" id="major" />
+            <Select chip search label="Chọn kỹ năng" />
+            <Select search label="Chọn nơi làm việc"></Select>
             <Select
               options={expieriences}
               label="Chọn kinh nghiệm làm việc"

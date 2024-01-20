@@ -9,6 +9,7 @@ import jobDetailReducer from "./jobDetail.ts";
 import changeCompanyAvatarReducer from "./changeCompanyAvatar.ts";
 import jobFilterReducer from "./filterOption.ts";
 import paginationDataReducer from "./paginationData.ts";
+import userAvatarReducer from "./avatar.ts";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
@@ -24,6 +25,7 @@ export const store = configureStore({
     changeCompanyAvatar: changeCompanyAvatarReducer,
     jobFilter: jobFilterReducer,
     paginationData: paginationDataReducer,
+    userAvatar: userAvatarReducer,
   },
 });
 

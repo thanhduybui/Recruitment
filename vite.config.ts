@@ -5,6 +5,9 @@ import path from "path";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
+    server: {
+      host: true,
+    },
     plugins: [react()],
     define: {
       "process.env": env,

@@ -151,7 +151,7 @@ export default function UpdateCompanyModal({
               <Editor
                 initialValue={companyInfo.description}
                 apiKey={editor_key}
-                onInit={(evt, editor) => (editorRef.current = editor)}
+                onInit={(_, editor) => (editorRef.current = editor)}
                 init={{
                   menubar: false,
                   language: "vi",

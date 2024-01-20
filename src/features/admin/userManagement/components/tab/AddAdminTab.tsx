@@ -19,9 +19,9 @@ export default function AddAdminTab(props: AddUserTabProps) {
             bắt buộc
           </Typography>
           <FormWrapper>
-            <TextInput label="Tên đăng nhập" type="text" strict />
-            <TextInput label="Mật khẩu" type="text" strict />
-            <TextInput label="Số điện thoại" type="phoneNumber" strict />
+            <TextInput label="Tên đăng nhập" type="text" required />
+            <TextInput label="Mật khẩu" type="text" required />
+            <TextInput label="Số điện thoại" type="phoneNumber" required />
             <Button variant="contained" color="primary">
               Thêm
             </Button>

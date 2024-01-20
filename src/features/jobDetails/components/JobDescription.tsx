@@ -1,34 +1,40 @@
 import { TextHeading } from "@components/heading";
 import { InformationSection } from "@features/jobDetails";
 import { HTMLContent } from "@features/jobDetails";
-
-export default function JobDescription() {
+type JobDescriptionProps = {
+  description?: string;
+  requirement?: string;
+  benefit?: string;
+  workingTime?: string;
+  workingLocation?: string;
+};
+export default function JobDescription(props: JobDescriptionProps) {
   return (
     <>
       <TextHeading title="Chi tiết tin tuyển dụng" borderStart />
       <InformationSection
         html
-        header="Yêu cầu công việc"
-        Htmlcontent={<HTMLContent />}
-      ></InformationSection>
+        header="Mô tả công việc"
+        Htmlcontent={<HTMLContent htmlContent={props.description} />}
+      />
       <InformationSection
-        header="Yêu cầu ứng viên"
+        header="Yêu cầu công việc"
         html
-        Htmlcontent={<HTMLContent />}
-      ></InformationSection>
+        Htmlcontent={<HTMLContent htmlContent={props.requirement} />}
+      />
       <InformationSection
         header="Quyền lợi"
         html
-        Htmlcontent={<HTMLContent />}
-      ></InformationSection>
+        Htmlcontent={<HTMLContent htmlContent={props.benefit} />}
+      />
       <InformationSection
         header="Thời gian làm việc"
-        textContent="Thứ 2 - Thứ 6, 8:00:00 - 17:00:00"
+        textContent={props.workingTime}
       ></InformationSection>
       <InformationSection
         header="Địa điểm làm việc"
-        textContent="Tầng 3, Tòa nhà Hanoi Group, 442 Đội Cấn, Ba Đình, Hà Nội"
-      ></InformationSection>
+        textContent={props.workingLocation}
+      />
     </>
   );
 }

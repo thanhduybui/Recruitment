@@ -1,39 +1,43 @@
 import { LogoInformation } from "@features/jobDetails";
 import StarsRoundedIcon from "@mui/icons-material/StarsRounded";
-import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import BusinessCenterRoundedIcon from "@mui/icons-material/BusinessCenterRounded";
 import WcRoundedIcon from "@mui/icons-material/WcRounded";
 import { TextHeading } from "@components/heading";
 
-export default function GeneralInfo() {
+type GeneralInfoProps = {
+  positionName?: string;
+  candidateNumber?: number;
+  workModeName?: string;
+  genderName?: string;
+};
+export default function GeneralInfo(props: GeneralInfoProps) {
   return (
     <>
       <TextHeading title="Thông tin chung" />
       <div className="flex flex-col gap-6 mt-6">
         <LogoInformation
           label="Cấp bậc"
-          content="Nhân viên"
+          content={props.positionName || "Nhân viên"}
           icon={<StarsRoundedIcon />}
         />
         <LogoInformation
-          label="Kinh nghiệm"
-          content="4 năm"
-          icon={<WorkHistoryRoundedIcon />}
-        />
-        <LogoInformation
           label="Số lượng tuyển"
-          content="1 người"
+          content={
+            props.candidateNumber
+              ? `${props.candidateNumber} nhân viên`
+              : "Không xác định"
+          }
           icon={<PeopleAltRoundedIcon />}
         />
         <LogoInformation
           label="Hình thức làm việc"
-          content="Toàn thời gian"
+          content={props.workModeName || "Không yêu cầu"}
           icon={<BusinessCenterRoundedIcon />}
         />
         <LogoInformation
           label="Giới tính"
-          content="Không yêu cầu"
+          content={props.genderName || "Không yêu cầu"}
           icon={<WcRoundedIcon />}
         />
       </div>

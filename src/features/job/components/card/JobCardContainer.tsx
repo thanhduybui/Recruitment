@@ -34,7 +34,7 @@ export default function JobCardContainer() {
   }, [jobFilter, dispatch]);
 
   const changePageHandler = async (
-    event: React.ChangeEvent<unknown>,
+    _: React.ChangeEvent<unknown>,
     value: number
   ) => {
     try {
@@ -52,8 +52,8 @@ export default function JobCardContainer() {
       <div className="transiton duration-75 overflow-y-auto flex flex-col gap-3 scrollbar-hidden bg-white py-2">
         {jobs?.map((job) => (
           <JobCard
-            key={job.id}
             id={job.id}
+            key={job.id}
             title={job.title}
             companyLogo={job.companyImage}
             companyName={job.companyName}

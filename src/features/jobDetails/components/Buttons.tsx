@@ -18,7 +18,11 @@ const styles = {
   gap: "0.6rem",
 };
 
-export default function Buttons() {
+type ButtonsProps = {
+  disabled?: boolean;
+};
+
+export default function Buttons({ disabled }: ButtonsProps) {
   const isApplyModalOpen = useSelector(
     (state: RootState) => state.modals.applyModal
   );
@@ -35,6 +39,7 @@ export default function Buttons() {
         <Button
           variant="contained"
           color="primary"
+          disabled={!disabled}
           onClick={clickHandler}
           sx={styles}
           startIcon={<SendRoundedIcon />}
@@ -47,6 +52,7 @@ export default function Buttons() {
           variant="outlined"
           onClick={clickHandler}
           color="primary"
+          disabled={!disabled}
           sx={styles}
           startIcon={<FavoriteBorderRoundedIcon />}
         >

@@ -216,7 +216,7 @@ export default function EditJobModal() {
               <div className="mt-2">
                 <Editor
                   apiKey={editor_key}
-                  onInit={(evt, editor) => (descriptionRef.current = editor)}
+                  onInit={(_, editor) => (descriptionRef.current = editor)}
                   initialValue={jobs?.description}
                   init={{
                     menubar: false,
@@ -254,7 +254,7 @@ export default function EditJobModal() {
                 <Editor
                   initialValue={jobs?.requirement}
                   apiKey={editor_key}
-                  onInit={(evt, editor) => (requirementRef.current = editor)}
+                  onInit={(_, editor) => (requirementRef.current = editor)}
                   init={{
                     menubar: false,
                     language: "vi",
@@ -291,7 +291,7 @@ export default function EditJobModal() {
                 <Editor
                   initialValue={jobs?.benefit}
                   apiKey={editor_key}
-                  onInit={(evt, editor) => (benefitRef.current = editor)}
+                  onInit={(_, editor) => (benefitRef.current = editor)}
                   init={{
                     menubar: false,
                     language: "vi",

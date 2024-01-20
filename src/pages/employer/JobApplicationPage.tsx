@@ -35,6 +35,7 @@ export default function JobApplicationPage() {
   );
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    event.preventDefault();
     setValue(newValue);
   };
 

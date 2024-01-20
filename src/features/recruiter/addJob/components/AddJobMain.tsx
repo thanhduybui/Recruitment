@@ -184,7 +184,7 @@ export default function AddJobMain() {
             <div className="mt-2">
               <Editor
                 apiKey={editor_key}
-                onInit={(evt, editor) => (descriptionRef.current = editor)}
+                onInit={(_, editor) => (descriptionRef.current = editor)}
                 init={{
                   menubar: false,
                   language: "vi",
@@ -220,7 +220,7 @@ export default function AddJobMain() {
             <div className="mt-2">
               <Editor
                 apiKey={editor_key}
-                onInit={(evt, editor) => (requirementRef.current = editor)}
+                onInit={(_, editor) => (requirementRef.current = editor)}
                 init={{
                   menubar: false,
                   language: "vi",
@@ -256,7 +256,7 @@ export default function AddJobMain() {
             <div className="mt-2">
               <Editor
                 apiKey={editor_key}
-                onInit={(evt, editor) => (benefitRef.current = editor)}
+                onInit={(_, editor) => (benefitRef.current = editor)}
                 init={{
                   menubar: false,
                   language: "vi",
