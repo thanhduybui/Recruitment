@@ -3,7 +3,7 @@ import { IconButton, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CompanyLogo } from "@features/company";
 import { CandidateJob } from "@data/interface";
@@ -11,9 +11,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { toast } from "react-toastify";
 import { toastTifyOptions } from "@utils/toastifyUtils";
-import { convertLocation } from "@features/job";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
+import { useLocationName } from "@hooks";
 
 type JobCardProps = CandidateJob & { isSaved: boolean };
 
@@ -21,7 +21,7 @@ export default function JobCard(props: JobCardProps) {
   const [onHover, setOnHover] = useState(false);
   const auth = useSelector((state: RootState) => state.auth);
 
-  const [location, setLocation] = useState("");
+  const locationName = useLocationName(props.locationId + "");
 
   const onMouseOverHandler = () => {
     setOnHover(true);
@@ -42,13 +42,20 @@ export default function JobCard(props: JobCardProps) {
     }
   };
 
-  useEffect(() => {
-    const fetchLocation = async () => {
-      const data = await convertLocation(props.locationId || "");
-      setLocation(data);
-    };
-    fetchLocation();
-  }, [props.locationId]);
+  const isExpired = props.deadline && props.deadline < 0;
+
+  let textDeadline = "Không xác định";
+  if (!props.deadline) {
+    textDeadline = "Còn hôm nay để ứng tuyển";
+  } else {
+    if (props.deadline === 0) {
+      textDeadline = "Đang tuyển";
+    } else if (props.deadline > 0) {
+      textDeadline = `Còn ${props.deadline} ngày để ứng tuyển`;
+    } else if (props.deadline < 0) {
+      textDeadline = "Hết hạn ứng tuyển";
+    }
+  }
 
   return (
     <div
@@ -101,7 +108,7 @@ export default function JobCard(props: JobCardProps) {
           </Tooltip>
         </div>
         <div className="flex gap-1">
-          <Tooltip title={location} placement="bottom">
+          <Tooltip title={locationName} placement="bottom">
             <Typography
               variant="subtitle2"
               component="span"
@@ -114,20 +121,11 @@ export default function JobCard(props: JobCardProps) {
                 fontWeight: 300,
               }}
             >
-              {location}
+              {locationName}
             </Typography>
           </Tooltip>
 
-          <Tooltip
-            title={`${
-              props.deadline === null
-                ? `Đang tuyển`
-                : props.deadline && props.deadline < 0
-                ? "Hết hạn ứng tuyển"
-                : `Còn ${props.deadline} ngày để ứng tuyển`
-            }`}
-            placement="bottom"
-          >
+          <Tooltip title={textDeadline} placement="bottom">
             <Typography
               variant="subtitle2"
               component="span"
@@ -140,13 +138,7 @@ export default function JobCard(props: JobCardProps) {
                 fontWeight: 300,
               }}
             >
-              {`${
-                props.deadline === null
-                  ? `Đang tuyển`
-                  : props.deadline && props.deadline < 0
-                  ? "Hết hạn ứng tuyển"
-                  : `Còn ${props.deadline} ngày để ứng tuyển`
-              }`}
+              {textDeadline}
             </Typography>
           </Tooltip>
         </div>
@@ -167,37 +159,45 @@ export default function JobCard(props: JobCardProps) {
         </div>
 
         <div className="flex items-center gap-1">
-          <Link to="/job-detail">
+          <Link to={`/job-detail/${props.id}`}>
             <Button
               color="primary"
               size="small"
               variant="contained"
               sx={{ textTransform: "none" }}
             >
-              Ứng tuyển
+              {isExpired ? "Xem" : "Ứng tuyển"}
             </Button>
           </Link>
-          {!props.isSaved ? (
-            <Tooltip title="Lưu tin" placement="top">
-              <IconButton
-                sx={{ borderRadius: "8px" }}
-                itemID={props.id}
-                onClick={saveFavoriteJobHandler}
-              >
-                {props.isFavorite && <FavoriteRoundedIcon color="primary" />}
-                {!props.isFavorite && <FavoriteBorderIcon color="primary" />}
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <Tooltip title="Bỏ lưu" placement="top">
-              <IconButton
-                sx={{ borderRadius: "8px" }}
-                itemID={props.id}
-                onClick={saveFavoriteJobHandler}
-              >
-                <TurnedInNotIcon color="primary" />
-              </IconButton>
-            </Tooltip>
+          {!isExpired && (
+            <>
+              {!props.isSaved ? (
+                <Tooltip title="Lưu tin" placement="top">
+                  <IconButton
+                    sx={{ borderRadius: "8px" }}
+                    itemID={props.id}
+                    onClick={saveFavoriteJobHandler}
+                  >
+                    {props.isFavorite && (
+                      <FavoriteRoundedIcon color="primary" />
+                    )}
+                    {!props.isFavorite && (
+                      <FavoriteBorderIcon color="primary" />
+                    )}
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <Tooltip title="Bỏ lưu" placement="top">
+                  <IconButton
+                    sx={{ borderRadius: "8px" }}
+                    itemID={props.id}
+                    onClick={saveFavoriteJobHandler}
+                  >
+                    <TurnedInNotIcon color="primary" />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </>
           )}
         </div>
       </div>

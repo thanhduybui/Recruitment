@@ -2,12 +2,15 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
 
 type UserSettingButtonProps = {
   handleClick: (event: React.MouseEvent<HTMLElement>) => void;
   open: boolean;
 };
 export default function UserSettingButton(props: UserSettingButtonProps) {
+  const userAvatar = useSelector((state: RootState) => state.userAvatar);
   return (
     <Box
       sx={{
@@ -25,7 +28,7 @@ export default function UserSettingButton(props: UserSettingButtonProps) {
           aria-haspopup="true"
           aria-expanded={props.open ? "true" : undefined}
         >
-          <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU"></Avatar>
+          <Avatar src={userAvatar.url}></Avatar>
         </IconButton>
       </Tooltip>
     </Box>

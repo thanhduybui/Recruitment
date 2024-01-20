@@ -6,6 +6,5 @@ export { default as Buttons } from "./components/Buttons";
 export { default as CompanyShortProfile } from "./components/aside/CompanyShortProfile";
 export { default as AsideChildContainer } from "./components/aside/AsideChildContainer";
 export { default as GeneralInfo } from "./components/aside/GeneralInfo";
-export { default as Aside } from "./components/aside/Aside";
 export { default as KeyInfo } from "./components/aside/KeyInfo";
 export { default as JobDetailHeader } from "./components/JobDetailHeader";
