@@ -28,6 +28,7 @@ import {
   findJobPageLoader,
   positionLoader,
   recruiterInfoLoader,
+  companyDetailLoader,
 } from "@services";
 import tokenLoader from "@services/tokenLoader";
 import { jobDetailLoader } from "@services";
@@ -61,7 +62,14 @@ const router = createBrowserRouter(
         }}
       />
       <Route path="company" element={<CompanyPage />} />
-      <Route path="company/:id" element={<CompanyDetailPage />} />
+      <Route
+        path="company/:id"
+        element={<CompanyDetailPage />}
+        id="companyDetail"
+        loader={(params) => {
+          return companyDetailLoader(params);
+        }}
+      />
       {/* candidate routes */}
       <Route element={<ProtectedRoute allowRole="CANDIDATE" />}>
         <Route path="setting" element={<UserSetting />} />

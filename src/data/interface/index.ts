@@ -76,3 +76,11 @@ export type UserProfile = {
   gender: string;
   avatar: string;
 };
+
+export type ListJobs = {
+  totalPages: number;
+  totalItems: number;
+  currentPage: number;
+  pageSize: number;
+  listData: CandidateJob[];
+};
