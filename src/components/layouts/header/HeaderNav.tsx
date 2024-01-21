@@ -24,23 +24,27 @@ export default function HeaderNav() {
     lg:justify-between w-full h-screen lg:h-16`}
       >
         <HeaderList>
-          <NavLink
-            to="/find-job"
-            end
-            className={({ isActive }) =>
-              isActive ? "text-primary-500 bg-gray-100" : ""
-            }
-          >
-            <HeaderNavItem name="Việc làm" />
-          </NavLink>
-          <NavLink
-            to="/company"
-            className={({ isActive }) =>
-              isActive ? "text-primary-500 bg-gray-100" : ""
-            }
-          >
-            <HeaderNavItem name="Doanh nghiệp" />
-          </NavLink>
+          {role != "ADMIN" && (
+            <>
+              <NavLink
+                to="/find-job"
+                end
+                className={({ isActive }) =>
+                  isActive ? "text-primary-500 bg-gray-100" : ""
+                }
+              >
+                <HeaderNavItem name="Việc làm" />
+              </NavLink>
+              <NavLink
+                to="/company"
+                className={({ isActive }) =>
+                  isActive ? "text-primary-500 bg-gray-100" : ""
+                }
+              >
+                <HeaderNavItem name="Doanh nghiệp" />
+              </NavLink>
+            </>
+          )}
           {role === "CANDIDATE" && (
             <NavLink
               to="/setting"

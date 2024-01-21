@@ -93,7 +93,7 @@ const router = createBrowserRouter(
         </Route>
       </Route>
       {/* admin routes */}
-      <Route path="/admin" element={<Root />}>
+      <Route path="/admin">
         <Route element={<ProtectedRoute allowRole="ADMIN" />}>
           <Route path="" element={<AdminDashboard />} />
           <Route path="jobs" element={<AdminJob />} />
