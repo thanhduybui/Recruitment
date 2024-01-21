@@ -17,7 +17,6 @@ export default function JobCardContainer() {
   );
 
   useEffect(() => {
-    console.log(jobFilter);
     const fetchData = async () => {
       try {
         const response = await axios(requestJobConfig(0, jobFilter));

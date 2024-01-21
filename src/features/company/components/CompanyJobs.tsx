@@ -4,9 +4,15 @@ import { NormalSelect, SearchInput } from "@components/form";
 import { locations } from "@data/api";
 import { Button, Divider } from "@mui/material";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import { FindJobMainSection } from "@features/job";
+import { ListJobs } from "@data/interface";
+import { JobCard } from "@features/job";
+import Pagination from "@mui/material/Pagination";
 
-export default function CompanyJobs() {
+type CompanyJobsProps = {
+  jobs?: ListJobs;
+};
+
+export default function CompanyJobs({ jobs }: CompanyJobsProps) {
   return (
     <CompanySectionContainer>
       <TextHeading borderStart title="Các vị trí đang tuyển" />
@@ -38,7 +44,34 @@ export default function CompanyJobs() {
         </div>
       </div>
       <Divider></Divider>
-      <FindJobMainSection />
+      <>
+        <div className="transiton duration-75 overflow-y-auto flex flex-col gap-3 scrollbar-hidden bg-white py-2">
+          {jobs?.listData?.map((job) => (
+            <JobCard
+              id={job.id}
+              key={job.id}
+              title={job.title}
+              companyLogo={job.companyImage}
+              companyName={job.companyName}
+              salaryRange={job.salaryRange}
+              deadline={job.restAppliedDays}
+              locationId={job.locationId}
+              status={job.status}
+              isFavorite={false}
+              isHot={job.isHot}
+              isSaved={false}
+            />
+          ))}
+        </div>
+        <div className="py-20 flex items-center justify-center">
+          <Pagination
+            count={jobs?.totalPages}
+            shape="rounded"
+            color="primary"
+            size="medium"
+          />
+        </div>
+      </>
     </CompanySectionContainer>
   );
 }

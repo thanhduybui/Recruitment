@@ -7,11 +7,15 @@ import { useRouteLoaderData } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { logout } from "@store/auth";
+import useUserProfile from "@hooks/useUserProfile";
+import { setUserAvatar } from "@store/avatar";
 
 export default function Root() {
   const token = useRouteLoaderData("root");
   const navigation = useNavigate();
   const dispatch = useDispatch();
+  const userProfile = useUserProfile();
+
   useEffect(() => {
     if (!token) {
       return;
@@ -31,7 +35,11 @@ export default function Root() {
       navigation("/login");
       dispatch(logout());
     }, tokenDuration);
-  }, [token, navigation, dispatch]);
+
+    dispatch(
+      setUserAvatar({ url: userProfile?.avatar, alt: userProfile?.fullName })
+    );
+  }, [token, navigation, dispatch, userProfile]);
 
   return (
     <>

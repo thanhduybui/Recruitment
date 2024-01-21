@@ -25,7 +25,6 @@ export default function BasicFilter() {
 
   const onSelectLocationHandler = (option: Option) => {
     dispatch(setJobFilter({ ...jobFilter, location: option.id }));
-    console.log(jobFilter);
   };
 
   const onSelectExpHandler = (option: Option) => {
