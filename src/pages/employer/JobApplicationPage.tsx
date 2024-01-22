@@ -2,7 +2,6 @@ import { Breadcrumb, MediumContainer } from "@components/ui";
 import { Box, Grid, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
-import { setRecruiterTabIndex } from "@store/recruiterSidebar";
 import { recruiterTabIndex } from "@data/constants";
 import { useNavigate } from "react-router-dom";
 import Tab from "@mui/material/Tab";
@@ -15,6 +14,7 @@ import {
 } from "@features/recruiter/jobApplication";
 import { Pagination } from "@mui/material";
 import { RootState } from "@store";
+import { setTabIndex } from "@store/sidebar";
 
 function a11yProps(index: number) {
   return {
@@ -41,7 +41,7 @@ export default function JobApplicationPage() {
 
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
-    dispatch(setRecruiterTabIndex(recruiterTabIndex.RECRUITER_JOB));
+    dispatch(setTabIndex(recruiterTabIndex.RECRUITER_JOB));
     navigate(event.currentTarget.getAttribute("href")!);
   }
 

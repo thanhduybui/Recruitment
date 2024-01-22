@@ -7,31 +7,22 @@ import IconButton from "@mui/material/IconButton";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { RootState } from "@store";
 import Tooltip from "@mui/material/Tooltip";
-import { setRecruiterTabIndex } from "@store/recruiterSidebar";
 
 type SideBarItemProps = {
-  selectedIndex?: number;
   tabIndex: number;
   textContent?: string;
   icon?: React.ReactNode;
-  isRecruiter?: boolean;
 };
 export default function SideBarItem(props: SideBarItemProps) {
   const dispatcher = useDispatch();
-
   const isMdScreen = useMediaQuery("(min-width: 768px)");
 
-  const selectdTabIndex = useSelector((state: RootState) => {
-    if (!props.isRecruiter) return state.sidebar.tabIndex;
-    return state.recruiterSidebar.recruiterTabIndex;
-  });
+  const selectdTabIndex = useSelector(
+    (state: RootState) => state.sidebar.tabIndex
+  );
 
   const handleListItemClick = (index: number) => {
-    if (props.isRecruiter) {
-      dispatcher(setRecruiterTabIndex(index));
-    } else {
-      dispatcher(setTabIndex(index));
-    }
+    dispatcher(setTabIndex(index));
   };
 
   return (

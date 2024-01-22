@@ -1,134 +1,75 @@
+import { LeftSidebarLayout } from "@components/layouts";
 import Container from "@mui/material/Container";
+import { adminTabIndex } from "@data/constants";
+import { SidebarItemType } from "@data/interface";
+import { Sidebar } from "@components/sidebar";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import MoreTimeIcon from "@mui/icons-material/MoreTime";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import DomainIcon from "@mui/icons-material/Domain";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import ChairAltIcon from "@mui/icons-material/ChairAlt";
 
-import * as React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
-  };
-}
+const {
+  ADMIN_FIELD,
+  ADMIN_MAJOR,
+  ADMIN_LOCATION,
+  ADMIN_POSITION,
+  ADMIN_SKILL,
+  ADMIN_WORKMODE,
+  ADMIN_EXP,
+  ADMIN_SALARY,
+} = adminTabIndex;
+const sidebarItems: SidebarItemType[] = [
+  {
+    tabIndex: ADMIN_SALARY,
+    content: "Mức lương",
+    icon: <AttachMoneyIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: ADMIN_EXP,
+    content: "Mức kinh nghiệm",
+    icon: <MoreTimeIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: ADMIN_WORKMODE,
+    content: "Hình thức làm việc",
+    icon: <CalendarMonthIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: ADMIN_SKILL,
+    content: "Kỹ năng",
+    icon: <EditNoteIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: ADMIN_POSITION,
+    content: "Vị trí",
+    icon: <ChairAltIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: ADMIN_LOCATION,
+    content: "Địa điểm",
+    icon: <LocationCityIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: ADMIN_FIELD,
+    content: "Lĩnh vực",
+    icon: <DomainIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: ADMIN_MAJOR,
+    content: "Ngành nghề",
+    icon: <WorkOutlineIcon sx={{ color: "#0572cc" }} />,
+  },
+];
 
 export default function AdminOther() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+  const sidebar = <Sidebar items={sidebarItems} />;
   return (
-    <Container
-      maxWidth="xl"
-      fixed
-      sx={{ marginTop: "1rem", marginBottom: "1rem" }}
-    >
-      <Box
-        sx={{
-          flexGrow: 1,
-          bgcolor: "background.paper",
-          display: "flex",
-          height: "100vh",
-        }}
-      >
-        <Tabs
-          orientation="vertical"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          sx={{
-            borderRight: 1,
-            borderColor: "divider",
-            width: "15%",
-            paddingTop: "1rem",
-          }}
-        >
-          <Tab
-            label="Item One"
-            {...a11yProps(0)}
-            sx={{ alignSelf: "self-start" }}
-          />
-          <Tab
-            label="Item Two"
-            {...a11yProps(1)}
-            sx={{ alignSelf: "self-start" }}
-          />
-          <Tab
-            label="Item Three"
-            {...a11yProps(2)}
-            sx={{ alignSelf: "self-start" }}
-          />
-          <Tab
-            label="Item Four"
-            {...a11yProps(3)}
-            sx={{ alignSelf: "self-start" }}
-          />
-          <Tab
-            label="Item Five"
-            {...a11yProps(4)}
-            sx={{ alignSelf: "self-start" }}
-          />
-          <Tab
-            label="Item Six"
-            {...a11yProps(5)}
-            sx={{ alignSelf: "self-start" }}
-          />
-          <Tab
-            label="Item Seven"
-            {...a11yProps(6)}
-            sx={{ alignSelf: "self-start" }}
-          />
-        </Tabs>
-        <TabPanel value={value} index={0}>
-          Item One
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          Item Three
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          Item Four
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          Item Five
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          Item Six
-        </TabPanel>
-        <TabPanel value={value} index={6}>
-          Item Seven
-        </TabPanel>
-      </Box>
+    <Container fixed sx={{ marginTop: "1rem", marginBottom: "1rem" }}>
+      <LeftSidebarLayout sidebar={sidebar} main={<></>} />
     </Container>
   );
 }
