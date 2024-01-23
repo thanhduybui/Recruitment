@@ -1,7 +1,9 @@
 import { FileWithPath, useDropzone } from "react-dropzone";
 import { useMemo, CSSProperties } from "react";
-import FormControlLabel from "../FormUI/FormControlLabel";
-import { Avatar } from "@mui/material";
+import { FormControlLabel } from "@components/form/FormUI";
+import { Avatar, Button, Tooltip } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 const baseStyle: CSSProperties = {
   flex: 1,
@@ -36,23 +38,28 @@ type FileDropZoneProps = {
   label?: string;
   content?: string;
   description?: string;
-  onSelectFile: (file: FileWithPath) => void;
+  exts?: string[];
+  isPapers?: boolean;
+  onSelectFile: (file: FileWithPath | null) => void;
 };
 
 export default function FileDropZone(props: FileDropZoneProps) {
-  const { label, content, description, onSelectFile } = props;
+  const { label, description, onSelectFile, isPapers } = props;
   const {
     acceptedFiles,
     getRootProps,
     getInputProps,
     isFocused,
     isDragAccept,
+    open,
     isDragReject,
   } = useDropzone({
+    noClick: true,
+    noKeyboard: true,
     accept: {
-      "image/*": [".jpeg", ".png", ".jpg"],
+      "image/*": props.exts || [".png", ".jpg", ".jpeg"],
     },
-    onDrop: (file) => onSelectFile(file[0]),
+    onDrop: (files) => onSelectFile(files[0]),
   });
 
   const style = useMemo(
@@ -65,34 +72,55 @@ export default function FileDropZone(props: FileDropZoneProps) {
     [isFocused, isDragAccept, isDragReject]
   );
 
-  const files = acceptedFiles.map((file: FileWithPath) => (
-    <li key={file.path} className="text-sm text-primary-600 font-thin">
-      {file.path} - {file.size} bytes
-    </li>
-  ));
+  const renderFiles = () => {
+    if (isPapers) {
+      return acceptedFiles.map((file: FileWithPath) => (
+        <p
+          key={file.path}
+          className="text-sm text-primary-600 font-thin bg-gray-100 w-full py-2 px-4"
+        >
+          {file.path} - {file.size} bytes
+        </p>
+      ));
+    } else {
+      return (
+        <Avatar
+          src={URL.createObjectURL(acceptedFiles[0])}
+          sx={{ width: "200px", height: "200px" }}
+        />
+      );
+    }
+  };
 
   return (
     <section className="w-full max-w-[700px] mx-auto">
-      {label && <FormControlLabel></FormControlLabel>}
+      {label && <FormControlLabel label={label} />}
       <div {...getRootProps({ style })} className="min-h-[150px] m-auto">
         <input {...getInputProps()} />
-        {files.length !== 0 && (
-          <div className="m-auto flex flex-col items-center gap-2">
-            <Avatar
-              src={URL.createObjectURL(acceptedFiles[0])}
-              sx={{ width: "200px", height: "200px" }}
-            />
-            <p className="text-sm text-gray-200 m-auto px-8 font-semibold hover:cursor-pointer">
-              Click để loại bỏ file đã chọn
-            </p>
+        {acceptedFiles.length !== 0 && (
+          <div className="m-auto w-full flex flex-col items-center gap-2">
+            {renderFiles()}
           </div>
         )}
-        {files.length === 0 && (
-          <p className="text-sm text-gray-200 m-auto px-8 font-semibold hover:cursor-pointer">
-            {content}
-          </p>
+        {acceptedFiles.length === 0 && (
+          <Button
+            onClick={open}
+            color="primary"
+            variant="outlined"
+            sx={{ textTransform: "none", margin: "auto" }}
+            size="small"
+          >
+            Tải lên
+          </Button>
         )}
-      </div>{" "}
+        {acceptedFiles.length !== 0 && (
+          <Tooltip title="Loại bỏ file">
+            <IconButton onClick={open}>
+              <HighlightOffIcon color="error" />
+            </IconButton>
+          </Tooltip>
+        )}
+      </div>
       <p className="text-xs text-gray-200 my-2">{description}</p>
     </section>
   );
