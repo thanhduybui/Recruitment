@@ -11,6 +11,9 @@ import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import DomainIcon from "@mui/icons-material/Domain";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import ChairAltIcon from "@mui/icons-material/ChairAlt";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
+import { SalaryManagement } from "@features/admin/otherManagement";
 
 const {
   ADMIN_FIELD,
@@ -66,10 +69,13 @@ const sidebarItems: SidebarItemType[] = [
 ];
 
 export default function AdminOther() {
+  const tabIndex = useSelector((state: RootState) => state.sidebar.tabIndex);
+
+  const main = <>{tabIndex === ADMIN_SALARY && <SalaryManagement />}</>;
   const sidebar = <Sidebar items={sidebarItems} />;
   return (
     <Container fixed sx={{ marginTop: "1rem", marginBottom: "1rem" }}>
-      <LeftSidebarLayout sidebar={sidebar} main={<></>} />
+      <LeftSidebarLayout sidebar={sidebar} main={main} />
     </Container>
   );
 }
