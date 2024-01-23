@@ -145,37 +145,31 @@ export default function AddJobMain() {
             <NormalSelect
               label="Mức lương"
               options={salaryRanges}
-              initValue={{ id: "0", name: "Chọn mức lương" }}
               onSelect={(option) => setSalary(option.id)}
             />
             <NormalSelect
               label="Mức kinh nghiệm"
               options={experienceRanges}
-              initValue={{ id: "0", name: "Chọn kinh nghiệm" }}
               onSelect={(option) => setExperience(option.id)}
             />
             <SearchSelect
               label="Lĩnh vực"
               options={fields}
-              initValue={{ id: "0", name: "Chọn lĩnh vực" }}
               onSelect={(option) => setField(option.id)}
             />
             <SearchSelect
               label="Ngành nghề"
               options={majors}
-              initValue={{ id: "0", name: "Chọn chuyên môn" }}
               onSelect={(option) => setMajor(option.id)}
             />
             <NormalSelect
               label="Chức vụ"
               options={positions}
-              initValue={{ id: "0", name: "Chọn vị trí" }}
               onSelect={(option) => setPosition(option.id)}
             />
             <NormalSelect
               label="Hình thức làm việc"
               options={workModes}
-              initValue={{ id: "0", name: "Chọn hình thức" }}
               onSelect={(option) => setWorkMode(option.id)}
             />
           </div>

@@ -1,9 +1,4 @@
-import {
-  CvManage,
-  CvProfile,
-  Profile,
-  SideBar,
-} from "@features/candidate/setting";
+import { CvManage, CvProfile, Profile } from "@features/candidate/setting";
 import { AppAvatar } from "@components/ui";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
@@ -11,8 +6,44 @@ import { TabIndex } from "@data/constants";
 import { AvatarModal } from "@features/candidate/setting";
 import { LeftLayoutContainer, LeftSidebarLayout } from "@components/layouts";
 import { FavoriteJobs } from "@features/candidate/favoriteJob";
+import { SidebarItemType } from "@data/interface";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ArticleIcon from "@mui/icons-material/Article";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
+import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
+import { Sidebar } from "@components/sidebar";
 
-const { USER_PROFILE, CV, CV_PROFILE, FAVORITE_JOB } = TabIndex;
+const { USER_PROFILE, CV, CV_PROFILE, FAVORITE_JOB, APPLICATION } = TabIndex;
+
+const candidateSidebarItems: SidebarItemType[] = [
+  {
+    tabIndex: USER_PROFILE,
+    content: "Thông tin cá nhân",
+    icon: <AccountBoxIcon sx={{ color: "#0572cc" }} />,
+  },
+
+  {
+    tabIndex: FAVORITE_JOB,
+    content: "Công việc yêu thích",
+    icon: <FavoriteIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: CV,
+    content: "Quản lý CV",
+    icon: <ArticleIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: CV_PROFILE,
+    content: "Cài đặt CV profile",
+    icon: <NewspaperIcon sx={{ color: "#0572cc" }} />,
+  },
+  {
+    tabIndex: APPLICATION,
+    content: "Lịch sử ứng tuyển",
+    icon: <MarkAsUnreadIcon sx={{ color: "#0572cc" }} />,
+  },
+];
 
 export default function UserSetting() {
   const selectedTab = useSelector((state: RootState) => state.sidebar.tabIndex);
@@ -24,7 +55,7 @@ export default function UserSetting() {
   const sidebar = (
     <>
       <AppAvatar link={avatarUser.url}></AppAvatar>
-      <SideBar></SideBar>
+      <Sidebar items={candidateSidebarItems}></Sidebar>
     </>
   );
 

@@ -84,3 +84,9 @@ export type ListJobs = {
   pageSize: number;
   listData: CandidateJob[];
 };
+
+export type SidebarItemType = {
+  tabIndex: number;
+  content: string;
+  icon: JSX.Element;
+};

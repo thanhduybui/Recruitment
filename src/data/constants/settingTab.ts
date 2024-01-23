@@ -18,3 +18,14 @@ export const recruiterTabIndex = {
   RECRUITER_ADD_JOB: 12,
   RECRUITER_PAPER: 13,
 };
+
+export const adminTabIndex = {
+  ADMIN_FIELD: 15,
+  ADMIN_MAJOR: 16,
+  ADMIN_LOCATION: 17,
+  ADMIN_SALARY: 18,
+  ADMIN_EXP: 19,
+  ADMIN_WORKMODE: 20,
+  ADMIN_POSITION: 21,
+  ADMIN_SKILL: 22,
+};

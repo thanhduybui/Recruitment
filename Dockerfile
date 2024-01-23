@@ -3,6 +3,8 @@ FROM node:21-alpine
 
 WORKDIR /app
 
+RUN npm install -g vite
+
 # Copy only the necessary files for npm install
 COPY package*.json ./
 

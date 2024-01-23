@@ -24,12 +24,10 @@ export default function useCompanyJob(id: string, index: number) {
         (job) => ({
           id: job.id,
           title: job.title,
-          companyName: job.company.id,
+          companyName: job.company?.name,
           dueDate: convertToDDMMYYYY(job.deadline),
         })
       );
-
-      console.log(recruiterJobCards);
 
       setCurrentPage(res.data.data.jobs.currentPage);
       setTotalPages(res.data.data.jobs.totalPages);
