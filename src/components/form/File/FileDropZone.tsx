@@ -72,9 +72,9 @@ export default function FileDropZone(props: FileDropZoneProps) {
   ));
 
   return (
-    <section className="w-full">
+    <section className="w-full max-w-[700px] mx-auto">
       {label && <FormControlLabel></FormControlLabel>}
-      <div {...getRootProps({ style })}>
+      <div {...getRootProps({ style })} className="min-h-[150px] m-auto">
         <input {...getInputProps()} />
         {files.length !== 0 && (
           <div className="m-auto flex flex-col items-center gap-2">
