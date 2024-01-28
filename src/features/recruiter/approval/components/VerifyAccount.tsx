@@ -19,7 +19,7 @@ export default function VerifyAccount() {
         {!isVerified && (
           <FileDropZone
             isPapers
-            description="Kích thước file không quá 200MB và phải trong số các định dạng: docx pdf"
+            description="Kích thước file không quá 200MB và phải trong số các định dạng: docx, pdf"
             content="Tải chứng nhận lên"
             exts={[".docx", ".pdf"]}
             onSelectFile={handleSelectFile}
