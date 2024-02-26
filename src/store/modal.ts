@@ -21,6 +21,7 @@ const initialState: ModalsState = {
   jobApplicationModal: false,
   imformModal: false,
   updateCompanyModal: false,
+  deleteLicenseModal: false,
 };
 
 const modalsSlice = createSlice({

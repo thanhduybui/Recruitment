@@ -20,6 +20,8 @@ export default function useCompanyJob(id: string, index: number) {
       const res = await api.get(`/companies/${id}/jobs?type=${type}`);
       const listJobs = res.data.data.jobs.listData;
 
+      console.log("listJobs", listJobs);
+
       const recruiterJobCards: RecruiterJobCardProps[] = listJobs.map(
         (job) => ({
           id: job.id,

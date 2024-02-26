@@ -30,7 +30,6 @@ export default function RecruiterJobCard(props: RecruiterJobCardProps) {
     try {
       const res = await api.get(`/jobs/${id}`);
       const jobDetails = res.data.data.job as JobDetailType;
-      console.log(jobDetails);
       dispatch(setJobDetail(jobDetails));
     } catch (err) {
       console.log(err);

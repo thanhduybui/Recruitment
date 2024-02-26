@@ -1,51 +1,120 @@
 import { FileDropZone } from "@components/form/File";
 import { MainSectionContainer } from "@components/ui";
-import pdf from "@assets/pdf/test_cv.pdf";
-import { useState } from "react";
-import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { FileWithPath } from "react-dropzone";
+import { getAccessToken } from "@utils/authUtils";
+import { Button, CircularProgress } from "@mui/material";
+import api from "@utils/axios";
+import { ToastContainer } from "react-toastify";
+import { toastContainerOptions, toastTifyOptions } from "@utils/toastifyUtils";
+import { ModalDeleteLicense } from "..";
+import { useDispatch } from "react-redux";
+import { openModal } from "@store/modal";
+import { modalName } from "@data/constants";
 
 export default function VerifyAccount() {
   const [file, setFile] = useState<FileWithPath | null>(null);
   const [isVerified, setIsVerified] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [fileSrc, setFileSrc] = useState("");
+  const dispatch = useDispatch();
   const handleSelectFile = (file: FileWithPath | null) => {
     setFile(file);
   };
 
-  return (
-    <MainSectionContainer heading="Giấy xác nhận doanh nghiệp">
-      <div className="mt-4">
-        {!isVerified && (
-          <FileDropZone
-            isPapers
-            description="Kích thước file không quá 200MB và phải trong số các định dạng: docx, pdf"
-            content="Tải chứng nhận lên"
-            exts={[".docx", ".pdf"]}
-            onSelectFile={handleSelectFile}
-          />
-        )}
-        {isVerified && <iframe src={pdf} className="w-full h-72"></iframe>}
-      </div>
+  const onClickHandler = async () => {
+    if (!isVerified) {
+      setIsLoading(true);
+      const data = new FormData();
+      data.append("file", file as File);
+      try {
+        const res = await api.post("/companies/business-license", data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${getAccessToken()}`,
+          },
+          timeout: 10000,
+        });
+        console.log(res);
+        toast.success(res.data.message, toastTifyOptions);
+        setIsVerified(true);
+      } catch (error) {
+        console.error("error", error);
+        toast.error("Cập nhật thất bại", toastTifyOptions);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      dispatch(openModal({ modalName: modalName.DELETE_LICENSE_MODAL }));
+    }
+  };
 
-      <div className="mt-4 flex items-center justify-center">
-        <Button
-          color={isVerified ? "error" : "primary"}
-          variant="contained"
-          sx={{
-            textTransform: "none",
-            "&.Mui-disabled": {
-              backgroundColor: "#CCCCCC", // Change the background color for disabled state
-              color: "#888888", // Change the text color for disabled state
-              // Add any other styles you want for the disabled state
-            },
-          }}
-          disabled={file === null}
-          onClick={() => setIsVerified(!isVerified)}
-        >
-          {isVerified ? "Xoá chứng nhận" : "Lưu chứng nhận"}
-        </Button>
-      </div>
-    </MainSectionContainer>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await api.get("/companies/profile", {
+          headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+          },
+        });
+        if (res.data.data.company?.businessLicense) {
+          setFileSrc(res.data.data.company?.businessLicense);
+          setIsVerified(true);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [isVerified]);
+
+  const handleDeleteLicense = () => {
+    setIsVerified(false);
+    setFile(null);
+  };
+
+  return (
+    <>
+      <ToastContainer {...toastContainerOptions} />
+      <MainSectionContainer heading="Giấy xác nhận doanh nghiệp">
+        <ModalDeleteLicense onVerified={handleDeleteLicense} />
+        <div className="mt-4">
+          {isLoading && <CircularProgress></CircularProgress>}
+          {!isLoading && !isVerified && (
+            <FileDropZone
+              isPapers
+              description="Kích thước file không quá 200MB và phải trong số các định dạng: docx, pdf"
+              content="Tải chứng nhận lên"
+              exts={[".docx", ".pdf"]}
+              onSelectFile={handleSelectFile}
+            />
+          )}
+          {isVerified && (
+            <iframe src={fileSrc} className="w-full h-screen"></iframe>
+          )}
+        </div>
+
+        <div className="mt-4 flex items-center justify-center">
+          <Button
+            color={isVerified ? "error" : "primary"}
+            variant="contained"
+            sx={{
+              textTransform: "none",
+              "&.Mui-disabled": {
+                backgroundColor: "#CCCCCC", // Change the background color for disabled state
+                color: "#888888", // Change the text color for disabled state
+                // Add any other styles you want for the disabled state
+              },
+            }}
+            disabled={file === null && !isVerified}
+            onClick={onClickHandler}
+          >
+            {isVerified ? "Xoá chứng nhận" : "Lưu chứng nhận"}
+          </Button>
+        </div>
+      </MainSectionContainer>
+    </>
   );
 }

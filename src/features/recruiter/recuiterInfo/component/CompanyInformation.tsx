@@ -15,6 +15,7 @@ import { setCompanyAvatar } from "@store/changeCompanyAvatar";
 
 export default function CompanyInformation() {
   const data = useRouteLoaderData("recruiterInfo");
+
   const isShowModal = useSelector(
     (state: RootState) => state.modals.updateCompanyModal
   );
