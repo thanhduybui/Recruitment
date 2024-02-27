@@ -23,8 +23,6 @@ export default function RecruiterMyJob() {
   const [value, setValue] = useState(0);
   const { jobs, totalPages } = useCompanyJob(companyInfo.id + "", value);
 
-  console.log("jobs", jobs);
-
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };

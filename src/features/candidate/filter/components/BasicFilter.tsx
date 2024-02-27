@@ -7,20 +7,19 @@ import { NormalSelect, SearchSelect } from "@components/form";
 
 import { useRouteLoaderData } from "react-router-dom";
 import { Option } from "@data/interface";
-import { useLocationAPI } from "@hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { setJobFilter } from "@store/filterOption";
 import { RootState } from "@store";
 
 export default function BasicFilter() {
   const data = useRouteLoaderData("findJob");
-  const locations = useLocationAPI();
   const dispatch = useDispatch();
   const jobFilter = useSelector((state: RootState) => state.jobFilter);
 
-  const { experienceRanges, salaryRanges } = data as {
+  const { experienceRanges, salaryRanges, locations } = data as {
     experienceRanges: Option[];
     salaryRanges: Option[];
+    locations: Option[];
   };
 
   const onSelectLocationHandler = (option: Option) => {
