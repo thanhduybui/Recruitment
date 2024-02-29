@@ -90,13 +90,6 @@ export default function UserInfo({ profile }: UserInfoProps) {
       ></TextInput>{" "}
       <div className="flex items-center justify-center gap-2 mt-4">
         <Button
-          variant="outlined"
-          color="primary"
-          sx={{ textTransform: "none" }}
-        >
-          Huỷ
-        </Button>
-        <Button
           variant="contained"
           color="primary"
           sx={{ textTransform: "none" }}

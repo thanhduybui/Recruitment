@@ -11,6 +11,10 @@ import { closeModal } from "@store/modal";
 import { modalName } from "@data/constants";
 import { TransitionProps } from "@mui/material/transitions";
 import Slide from "@mui/material/Slide";
+import api from "@utils/axios";
+import { getAccessToken } from "@utils/authUtils";
+import { toastTifyOptions } from "@utils/toastifyUtils";
+import { toast } from "react-toastify";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -21,13 +25,33 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function DeleteModal() {
+type ModalDeleteLicenseProps = {
+  onVerified: () => void;
+};
+
+export default function ModalDeleteLicense(props: ModalDeleteLicenseProps) {
   const isDeleteModalOpen = useSelector(
-    (state: RootState) => state.modals.deleteModal
+    (state: RootState) => state.modals.deleteLicenseModal
   );
   const dispatch = useDispatch();
+
   const handleClose = () => {
-    dispatch(closeModal({ modalName: modalName.DELETE_MODAL }));
+    dispatch(closeModal({ modalName: modalName.DELETE_LICENSE_MODAL }));
+  };
+
+  const deleteLicense = async () => {
+    try {
+      const res = await api.delete("/companies/business-license", {
+        headers: {
+          Authorization: `Bearer ${getAccessToken()}`,
+        },
+      });
+      toast.success(res.data.message, toastTifyOptions);
+      dispatch(closeModal({ modalName: modalName.DELETE_LICENSE_MODAL }));
+      props.onVerified();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -42,7 +66,7 @@ export default function DeleteModal() {
         <DialogTitle id="alert-dialog-title">{"Thông báo"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Bạn muốn xoá thật không?
+            Xoá giấy chứng nhận này ?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -50,7 +74,7 @@ export default function DeleteModal() {
             Huỷ
           </Button>
           <Button
-            onClick={handleClose}
+            onClick={deleteLicense}
             autoFocus
             variant="contained"
             color="error"
