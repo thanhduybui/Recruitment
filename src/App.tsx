@@ -8,6 +8,8 @@ import {
   ConfirmPage,
   CompanyPage,
   CompanyDetailPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
 } from "@pages";
 import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
 import { Root } from "@components/layouts";
@@ -53,6 +55,8 @@ const router = createBrowserRouter(
         id="findJob"
         loader={findJobPageLoader}
       />
+      <Route path="forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="reset-password" element={<ResetPasswordPage />} />
       <Route
         path="job-detail/:id"
         element={<JobDetail />}

@@ -86,7 +86,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <Container maxWidth="md" fixed>
+    <Container maxWidth="md" sx={{marginBottom: "2.4rem"}} fixed>
       <InformModal content={message}></InformModal>
       <FormContainer>
         <FormHeader
