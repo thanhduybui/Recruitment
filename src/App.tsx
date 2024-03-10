@@ -10,6 +10,7 @@ import {
   CompanyDetailPage,
   ForgotPasswordPage,
   ResetPasswordPage,
+  CreateCVPage,
 } from "@pages";
 import { AdminUser, AdminJob, AdminDashboard, AdminOther } from "@pages/admin";
 import { Root } from "@components/layouts";
@@ -77,6 +78,7 @@ const router = createBrowserRouter(
       {/* candidate routes */}
       <Route element={<ProtectedRoute allowRole="CANDIDATE" />}>
         <Route path="setting" element={<UserSetting />} />
+        <Route path="create-cv" element={<CreateCVPage />} />
       </Route>
       {/*recruiter routes  */}
       <Route path="/recruiter">

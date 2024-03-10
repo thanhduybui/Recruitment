@@ -9,3 +9,4 @@ export { default as CompanyPage } from "./candidate/CompanyPage";
 export { default as CompanyDetailPage } from "./candidate/CompanyDetailPage";
 export { default as ForgotPasswordPage } from "./ForgotPasswordPage";
 export { default as ResetPasswordPage } from "./ResetPasswordPage";
+export { default as CreateCVPage } from "./candidate/CreateCVPage";

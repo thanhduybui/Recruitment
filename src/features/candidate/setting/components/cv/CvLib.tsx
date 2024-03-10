@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import CvCard from "./CvItem";
 import CvLibContainer from "./CvLibContainer";
+import { Link } from "react-router-dom";
 
 export default function CvLib() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -54,7 +55,9 @@ export default function CvLib() {
             onClose={handleClose}
             TransitionComponent={Fade}
           >
-            <MenuItem onClick={handleClose}>Tạo CV từ Jobhunt</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link to={"/create-cv"}>Tạo CV từ Jobhunt</Link>
+            </MenuItem>
             <MenuItem onClick={handleClose}>Tải CV lên</MenuItem>
           </Menu>
         </div>
