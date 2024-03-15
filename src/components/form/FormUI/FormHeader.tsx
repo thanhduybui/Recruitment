@@ -13,7 +13,7 @@ export default function FormHeader(props: FormHeaderProps) {
         className="text-primary-600"
         variant="h6"
         component="h1"
-        style={{ fontWeight: "600", fontSize: "1.1rem" }}
+        style={{ fontWeight: "600", fontSize: "1.2rem" }}
       >
         {props.title}
       </Typography>

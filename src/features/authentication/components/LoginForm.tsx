@@ -80,7 +80,7 @@ export default function LoginForm() {
   };
 
   return (
-    <Container maxWidth="md" fixed>
+    <Container maxWidth="md" fixed sx={{marginBottom: "2.4rem"}}>
       {showAlert && <Alert severity="success">{location.state?.message}</Alert>}
       <FormContainer onSubmit={onSubmitHandler}>
         <FormHeader
