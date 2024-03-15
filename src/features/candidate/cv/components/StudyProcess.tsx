@@ -8,11 +8,11 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { FormWorkingProcess } from "..";
+import { FormStudyProcess, FormWorkingProcess } from "..";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 
-export default function WorkingProcess() {
+export default function StudyProcess() {
   return (
     <TableContainer
       style={{ border: "1px solid #eaeaea", borderRadius: "5px" }}
@@ -21,7 +21,9 @@ export default function WorkingProcess() {
         <TableHead sx={{ backgroundColor: "#eaeaea" }}>
           <TableRow>
             <TableCell style={{ width: "10%" }}>STT</TableCell>
-            <TableCell style={{ width: "70%" }}>Mô tả công việc</TableCell>
+            <TableCell style={{ width: "70%" }}>
+              Mô tả quá trình học tập
+            </TableCell>
             <TableCell
               style={{
                 width: "10%",
@@ -47,7 +49,7 @@ export default function WorkingProcess() {
                 borderRight: "1px solid #eaeaea",
               }}
             >
-              <FormWorkingProcess />
+              <FormStudyProcess />
             </TableCell>
             <TableCell>
               <IconButton>

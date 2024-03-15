@@ -12,7 +12,7 @@ type DateRangeType = {
   key: string;
 };
 
-export default function ResponsiveDateTimePicker() {
+export default function DateRangePicker() {
   const [dateRange, setDateRange] = useState<DateRangeType>({
     startDate: new Date(),
     endDate: addDays(new Date(), 7),
@@ -24,7 +24,6 @@ export default function ResponsiveDateTimePicker() {
   const refOne = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // event listeners
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
@@ -50,7 +49,7 @@ export default function ResponsiveDateTimePicker() {
   };
 
   return (
-    <Box>
+    <Box style={{ position: "relative" }}>
       <input
         value={
           format(dateRange.startDate, "MM/dd/yyyy") +
@@ -65,7 +64,15 @@ export default function ResponsiveDateTimePicker() {
         `}
         onClick={onClickHandler}
       />
-      <div ref={refOne}>
+      <div
+        ref={refOne}
+        style={{
+          position: "absolute",
+          zIndex: 9999, // Set a high z-index to make it appear on top
+          top: "100%", // Adjust this according to your layout
+          left: 0, // Adjust this according to your layout
+        }}
+      >
         {open && (
           <DateRange
             onChange={(item: DateRangeType) => setTimeHandler(item)}

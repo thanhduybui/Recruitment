@@ -38,6 +38,7 @@ type FileDropZoneProps = {
   label?: string;
   content?: string;
   description?: string;
+  labelBold?: boolean;
   exts?: string[];
   isPapers?: boolean;
   onSelectFile: (file: FileWithPath | null) => void;
@@ -93,9 +94,9 @@ export default function FileDropZone(props: FileDropZoneProps) {
   };
 
   return (
-    <section className="w-full max-w-[700px] mx-auto">
-      {label && <FormControlLabel label={label} />}
-      <div {...getRootProps({ style })} className="min-h-[150px] m-auto">
+    <section className="w-full max-w-[700px] h-full mx-auto">
+      {label && <FormControlLabel label={label} bold={props.labelBold} />}
+      <div {...getRootProps({ style })} className="min-h-[150px] h-fu m-auto">
         <input {...getInputProps()} />
         {acceptedFiles.length !== 0 && (
           <div className="m-auto w-full flex flex-col items-center gap-2">

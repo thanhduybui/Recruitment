@@ -13,6 +13,7 @@ type SelectProps = {
   small?: boolean;
   bold?: boolean;
   label?: string;
+  labelBold?: boolean;
   required?: boolean;
   id?: string;
   onSelect?: (option: Option) => void;
@@ -56,6 +57,7 @@ export default function NormalSelect(props: SelectProps) {
           htmlFor={props.id}
           label={props.label}
           strict={props.required}
+          bold={props.labelBold}
         />
       )}
       <div
