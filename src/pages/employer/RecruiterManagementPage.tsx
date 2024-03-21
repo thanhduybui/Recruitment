@@ -54,10 +54,8 @@ export default function AddJobPage() {
   );
 
   return (
-    <>
-      <LeftLayoutContainer>
-        <LeftSidebarLayout sidebar={sidebar} main={main} />
-      </LeftLayoutContainer>
-    </>
+    <LeftLayoutContainer>
+      <LeftSidebarLayout sidebar={sidebar} main={main} />
+    </LeftLayoutContainer>
   );
 }
