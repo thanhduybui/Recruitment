@@ -5,6 +5,9 @@ import { useLocation } from "react-router-dom";
 import { Slider } from "@components/ui";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
+import { NearJobSection } from "@features/job";
+import { Divider } from "@mui/material";
+import ApplicationGuideline from "@features/candidate/cv/components/ApplicationGuideLine";
 
 function HomePage() {
   const location = useLocation();
@@ -29,6 +32,8 @@ function HomePage() {
           <Alert severity="success">{location.state.message}</Alert>
         )}
         <Slider />
+        <NearJobSection />
+        <ApplicationGuideline />
       </Container>
     </React.Fragment>
   );
