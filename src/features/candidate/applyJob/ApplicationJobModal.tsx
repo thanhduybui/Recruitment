@@ -9,10 +9,14 @@ import Button from "@mui/material/Button";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { ListCV, UploadForm } from ".";
+import { TextInput } from "@components/form";
+import { Divider } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import {
   ModalBackdrop,
   ModalContentContainer,
   ModalHeader,
+  ScrollModalContainer,
 } from "@components/ui/modal";
 import { modalName } from "@data/constants";
 const { APPLY_MODAL } = modalName;
@@ -52,63 +56,79 @@ export default function ApplicationModal() {
           title="Ứng tuyển cho"
           textHighlight="Java Developer"
         />
-        <FormControl>
-          <FormLabel
-            id="demo-controlled-radio-buttons-group"
-            sx={formLabelStyles}
-          >
-            <DescriptionIcon color="primary" />
-            <span className="text-gray-400 font-semibold">
-              Chọn CV để ứng tuyển
-            </span>
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-controlled-radio-buttons-group"
-            name="controlled-radio-buttons-group"
-            value={value}
-            onChange={handleChange}
-          >
-            <div
-              className={`relative border-2 rounded-md px-2 mb-2 ${
-                value === 1 ? "border-primary-400" : "border-gray-150"
-              }`}
-            >
-              <FormControlLabel
-                value={1}
-                control={<Radio />}
-                label="Chọn CV mặc định: Backend Intern"
-              />
-              <Button color="primary" size="small" sx={btnStyles}>
-                Xem
-              </Button>
+        <ScrollModalContainer wide>
+          <Typography variant="caption">
+            Điền các thông tin sau. <span className="text-error-400">(*)</span>{" "}
+            là bắt buộc
+          </Typography>
+          <div className="w-full">
+            <div className="px-10">
+              <div>
+                <TextInput label="Tên đầy đủ" type="text" required />
+              </div>
+              <div className="grid grid-cols-2 gap-x-2">
+                <TextInput label="Số điện thoại" type="phone" required />
+                <TextInput label="Email" type="email" required />
+              </div>
             </div>
-            <div
-              className={`relative border-2 rounded-md px-2 mb-2 ${
-                value === 2 ? "border-primary-400" : "border-gray-150"
-              }`}
+            <Divider sx={{ margin: "12px 0px 12px" }} />
+            <FormLabel
+              id="demo-controlled-radio-buttons-group"
+              sx={formLabelStyles}
             >
-              <FormControlLabel
-                value={2}
-                control={<Radio />}
-                label="Chọn CV có sẳn"
-              />
-              {value === 2 && <ListCV />}
-            </div>
+              <DescriptionIcon color="primary" />
+              <span className="text-gray-400 font-semibold">
+                Chọn CV để ứng tuyển
+              </span>
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={value}
+              onChange={handleChange}
+            >
+              <div
+                className={`relative border-2 rounded-md px-2 mb-2 ${
+                  value === 1 ? "border-primary-400" : "border-gray-150"
+                }`}
+              >
+                <FormControlLabel
+                  value={1}
+                  control={<Radio />}
+                  label="Chọn CV mặc định: Backend Intern"
+                />
+                <Button color="primary" size="small" sx={btnStyles}>
+                  Xem
+                </Button>
+              </div>
+              <div
+                className={`relative border-2 rounded-md px-2 mb-2 ${
+                  value === 2 ? "border-primary-400" : "border-gray-150"
+                }`}
+              >
+                <FormControlLabel
+                  value={2}
+                  control={<Radio />}
+                  label="Chọn CV có sẳn"
+                />
+                {value === 2 && <ListCV />}
+              </div>
 
-            <div
-              className={`relative border-2 border-dashed rounded-md px-2 mb-2 flex flex-col ${
-                value === 3 ? "border-primary-400" : "border-gray-150"
-              }`}
-            >
-              <FormControlLabel
-                value={3}
-                control={<Radio />}
-                label="Tải CV lên"
-              />
-              {value === 3 && <UploadForm />}
-            </div>
-          </RadioGroup>
-        </FormControl>
+              <div
+                className={`relative border-2 border-dashed rounded-md px-2 mb-2 flex flex-col ${
+                  value === 3 ? "border-primary-400" : "border-gray-150"
+                }`}
+              >
+                <FormControlLabel
+                  value={3}
+                  control={<Radio />}
+                  label="Tải CV lên"
+                />
+                {value === 3 && <UploadForm />}
+              </div>
+            </RadioGroup>
+          </div>
+        </ScrollModalContainer>
 
         <div className="flex items-center gap-3 ml-auto">
           <Button variant="outlined" color="primary" onClick={closeHandler}>
