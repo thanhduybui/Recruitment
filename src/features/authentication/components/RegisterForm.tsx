@@ -6,6 +6,8 @@ import {
   FormHeader,
   FormContainer,
 } from "@components/form";
+import { Link } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import OauthLogin from "./OauthLogin";
 import { InputConstants } from "@data/constants";
@@ -86,7 +88,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <Container maxWidth="md" sx={{marginBottom: "2.4rem"}} fixed>
+    <Container maxWidth="md" sx={{ marginBottom: "2.4rem" }} fixed>
       <InformModal content={message}></InformModal>
       <FormContainer>
         <FormHeader
@@ -142,6 +144,24 @@ export default function RegisterForm() {
         <FormGroup>
           <div className="m-auto flex flex-col gap-4">
             <OauthLogin />
+          </div>
+          <div className="m-auto mt-2">
+            <Link to="/recruiter/register">
+              <Typography
+                variant="body2"
+                color="primary"
+                sx={{
+                  fontWeight: "600",
+                  cursor: "pointer",
+                  fontSize: "0.8rem",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
+                }}
+              >
+                Đăng ký tài khoản nhà tuyển dụng
+              </Typography>
+            </Link>
           </div>
         </FormGroup>
       </FormContainer>

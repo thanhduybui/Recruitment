@@ -33,7 +33,7 @@ export default function RecruiterMyJob() {
       <MainSectionContainer heading="Quản lý việc làm của bạn">
         <DeleteModal></DeleteModal>
         {isEditModalOpen && <EditJobModal></EditJobModal>}
-        <Box sx={{ width: "100%", mt: "0.2rem", mb: "2rem", height: "100vh" }}>
+        <Box sx={{ width: "100%", mt: "0.2rem", mb: "2rem" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={value}

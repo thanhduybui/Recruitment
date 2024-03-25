@@ -9,7 +9,7 @@ export default function ModalScrollContainer({
 }: ModalScrollContainerProps) {
   return (
     <div
-      className={`m-auto max-h-[700px] overflow-y-scroll mt-5 ${
+      className={`m-auto max-h-[500px] md:max-h-[350px] overflow-y-scroll mt-5 ${
         wide ? "w-full" : "w-3/4"
       }`}
     >

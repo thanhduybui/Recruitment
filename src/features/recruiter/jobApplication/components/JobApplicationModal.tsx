@@ -25,7 +25,7 @@ export default function JobApplicationModal() {
         <div className="flex flex-col gap-4">
           <TextHeading title="CV ứng tuyển" borderStart small />
           <iframe
-            className="border border-gray-150 w-full h-[700px]"
+            className="border border-gray-150 w-full md:h-[400px]"
             src="https://firebasestorage.googleapis.com/v0/b/jobhunt-b08b1.appspot.com/o/test_cv.pdf?alt=media&token=1475092c-86d2-48e2-baa1-7eb1964f14fb"
           />
         </div>

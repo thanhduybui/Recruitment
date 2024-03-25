@@ -24,7 +24,7 @@ export default function Slider() {
 
   return (
     <div className="mt-2 relative">
-      <div className="flex overflow-hidden rounded-md border-4 h-[300px] border-primary-600 relative">
+      <div className="flex overflow-hidden rounded-md border-4 h-[250px] border-primary-600 relative">
         {images.map((image, index) => (
           <img
             key={index}

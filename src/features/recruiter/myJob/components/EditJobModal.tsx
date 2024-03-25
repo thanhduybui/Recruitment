@@ -1,6 +1,5 @@
 import {
   ModalBackdrop,
-  ModalContentContainer,
   ModalHeader,
   ScrollModalContainer,
 } from "@components/ui/modal";
@@ -30,6 +29,7 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { closeModal } from "@store/modal";
 import { editor_key } from "@config/key";
+import { EditModalContainer } from "@components/ui/modal";
 import { toastTifyOptions } from "@utils/toastifyUtils";
 import utc from "dayjs/plugin/utc";
 
@@ -110,13 +110,13 @@ export default function EditJobModal() {
 
   return (
     <ModalBackdrop modalName={modalName.EDIT_JOB_MODAL}>
-      <ModalContentContainer>
+      <EditModalContainer>
         <ModalHeader modalName={modalName.EDIT_JOB_MODAL} title="Fesher Java" />
         <ScrollModalContainer wide>
           <form className="p-4">
             <TextHeading title="Thông tin chung" borderStart small />
             <div className="flex gap-4 mt-3">
-              <div className="flex-1 w-3/5 flex flex-col gap-4">
+              <div className="flex-1 flex flex-col gap-4">
                 <Textarea
                   label="Tên công việc"
                   defaultValue={jobs?.title}
@@ -335,7 +335,7 @@ export default function EditJobModal() {
             Lưu thay đổi
           </Button>
         </div>
-      </ModalContentContainer>
+      </EditModalContainer>
     </ModalBackdrop>
   );
 }
