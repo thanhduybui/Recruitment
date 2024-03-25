@@ -13,6 +13,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import { Sidebar } from "@components/sidebar";
+import { UploadCVModal } from "@features/candidate/cv";
 
 const { USER_PROFILE, CV, CV_PROFILE, FAVORITE_JOB, APPLICATION } = TabIndex;
 
@@ -50,6 +51,13 @@ export default function UserSetting() {
   const isAvatarModalOpen = useSelector(
     (state: RootState) => state.modals.avatarModal
   );
+
+  const isUploadCVModalOpen = useSelector(
+    (state: RootState) => state.modals.uploadCVModal
+  );
+
+  console.log(isUploadCVModalOpen);
+
   const avatarUser = useSelector((state: RootState) => state.userAvatar);
 
   const sidebar = (
@@ -71,6 +79,7 @@ export default function UserSetting() {
   return (
     <>
       {isAvatarModalOpen && <AvatarModal />}
+      {isUploadCVModalOpen && <UploadCVModal />}
       <LeftLayoutContainer>
         <LeftSidebarLayout sidebar={sidebar} main={main} />
       </LeftLayoutContainer>

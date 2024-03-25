@@ -22,6 +22,7 @@ const initialState: ModalsState = {
   imformModal: false,
   updateCompanyModal: false,
   deleteLicenseModal: false,
+  uploadCVModal: true,
 };
 
 const modalsSlice = createSlice({
