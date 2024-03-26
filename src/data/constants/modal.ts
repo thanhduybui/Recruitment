@@ -11,4 +11,5 @@ export const modalName = {
   INFORM_MODAL: "informModal",
   UPDATE_COMPANY_MODAL: "updateCompanyModal",
   DELETE_LICENSE_MODAL: "deleteLicenseModal",
+  UPLOAD_CV_MODAL: "uploadCVModal",
 };

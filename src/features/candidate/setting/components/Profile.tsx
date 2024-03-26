@@ -17,7 +17,6 @@ export default function Profile() {
     const fetchCandidateProfile = async () => {
       try {
         setIsLoading(true);
-
         const res = await api.get("/users/profile", {
           headers: {
             Authorization: `Bearer ${getAccessToken()}`,
@@ -32,6 +31,7 @@ export default function Profile() {
         setIsLoading(false);
       }
     };
+
     fetchCandidateProfile();
   }, [dispatch]);
 

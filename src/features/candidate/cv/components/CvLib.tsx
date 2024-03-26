@@ -9,6 +9,9 @@ import Fade from "@mui/material/Fade";
 import CvCard from "./CvItem";
 import CvLibContainer from "./CvLibContainer";
 import { Link } from "react-router-dom";
+import { openModal } from "@store/modal";
+import { modalName } from "@data/constants";
+import { useDispatch } from "react-redux";
 
 export default function CvLib() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -16,8 +19,14 @@ export default function CvLib() {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+  const dispatch = useDispatch();
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const onUploadCvHanlder = () => {
+    setAnchorEl(null);
+    dispatch(openModal({ modalName: modalName.UPLOAD_CV_MODAL }));
   };
 
   return (
@@ -58,7 +67,7 @@ export default function CvLib() {
             <MenuItem onClick={handleClose}>
               <Link to={"/create-cv"}>Tạo CV từ Jobhunt</Link>
             </MenuItem>
-            <MenuItem onClick={handleClose}>Tải CV lên</MenuItem>
+            <MenuItem onClick={onUploadCvHanlder}>Tải CV lên</MenuItem>
           </Menu>
         </div>
       </div>
