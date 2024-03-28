@@ -4,7 +4,7 @@ export { default as FormWorkingProcess } from "./components/FormWorkingProcess";
 export { default as FormStudyProcess } from "./components/FormStudyProcess";
 export { default as ApplicatonGuideline } from "./components/ApplicationGuideline";
 export { default as UploadCVModal } from "./components/UploadCVModal";
-export { default as CvItem } from "./components/CvItem";
+export { default as CvItem } from "./components/CvCard";
 export { default as CvLib } from "./components/CvLib";
 export { default as CvLibContainer } from "./components/CvLibContainer";
 export { default as CvManage } from "./components/CvManage";

@@ -12,6 +12,7 @@ type CvProps = {
   name: string;
   default?: boolean;
   upload?: boolean;
+  url?: string;
 };
 
 const IconButtonStyles = {
@@ -30,11 +31,8 @@ const chipStyles = {
 };
 
 export default function Cv(props: CvProps) {
-  const backgroundImageUrl =
-    "url('https://tenten.vn/tin-tuc/wp-content/uploads/2022/03/cv-xin-viec-la-gi-5.png')"; // Replace 'path_to_your_image.jpg' with the actual image path
-
   const backgroundStyle = {
-    backgroundImage: backgroundImageUrl,
+    backgroundImage: `url("https://tenten.vn/tin-tuc/wp-content/uploads/2022/03/cv-xin-viec-la-gi-5.png)`,
     backgroundSize: "cover",
     backgroundPosition: "center",
   };

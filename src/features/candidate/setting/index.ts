@@ -6,4 +6,4 @@ export { default as AvatarModal } from "./components/AvatarModal";
 export { default as UserModalAvatar } from "./components/UserModalAvatar";
 export { default as CvLib } from "../cv/components/CvLib";
 export { default as CvLibContainer } from "../cv/components/CvLibContainer";
-export { default as Cv } from "../cv/components/CvItem";
+export { default as Cv } from "../cv/components/CvCard";
