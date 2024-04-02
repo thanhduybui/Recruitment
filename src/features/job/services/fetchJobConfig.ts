@@ -1,6 +1,11 @@
 import { FilterState } from "@store/filterOption";
 
-const requestConfig = (currentPage: number, jobFilter: FilterState) => {
+const requestConfig = (
+  currentPage: number,
+  jobFilter: FilterState,
+  authToken
+) => {
+  const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
   return {
     method: "GET",
     url: "http://localhost:8080/api/v1/jobs",
@@ -16,6 +21,7 @@ const requestConfig = (currentPage: number, jobFilter: FilterState) => {
       major: jobFilter.major,
       workMode: jobFilter.workMode,
     },
+    headers: headers,
   };
 };
 
