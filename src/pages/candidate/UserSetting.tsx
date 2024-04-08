@@ -16,6 +16,7 @@ import { Sidebar } from "@components/sidebar";
 import { UploadCVModal } from "@features/candidate/cv";
 import { ToastContainer } from "react-toastify";
 import { toastContainerOptions } from "@utils/toastifyUtils";
+import { ApplyJobHistory } from "@features/candidate/applyHistory";
 
 const { USER_PROFILE, CV, CV_PROFILE, FAVORITE_JOB, APPLICATION } = TabIndex;
 
@@ -62,8 +63,8 @@ export default function UserSetting() {
 
   const sidebar = (
     <>
-      <AppAvatar link={avatarUser.url}></AppAvatar>
-      <Sidebar items={candidateSidebarItems}></Sidebar>
+      <AppAvatar link={avatarUser.url} />
+      <Sidebar items={candidateSidebarItems} />
     </>
   );
 
@@ -72,7 +73,8 @@ export default function UserSetting() {
       {selectedTab === USER_PROFILE && <Profile />}
       {selectedTab === CV_PROFILE && <CvProfile />}
       {selectedTab === CV && <CvManage />}
-      {selectedTab == FAVORITE_JOB && <FavoriteJobs />}
+      {selectedTab === FAVORITE_JOB && <FavoriteJobs />}
+      {selectedTab === APPLICATION && <ApplyJobHistory />}
     </>
   );
 

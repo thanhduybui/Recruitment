@@ -32,8 +32,6 @@ export default function Buttons({ disabled }: ButtonsProps) {
     dispatch(openModal({ modalName: APPLY_MODAL }));
   };
 
-  const saveFavoriteJobHandler = async () => {};
-
   return (
     <>
       {isApplyModalOpen && <ApplicationJobModal />}
