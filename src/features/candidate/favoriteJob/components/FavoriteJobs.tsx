@@ -41,10 +41,12 @@ export default function FavoriteJobs() {
     <MainSectionContainer heading="Việc làm đã thích">
       <Typography color="#444" marginBottom={`1rem`}>
         Danh sách{" "}
-        <span className="text-lg text-primary-500 font-semibold">1</span> việc
-        làm đã lưu
+        <span className="text-lg text-primary-500 font-semibold">
+          {jobs.length}
+        </span>{" "}
+        việc làm đã lưu
       </Typography>
-      <Box sx={{ width: "100%", mt: "0.2rem", mb: "2rem", height: "100vh" }}>
+      <Box sx={{ width: "100%", mt: "0.2rem", mb: "2rem" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
@@ -92,10 +94,10 @@ export default function FavoriteJobs() {
           })}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Hết hạn ứng tuyển
+          Loading...
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Tuyển gấp
+          Loading...
         </TabPanel>
         <Box sx={{ marginTop: "2rem", display: "flex" }}>
           <Pagination

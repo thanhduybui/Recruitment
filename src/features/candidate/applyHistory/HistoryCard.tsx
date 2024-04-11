@@ -1,11 +1,12 @@
 import Tooltip from "@mui/material/Tooltip";
-import { IconButton, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { CompanyLogo } from "@features/company";
+import { Typography } from "@mui/material";
 import { useState } from "react";
 
-export default function HistoryCard() {
+type HistoryCardProps = {};
+
+export default function HistoryCard(props: HistoryCardProps) {
   const [onHover, setOnHover] = useState(false);
   const onMouseOverHandler = () => {
     setOnHover(true);
