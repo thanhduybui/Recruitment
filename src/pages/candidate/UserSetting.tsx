@@ -13,6 +13,10 @@ import ArticleIcon from "@mui/icons-material/Article";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import { Sidebar } from "@components/sidebar";
+import { UploadCVModal } from "@features/candidate/cv";
+import { ToastContainer } from "react-toastify";
+import { toastContainerOptions } from "@utils/toastifyUtils";
+import { ApplyJobHistory } from "@features/candidate/applyHistory";
 
 const { USER_PROFILE, CV, CV_PROFILE, FAVORITE_JOB, APPLICATION } = TabIndex;
 
@@ -50,12 +54,17 @@ export default function UserSetting() {
   const isAvatarModalOpen = useSelector(
     (state: RootState) => state.modals.avatarModal
   );
+
+  const isUploadCVModalOpen = useSelector(
+    (state: RootState) => state.modals.uploadCVModal
+  );
+
   const avatarUser = useSelector((state: RootState) => state.userAvatar);
 
   const sidebar = (
     <>
-      <AppAvatar link={avatarUser.url}></AppAvatar>
-      <Sidebar items={candidateSidebarItems}></Sidebar>
+      <AppAvatar link={avatarUser.url} />
+      <Sidebar items={candidateSidebarItems} />
     </>
   );
 
@@ -64,13 +73,16 @@ export default function UserSetting() {
       {selectedTab === USER_PROFILE && <Profile />}
       {selectedTab === CV_PROFILE && <CvProfile />}
       {selectedTab === CV && <CvManage />}
-      {selectedTab == FAVORITE_JOB && <FavoriteJobs />}
+      {selectedTab === FAVORITE_JOB && <FavoriteJobs />}
+      {selectedTab === APPLICATION && <ApplyJobHistory />}
     </>
   );
 
   return (
     <>
       {isAvatarModalOpen && <AvatarModal />}
+      {isUploadCVModalOpen && <UploadCVModal />}
+      <ToastContainer {...toastContainerOptions} />
       <LeftLayoutContainer>
         <LeftSidebarLayout sidebar={sidebar} main={main} />
       </LeftLayoutContainer>

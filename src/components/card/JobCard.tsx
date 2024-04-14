@@ -2,7 +2,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { IconButton, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CompanyLogo } from "@features/company";
@@ -12,14 +12,16 @@ import { RootState } from "@store";
 import { toast } from "react-toastify";
 import { toastTifyOptions } from "@utils/toastifyUtils";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
-import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import { useLocationName } from "@hooks";
+import api from "@utils/axios";
+import { getAccessToken } from "@utils/authUtils";
 
 type JobCardProps = CandidateJob & { isSaved: boolean };
 
 export default function JobCard(props: JobCardProps) {
   const [onHover, setOnHover] = useState(false);
   const auth = useSelector((state: RootState) => state.auth);
+  const [isFavorite, setIsFavorite] = useState(props.isFavorite);
 
   const locationName = useLocationName(props.locationId + "");
 
@@ -31,14 +33,52 @@ export default function JobCard(props: JobCardProps) {
     setOnHover(false);
   };
 
-  const saveFavoriteJobHandler = () => {
+  const saveFavoriteJobHandler = async () => {
     if (!auth.isAuthenticated) {
       toast.warning(
         "Bạn cần đăng nhập để thực hiện chức năng này",
         toastTifyOptions
       );
     } else {
-      toast.success("Chức năng này đang được phát triển", toastTifyOptions);
+      try {
+        const res = await api.post(
+          `/favorite-jobs`,
+          { jobId: props.id },
+          { headers: { Authorization: `Bearer ${getAccessToken()}` } }
+        );
+
+        toast.success(res.data?.message, toastTifyOptions);
+        setIsFavorite(true);
+      } catch (error) {
+        toast.error("Đã có lỗi xảy ra", toastTifyOptions);
+      }
+    }
+  };
+
+  const deleFavoriteJobHandler = async () => {
+    if (!auth.isAuthenticated) {
+      toast.warning(
+        "Bạn cần đăng nhập để thực hiện chức năng này",
+        toastTifyOptions
+      );
+    } else {
+      try {
+        const token = getAccessToken();
+        if (!token) {
+          console.error("Access token not found");
+          return;
+        }
+
+        const res = await api.put(`/favorite-jobs/${props.id}`, null, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        toast.success(res.data?.message, toastTifyOptions);
+        setIsFavorite(false);
+      } catch (error) {
+        console.error("Error:", error);
+        toast.error("Đã có lỗi xảy ra", toastTifyOptions);
+      }
     }
   };
 
@@ -171,19 +211,14 @@ export default function JobCard(props: JobCardProps) {
           </Link>
           {!isExpired && (
             <>
-              {!props.isSaved ? (
+              {!isFavorite ? (
                 <Tooltip title="Lưu tin" placement="top">
                   <IconButton
                     sx={{ borderRadius: "8px" }}
                     itemID={props.id}
                     onClick={saveFavoriteJobHandler}
                   >
-                    {props.isFavorite && (
-                      <FavoriteRoundedIcon color="primary" />
-                    )}
-                    {!props.isFavorite && (
-                      <FavoriteBorderIcon color="primary" />
-                    )}
+                    <FavoriteBorderIcon color="primary" />
                   </IconButton>
                 </Tooltip>
               ) : (
@@ -191,9 +226,9 @@ export default function JobCard(props: JobCardProps) {
                   <IconButton
                     sx={{ borderRadius: "8px" }}
                     itemID={props.id}
-                    onClick={saveFavoriteJobHandler}
+                    onClick={deleFavoriteJobHandler}
                   >
-                    <TurnedInNotIcon color="primary" />
+                    <FavoriteIcon color="primary" />
                   </IconButton>
                 </Tooltip>
               )}

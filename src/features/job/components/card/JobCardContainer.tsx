@@ -7,8 +7,10 @@ import { setTotalFoundJobs } from "@store/paginationData";
 import { requestJobConfig } from "@features/job";
 import Pagination from "@mui/material/Pagination";
 import { CandidateJob } from "@data/interface";
+import { getAccessToken } from "@utils/authUtils";
 
 export default function JobCardContainer() {
+  const defaultPage: number = 0;
   const jobFilter = useSelector((state: RootState) => state.jobFilter);
   const [jobs, setJobs] = useState<CandidateJob[]>([]);
   const dispatch = useDispatch();
@@ -19,7 +21,9 @@ export default function JobCardContainer() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios(requestJobConfig(0, jobFilter));
+        const response = await axios(
+          requestJobConfig(defaultPage, jobFilter, getAccessToken())
+        );
         const { listData, totalItems, totalPages } = response.data.data.jobs;
 
         setJobs(listData);
@@ -37,7 +41,9 @@ export default function JobCardContainer() {
     value: number
   ) => {
     try {
-      const response = await axios(requestJobConfig(value - 1, jobFilter));
+      const response = await axios(
+        requestJobConfig(value - 1, jobFilter, getAccessToken())
+      );
       const { listData } = response.data.data.jobs;
 
       setJobs(listData);
@@ -60,7 +66,7 @@ export default function JobCardContainer() {
             salaryRange={job.salaryRange}
             deadline={job.restAppliedDays}
             status={job.status}
-            isFavorite={false}
+            isFavorite={job.isFavorite}
             isHot={job.isHot}
             isSaved={false}
           />

@@ -1,10 +1,10 @@
 import { TextInput } from "@components/form";
 import {
   ModalBackdrop,
-  ModalContentContainer,
   ModalHeader,
   ScrollModalContainer,
 } from "@components/ui/modal";
+import { EditModalContainer } from "@components/ui/modal";
 import { modalName } from "@data/constants";
 import { createPortal } from "react-dom";
 import Button from "@mui/material/Button";
@@ -20,14 +20,14 @@ export default function UserDetailModal() {
 
   return createPortal(
     <ModalBackdrop modalName={modalName.USER_DETAIL_MODAL}>
-      <ModalContentContainer>
+      <EditModalContainer>
         <ModalHeader
           title="Chi tiết tài khoản"
           modalName={modalName.USER_DETAIL_MODAL}
         />
-        <ScrollModalContainer>
+        <ScrollModalContainer wide>
           <form className="flex gap-6">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 flex-1">
               <TextInput
                 disabled
                 defaultValue="12345"
@@ -59,7 +59,7 @@ export default function UserDetailModal() {
                 labelBold
               />
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 flex-1">
               <TextInput
                 disabled
                 defaultValue="20"
@@ -92,7 +92,7 @@ export default function UserDetailModal() {
             Đóng
           </Button>
         </div>
-      </ModalContentContainer>
+      </EditModalContainer>
     </ModalBackdrop>,
     document.getElementById("modal") as HTMLElement
   );

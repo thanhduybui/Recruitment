@@ -10,6 +10,8 @@ import {
   KeyInfo,
 } from "@features/jobDetails";
 import { CompanyShortProfile } from "@features/jobDetails";
+import { ToastContainer } from "react-toastify";
+import { toastContainerOptions } from "@utils/toastifyUtils";
 
 export default function JobDetail() {
   const data = useRouteLoaderData("jobDetail");
@@ -30,6 +32,7 @@ export default function JobDetail() {
         padding: 0,
       }}
     >
+      <ToastContainer {...toastContainerOptions} />
       <div className="flex">
         <div className="flex-1 w-2/3 flex flex-col bg-gray-50">
           <JobDetailHeader
