@@ -5,28 +5,9 @@ import api from "@utils/axios";
 import { getAccessToken } from "@utils/authUtils";
 import { CircularProgress } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-
-const userData = [
-  {
-    id: "20011",
-    name: "John Doe",
-    email: "johndoe@gmail.com",
-    status: "Hoạt động",
-    role: "Admin",
-  },
-];
-
-const additionalUsers: typeof userData = [];
-
-for (let i = 1; i <= 10; i++) {
-  additionalUsers.push({
-    id: (parseInt(userData[0].id) + i).toString(),
-    name: `User ${i}`,
-    email: `user${i}@example.com`,
-    status: "Hoạt động", // Update the dates as needed
-    role: "User",
-  });
-}
+import { AddUserModal } from "@features/admin/userManagement";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@store";
 
 type UserDataRowType = {
   id?: string;
@@ -43,6 +24,11 @@ export default function UserDataList() {
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const addUserModalOpen = useSelector(
+    (state: RootState) => state.modals.addUserModal
+  );
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -66,6 +52,7 @@ export default function UserDataList() {
 
   return (
     <>
+      {addUserModalOpen && <AddUserModal />}
       <div className="flex flex-col gap-2 mt-4 mb-10 overflow-x-auto">
         <UserDataRow
           isHead={true}

@@ -8,6 +8,8 @@ import Link from "@mui/material/Link";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { UserDetailModal } from "@features/admin/userManagement";
+import { ToastContainer } from "react-toastify";
+import { toastContainerOptions } from "@utils/toastifyUtils";
 
 export default function AdminUser() {
   const isDetailModalOpen = useSelector(
@@ -35,6 +37,7 @@ export default function AdminUser() {
 
   return (
     <div className="mt-2">
+      <ToastContainer {...toastContainerOptions} />
       {isDetailModalOpen && <UserDetailModal />}
       <Container maxWidth="xl" fixed>
         <div className="flex flex-col gap-2 bg-gray-50">
