@@ -10,10 +10,12 @@ import { Option } from "@data/interface";
 import { useDispatch, useSelector } from "react-redux";
 import { setJobFilter } from "@store/filterOption";
 import { RootState } from "@store";
+import { useState } from "react";
 
 export default function BasicFilter() {
   const data = useRouteLoaderData("findJob");
   const dispatch = useDispatch();
+  const [keyword, setKeyword] = useState("");
   const jobFilter = useSelector((state: RootState) => state.jobFilter);
 
   const { experienceRanges, salaryRanges, locations } = data as {
@@ -34,11 +36,17 @@ export default function BasicFilter() {
     dispatch(setJobFilter({ ...jobFilter, salaryRange: option.id }));
   };
 
+  const onSearchKeywordHandler = () => {
+    dispatch(setJobFilter({ ...jobFilter, searchKeyword: keyword }));
+    console.log(jobFilter);
+  };
+
   return (
     <div className="grid grid-cols-10 gap-2 items-center py-4 bg-white rounded-b-md">
       <SearchInput
         styles="col-span-3"
         placeholder="Tìm kiếm việc làm, công ty"
+        onChange={(e) => setKeyword(e.target.value)}
       />
 
       <div className="col-span-2">
@@ -91,6 +99,7 @@ export default function BasicFilter() {
         variant="contained"
         size="large"
         style={{ textTransform: "none" }}
+        onClick={onSearchKeywordHandler}
       >
         Tìm
       </Button>

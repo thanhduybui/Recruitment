@@ -4,7 +4,14 @@ import { CompanyLogo } from "@features/company";
 import { Typography } from "@mui/material";
 import { useState } from "react";
 
-type HistoryCardProps = {};
+type HistoryCardProps = {
+  name?: string;
+  companyName?: string;
+  applyTime?: string;
+  status?: string;
+  salary?: string;
+  companyLogo?: string;
+};
 
 export default function HistoryCard(props: HistoryCardProps) {
   const [onHover, setOnHover] = useState(false);
@@ -24,7 +31,8 @@ export default function HistoryCard(props: HistoryCardProps) {
     >
       <CompanyLogo
         src={
-          "https://static.topcv.vn/company_logos/Du7iqFvgKR5Qt3CWzFl5ZGnUBJRbppEN_1681815625____148db75bd6c6c854341c9df14be2e2c2.jpg"
+          props.companyLogo ||
+          "https://cdn-icons-png.flaticon.com/512/25/25231.png"
         }
       />
       <div className="text-gray-500 font-medium flex flex-col gap-6 w-1/2">
@@ -40,7 +48,7 @@ export default function HistoryCard(props: HistoryCardProps) {
                 color: onHover ? "#0581e6" : "#444444",
               }}
             >
-              "Java fresher"
+              {props.name || "Java fresher"}
             </Typography>
           </Tooltip>
 
@@ -53,7 +61,7 @@ export default function HistoryCard(props: HistoryCardProps) {
                 fontSize: "0.8rem",
               }}
             >
-              Tên công ty
+              {props.companyName}
             </Typography>
           </Tooltip>
 
@@ -66,7 +74,7 @@ export default function HistoryCard(props: HistoryCardProps) {
                 fontSize: "0.8rem",
               }}
             >
-              Thời gian ứng tuyển: 12/01/2022
+              Thời gian ứng tuyển: {props.applyTime}
             </Typography>
           </Tooltip>
         </div>
@@ -84,7 +92,7 @@ export default function HistoryCard(props: HistoryCardProps) {
                 fontWeight: 300,
               }}
             >
-              Trạng thái: NTD đã xem hồ sơ
+              Trạng thái: {props.status}
             </Typography>
           </Tooltip>
         </div>
@@ -100,7 +108,7 @@ export default function HistoryCard(props: HistoryCardProps) {
               fontWeight: 600,
             }}
           >
-            5 - 10 triệu
+            {props.salary}
           </Typography>
         </div>
 
