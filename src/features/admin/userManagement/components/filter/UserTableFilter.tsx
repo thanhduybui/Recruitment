@@ -11,14 +11,40 @@ import { useState } from "react";
 
 import { modalName } from "@data/constants";
 import { openModal } from "@store/modal";
+import api from "@utils/axios";
+import { getAccessToken } from "@utils/authUtils";
+import { UserDataRowType } from "../dataTable/UserDataList";
 
-export default function UserTableFilter() {
+type UserTableFilterProps = {
+  getUsers: (users: UserDataRowType[]) => void;
+};
+
+export default function UserTableFilter(props: UserTableFilterProps) {
   const isMediumScreen = useMediaQuery("(min-width: 760px)");
   const [searchOpen, setSearchOpen] = useState(false);
   const dispatch = useDispatch();
+  const [searchEmail, setSearchEmail] = useState("");
+  const [users, setUsers] = useState<UserDataRowType[]>([]);
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchEmail(e.target.value);
+    props.getUsers(users);
+  };
 
   const onClickHandler = () => {
     dispatch(openModal({ modalName: modalName.ADD_USER_MODAL }));
+  };
+
+  const searchHandler = async () => {
+    try {
+      const res = await api.get(`/users/search?email=${searchEmail}`, {
+        headers: { Authorization: "Bearer " + getAccessToken() },
+      });
+      setUsers(res.data.data);
+      props.getUsers(res.data.data);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -32,14 +58,25 @@ export default function UserTableFilter() {
               : "hidden"
           }`}
         >
-          <SearchInput placeholder="Tìm kiếm người dùng" />
+          <SearchInput
+            placeholder="Tìm kiếm người dùng"
+            onChange={(e) => onChangeHandler(e)}
+          />
           <Button
             variant="contained"
             className="bg-primary-600 text-white"
             sx={{ textTransform: "none" }}
             size={isMediumScreen ? "medium" : "small"}
+            onClick={() => {
+              if (users.length > 0) {
+                setUsers([]);
+                props.getUsers([]);
+              } else {
+                searchHandler();
+              }
+            }}
           >
-            Tìm kiếm
+            {users.length > 0 ? "Tải lại" : "Tìm kiếm"}
           </Button>
         </div>
 

@@ -35,30 +35,6 @@ const notifications = [
     content:
       "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
   },
-  {
-    id: 5,
-    title: "Tìm thấy một công việc phù hợp với bạn",
-    content:
-      "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
-  },
-  {
-    id: 6,
-    title: "Tìm thấy một công việc phù hợp với bạn",
-    content:
-      "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
-  },
-  {
-    id: 7,
-    title: "Tìm thấy một công việc phù hợp với bạn",
-    content:
-      "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
-  },
-  {
-    id: 8,
-    title: "Tìm thấy một công việc phù hợp với bạn",
-    content:
-      "Công ty abc đăng tuyển vị trí Fresher React JS, nhanh tay ứng tuyển nào",
-  },
 ];
 
 export default function NotificationBox(props: NotificationBoxProps) {
@@ -73,12 +49,12 @@ export default function NotificationBox(props: NotificationBoxProps) {
         horizontal: "left",
       }}
     >
-      <div className="min-w-[340px] max-w-[400px] flex flex-col gap-2 p-2">
+      <div className="min-w-[300px] max-w-[400px] flex flex-col gap-2 p-2">
         <Typography variant="body1" sx={{ fontWeight: 600 }}>
           Thông báo
         </Typography>
         <Divider />
-        <div className="flex flex-col gap-2 max-h-[500px] lg:max-h-[700px] overflow-y-auto">
+        <div className="flex flex-col gap-2 max-h-[700px] lg:max-h-[500px] overflow-y-auto">
           {notifications.map((noti) => (
             <Notification
               key={noti.id}

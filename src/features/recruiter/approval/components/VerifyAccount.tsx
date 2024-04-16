@@ -58,6 +58,9 @@ export default function VerifyAccount() {
             Authorization: `Bearer ${getAccessToken()}`,
           },
         });
+
+        console.log(res.data.data);
+
         if (res.data.data.company?.businessLicense) {
           setFileSrc(res.data.data.company?.businessLicense);
           setIsVerified(true);
@@ -85,9 +88,9 @@ export default function VerifyAccount() {
           {!isLoading && !isVerified && (
             <FileDropZone
               isPapers
-              description="Kích thước file không quá 200MB và phải trong số các định dạng: docx, pdf"
+              description="Kích thước file không quá 200MB và phải trong số các định dạng: pdf"
               content="Tải chứng nhận lên"
-              exts={[".docx", ".pdf"]}
+              exts={[".pdf"]}
               onSelectFile={handleSelectFile}
             />
           )}

@@ -18,25 +18,25 @@ export default function NearJobSection() {
         <div className="job-card-container grid grid-cols-2 grid-rows-2 gap-y-2 gap-x-4 mt-4">
           <JobCard
             isSaved
-            title="Ăn ngủ qua ngày"
+            title="Kiểm toán ngân hàng"
             companyName="Its Ok"
             companyImage="none"
           />
           <JobCard
             isSaved
-            title="Ăn ngủ qua ngày"
+            title="Kiểm toán ngân hàng"
             companyName="Its Ok"
             companyImage="none"
           />
           <JobCard
             isSaved
-            title="Ăn ngủ qua ngày"
+            title="Kiểm toán ngân hàng"
             companyName="Its Ok"
             companyImage="none"
           />
           <JobCard
             isSaved
-            title="Ăn ngủ qua ngày"
+            title="Kiểm toán ngân hàng"
             companyName="Its Ok"
             companyImage="none"
           />

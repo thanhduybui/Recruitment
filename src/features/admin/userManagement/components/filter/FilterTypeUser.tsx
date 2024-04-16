@@ -16,7 +16,7 @@ import { setIndex } from "@store/userFilterTab";
 import { RootState } from "@store";
 import { userFilterTab } from "@data/constants";
 
-const { CANDIDATE_TAB, EMPLOYER_TAB, ADMIN_TAB, PENDING_TAB } = userFilterTab;
+const { CANDIDATE_TAB, EMPLOYER_TAB, ADMIN_TAB, ALL_USER } = userFilterTab;
 
 const iconButtonStyles = {
   borderRadius: "8px",
@@ -32,8 +32,6 @@ const FilterTypeUser = () => {
   );
   const open = Boolean(anchorEl);
   const id = open ? "type-user-menu" : undefined;
-
-  console.log(index);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -75,10 +73,10 @@ const FilterTypeUser = () => {
         <Paper>
           <MenuList>
             {[
+              { tab: ALL_USER, text: "Tất cả" },
               { tab: CANDIDATE_TAB, text: "Ứng viên" },
               { tab: EMPLOYER_TAB, text: "Nhà tuyển dụng" },
               { tab: ADMIN_TAB, text: "Quản trị viên" },
-              { tab: PENDING_TAB, text: "Tài khoản chờ xét duyệt" },
             ].map((item) => (
               <MenuItem key={item.tab} onClick={() => handleClose(item.tab)}>
                 {index === item.tab && (

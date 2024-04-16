@@ -6,10 +6,13 @@ import { getAccessToken } from "@utils/authUtils";
 import { CircularProgress } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import { AddUserModal } from "@features/admin/userManagement";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@store";
+import { useSelector } from "react-redux";
+import { userFilterTab } from "@data/constants";
 
-type UserDataRowType = {
+import { RootState } from "@store";
+import { set } from "date-fns";
+
+export type UserDataRowType = {
   id?: string;
   fullName?: string;
   email?: string;
@@ -19,11 +22,23 @@ type UserDataRowType = {
   isHead?: boolean;
 };
 
-export default function UserDataList() {
+type UserDataListProps = {
+  searchUsers?: UserDataRowType[];
+};
+
+const { CANDIDATE_TAB, EMPLOYER_TAB, ADMIN_TAB } = userFilterTab;
+
+export default function UserDataList(props: UserDataListProps) {
   const [users, setUsers] = useState<UserDataRowType[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [_, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [searchUsers, setSearchUsers] = useState<UserDataRowType[]>(
+    props.searchUsers || []
+  );
+  const type = useSelector((state: RootState) => state.userFilterTab.tabIndex);
+
+  console.log(props.searchUsers);
 
   const addUserModalOpen = useSelector(
     (state: RootState) => state.modals.addUserModal
@@ -33,7 +48,18 @@ export default function UserDataList() {
     const fetchUserData = async () => {
       try {
         setLoading(true);
-        const res = await api.get("/users", {
+        let url = "";
+        if (type === CANDIDATE_TAB) {
+          url = "/users?role=CANDIDATE";
+        } else if (type === EMPLOYER_TAB) {
+          url = "/users?role=RECRUITER";
+        } else if (type === ADMIN_TAB) {
+          url = "/users?role=ADMIN";
+        } else {
+          url = "/users";
+        }
+
+        const res = await api.get(`${url}`, {
           headers: { Authorization: "Bearer " + getAccessToken() },
         });
 
@@ -48,7 +74,7 @@ export default function UserDataList() {
       }
     };
     fetchUserData();
-  }, []);
+  }, [type]);
 
   return (
     <>
@@ -64,6 +90,7 @@ export default function UserDataList() {
         />
         {loading && <CircularProgress />}
         {!loading &&
+          props.searchUsers?.length === 0 &&
           users.map((userData) => (
             <UserDataRow
               key={userData.id}
@@ -71,6 +98,15 @@ export default function UserDataList() {
               {...userData}
             />
           ))}
+        {props.searchUsers &&
+          props.searchUsers.map((userData) => (
+            <UserDataRow
+              key={userData.id}
+              name={userData.fullName}
+              {...userData}
+            />
+          ))}
+
         {!loading && (!users || users.length === 0) && <p>No users found</p>}
       </div>
       <div className="flex justify-end">

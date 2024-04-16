@@ -22,6 +22,7 @@ const initialState: ModalsState = {
   imformModal: false,
   updateCompanyModal: false,
   deleteLicenseModal: false,
+  deleteConfirmModal: false,
   uploadCVModal: false,
 };
 
