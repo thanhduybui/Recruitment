@@ -5,7 +5,7 @@ interface UserFilterTabState {
 }
 
 const initialState: UserFilterTabState = {
-  tabIndex: 1,
+  tabIndex: 4,
 };
 
 const userFilterTabSlide = createSlice({

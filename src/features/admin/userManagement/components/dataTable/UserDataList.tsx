@@ -10,8 +10,9 @@ import { useSelector } from "react-redux";
 import { userFilterTab } from "@data/constants";
 
 import { RootState } from "@store";
+import { set } from "date-fns";
 
-type UserDataRowType = {
+export type UserDataRowType = {
   id?: string;
   fullName?: string;
   email?: string;
@@ -21,14 +22,23 @@ type UserDataRowType = {
   isHead?: boolean;
 };
 
-const { CANDIDATE_TAB, EMPLOYER_TAB, ADMIN_TAB, ALL_USER } = userFilterTab;
+type UserDataListProps = {
+  searchUsers?: UserDataRowType[];
+};
 
-export default function UserDataList() {
+const { CANDIDATE_TAB, EMPLOYER_TAB, ADMIN_TAB } = userFilterTab;
+
+export default function UserDataList(props: UserDataListProps) {
   const [users, setUsers] = useState<UserDataRowType[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [_, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [searchUsers, setSearchUsers] = useState<UserDataRowType[]>(
+    props.searchUsers || []
+  );
   const type = useSelector((state: RootState) => state.userFilterTab.tabIndex);
+
+  console.log(props.searchUsers);
 
   const addUserModalOpen = useSelector(
     (state: RootState) => state.modals.addUserModal
@@ -80,6 +90,7 @@ export default function UserDataList() {
         />
         {loading && <CircularProgress />}
         {!loading &&
+          props.searchUsers?.length === 0 &&
           users.map((userData) => (
             <UserDataRow
               key={userData.id}
@@ -87,6 +98,15 @@ export default function UserDataList() {
               {...userData}
             />
           ))}
+        {props.searchUsers &&
+          props.searchUsers.map((userData) => (
+            <UserDataRow
+              key={userData.id}
+              name={userData.fullName}
+              {...userData}
+            />
+          ))}
+
         {!loading && (!users || users.length === 0) && <p>No users found</p>}
       </div>
       <div className="flex justify-end">
