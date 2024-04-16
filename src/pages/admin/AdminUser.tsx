@@ -10,6 +10,8 @@ import { RootState } from "@store";
 import { UserDetailModal } from "@features/admin/userManagement";
 import { ToastContainer } from "react-toastify";
 import { toastContainerOptions } from "@utils/toastifyUtils";
+import { ModalConfirmDelete } from "@components/ui/modal";
+import { modalType } from "@data/constants";
 
 export default function AdminUser() {
   const isDetailModalOpen = useSelector(
@@ -37,6 +39,10 @@ export default function AdminUser() {
 
   return (
     <div className="mt-2">
+      <ModalConfirmDelete
+        content="Bạn muốn xóa người dùng này ?"
+        type={modalType.USER}
+      />
       <ToastContainer {...toastContainerOptions} />
       {isDetailModalOpen && <UserDetailModal />}
       <Container maxWidth="xl" fixed>

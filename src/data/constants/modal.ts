@@ -12,4 +12,5 @@ export const modalName = {
   UPDATE_COMPANY_MODAL: "updateCompanyModal",
   DELETE_LICENSE_MODAL: "deleteLicenseModal",
   UPLOAD_CV_MODAL: "uploadCVModal",
+  CONFIRM_DELETE_MODAL: "deleteConfirmModal",
 };

@@ -6,7 +6,9 @@ import { getAccessToken } from "@utils/authUtils";
 import { CircularProgress } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import { AddUserModal } from "@features/admin/userManagement";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { userFilterTab } from "@data/constants";
+
 import { RootState } from "@store";
 
 type UserDataRowType = {
@@ -19,11 +21,14 @@ type UserDataRowType = {
   isHead?: boolean;
 };
 
+const { CANDIDATE_TAB, EMPLOYER_TAB, ADMIN_TAB, ALL_USER } = userFilterTab;
+
 export default function UserDataList() {
   const [users, setUsers] = useState<UserDataRowType[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const type = useSelector((state: RootState) => state.userFilterTab.tabIndex);
 
   const addUserModalOpen = useSelector(
     (state: RootState) => state.modals.addUserModal
@@ -33,7 +38,18 @@ export default function UserDataList() {
     const fetchUserData = async () => {
       try {
         setLoading(true);
-        const res = await api.get("/users", {
+        let url = "";
+        if (type === CANDIDATE_TAB) {
+          url = "/users?role=CANDIDATE";
+        } else if (type === EMPLOYER_TAB) {
+          url = "/users?role=RECRUITER";
+        } else if (type === ADMIN_TAB) {
+          url = "/users?role=ADMIN";
+        } else {
+          url = "/users";
+        }
+
+        const res = await api.get(`${url}`, {
           headers: { Authorization: "Bearer " + getAccessToken() },
         });
 
@@ -48,7 +64,7 @@ export default function UserDataList() {
       }
     };
     fetchUserData();
-  }, []);
+  }, [type]);
 
   return (
     <>

@@ -25,6 +25,9 @@ export default function UserDataRow(props: UserGridProps) {
     dispatch(openModal({ modalName: modalName.USER_DETAIL_MODAL }));
   };
 
+  const handleDeleteUser = (id: string | undefined) => {
+    dispatch(openModal({ modalName: modalName.CONFIRM_DELETE_MODAL }));
+  };
   return (
     <>
       <DataRowContainer isHead={props.isHead}>
@@ -45,7 +48,7 @@ export default function UserDataRow(props: UserGridProps) {
               </IconButton>
             </Tooltip>
             <Tooltip title="Xoá người dùng">
-              <IconButton>
+              <IconButton onClick={() => handleDeleteUser(props.id)}>
                 <DeleteOutlineOutlinedIcon color="error" />
               </IconButton>
             </Tooltip>
