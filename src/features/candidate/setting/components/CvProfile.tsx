@@ -1,66 +1,77 @@
-import { SearchSelect, Select } from "@components/form";
+import { SearchSelect } from "@components/form";
+import { getAccessToken } from "@utils/authUtils";
 
 import Typography from "@mui/material/Typography";
 import WorkIcon from "@mui/icons-material/Work";
 import Button from "@mui/material/Button";
-import { Gender } from "@data/constants";
 import { useEffect, useState } from "react";
 import { Option } from "@data/interface";
 import api from "@utils/axios";
+import { toast } from "react-toastify";
+import { toastTifyOptions } from "@utils/toastifyUtils";
 
-const genders = [
-  {
-    value: Gender.MALE,
-    name: Gender.MALE,
-  },
-  { value: Gender.FEMALE, name: Gender.FEMALE },
-  { value: Gender.OTHER, name: Gender.OTHER },
-];
+type CvProfileProps = {
+  workLocation?: Option;
+  field?: Option;
+  major?: Option;
+  gender?: string;
+};
 
 export default function CvProfile() {
   const [fields, setFields] = useState<Option[]>([]);
   const [majors, setMajors] = useState<Option[]>([]);
   const [locations, setLocations] = useState<Option[]>([]);
+  const [useCVProfile, setUseCVProfile] = useState<CvProfileProps>();
+  const [loading, setLoading] = useState<boolean>(true); // State for loading indicator
+
+  const handleUpdateProfile = async () => {
+    console.log(useCVProfile);
+    try {
+      await api.put(
+        "/users/cv-profile",
+        {
+          fieldId: useCVProfile?.field?.id,
+          majorId: useCVProfile?.major?.id,
+          locationId: useCVProfile?.workLocation?.id,
+        },
+        {
+          headers: { Authorization: `Bearer ${getAccessToken()}` },
+        }
+      );
+
+      toast.success("Cập nhật thông tin thành công", toastTifyOptions);
+    } catch (error) {
+      console.error(error);
+      toast.error("Cập nhật thông tin thất bại", toastTifyOptions);
+    }
+  };
 
   useEffect(() => {
-    // Define fetchFields function to fetch fields data
-    const fetchFields = async () => {
+    const fetchData = async () => {
       try {
-        const res = await api.get("/fields");
-        setFields(res.data.data.fields); // Set fields state with fetched data
+        const [fieldsRes, majorsRes, locationsRes, useCVProfileRes] =
+          await Promise.all([
+            api.get("/fields"),
+            api.get("/majors"),
+            api.get("/locations"),
+            api.get("/users/cv-profile", {
+              headers: { Authorization: `Bearer ${getAccessToken()}` },
+            }),
+          ]);
+
+        setFields(fieldsRes.data.data.fields);
+        setMajors(majorsRes.data.data.majors);
+        setLocations(locationsRes.data.data.locations);
+        setUseCVProfile(useCVProfileRes.data.data.profile);
+        setLoading(false); // Set loading to false after all data is fetched
       } catch (error) {
-        console.error("Error fetching fields:", error);
-        // Handle error if needed
+        setLoading(false); // Set loading to false if there's an error
       }
     };
 
-    // Define fetchMajors function to fetch majors data
-    const fetchMajors = async () => {
-      try {
-        const res = await api.get("/majors");
-        setMajors(res.data.data.majors); // Set majors state with fetched data
-        console.log(res.data.data);
-      } catch (error) {
-        console.error("Error fetching majors:", error);
-        // Handle error if needed
-      }
-    };
-
-    const fetchLocations = async () => {
-      try {
-        const res = await api.get("/locations");
-        setLocations(res.data.data.locations);
-      } catch (error) {
-        console.error("Error fetching locations:", error);
-      }
-    };
-
-    fetchFields();
-    fetchMajors();
-    fetchLocations();
+    fetchData();
   }, []);
 
-  useEffect(() => {}, []);
   return (
     <div className="p-4">
       <div>
@@ -82,38 +93,56 @@ export default function CvProfile() {
           gợi ý việc làm phù hợp nhất cho bạn.
         </Typography>
       </div>
-      <div className="w-3/4 m-auto pt-5">
-        <form className="w-full flex flex-col gap-4">
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center text-gray-400 font-semibold gap-2">
-              <WorkIcon />
-              <p className="text-m">Nhu cầu cầu công việc</p>
+      {loading ? (
+        <div>Loading...</div> // Display loading indicator while data is being fetched
+      ) : (
+        <div className="w-3/4 m-auto pt-5">
+          <form className="w-full flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center text-gray-400 font-semibold gap-2">
+                <WorkIcon />
+                <p className="text-m">Nhu cầu cầu công việc</p>
+              </div>
+              <SearchSelect
+                onSelect={(option: Option) => {
+                  setUseCVProfile({ ...useCVProfile, field: option });
+                }}
+                label="Chọn Lĩnh vực"
+                options={fields}
+                initValue={useCVProfile?.field}
+              />
+              <SearchSelect
+                onSelect={(option: Option) => {
+                  setUseCVProfile({ ...useCVProfile, major: option });
+                }}
+                label="Chọn ngành nghề"
+                options={majors}
+                initValue={useCVProfile?.major}
+              />
+              <SearchSelect
+                onSelect={(option: Option) => {
+                  setUseCVProfile({ ...useCVProfile, workLocation: option });
+                }}
+                label="Chọn nơi làm việc"
+                options={locations}
+                initValue={useCVProfile?.workLocation}
+              />
+              <Button
+                onClick={handleUpdateProfile}
+                variant="contained"
+                sx={{
+                  textTransform: "none",
+                  width: "fit-content",
+                  margin: "auto",
+                  marginTop: "1.2rem",
+                }}
+              >
+                Cập nhật
+              </Button>
             </div>
-            <Select
-              initValue={genders[0]}
-              options={genders}
-              label="Chọn giới tính"
-            ></Select>
-            <SearchSelect label="Chọn Lĩnh vực" options={fields} />
-            <SearchSelect label="Chọn ngành nghề" options={majors} />
-            <SearchSelect
-              label="Chọn nơi làm việc"
-              options={locations}
-            ></SearchSelect>
-            <Button
-              variant="contained"
-              sx={{
-                textTransform: "none",
-                width: "fit-content",
-                margin: "auto",
-                marginTop: "1.2rem",
-              }}
-            >
-              Cập nhật
-            </Button>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
