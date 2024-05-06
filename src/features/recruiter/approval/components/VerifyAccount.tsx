@@ -59,8 +59,6 @@ export default function VerifyAccount() {
           },
         });
 
-        console.log(res.data.data);
-
         if (res.data.data.company?.businessLicense) {
           setFileSrc(res.data.data.company?.businessLicense);
           setIsVerified(true);

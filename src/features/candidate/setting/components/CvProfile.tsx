@@ -1,11 +1,12 @@
-import { Select, TextInput } from "@components/form";
+import { SearchSelect, Select } from "@components/form";
 
 import Typography from "@mui/material/Typography";
 import WorkIcon from "@mui/icons-material/Work";
 import Button from "@mui/material/Button";
 import { Gender } from "@data/constants";
-
-import { expieriences, salaryRanges } from "@data/api";
+import { useEffect, useState } from "react";
+import { Option } from "@data/interface";
+import api from "@utils/axios";
 
 const genders = [
   {
@@ -17,6 +18,49 @@ const genders = [
 ];
 
 export default function CvProfile() {
+  const [fields, setFields] = useState<Option[]>([]);
+  const [majors, setMajors] = useState<Option[]>([]);
+  const [locations, setLocations] = useState<Option[]>([]);
+
+  useEffect(() => {
+    // Define fetchFields function to fetch fields data
+    const fetchFields = async () => {
+      try {
+        const res = await api.get("/fields");
+        setFields(res.data.data.fields); // Set fields state with fetched data
+      } catch (error) {
+        console.error("Error fetching fields:", error);
+        // Handle error if needed
+      }
+    };
+
+    // Define fetchMajors function to fetch majors data
+    const fetchMajors = async () => {
+      try {
+        const res = await api.get("/majors");
+        setMajors(res.data.data.majors); // Set majors state with fetched data
+        console.log(res.data.data);
+      } catch (error) {
+        console.error("Error fetching majors:", error);
+        // Handle error if needed
+      }
+    };
+
+    const fetchLocations = async () => {
+      try {
+        const res = await api.get("/locations");
+        setLocations(res.data.data.locations);
+      } catch (error) {
+        console.error("Error fetching locations:", error);
+      }
+    };
+
+    fetchFields();
+    fetchMajors();
+    fetchLocations();
+  }, []);
+
+  useEffect(() => {}, []);
   return (
     <div className="p-4">
       <div>
@@ -50,24 +94,12 @@ export default function CvProfile() {
               options={genders}
               label="Chọn giới tính"
             ></Select>
-            <TextInput
-              label="Vị trí công việc"
-              placeholder="Nhập vị trí công việc"
-              id="position"
-              type="text"
-            ></TextInput>
-            <Select search label="Chọn ngành nghề" id="major" />
-            <Select chip search label="Chọn kỹ năng" />
-            <Select search label="Chọn nơi làm việc"></Select>
-            <Select
-              options={expieriences}
-              label="Chọn kinh nghiệm làm việc"
-            ></Select>
-            <Select
-              options={salaryRanges}
-              label="Chọn mức lương mong muốn"
-            ></Select>
-
+            <SearchSelect label="Chọn Lĩnh vực" options={fields} />
+            <SearchSelect label="Chọn ngành nghề" options={majors} />
+            <SearchSelect
+              label="Chọn nơi làm việc"
+              options={locations}
+            ></SearchSelect>
             <Button
               variant="contained"
               sx={{
