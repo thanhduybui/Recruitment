@@ -14,6 +14,8 @@ import { modalName } from "@data/constants";
 import { useDispatch } from "react-redux";
 import { getAccessToken } from "@utils/authUtils";
 import api from "@utils/axios";
+import DeleteCVModal from "./DeleteCVModal";
+import { set } from "date-fns";
 
 export default function CvLib() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -46,10 +48,15 @@ export default function CvLib() {
       }
     };
     fetchCv();
-  }, []);
+  }, [cvList]);
+
+  const onReload = () => {
+    setCvList([]);
+  };
 
   return (
     <div>
+      <DeleteCVModal onReload={onReload} />
       <div className="flex item-center justify-between mb-2">
         <Typography
           variant="subtitle1"
@@ -93,7 +100,13 @@ export default function CvLib() {
       <Divider />
       <CvLibContainer>
         {cvList.map((cv: any) => (
-          <CvCard key={cv.id} name={cv.name} default={cv.isDefault} upload />
+          <CvCard
+            key={cv.id}
+            id={cv.id}
+            name={cv.name}
+            default={cv.isDefault}
+            upload
+          />
         ))}
       </CvLibContainer>
     </div>

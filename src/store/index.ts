@@ -3,7 +3,7 @@ import sidebarReducer from "./sidebar.ts";
 import modalReducer from "./modal.ts";
 import roleReducer from "./role.ts";
 import userFilterTabReducer from "./userFilterTab.ts";
-
+import deleteCvIdReducer from "./deleteCvId.ts";
 import registerEmailReducer from "./register.ts";
 import jobDetailReducer from "./jobDetail.ts";
 import changeCompanyAvatarReducer from "./changeCompanyAvatar.ts";
@@ -25,6 +25,7 @@ export const store = configureStore({
     jobFilter: jobFilterReducer,
     paginationData: paginationDataReducer,
     userAvatar: userAvatarReducer,
+    deleteCvId: deleteCvIdReducer,
   },
 });
 

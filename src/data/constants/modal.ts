@@ -13,4 +13,5 @@ export const modalName = {
   DELETE_LICENSE_MODAL: "deleteLicenseModal",
   UPLOAD_CV_MODAL: "uploadCVModal",
   CONFIRM_DELETE_MODAL: "deleteConfirmModal",
+  DELETE_CV_MODAL: "deleteCVModal",
 };

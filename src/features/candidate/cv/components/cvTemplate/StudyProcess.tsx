@@ -8,7 +8,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { FormStudyProcess, FormWorkingProcess } from "..";
+import { FormStudyProcess, FormWorkingProcess } from "../..";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 

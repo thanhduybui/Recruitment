@@ -1,10 +1,11 @@
-export { default as WorkingProcess } from "./components/WorkingProcess";
-export { default as DateRangePicker } from "./components/DateRangePicker";
-export { default as FormWorkingProcess } from "./components/FormWorkingProcess";
-export { default as FormStudyProcess } from "./components/FormStudyProcess";
+export { default as WorkingProcess } from "./components/cvTemplate/WorkingProcess";
+export { default as DateRangePicker } from "./components/cvTemplate/DateRangePicker";
+export { default as FormWorkingProcess } from "./components/cvTemplate/FormWorkingProcess";
+export { default as FormStudyProcess } from "./components/cvTemplate/FormStudyProcess";
 export { default as ApplicatonGuideline } from "./components/ApplicationGuideline";
 export { default as UploadCVModal } from "./components/UploadCVModal";
 export { default as CvItem } from "./components/CvCard";
 export { default as CvLib } from "./components/CvLib";
 export { default as CvLibContainer } from "./components/CvLibContainer";
 export { default as CvManage } from "./components/CvManage";
+export { default as DeleteCVModal } from "./components/DeleteCVModal";

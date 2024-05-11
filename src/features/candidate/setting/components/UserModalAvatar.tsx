@@ -22,7 +22,6 @@ export default function UserModalAvatar() {
         },
       });
       dispatch(setUserAvatar({ url: res.data.data.avatar }));
-      console.log(res.data.data);
     } catch (err) {
       console.error(err);
     } finally {

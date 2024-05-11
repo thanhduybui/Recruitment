@@ -9,7 +9,7 @@ import { editor_key } from "@config/key";
 import { useRef } from "react";
 import { Editor as TinyMCEEditor } from "tinymce";
 import { WorkingProcess } from "@features/candidate/cv";
-import StudyProcess from "@features/candidate/cv/components/StudyProcess";
+import StudyProcess from "@features/candidate/cv/components/cvTemplate/StudyProcess";
 import Button from "@mui/material/Button";
 import { FileDropZone } from "@components/form/File";
 

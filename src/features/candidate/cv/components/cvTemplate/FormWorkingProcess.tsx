@@ -1,21 +1,21 @@
 import { CustomFormControlLabel, TextInput, Textarea } from "@components/form";
-import { DateRangePicker } from "..";
+import { DateRangePicker } from "../..";
 
-export default function FormStudyProcess() {
+export default function FormWorkingProcess() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
         <div>
-          <CustomFormControlLabel label="Thời gian" strict />
+          <CustomFormControlLabel label="Thời gian làm việc" strict />
           <DateRangePicker />
         </div>
         <div>
-          <CustomFormControlLabel label="Tên trường đại học" strict />
+          <CustomFormControlLabel label="Tên cơ quan làm việc" strict />
           <TextInput />
         </div>
       </div>
       <div>
-        <Textarea label="Giới thiệu ngắn gọn quá trình học tập" />
+        <Textarea label="Mô tả công việc" />
       </div>
     </div>
   );

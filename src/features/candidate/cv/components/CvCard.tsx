@@ -7,8 +7,13 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import { Tooltip } from "@mui/material";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import { useDispatch } from "react-redux";
+import { openModal } from "@store/modal";
+import { modalName } from "@data/constants";
+import { setCVIdToDelete } from "@store/deleteCvId";
 
 type CvProps = {
+  id: number;
   name: string;
   default?: boolean;
   upload?: boolean;
@@ -35,6 +40,13 @@ export default function Cv(props: CvProps) {
     backgroundImage: `url("https://tenten.vn/tin-tuc/wp-content/uploads/2022/03/cv-xin-viec-la-gi-5.png)`,
     backgroundSize: "cover",
     backgroundPosition: "center",
+  };
+
+  const dispatch = useDispatch();
+
+  const openDeleteCVModal = () => {
+    dispatch(openModal({ modalName: modalName.DELETE_CV_MODAL }));
+    dispatch(setCVIdToDelete(props.id));
   };
 
   return (
@@ -82,7 +94,11 @@ export default function Cv(props: CvProps) {
               </Tooltip>
             )}
             <Tooltip title="Xóa CV">
-              <IconButton size="small" sx={IconButtonStyles}>
+              <IconButton
+                size="small"
+                sx={IconButtonStyles}
+                onClick={openDeleteCVModal}
+              >
                 <DeleteOutlineTwoToneIcon color="error" />
               </IconButton>
             </Tooltip>

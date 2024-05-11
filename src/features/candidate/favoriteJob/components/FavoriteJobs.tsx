@@ -16,6 +16,8 @@ export default function FavoriteJobs() {
 
   const [jobs, setJobs] = useState<CandidateJob[]>([]);
 
+  console.log(jobs);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -85,7 +87,7 @@ export default function FavoriteJobs() {
                 companyName={job.companyName}
                 locationId={job.locationId}
                 salaryRange={job.salaryRange}
-                deadline={job.deadline}
+                deadline={job.restAppliedDays}
                 isFavorite={true}
                 isHot={job.isHot}
                 isSaved={job.isFavorite || false}

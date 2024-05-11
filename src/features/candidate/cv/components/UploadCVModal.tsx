@@ -40,7 +40,6 @@ export default function UploadCVModal() {
         timeout: 10000,
       });
       toast.success(res.data.message, toastTifyOptions);
-      console.log(res.data);
     } catch (err) {
       console.error(err);
     } finally {
