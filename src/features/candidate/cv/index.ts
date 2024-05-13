@@ -9,3 +9,4 @@ export { default as CvLib } from "./components/CvLib";
 export { default as CvLibContainer } from "./components/CvLibContainer";
 export { default as CvManage } from "./components/CvManage";
 export { default as DeleteCVModal } from "./components/DeleteCVModal";
+export { default as ViewCvModal } from "./components/ViewCvModal";

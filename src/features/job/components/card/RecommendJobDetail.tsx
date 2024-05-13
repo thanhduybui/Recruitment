@@ -10,7 +10,7 @@ type RecommendJobDetailProps = {
 export default function RecommendJobDetail(props: RecommendJobDetailProps) {
   return (
     <Tooltip title={props.tooltip} placement="top">
-      <div className="flex items-center">
+      <div className="flex items-center gap-1">
         {props.icon}
         <Typography
           className="text-gray-300"

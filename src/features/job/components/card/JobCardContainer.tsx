@@ -10,7 +10,7 @@ import { CandidateJob } from "@data/interface";
 import { getAccessToken } from "@utils/authUtils";
 
 export default function JobCardContainer() {
-  const defaultPage: number = 0;
+  const defaultPage: number = 1;
   const jobFilter = useSelector((state: RootState) => state.jobFilter);
   const [jobs, setJobs] = useState<CandidateJob[]>([]);
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function JobCardContainer() {
     const fetchData = async () => {
       try {
         const response = await axios(
-          requestJobConfig(defaultPage, jobFilter, getAccessToken())
+          requestJobConfig(defaultPage, 10, getAccessToken())
         );
         const { listData, totalItems, totalPages } = response.data.data.jobs;
 
@@ -42,7 +42,7 @@ export default function JobCardContainer() {
   ) => {
     try {
       const response = await axios(
-        requestJobConfig(value - 1, jobFilter, getAccessToken())
+        requestJobConfig(value - 1, 10, getAccessToken())
       );
       const { listData } = response.data.data.jobs;
 

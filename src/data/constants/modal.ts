@@ -14,4 +14,5 @@ export const modalName = {
   UPLOAD_CV_MODAL: "uploadCVModal",
   CONFIRM_DELETE_MODAL: "deleteConfirmModal",
   DELETE_CV_MODAL: "deleteCVModal",
+  VIEW_CV_MODAL: "viewCvModal",
 };

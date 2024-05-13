@@ -1,3 +1,4 @@
+import ViewCvModal from "@features/candidate/cv/components/ViewCvModal";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ModalsState {
@@ -25,6 +26,7 @@ const initialState: ModalsState = {
   deleteConfirmModal: false,
   uploadCVModal: false,
   deleteCVModal: false,
+  viewCvModal: false,
 };
 
 const modalsSlice = createSlice({

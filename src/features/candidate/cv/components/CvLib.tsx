@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { getAccessToken } from "@utils/authUtils";
 import api from "@utils/axios";
 import DeleteCVModal from "./DeleteCVModal";
-import { set } from "date-fns";
+import ViewCvModal from "./ViewCvModal";
 
 export default function CvLib() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -29,29 +29,30 @@ export default function CvLib() {
     setAnchorEl(null);
   };
 
+  const fetchCv = async () => {
+    try {
+      const res = await api.get("/cv/user", {
+        headers: {
+          Authorization: `Bearer ${getAccessToken()}`,
+        },
+      });
+      setCvList(res.data.data.cvs);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const onUploadCvHanlder = () => {
     setAnchorEl(null);
     dispatch(openModal({ modalName: modalName.UPLOAD_CV_MODAL }));
   };
 
   useEffect(() => {
-    const fetchCv = async () => {
-      try {
-        const res = await api.get("/cv/user", {
-          headers: {
-            Authorization: `Bearer ${getAccessToken()}`,
-          },
-        });
-        setCvList(res.data.data.cvs);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchCv();
-  }, [cvList]);
+  }, []);
 
   const onReload = () => {
-    setCvList([]);
+    fetchCv();
   };
 
   return (
@@ -104,6 +105,7 @@ export default function CvLib() {
             key={cv.id}
             id={cv.id}
             name={cv.name}
+            url={cv.cvUrl}
             default={cv.isDefault}
             upload
           />

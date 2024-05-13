@@ -13,6 +13,7 @@ export default function ModalHeader(props: ModalHeaderProps) {
   const dispatch = useDispatch();
   const closeHandler = () => {
     dispatch(closeModal({ modalName: props.modalName }));
+    console.log(props.modalName);
   };
   return (
     <div className="flex items-center justify-between border-b-4 border-primary-500">

@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { openModal } from "@store/modal";
 import { modalName } from "@data/constants";
 import { setCVIdToDelete } from "@store/deleteCvId";
+import ViewCvModal from "./ViewCvModal";
+import { Link } from "react-router-dom";
 
 type CvProps = {
   id: number;
@@ -82,9 +84,15 @@ export default function Cv(props: CvProps) {
           </Typography>
           <div className="flex items-center justify-between gap-1 ml-auto">
             <Tooltip title="Xem chi tiết">
-              <IconButton size="small" sx={IconButtonStyles}>
-                <RemoveRedEyeOutlinedIcon color="success" />
-              </IconButton>
+              <Link
+                to={props.url || ""}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <IconButton size="small" sx={IconButtonStyles}>
+                  <RemoveRedEyeOutlinedIcon color="success" />
+                </IconButton>
+              </Link>
             </Tooltip>
             {props.upload || (
               <Tooltip title="Chỉnh sửa">

@@ -209,7 +209,7 @@ export default function JobCard(props: JobCardProps) {
               {isExpired ? "Xem" : "Ứng tuyển"}
             </Button>
           </Link>
-          {!isExpired && (
+          {!isExpired ? (
             <>
               {!isFavorite ? (
                 <Tooltip title="Lưu tin" placement="top">
@@ -233,6 +233,16 @@ export default function JobCard(props: JobCardProps) {
                 </Tooltip>
               )}
             </>
+          ) : (
+            <Tooltip title="Bỏ lưu" placement="top">
+              <IconButton
+                sx={{ borderRadius: "8px" }}
+                itemID={props.id}
+                onClick={deleFavoriteJobHandler}
+              >
+                <FavoriteIcon color="primary" />
+              </IconButton>
+            </Tooltip>
           )}
         </div>
       </div>
