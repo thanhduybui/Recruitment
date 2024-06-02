@@ -17,7 +17,9 @@ export default function useCompanyJob(id: string, index: number) {
       } else if (index === 2) {
         type = "HOT";
       }
-      const res = await api.get(`/companies/${id}/jobs?type=${type}`);
+      const res = await api.get(
+        `/companies/${id}/jobs?type=${type}&page=${currentPage}`
+      );
       const listJobs = res.data.data.jobs.listData;
 
       console.log("listJobs", listJobs);
@@ -42,7 +44,7 @@ export default function useCompanyJob(id: string, index: number) {
 
   useEffect(() => {
     fetchCompanyJob(id, index);
-  }, [fetchCompanyJob, id, index]);
+  }, [fetchCompanyJob, id, index, currentPage]);
 
   return { jobs, currentPage, totalItems, totalPages };
 }

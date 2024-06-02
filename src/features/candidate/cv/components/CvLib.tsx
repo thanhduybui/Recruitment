@@ -14,8 +14,10 @@ import { modalName } from "@data/constants";
 import { useDispatch } from "react-redux";
 import { getAccessToken } from "@utils/authUtils";
 import api from "@utils/axios";
+import { UploadCVModal } from "@features/candidate/cv";
 import DeleteCVModal from "./DeleteCVModal";
-import ViewCvModal from "./ViewCvModal";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
 
 export default function CvLib() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -24,6 +26,10 @@ export default function CvLib() {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const isUploadCVModalOpen = useSelector(
+    (state: RootState) => state.modals.uploadCVModal
+  );
   const dispatch = useDispatch();
   const handleClose = () => {
     setAnchorEl(null);
@@ -42,6 +48,10 @@ export default function CvLib() {
     }
   };
 
+  const reloadPageHandler = () => {
+    fetchCv();
+  };
+
   const onUploadCvHanlder = () => {
     setAnchorEl(null);
     dispatch(openModal({ modalName: modalName.UPLOAD_CV_MODAL }));
@@ -58,6 +68,7 @@ export default function CvLib() {
   return (
     <div>
       <DeleteCVModal onReload={onReload} />
+      {isUploadCVModalOpen && <UploadCVModal reloadPage={reloadPageHandler} />}
       <div className="flex item-center justify-between mb-2">
         <Typography
           variant="subtitle1"

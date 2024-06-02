@@ -13,7 +13,6 @@ import ArticleIcon from "@mui/icons-material/Article";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import { Sidebar } from "@components/sidebar";
-import { UploadCVModal } from "@features/candidate/cv";
 import { ToastContainer } from "react-toastify";
 import { toastContainerOptions } from "@utils/toastifyUtils";
 import { ApplyJobHistory } from "@features/candidate/applyHistory";
@@ -55,10 +54,6 @@ export default function UserSetting() {
     (state: RootState) => state.modals.avatarModal
   );
 
-  const isUploadCVModalOpen = useSelector(
-    (state: RootState) => state.modals.uploadCVModal
-  );
-
   const avatarUser = useSelector((state: RootState) => state.userAvatar);
 
   const sidebar = (
@@ -81,7 +76,7 @@ export default function UserSetting() {
   return (
     <>
       {isAvatarModalOpen && <AvatarModal />}
-      {isUploadCVModalOpen && <UploadCVModal />}
+
       <ToastContainer {...toastContainerOptions} />
       <LeftLayoutContainer>
         <LeftSidebarLayout sidebar={sidebar} main={main} />

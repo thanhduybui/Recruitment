@@ -8,3 +8,4 @@ export { default as TimeOrder } from "./components/TimeOrder";
 export { default as convertLocation } from "./services/convertLocation";
 export { default as requestJobConfig } from "./services/fetchJobConfig";
 export { default as NearJobSection } from "./components/NearJobSection";
+export { default as requestFilterConfig } from "./services/filterJobConfig";

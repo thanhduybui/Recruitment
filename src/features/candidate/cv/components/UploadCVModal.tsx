@@ -16,7 +16,10 @@ import { getAccessToken } from "@utils/authUtils";
 import { toast } from "react-toastify";
 import { toastTifyOptions } from "@utils/toastifyUtils";
 
-export default function UploadCVModal() {
+type UploadCVModalProps = {
+  reloadPage: () => void;
+};
+export default function UploadCVModal(props: UploadCVModalProps) {
   const dispatch = useDispatch();
   const [file, setFile] = useState<File | null>(null);
   const [cvName, setCvName] = useState<string>("");
@@ -40,6 +43,7 @@ export default function UploadCVModal() {
         timeout: 10000,
       });
       toast.success(res.data.message, toastTifyOptions);
+      props.reloadPage();
     } catch (err) {
       console.error(err);
     } finally {
@@ -71,7 +75,7 @@ export default function UploadCVModal() {
                 onSelectFile={(file) => {
                   setFile(file);
                 }}
-                exts={[".pdf", ".docx", ".doc"]}
+                exts={[".pdf"]}
                 isPapers
               />
             </div>

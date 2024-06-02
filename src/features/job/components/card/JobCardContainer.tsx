@@ -8,6 +8,7 @@ import { requestJobConfig } from "@features/job";
 import Pagination from "@mui/material/Pagination";
 import { CandidateJob } from "@data/interface";
 import { getAccessToken } from "@utils/authUtils";
+import { requestFilterConfig } from "@features/job";
 
 export default function JobCardContainer() {
   const defaultPage: number = 1;
@@ -18,23 +19,46 @@ export default function JobCardContainer() {
     (state: RootState) => state.paginationData.paginationData
   );
 
+  const fetchData = async () => {
+    try {
+      const response = await axios(
+        requestJobConfig(defaultPage, 10, getAccessToken())
+      );
+      const { listData, totalItems, totalPages } = response.data.data.jobs;
+
+      setJobs(listData);
+      dispatch(setTotalFoundJobs({ totalItems, totalPages }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchFilterData = async () => {
+    try {
+      const response = await axios(
+        requestFilterConfig(defaultPage - 1, jobFilter, getAccessToken())
+      );
+      const { listData } = response.data.data.jobs;
+
+      console.log(response.data.data.jobs);
+
+      setJobs(listData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios(
-          requestJobConfig(defaultPage, 10, getAccessToken())
-        );
-        const { listData, totalItems, totalPages } = response.data.data.jobs;
-
-        setJobs(listData);
-        dispatch(setTotalFoundJobs({ totalItems, totalPages }));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
+    // Chỉ gọi fetchData khi component mount lần đầu tiên
     fetchData();
-  }, [jobFilter, dispatch]);
+  }, []);
+
+  useEffect(() => {
+    // Gọi fetchFilterData khi jobFilter thay đổi
+    if (jobFilter) {
+      fetchFilterData();
+    }
+  }, [jobFilter]);
 
   const changePageHandler = async (
     _: React.ChangeEvent<unknown>,

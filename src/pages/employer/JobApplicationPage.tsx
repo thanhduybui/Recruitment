@@ -3,10 +3,10 @@ import { Box, Grid, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { recruiterTabIndex } from "@data/constants";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BlacklistModal,
   JobApplicationCard,
@@ -15,6 +15,10 @@ import {
 import { Pagination } from "@mui/material";
 import { RootState } from "@store";
 import { setTabIndex } from "@store/sidebar";
+import api from "@utils/axios";
+import { getAccessToken } from "@utils/authUtils";
+import { set } from "date-fns";
+import { CandidateJob } from "@data/interface";
 
 function a11yProps(index: number) {
   return {
@@ -23,13 +27,29 @@ function a11yProps(index: number) {
   };
 }
 
+type JobApplicationPageProps = {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  phone: string;
+  isBackListed: boolean;
+};
+
 export default function JobApplicationPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const [value, setValue] = useState(0);
+  const [job, setJob] = useState<CandidateJob>();
+  const [totalPages, setTotalPages] = useState(0);
   const isBlackListModalOpen = useSelector(
     (state: RootState) => state.modals.blacklistModal
   );
+  const [applyStatus, setApplyStatus] = useState("PENDING");
+  const [jobApplications, setJobApplications] = useState<
+    JobApplicationPageProps[]
+  >([]);
   const isJobApplicationModalOpen = useSelector(
     (state: RootState) => state.modals.jobApplicationModal
   );
@@ -44,6 +64,30 @@ export default function JobApplicationPage() {
     dispatch(setTabIndex(recruiterTabIndex.RECRUITER_JOB));
     navigate(event.currentTarget.getAttribute("href")!);
   }
+
+  useEffect(() => {
+    const fetchJobApplications = async () => {
+      try {
+        const response = await api.get(
+          `/job-applications?status=${applyStatus}&jobId=${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${getAccessToken()}`,
+            },
+          }
+        );
+
+        const { totalPages } = response.data.data.jobApplications;
+        setTotalPages(totalPages);
+
+        setJobApplications(response.data.data.jobApplications.listData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchJobApplications();
+  }, [id, applyStatus]);
 
   const breadcrumbs = [
     <Link
@@ -60,19 +104,19 @@ export default function JobApplicationPage() {
     </Typography>,
   ];
 
-  const jobApplications = Array.from({ length: 10 }, (_, index) => (
-    <Grid key={index} item xs={6} md={4}>
-      <JobApplicationCard
-        seen={true}
-        name="Bùi Thanh Duy"
-        email="dtb1742002@gmail.com"
-        phone="0383314133"
-        isBackListed
-        avatar="https://hips.hearstapps.com/hmg-prod/images/russian-blue-royalty-free-image-1658451809.jpg"
-      />
-    </Grid>
-  ));
-
+  const renderJobApplications = jobApplications.map(
+    (jobApplication: JobApplicationPageProps) => (
+      <Grid key={jobApplication.id} item xs={6} md={4}>
+        <JobApplicationCard
+          id={jobApplication.id}
+          name={jobApplication.name}
+          email={jobApplication.email}
+          phone={jobApplication.phone}
+          avatar={jobApplication.avatar}
+        />
+      </Grid>
+    )
+  );
   return (
     <MediumContainer>
       {isBlackListModalOpen && <BlacklistModal></BlacklistModal>}
@@ -108,7 +152,8 @@ export default function JobApplicationPage() {
             textColor="primary"
           >
             <Tab
-              label="Đã xem"
+              onClick={() => setApplyStatus("PENDING")}
+              label="Tất cả"
               {...a11yProps(0)}
               sx={{
                 textTransform: "none",
@@ -116,11 +161,13 @@ export default function JobApplicationPage() {
               }}
             />
             <Tab
-              label="Chưa xem"
+              onClick={() => setApplyStatus("SEEN")}
+              label="Đã xem"
               {...a11yProps(1)}
               sx={{ textTransform: "none", fontSize: "0.9rem" }}
             />
             <Tab
+              onClick={() => setApplyStatus("APPROVED")}
               label="Phù hợp nhất"
               {...a11yProps(2)}
               sx={{ textTransform: "none", fontSize: "0.9rem" }}
@@ -133,19 +180,17 @@ export default function JobApplicationPage() {
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           mt={`2rem`}
         >
-          {jobApplications}
+          {renderJobApplications}
         </Grid>
         <Box
           sx={{
             my: "3rem",
-
             display: "flex",
             alignItems: "center",
             justifyContent: "end",
           }}
         >
-          {" "}
-          <Pagination count={10} shape="rounded" color="primary"></Pagination>
+          <Pagination count={totalPages} shape="rounded" color="primary" />
         </Box>
       </div>
     </MediumContainer>

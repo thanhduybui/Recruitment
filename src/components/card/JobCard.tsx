@@ -209,41 +209,29 @@ export default function JobCard(props: JobCardProps) {
               {isExpired ? "Xem" : "Ứng tuyển"}
             </Button>
           </Link>
-          {!isExpired ? (
-            <>
-              {!isFavorite ? (
-                <Tooltip title="Lưu tin" placement="top">
-                  <IconButton
-                    sx={{ borderRadius: "8px" }}
-                    itemID={props.id}
-                    onClick={saveFavoriteJobHandler}
-                  >
-                    <FavoriteBorderIcon color="primary" />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Bỏ lưu" placement="top">
-                  <IconButton
-                    sx={{ borderRadius: "8px" }}
-                    itemID={props.id}
-                    onClick={deleFavoriteJobHandler}
-                  >
-                    <FavoriteIcon color="primary" />
-                  </IconButton>
-                </Tooltip>
-              )}
-            </>
-          ) : (
-            <Tooltip title="Bỏ lưu" placement="top">
-              <IconButton
-                sx={{ borderRadius: "8px" }}
-                itemID={props.id}
-                onClick={deleFavoriteJobHandler}
-              >
-                <FavoriteIcon color="primary" />
-              </IconButton>
-            </Tooltip>
-          )}
+          <>
+            {!isFavorite ? (
+              <Tooltip title="Lưu tin" placement="top">
+                <IconButton
+                  sx={{ borderRadius: "8px" }}
+                  itemID={props.id}
+                  onClick={saveFavoriteJobHandler}
+                >
+                  <FavoriteBorderIcon color="primary" />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Bỏ lưu" placement="top">
+                <IconButton
+                  sx={{ borderRadius: "8px" }}
+                  itemID={props.id}
+                  onClick={deleFavoriteJobHandler}
+                >
+                  <FavoriteIcon color="primary" />
+                </IconButton>
+              </Tooltip>
+            )}
+          </>
         </div>
       </div>
     </div>

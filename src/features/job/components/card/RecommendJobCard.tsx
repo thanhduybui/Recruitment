@@ -2,10 +2,8 @@ import Typography from "@mui/material/Typography";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { RecommendJobDetail } from "../..";
-import { IconButton, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import { CompanyLogo } from "@features/company";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import { convertLocation } from "../..";
 import { useLocationName } from "@hooks";
 import { Link } from "react-router-dom";
 

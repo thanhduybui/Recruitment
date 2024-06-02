@@ -38,7 +38,6 @@ export default function BasicFilter() {
 
   const onSearchKeywordHandler = () => {
     dispatch(setJobFilter({ ...jobFilter, searchKeyword: keyword }));
-    console.log(jobFilter);
   };
 
   return (

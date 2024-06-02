@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { CompanyLogo } from "@features/company";
 import { Typography } from "@mui/material";
 import { useState } from "react";
+import { convertToReadableDateTime } from "@services/dateTimeService";
 
 type HistoryCardProps = {
   name?: string;
@@ -74,7 +75,8 @@ export default function HistoryCard(props: HistoryCardProps) {
                 fontSize: "0.8rem",
               }}
             >
-              Thời gian ứng tuyển: {props.applyTime}
+              Thời gian ứng tuyển:{" "}
+              {props.applyTime && convertToReadableDateTime(props.applyTime)}
             </Typography>
           </Tooltip>
         </div>
