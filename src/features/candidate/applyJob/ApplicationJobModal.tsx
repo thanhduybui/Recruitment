@@ -109,7 +109,7 @@ export default function ApplicationModal() {
     };
     console.log(applyData);
     try {
-      const res = await api.post(`/job-application`, applyData, {
+      const res = await api.post(`/job-applications`, applyData, {
         headers: {
           Authorization: `Bearer ${getAccessToken()}`,
         },

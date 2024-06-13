@@ -5,6 +5,9 @@ import FlagIcon from "@mui/icons-material/Flag";
 import { useDispatch } from "react-redux";
 import { openModal } from "@store/modal";
 import { modalName } from "@data/constants";
+import { setSelectedJobApplication } from "@store/selectedJobApplication";
+import api from "@utils/axios";
+import { getAccessToken } from "@utils/authUtils";
 
 type JobApplicationCardProps = {
   id?: string;
@@ -12,28 +15,41 @@ type JobApplicationCardProps = {
   name?: string;
   phone?: string;
   email?: string;
-  seen?: boolean;
+  pending?: boolean;
   isBackListed?: boolean;
 };
 
 export default function JobApplicationCard(props: JobApplicationCardProps) {
-  const { id, isBackListed, avatar, name, phone, email, seen } = props;
+  const { id, isBackListed, avatar, name, phone, email, pending } = props;
   const dispatch = useDispatch();
 
   const onOpenBlacklistDetailModal = (id?: string) => {
-    console.log(id);
     dispatch(openModal({ modalName: modalName.BLACKLIST_MODAL }));
   };
 
-  const onOpenJobApplicationtDetailModal = (id?: string) => {
-    console.log(id);
+  const onOpenJobApplicationtDetailModal = async (id?: string) => {
     dispatch(openModal({ modalName: modalName.JOB_APPLICATION_MODAL }));
+    dispatch(setSelectedJobApplication(id ? +id : 0));
+    if (pending) {
+      try {
+        const res = await api.put(
+          `/job-applications/${id}`,
+          { status: "SEEN" },
+          {
+            headers: { Authorization: `Bearer ${getAccessToken()}` },
+          }
+        );
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   return (
     <div
       className={`p-4 flex flex-col items-center justify-center border-2  rounded-md first-letter ${
-        seen
+        pending
           ? "bg-gray-100 border-gray-150 text-gray-200"
           : "border-primary-500"
       }`}

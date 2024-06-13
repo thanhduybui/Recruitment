@@ -78,7 +78,6 @@ export default function RecruiterRegisterForm() {
       console.log(error);
       const typeError = error as AxiosError;
       const message = typeError.response?.data;
-      console.log(message);
     }
   };
 

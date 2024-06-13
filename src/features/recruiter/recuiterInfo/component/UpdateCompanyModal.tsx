@@ -21,6 +21,7 @@ import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { toastTifyOptions } from "@utils/toastifyUtils";
 import { editor_key } from "@config/key";
+import { ScrollModalContainer } from "@components/ui/modal";
 
 type UpdateCompanyModalProps = {
   companyInfo: CompanyInfo;
@@ -80,7 +81,7 @@ export default function UpdateCompanyModal({
           modalName={modalName.UPDATE_COMPANY_MODAL}
         ></ModalHeader>
 
-        <ScrollContainer>
+        <ScrollModalContainer wide>
           <div className="w-4/5 m-auto flex flex-col gap-4">
             <Textarea
               label="Tên công ty"
@@ -181,7 +182,7 @@ export default function UpdateCompanyModal({
               />
             </div>
           </div>
-        </ScrollContainer>
+        </ScrollModalContainer>
         <div className="flex gap-4 ml-auto my-8">
           <Button
             variant="outlined"

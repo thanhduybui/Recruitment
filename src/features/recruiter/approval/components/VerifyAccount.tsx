@@ -12,6 +12,7 @@ import { ModalDeleteLicense } from "..";
 import { useDispatch } from "react-redux";
 import { openModal } from "@store/modal";
 import { modalName } from "@data/constants";
+import { Link } from "react-router-dom";
 
 export default function VerifyAccount() {
   const [file, setFile] = useState<FileWithPath | null>(null);
@@ -36,7 +37,6 @@ export default function VerifyAccount() {
           },
           timeout: 10000,
         });
-        console.log(res);
         toast.success(res.data.message, toastTifyOptions);
         setIsVerified(true);
       } catch (error) {
@@ -92,9 +92,19 @@ export default function VerifyAccount() {
               onSelectFile={handleSelectFile}
             />
           )}
-          {isVerified && (
+          {/* {isVerified && (
             <iframe src={fileSrc} className="w-full h-screen"></iframe>
-          )}
+          )} */}
+          <div className="flex gap-2 items-center">
+            <Link to={fileSrc}>
+              <Button variant="outlined">Xem giấy xác nhận</Button>
+            </Link>
+            {isVerified === true ? (
+              <p className="text-success-600">Đã xác nhận</p>
+            ) : (
+              <p className="text-error-400">Chưa được xác nhận</p>
+            )}
+          </div>
         </div>
 
         <div className="mt-4 flex items-center justify-center">

@@ -17,8 +17,9 @@ import { RootState } from "@store";
 import { setTabIndex } from "@store/sidebar";
 import api from "@utils/axios";
 import { getAccessToken } from "@utils/authUtils";
-import { set } from "date-fns";
 import { CandidateJob } from "@data/interface";
+import { ToastContainer } from "react-toastify";
+import { toastContainerOptions } from "@utils/toastifyUtils";
 
 function a11yProps(index: number) {
   return {
@@ -77,9 +78,11 @@ export default function JobApplicationPage() {
           }
         );
 
+        const res = await api.get(`/jobs/${id}`);
+        setJob(res.data.data.job);
+
         const { totalPages } = response.data.data.jobApplications;
         setTotalPages(totalPages);
-
         setJobApplications(response.data.data.jobApplications.listData);
       } catch (error) {
         console.log(error);
@@ -100,7 +103,7 @@ export default function JobApplicationPage() {
       Đơn ứng tuyển
     </Link>,
     <Typography key="2" color="text.primary">
-      Đơn ứng tuyển Fresher Java
+      {job?.title}
     </Typography>,
   ];
 
@@ -113,12 +116,14 @@ export default function JobApplicationPage() {
           email={jobApplication.email}
           phone={jobApplication.phone}
           avatar={jobApplication.avatar}
+          pending={applyStatus === "PENDING" ? true : false}
         />
       </Grid>
     )
   );
   return (
     <MediumContainer>
+      <ToastContainer {...toastContainerOptions} />
       {isBlackListModalOpen && <BlacklistModal></BlacklistModal>}
       {isJobApplicationModalOpen && <JobApplicationModal></JobApplicationModal>}
       <div className="className p-4 bg-white rounded-md">
@@ -133,7 +138,7 @@ export default function JobApplicationPage() {
             sx={{ display: "inline", mr: "0.4rem" }}
             fontWeight={600}
           >
-            Đơn ứng tuyển Java fresher
+            {job?.title}
           </Typography>
           <Typography
             variant="subtitle2"
@@ -141,7 +146,7 @@ export default function JobApplicationPage() {
             color={`#0581e6`}
             sx={{ display: "inline" }}
           >
-            #2334-2234-2234-2233
+            #{job?.id}
           </Typography>
         </Box>
         <Box sx={{ borderBottom: 1, borderColor: "divider", mt: "1.2rem" }}>
@@ -153,7 +158,7 @@ export default function JobApplicationPage() {
           >
             <Tab
               onClick={() => setApplyStatus("PENDING")}
-              label="Tất cả"
+              label="Chờ duyệt"
               {...a11yProps(0)}
               sx={{
                 textTransform: "none",
@@ -174,14 +179,22 @@ export default function JobApplicationPage() {
             />
           </Tabs>
         </Box>
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={`2rem`}
-        >
-          {renderJobApplications}
-        </Grid>
+        {jobApplications.length === 0 ? (
+          <Box sx={{ mt: "2rem" }}>
+            <Typography variant="body1" color="text.secondary">
+              Không có đơn ứng tuyển nào.
+            </Typography>
+          </Box>
+        ) : (
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            mt={`2rem`}
+          >
+            {renderJobApplications}
+          </Grid>
+        )}
         <Box
           sx={{
             my: "3rem",

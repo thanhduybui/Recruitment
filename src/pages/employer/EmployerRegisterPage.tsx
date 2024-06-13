@@ -6,9 +6,7 @@ export default function EmployerRegisterPage() {
     <MediumContainer>
       <div className="bg-white  w-full flex rounded-md">
         <RecruiterRegisterForm></RecruiterRegisterForm>
-        <div className="w-5/12 rounded-r-md bg-gradient-to-br from-primary-600 to-primary-200">
-          Ảnh
-        </div>
+        <div className="w-5/12 rounded-r-md bg-gradient-to-br from-primary-600 to-primary-200"></div>
       </div>
     </MediumContainer>
   );
