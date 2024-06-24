@@ -4,6 +4,7 @@ import { CompanyLogo } from "@features/company";
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import { convertToReadableDateTime } from "@services/dateTimeService";
+import { Link } from "react-router-dom";
 
 type HistoryCardProps = {
   name?: string;
@@ -12,6 +13,7 @@ type HistoryCardProps = {
   status?: string;
   salary?: string;
   companyLogo?: string;
+  cv?: string;
 };
 
 export default function HistoryCard(props: HistoryCardProps) {
@@ -114,14 +116,16 @@ export default function HistoryCard(props: HistoryCardProps) {
           </Typography>
         </div>
 
-        <Button
-          color="primary"
-          size="small"
-          variant="contained"
-          sx={{ textTransform: "none" }}
-        >
-          Xem CV
-        </Button>
+        <Link to={props.cv || ""} target="_blank" rel="noopener noreferrer">
+          <Button
+            color="primary"
+            size="small"
+            variant="contained"
+            sx={{ textTransform: "none" }}
+          >
+            Xem CV
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -32,7 +32,6 @@ function HomePage() {
         )}
         <Slider />
         <NearJobSection />
-        <ApplicatonGuideline />
       </Container>
     </React.Fragment>
   );

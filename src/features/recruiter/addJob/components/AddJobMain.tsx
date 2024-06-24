@@ -7,7 +7,6 @@ import {
 import { MainSectionContainer } from "@components/ui";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
-import { majors } from "@data/api";
 import { Editor as TinyMCEEditor } from "tinymce";
 import { TextHeading } from "@components/heading";
 import Button from "@mui/material/Button";
@@ -48,6 +47,8 @@ export default function AddJobMain() {
     experienceRanges,
     fields,
     workModes,
+    locations,
+    majors,
   } = data as {
     companyInfo: CompanyInfo;
     positions: Option[];
@@ -55,6 +56,8 @@ export default function AddJobMain() {
     experienceRanges: Option[];
     fields: Option[];
     workModes: Option[];
+    locations: Option[];
+    majors: Option[];
   };
 
   const changeHandler = () => {
@@ -142,6 +145,11 @@ export default function AddJobMain() {
             />
           </div>
           <div className="grid grid-cols-3 mt-5 gap-4">
+            <NormalSelect
+              label="Nơi làm việc"
+              options={locations}
+              onSelect={(option) => setSalary(option.id)}
+            />
             <NormalSelect
               label="Mức lương"
               options={salaryRanges}

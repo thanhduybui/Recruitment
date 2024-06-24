@@ -9,6 +9,7 @@ export default async function findJobPageLoader(): Promise<{
   fields: Option[];
   experienceRanges: Option[];
   workModes: Option[]; // Define the type for experienceRanges
+  majors: Option[];
 } | null> {
   try {
     const [
@@ -18,6 +19,7 @@ export default async function findJobPageLoader(): Promise<{
       fieldRes,
       experienceRes,
       workModeRes,
+      majorRes,
     ]: AxiosResponse[] = await Promise.all([
       api.get("/positions"),
       api.get("/salary-ranges"),
@@ -25,6 +27,7 @@ export default async function findJobPageLoader(): Promise<{
       api.get("/fields"),
       api.get("/experience-ranges"),
       api.get("/work-modes"),
+      api.get("majors"),
     ]);
 
     const positions = positionRes.data?.data?.positions || [];
@@ -33,6 +36,7 @@ export default async function findJobPageLoader(): Promise<{
     const fields = fieldRes.data?.data?.fields || [];
     const experienceRanges = experienceRes.data?.data?.experience_ranges || [];
     const workModes = workModeRes.data?.data?.work_modes || [];
+    const majors = majorRes.data?.data?.majors || [];
 
     return {
       positions,
@@ -41,6 +45,7 @@ export default async function findJobPageLoader(): Promise<{
       fields,
       experienceRanges,
       workModes,
+      majors,
     };
   } catch (err) {
     console.error("Error fetching data:", err);
@@ -51,6 +56,7 @@ export default async function findJobPageLoader(): Promise<{
       fields: [],
       experienceRanges: [],
       workModes: [],
+      majors: [],
     };
   }
 }

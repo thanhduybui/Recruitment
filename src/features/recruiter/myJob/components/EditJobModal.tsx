@@ -14,7 +14,6 @@ import {
 import dayjs, { Dayjs } from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Editor as TinyMCEEditor } from "tinymce";
-import { majors } from "@data/api";
 import { useRef, useState } from "react";
 import { TextHeading } from "@components/heading";
 import { Button, FormControlLabel, Switch } from "@mui/material";
@@ -45,6 +44,7 @@ export default function EditJobModal() {
   const workTimeRef = useRef<HTMLTextAreaElement>(null);
   const [field, setField] = useState<Option | undefined>(jobs?.field);
   const [major, setMajor] = useState<Option | undefined>(jobs?.major);
+  const [location, setLocation] = useState<Option | undefined>(jobs?.location);
   const [position, setPosition] = useState<Option | undefined>(jobs?.position);
   const [salaryRange, setSalaryRange] = useState<Option | undefined>(
     jobs?.salaryRange
@@ -52,6 +52,7 @@ export default function EditJobModal() {
   const [experienceRange, setExperienceRange] = useState<Option | undefined>(
     jobs?.experienceRange
   );
+  const [slots, setSlots] = useState(jobs?.slots);
   const [workMode, setWorkMode] = useState<Option | undefined>(jobs?.workMode);
   const descriptionRef = useRef<TinyMCEEditor | null>(null);
   const benefitRef = useRef<TinyMCEEditor | null>(null);
@@ -59,14 +60,23 @@ export default function EditJobModal() {
   const [isHot, setIsHot] = useState(jobs?.isHot);
   const [deadline, setDeadline] = useState<Dayjs | null>(null);
 
-  const { positions, salaryRanges, experienceRanges, fields, workModes } =
-    data as {
-      positions: Option[];
-      salaryRanges: Option[];
-      experienceRanges: Option[];
-      fields: Option[];
-      workModes: Option[];
-    };
+  const {
+    positions,
+    salaryRanges,
+    experienceRanges,
+    fields,
+    workModes,
+    locations,
+    majors,
+  } = data as {
+    positions: Option[];
+    salaryRanges: Option[];
+    experienceRanges: Option[];
+    fields: Option[];
+    workModes: Option[];
+    locations: Option[];
+    majors: Option[];
+  };
 
   const onUpdateHandler = async () => {
     const updateJob = {
@@ -76,6 +86,8 @@ export default function EditJobModal() {
       workTime: workTimeRef.current?.value,
       field_id: field?.id,
       major_id: major?.id,
+      slots: slots,
+      location_id: location?.id,
       position_id: position?.id,
       salary_id: salaryRange?.id,
       experience_id: experienceRange?.id,
@@ -160,7 +172,8 @@ export default function EditJobModal() {
               <TextInput
                 type="number"
                 label="Số lượng"
-                defaultValue={jobs?.slots + ""}
+                inputChange={(e) => setSlots(parseInt(e.target.value))}
+                defaultValue={slots + ""}
               />
               <FormControlLabel
                 control={
@@ -175,10 +188,10 @@ export default function EditJobModal() {
             </div>
             <div className="grid grid-cols-3 mt-5 gap-4">
               <NormalSelect
-                label="Chức vụ"
-                options={positions}
-                onSelect={(value) => setPosition(value)}
-                initValue={jobs?.position}
+                label="Địa điểm"
+                options={locations}
+                onSelect={(value) => setLocation(value)}
+                initValue={jobs?.location}
               />
               <NormalSelect
                 label="Mức lương"
@@ -203,6 +216,12 @@ export default function EditJobModal() {
                 onSelect={(value) => setMajor(value)}
                 options={majors}
                 initValue={jobs?.major}
+              />
+              <NormalSelect
+                label="Chức vụ"
+                options={positions}
+                onSelect={(value) => setPosition(value)}
+                initValue={jobs?.position}
               />
               <NormalSelect
                 label="Chế độ làm việc"

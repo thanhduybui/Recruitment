@@ -3,7 +3,7 @@ import { JobCard } from "..";
 
 export default function NearJobSection() {
   return (
-    <div className="bg-white py-10 mt-2 rounded-md shadow-sm">
+    <div className="bg-white py-10 my-2 rounded-md shadow-sm">
       <div className="mx-4">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-semibold text-gray-800">
@@ -19,26 +19,26 @@ export default function NearJobSection() {
           <JobCard
             isSaved
             title="Kiểm toán ngân hàng"
-            companyName="Its Ok"
-            companyImage="none"
+            companyName="Công ty TNHH Wisdom Square Vietnam"
+            companyLogo="https://media.licdn.com/dms/image/C4E0BAQEK2Eq3_aOutA/company-logo_200_200/0/1673257468927/isb_vietnam_co_limited_logo?e=2147483647&v=beta&t=5F1Bv7MWfuPlYC2QCNo5g15Bs3HA2PGzUmVcjtAk7R0"
+          />
+          <JobCard
+            companyLogo="https://media.licdn.com/dms/image/C4E0BAQEK2Eq3_aOutA/company-logo_200_200/0/1673257468927/isb_vietnam_co_limited_logo?e=2147483647&v=beta&t=5F1Bv7MWfuPlYC2QCNo5g15Bs3HA2PGzUmVcjtAk7R0"
+            isSaved
+            title="Kiểm toán ngân hàng"
+            companyName="Công ty TNHH Wisdom Square Vietnam"
           />
           <JobCard
             isSaved
             title="Kiểm toán ngân hàng"
-            companyName="Its Ok"
-            companyImage="none"
+            companyName="Công ty TNHH Wisdom Square Vietnam"
+            companyLogo="https://media.licdn.com/dms/image/C4E0BAQEK2Eq3_aOutA/company-logo_200_200/0/1673257468927/isb_vietnam_co_limited_logo?e=2147483647&v=beta&t=5F1Bv7MWfuPlYC2QCNo5g15Bs3HA2PGzUmVcjtAk7R0"
           />
           <JobCard
             isSaved
             title="Kiểm toán ngân hàng"
-            companyName="Its Ok"
-            companyImage="none"
-          />
-          <JobCard
-            isSaved
-            title="Kiểm toán ngân hàng"
-            companyName="Its Ok"
-            companyImage="none"
+            companyName="Công ty TNHH Wisdom Square Vietnam"
+            companyLogo="https://media.licdn.com/dms/image/C4E0BAQEK2Eq3_aOutA/company-logo_200_200/0/1673257468927/isb_vietnam_co_limited_logo?e=2147483647&v=beta&t=5F1Bv7MWfuPlYC2QCNo5g15Bs3HA2PGzUmVcjtAk7R0"
           />
         </div>
       </div>

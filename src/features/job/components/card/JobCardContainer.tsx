@@ -36,11 +36,9 @@ export default function JobCardContainer() {
   const fetchFilterData = async () => {
     try {
       const response = await axios(
-        requestFilterConfig(defaultPage - 1, jobFilter, getAccessToken())
+        requestFilterConfig(defaultPage, jobFilter, getAccessToken())
       );
       const { listData } = response.data.data.jobs;
-
-      console.log(response.data.data.jobs);
 
       setJobs(listData);
     } catch (error) {
@@ -66,8 +64,10 @@ export default function JobCardContainer() {
   ) => {
     try {
       const response = await axios(
-        requestJobConfig(value - 1, 10, getAccessToken())
+        requestJobConfig(value, 10, getAccessToken())
       );
+
+      console.log(value);
       const { listData } = response.data.data.jobs;
 
       setJobs(listData);

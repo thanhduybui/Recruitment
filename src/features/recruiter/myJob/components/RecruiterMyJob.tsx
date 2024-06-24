@@ -155,10 +155,24 @@ export default function RecruiterMyJob() {
             </Box>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <RecruiterPanelContent
-              jobs={renderJobs}
-              totalPages={2}
-            ></RecruiterPanelContent>
+            {renderJobs &&
+              renderJobs.map((job) => (
+                <RecruiterJobCard
+                  key={job.id}
+                  {...job}
+                  dueDate={convertToDDMMYYYY(job.deadline + "")}
+                />
+              ))}
+            <Box sx={{ marginTop: "2rem", display: "flex" }}>
+              <Pagination
+                count={totalPages}
+                shape="rounded"
+                color="primary"
+                size="medium"
+                onChange={handlePageChange}
+                sx={{ marginLeft: "auto" }}
+              />
+            </Box>
           </TabPanel>
         </Box>
       </MainSectionContainer>

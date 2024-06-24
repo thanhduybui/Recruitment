@@ -16,6 +16,8 @@ import { setCompanyAvatar } from "@store/changeCompanyAvatar";
 export default function CompanyInformation() {
   const data = useRouteLoaderData("recruiterInfo");
 
+  console.log(data);
+
   const isShowModal = useSelector(
     (state: RootState) => state.modals.updateCompanyModal
   );
@@ -38,14 +40,14 @@ export default function CompanyInformation() {
       {isAvatarModalOpen && <AvatarModal />}
       {isShowModal && <UpdateCompanyModal companyInfo={companyInfo} />}
       <TextHeading title="Thông tin công ty" borderStart></TextHeading>
-      <AppAvatar link={companyInfo.image}></AppAvatar>
+      <AppAvatar link={companyInfo?.image} />
       <InfoContainer>
-        <CompanyInfoRow label="Tên công ty" value={companyInfo.name} />
-        <CompanyInfoRow label="Quy mô" value={companyInfo.scale} />
-        <CompanyInfoRow label="Địa chỉ" value={companyInfo.address} />
-        <CompanyInfoRow label="Email liên hệ" value={companyInfo.email} />
-        <CompanyInfoRow label="Hotline" value={companyInfo.phone} />
-        <CompanyInfoRow label="Địa chỉ web" value={companyInfo.webUrl} />
+        <CompanyInfoRow label="Tên công ty" value={companyInfo?.name} />
+        <CompanyInfoRow label="Quy mô" value={companyInfo?.scale} />
+        <CompanyInfoRow label="Địa chỉ" value={companyInfo?.address} />
+        <CompanyInfoRow label="Email liên hệ" value={companyInfo?.email} />
+        <CompanyInfoRow label="Hotline" value={companyInfo?.phone} />
+        <CompanyInfoRow label="Địa chỉ web" value={companyInfo?.webUrl} />
         <CompanyInfoRow label="Mô tả" />
         <div>
           <HTMLContent htmlContent={companyInfo.description} />

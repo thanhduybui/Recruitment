@@ -88,7 +88,7 @@ export default function AddCandidateTab() {
           inputChange={(e) => setPassword(e.target.value)}
         />
         <TextInput
-          label="Mật khẩu"
+          label="Nhập lại mật khẩu"
           type="password"
           required
           inputChange={(e) => setConfirmPassword(e.target.value)}

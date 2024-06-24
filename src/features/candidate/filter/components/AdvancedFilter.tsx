@@ -4,7 +4,7 @@ import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import ChairAltOutlinedIcon from "@mui/icons-material/ChairAltOutlined";
 import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
-import { majors, postTypes } from "@data/api";
+import { postTypes } from "@data/api";
 import { useRouteLoaderData } from "react-router-dom";
 import { Option } from "@data/interface";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,10 +15,11 @@ export default function AdvancedFilter() {
   const data = useRouteLoaderData("findJob");
   const dispatch = useDispatch();
   const jobFilter = useSelector((state: RootState) => state.jobFilter);
-  const { positions, fields, workModes } = data as {
+  const { positions, fields, workModes, majors } = data as {
     positions: Option[];
     fields: Option[];
     workModes: Option[];
+    majors: Option[];
   };
 
   const onFieldSelectHandler = (option: Option) => {

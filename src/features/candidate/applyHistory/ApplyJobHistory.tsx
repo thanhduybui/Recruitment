@@ -12,10 +12,15 @@ type Job = {
   companyImage: string;
 };
 
+type CV = {
+  cvUrl: string;
+};
+
 export type JobApplication = {
   job: Job;
   createdAt: string;
   status: string;
+  cv: CV;
 };
 
 const statusHandler = (status: string) => {
@@ -39,7 +44,6 @@ export default function ApplyJobHistory() {
           headers: { Authorization: "Bearer " + getAccessToken() },
         });
 
-        console.log(res.data.data.job_applications.listData);
         setJobApplications(res.data.data.job_applications.listData);
       } catch (error) {
         console.log(error);
@@ -47,13 +51,14 @@ export default function ApplyJobHistory() {
     };
 
     fetchJobApplications();
-  }, [jobApplications]);
+  }, []);
 
   return (
     <MainSectionContainer heading="Lịch sử ứng tuyển của bạn">
       <div className="mt-8 flex flex-col gap-4">
         {jobApplications.map((jobApplication) => (
           <HistoryCard
+            cv={jobApplication.cv.cvUrl}
             name={jobApplication.job.title}
             companyName={jobApplication.job.companyName}
             salary={jobApplication.job.salary}
