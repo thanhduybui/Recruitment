@@ -74,7 +74,7 @@ export default function HeaderNav() {
                   isActive ? "text-primary-500 bg-gray-100" : ""
                 }
               >
-                <HeaderNavItem name="Dashboard" />
+                <HeaderNavItem name="Công ty" />
               </NavLink>
               <NavLink
                 to="/admin/jobs"

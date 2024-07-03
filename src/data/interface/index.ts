@@ -90,3 +90,8 @@ export type SidebarItemType = {
   content: string;
   icon: JSX.Element;
 };
+
+export type ErrorReponseData = {
+  message: string;
+  status: string;
+};

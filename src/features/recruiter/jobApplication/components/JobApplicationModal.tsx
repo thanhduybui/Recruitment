@@ -17,7 +17,6 @@ import { getAccessToken } from "@utils/authUtils";
 import api from "@utils/axios";
 import { toast } from "react-toastify";
 import { toastTifyOptions } from "@utils/toastifyUtils";
-import { stat } from "fs";
 
 type CvProps = {
   id: string;

@@ -15,23 +15,13 @@ export default function AdvancedFilter() {
   const data = useRouteLoaderData("findJob");
   const dispatch = useDispatch();
   const jobFilter = useSelector((state: RootState) => state.jobFilter);
-  const { positions, fields, workModes, majors } = data as {
-    positions: Option[];
+  const { fields, workModes } = data as {
     fields: Option[];
     workModes: Option[];
-    majors: Option[];
   };
 
   const onFieldSelectHandler = (option: Option) => {
     dispatch(setJobFilter({ ...jobFilter, field: option.id }));
-  };
-
-  const onMajorSelectHandler = (option: Option) => {
-    dispatch(setJobFilter({ ...jobFilter, major: option.id }));
-  };
-
-  const onPositionSelectHandler = (option: Option) => {
-    dispatch(setJobFilter({ ...jobFilter, position: option.id }));
   };
 
   const onWorkModeSelectHandler = (option: Option) => {
@@ -55,36 +45,7 @@ export default function AdvancedFilter() {
           }
         />
       </div>
-      <div className="col-span-2">
-        <SearchSelect
-          options={majors}
-          small
-          bold
-          initValue={{ id: "0", name: "Tất cả ngành nghề" }}
-          onSelect={(option: Option) => onMajorSelectHandler(option)}
-          startIcon={
-            <AppsOutlinedIcon
-              sx={{ width: "20px", height: "20px" }}
-              color="primary"
-            />
-          }
-        />
-      </div>
-      <div className="col-span-2">
-        <NormalSelect
-          options={positions}
-          small
-          bold
-          onSelect={(option: Option) => onPositionSelectHandler(option)}
-          initValue={{ id: "0", name: "Tất cả chức vụ" }}
-          startIcon={
-            <ChairAltOutlinedIcon
-              sx={{ width: "20px", height: "20px" }}
-              color="primary"
-            />
-          }
-        />
-      </div>
+
       <div className="col-span-2">
         <NormalSelect
           options={workModes}

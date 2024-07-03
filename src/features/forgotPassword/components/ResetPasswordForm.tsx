@@ -7,11 +7,26 @@ import {
 } from "@components/form";
 import Button from "@mui/material/Button";
 import { InputConstants } from "@data/constants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import api from "@utils/axios";
+import { useState } from "react";
 
 export default function ResetPasswordForm() {
   const navigate = useNavigate();
-  const hanldeResetPasswordButtonClick = () => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const location = useLocation();
+  const { email } = location.state || {};
+  console.log(email);
+
+  const hanldeResetPasswordButtonClick = async () => {
+    try {
+      const res = await api.post("auth/forget-password/create-password", {
+        password: password,
+        confirmPassword: confirmPassword,
+        email: email,
+      });
+    } catch (error) {}
     navigate("/login");
   };
   return (
@@ -25,11 +40,18 @@ export default function ResetPasswordForm() {
           <PassFormControl
             label="Mật khẩu mới"
             name={InputConstants.PASSWORD}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
 
           <PassFormControl
             label="Nhập lại mật khẩu"
             name={InputConstants.CONFIRM_PASSWORD}
+            passwordValue={password}
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
           />
 
           <div className="w-full">

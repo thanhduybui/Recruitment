@@ -3,9 +3,15 @@ import { FormHeader, NormalFormControl, FormGroup } from "@components/form";
 import { Button, CircularProgress } from "@mui/material";
 import { InputConstants } from "@data/constants";
 import { useState } from "react";
+import api from "@utils/axios";
+import { toast } from "react-toastify";
+import { toastTifyOptions } from "@utils/toastifyUtils";
+import { AxiosError } from "axios";
+import { ErrorReponseData } from "@data/interface";
 
 type SendEmailFormProps = {
   onSwitchForm: () => void;
+  onEmailChange: (email: string) => void;
 };
 export default function SendEmailForm(props: SendEmailFormProps) {
   const [email, setEmail] = useState("");
@@ -13,14 +19,25 @@ export default function SendEmailForm(props: SendEmailFormProps) {
 
   const onEmailChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
+    props.onEmailChange(event.target.value);
   };
 
-  const hanldeSubmitEmailButtonClick = () => {
+  const hanldeSubmitEmailButtonClick = async () => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const res = await api.post("/auth/forget-password/send-code", { email });
+      toast.success(
+        (res.data.message as string) || "Gửi mã thành công",
+        toastTifyOptions
+      );
       props.onSwitchForm();
-    }, 2000);
+    } catch (error) {
+      const typedError = error as AxiosError;
+      const data = typedError.response?.data as ErrorReponseData;
+      toast.error(data.message, toastTifyOptions);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -32,7 +49,7 @@ export default function SendEmailForm(props: SendEmailFormProps) {
         <>
           <FormHeader
             title="Lấy lại tài khoản"
-            subtitle="Bạn cần thực hiện một số bước theo yêu cầu để lấy lại mật khẩu"
+            subtitle="Bạn cần thực hiện một số bước theo yêu cầu để đặt lại mật khẩu"
           />
           <FormGroup>
             <NormalFormControl

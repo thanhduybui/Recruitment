@@ -5,3 +5,4 @@ export * from "./modal";
 export * from "./role";
 export * from "./userFilterTab";
 export * from "./modalType";
+export * from "./companyFilterTab";

@@ -18,11 +18,7 @@ import Cookies from "js-cookie";
 import { login } from "@store/auth";
 import { AxiosError } from "axios";
 import { useAlert } from "@hooks";
-
-type ErrorReponseData = {
-  message: string;
-  status: string;
-};
+import { ErrorReponseData } from "@data/interface";
 
 export default function LoginForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
@@ -80,7 +76,7 @@ export default function LoginForm() {
   };
 
   return (
-    <Container maxWidth="md" fixed sx={{marginBottom: "2.4rem"}}>
+    <Container maxWidth="md" fixed sx={{ marginBottom: "2.4rem" }}>
       {showAlert && <Alert severity="success">{location.state?.message}</Alert>}
       <FormContainer onSubmit={onSubmitHandler}>
         <FormHeader

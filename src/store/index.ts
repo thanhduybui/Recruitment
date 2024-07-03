@@ -12,6 +12,7 @@ import paginationDataReducer from "./paginationData.ts";
 import userAvatarReducer from "./avatar.ts";
 import jobApplicationId from "./selectedJobApplication.ts";
 import { configureStore } from "@reduxjs/toolkit";
+import companyFilterTab from "./companyFilterTab.ts";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     modals: modalReducer,
     role: roleReducer,
     userFilterTab: userFilterTabReducer,
+    companyFilterTab: companyFilterTab,
     registerEmail: registerEmailReducer,
     jobDetail: jobDetailReducer,
     changeCompanyAvatar: changeCompanyAvatarReducer,

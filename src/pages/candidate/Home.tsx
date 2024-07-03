@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { Slider } from "@components/ui";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
-import { ApplicatonGuideline } from "@features/candidate/cv";
 import { NearJobSection } from "@features/job";
 
 function HomePage() {

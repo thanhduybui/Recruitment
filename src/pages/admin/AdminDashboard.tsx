@@ -1,7 +1,6 @@
 import { AdminCard, AdminCardContainer } from "@components/card";
 import { Container } from "@mui/material";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import { UserTable } from "@features/admin/userManagement";
 import { AdminHeadSection } from "@components/admin";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
@@ -12,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import { toastContainerOptions } from "@utils/toastifyUtils";
 import { ModalConfirmDelete } from "@components/ui/modal";
 import { modalType } from "@data/constants";
+import { CompanyTable } from "@features/admin/companyManagement";
 
 export default function AdminDashboard() {
   const isDetailModalOpen = useSelector(
@@ -66,7 +66,7 @@ export default function AdminDashboard() {
             />
           </AdminCardContainer>
           <div className="bg-white px-4 pt-2 pb-10 rounded-md mb-10">
-            <UserTable />
+            <CompanyTable />
           </div>
         </div>
       </Container>
