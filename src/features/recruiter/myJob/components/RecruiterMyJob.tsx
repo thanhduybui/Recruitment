@@ -2,18 +2,14 @@ import { MainSectionContainer } from "@components/ui";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import { RecruiterPanelContent, TabPanel, a11yProps } from "@components/tab";
+import { TabPanel, a11yProps } from "@components/tab";
 import { useEffect, useState } from "react";
-import { EditJobModal } from "..";
+import { DeleteJobModal, EditJobModal } from "..";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
-import { DeleteModal } from "@components/ui/modal";
+
 import { useRouteLoaderData } from "react-router-dom";
-import {
-  CandidateJob,
-  CompanyInfo,
-  RecruiterJobCardProps,
-} from "@data/interface";
+import { CandidateJob, CompanyInfo } from "@data/interface";
 import { ToastContainer } from "react-toastify";
 import { toastContainerOptions } from "@utils/toastifyUtils";
 import { RecruiterJobCard } from "..";
@@ -30,6 +26,9 @@ export default function RecruiterMyJob() {
   const [value, setValue] = useState(0);
   const [renderJobs, setRenderJobs] = useState<CandidateJob[]>([]);
   const [totalPages, setTotalPages] = useState(0);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteJobId, setDeleteJobId] = useState<string>("");
+  const [reloading, setReloading] = useState(false);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -50,14 +49,13 @@ export default function RecruiterMyJob() {
         const { listData, totalPages } = response.data.data.jobs;
         setTotalPages(totalPages);
         setRenderJobs(listData);
-        console.log("listData", listData);
       } catch (error) {
         console.error("Error fetching company jobs", error);
       }
     };
 
     fetchData();
-  }, [value]);
+  }, [value, reloading]);
 
   const handlePageChange = async (
     _: React.ChangeEvent<unknown>,
@@ -80,11 +78,25 @@ export default function RecruiterMyJob() {
     }
   };
 
+  const handleDeleteJob = (jobId: string) => () => {
+    setDeleteModalOpen(true);
+    setDeleteJobId(jobId);
+  };
+
+  const handleCloseModal = () => {
+    setDeleteModalOpen(false);
+  };
+
   return (
     <>
       <ToastContainer {...toastContainerOptions} />
       <MainSectionContainer heading="Quản lý việc làm của bạn">
-        <DeleteModal></DeleteModal>
+        <DeleteJobModal
+          isDeleteModalOpen={deleteModalOpen}
+          onClose={handleCloseModal}
+          jobId={deleteJobId}
+          onReload={() => setReloading(!reloading)}
+        />
         {isEditModalOpen && <EditJobModal></EditJobModal>}
         <Box sx={{ width: "100%", mt: "0.2rem", mb: "2rem" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -121,6 +133,8 @@ export default function RecruiterMyJob() {
                   key={job.id}
                   {...job}
                   dueDate={convertToDDMMYYYY(job.deadline + "")}
+                  createdDate={convertToDDMMYYYY(job.createdAt + "")}
+                  onDeleted={handleDeleteJob(job.id || "")}
                 />
               ))}
             <Box sx={{ marginTop: "2rem", display: "flex" }}>

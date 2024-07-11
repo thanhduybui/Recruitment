@@ -20,6 +20,9 @@ import { AxiosError } from "axios";
 import { FormControlLabel, Switch } from "@mui/material";
 import { toastContainerOptions, toastTifyOptions } from "@utils/toastifyUtils";
 import { editor_key } from "@config/key";
+import { useDispatch } from "react-redux";
+import { setTabIndex } from "@store/sidebar";
+import { recruiterTabIndex } from "@data/constants";
 
 export default function AddJobMain() {
   const descriptionRef = useRef<TinyMCEEditor | null>(null);
@@ -36,6 +39,8 @@ export default function AddJobMain() {
   const [location, setLocation] = useState("0");
   const [deadline, setDeadline] = useState<string>("");
   const [isHot, setIsHot] = useState(false);
+
+  const dispatch = useDispatch();
 
   const data = useRouteLoaderData("recruiterInfo");
 
@@ -68,6 +73,7 @@ export default function AddJobMain() {
       experience_id: experience,
       field_id: field,
       major_id: major,
+      location_id: location,
       work_mode_id: wordMode,
       slots: +slot,
       company_id: companyInfo.id,
@@ -82,6 +88,7 @@ export default function AddJobMain() {
         headers: { Authorization: `Bearer ${getAccessToken()}` },
       });
       toast.success(res.data.message, toastTifyOptions);
+      dispatch(setTabIndex(recruiterTabIndex.RECRUITER_JOB));
     } catch (error) {
       const typedError = error as AxiosError;
       const data = typedError.response?.data as {

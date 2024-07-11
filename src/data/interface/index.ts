@@ -22,6 +22,8 @@ export type RecruiterJobCardProps = {
   title?: string;
   dueDate?: string;
   hotJob?: boolean;
+  createdDate?: string;
+  onDeleted?: (id: string) => void;
 };
 
 export type JobDetailType = {
@@ -67,6 +69,7 @@ export type CandidateJob = {
   restAppliedDays?: number;
   isHot?: boolean;
   status?: string;
+  createdAt?: string;
 };
 
 export type UserProfile = {

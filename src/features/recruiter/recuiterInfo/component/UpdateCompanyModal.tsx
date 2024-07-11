@@ -1,16 +1,11 @@
 import { TextInput, Textarea } from "@components/form";
-import { ScrollContainer } from "@components/ui";
+
 import {
   ModalBackdrop,
   ModalContentContainer,
   ModalHeader,
 } from "@components/ui/modal";
-import {
-  InputConstants,
-  modalName,
-  recruiterTabIndex,
-  TabIndex,
-} from "@data/constants";
+import { InputConstants, modalName, recruiterTabIndex } from "@data/constants";
 import { createPortal } from "react-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";

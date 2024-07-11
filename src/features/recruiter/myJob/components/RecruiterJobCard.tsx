@@ -18,12 +18,11 @@ import api from "@utils/axios";
 import { setJobDetail } from "@store/jobDetail";
 
 export default function RecruiterJobCard(props: RecruiterJobCardProps) {
-  const { id, title, dueDate } = props;
+  const { id, title, dueDate, createdDate, onDeleted } = props;
   const dispatch = useDispatch();
 
   const onDeletePostHandler = (id?: string) => {
-    console.log(id);
-    dispatch(openModal({ modalName: modalName.DELETE_MODAL }));
+    onDeleted && onDeleted(id || "");
   };
 
   const onOpenEditModal = async (id?: string) => {
@@ -45,6 +44,7 @@ export default function RecruiterJobCard(props: RecruiterJobCardProps) {
           {title}
         </Typography>
         <Typography variant="body2">Hạn ứng tuyển: {dueDate}</Typography>
+        <Typography variant="body2">Ngày đăng: {createdDate}</Typography>
       </CardContent>
       <CardActions sx={{ marginLeft: "auto" }}>
         <Link to={"/recruiter/job-application/" + id}>
