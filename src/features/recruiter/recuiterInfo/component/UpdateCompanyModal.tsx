@@ -5,7 +5,12 @@ import {
   ModalContentContainer,
   ModalHeader,
 } from "@components/ui/modal";
-import { InputConstants, modalName } from "@data/constants";
+import {
+  InputConstants,
+  modalName,
+  recruiterTabIndex,
+  TabIndex,
+} from "@data/constants";
 import { createPortal } from "react-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
@@ -22,12 +27,15 @@ import { toast } from "react-toastify";
 import { toastTifyOptions } from "@utils/toastifyUtils";
 import { editor_key } from "@config/key";
 import { ScrollModalContainer } from "@components/ui/modal";
+import { setTabIndex } from "@store/sidebar";
 
 type UpdateCompanyModalProps = {
   companyInfo: CompanyInfo;
+  isUpdate?: () => void;
 };
 
 export default function UpdateCompanyModal({
+  isUpdate,
   companyInfo,
 }: UpdateCompanyModalProps) {
   const editorRef = useRef<TinyMCEEditor | null>(null);
@@ -38,6 +46,7 @@ export default function UpdateCompanyModal({
   const [companyPhone, setCompanyPhone] = useState(companyInfo.phone);
   const [companyScale, setCompanyScale] = useState(companyInfo.scale);
   const [companyWebUrl, setCompanyWebUrl] = useState(companyInfo.webUrl);
+
   const onCloseHandler = () => {
     dispatch(closeModal({ modalName: modalName.UPDATE_COMPANY_MODAL }));
   };
@@ -62,6 +71,8 @@ export default function UpdateCompanyModal({
 
       dispatch(closeModal({ modalName: modalName.UPDATE_COMPANY_MODAL }));
       toast.success(res.data.message, toastTifyOptions);
+      dispatch(setTabIndex(recruiterTabIndex.RECRUITER_PROFILE));
+      isUpdate && isUpdate();
     } catch (error) {
       const typedError = error as AxiosError;
       const data = typedError.response?.data as {

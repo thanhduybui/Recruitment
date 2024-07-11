@@ -28,13 +28,12 @@ export default function AddJobMain() {
   const jobNameRef = useRef<HTMLTextAreaElement>(null);
   const workLocationRef = useRef<HTMLTextAreaElement>(null);
   const workTimeRef = useRef<HTMLTextAreaElement>(null);
-  const [salary, setSalary] = useState("0");
   const [experience, setExperience] = useState("0");
-  const [position, setPosition] = useState("0");
   const [field, setField] = useState("0");
   const [major, setMajor] = useState("0");
   const [wordMode, setWorkMode] = useState("0");
   const [slot, setSlot] = useState<string>("");
+  const [location, setLocation] = useState("0");
   const [deadline, setDeadline] = useState<string>("");
   const [isHot, setIsHot] = useState(false);
 
@@ -42,8 +41,6 @@ export default function AddJobMain() {
 
   const {
     companyInfo,
-    positions,
-    salaryRanges,
     experienceRanges,
     fields,
     workModes,
@@ -51,8 +48,6 @@ export default function AddJobMain() {
     majors,
   } = data as {
     companyInfo: CompanyInfo;
-    positions: Option[];
-    salaryRanges: Option[];
     experienceRanges: Option[];
     fields: Option[];
     workModes: Option[];
@@ -70,9 +65,7 @@ export default function AddJobMain() {
       description: descriptionRef.current?.getContent(),
       requirement: requirementRef.current?.getContent(),
       benefit: benefitRef.current?.getContent(),
-      salary_id: salary,
       experience_id: experience,
-      position_id: position,
       field_id: field,
       major_id: major,
       work_mode_id: wordMode,
@@ -148,13 +141,9 @@ export default function AddJobMain() {
             <NormalSelect
               label="Nơi làm việc"
               options={locations}
-              onSelect={(option) => setSalary(option.id)}
+              onSelect={(option) => setLocation(option.id)}
             />
-            <NormalSelect
-              label="Mức lương"
-              options={salaryRanges}
-              onSelect={(option) => setSalary(option.id)}
-            />
+            <TextInput label="Mức lương" type="number" />
             <NormalSelect
               label="Mức kinh nghiệm"
               options={experienceRanges}
@@ -169,11 +158,6 @@ export default function AddJobMain() {
               label="Ngành nghề"
               options={majors}
               onSelect={(option) => setMajor(option.id)}
-            />
-            <NormalSelect
-              label="Chức vụ"
-              options={positions}
-              onSelect={(option) => setPosition(option.id)}
             />
             <NormalSelect
               label="Hình thức làm việc"

@@ -2,8 +2,6 @@ import { TextHeading } from "@components/heading";
 import { CompanyInfoRow, InfoContainer, UpdateCompanyModal } from "..";
 import { HTMLContent } from "@features/jobDetails";
 import Button from "@mui/material/Button";
-import { useRouteLoaderData } from "react-router-dom";
-import { CompanyInfo } from "@data/interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store";
 import { openModal } from "@store/modal";
@@ -12,11 +10,26 @@ import { AppAvatar } from "@components/ui";
 import { AvatarModal } from "@features/candidate/setting";
 import { useEffect } from "react";
 import { setCompanyAvatar } from "@store/changeCompanyAvatar";
+import api from "@utils/axios";
+import { useState } from "react";
+import { CompanyInfo } from "@data/interface";
+import { getAccessToken } from "@utils/authUtils";
 
 export default function CompanyInformation() {
-  const data = useRouteLoaderData("recruiterInfo");
-
-  console.log(data);
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo>({
+    id: -1,
+    name: "",
+    image: "",
+    branch: "",
+    scale: "",
+    description: "",
+    address: "",
+    webUrl: "",
+    email: "",
+    phone: "",
+    status: "",
+  });
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const isShowModal = useSelector(
     (state: RootState) => state.modals.updateCompanyModal
@@ -25,20 +38,40 @@ export default function CompanyInformation() {
     (state: RootState) => state.modals.avatarModal
   );
   const dispatch = useDispatch();
-  const { companyInfo } = data as { companyInfo: CompanyInfo };
 
   const onClickHandler = () => {
     dispatch(openModal({ modalName: modalName.UPDATE_COMPANY_MODAL }));
   };
 
   useEffect(() => {
-    dispatch(setCompanyAvatar(companyInfo.image));
-  }, [dispatch, companyInfo.image]);
+    const fetchCompanyData = async () => {
+      try {
+        const res = await api.get("/companies/profile", {
+          headers: { Authorization: `Bearer ${getAccessToken()}` },
+        });
+        const companyInfo = res.data.data.company;
+        setCompanyInfo(companyInfo);
+        dispatch(setCompanyAvatar(companyInfo.image));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchCompanyData();
+  }, [dispatch, isUpdate]);
+
+  const handleUpdateData = () => {
+    setIsUpdate(!isUpdate);
+  };
 
   return (
     <div className="my-8 px-2">
       {isAvatarModalOpen && <AvatarModal />}
-      {isShowModal && <UpdateCompanyModal companyInfo={companyInfo} />}
+      {isShowModal && (
+        <UpdateCompanyModal
+          companyInfo={companyInfo}
+          isUpdate={handleUpdateData}
+        />
+      )}
       <TextHeading title="Thông tin công ty" borderStart></TextHeading>
       <AppAvatar link={companyInfo?.image} />
       <InfoContainer>
@@ -50,7 +83,7 @@ export default function CompanyInformation() {
         <CompanyInfoRow label="Địa chỉ web" value={companyInfo?.webUrl} />
         <CompanyInfoRow label="Mô tả" />
         <div>
-          <HTMLContent htmlContent={companyInfo.description} />
+          <HTMLContent htmlContent={companyInfo?.description} />
         </div>
       </InfoContainer>
       <div className="flex items-center justify-center gap-2 mt-8">

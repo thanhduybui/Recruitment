@@ -6,8 +6,6 @@ import { AxiosResponse } from "axios";
 
 export default async function recruiterInfoLoader(): Promise<{
   companyInfo: CompanyInfo | null;
-  positions: Option[];
-  salaryRanges: Option[];
   fields: Option[];
   experienceRanges: Option[];
   workModes: Option[]; // Define the type for experienceRanges
@@ -19,19 +17,13 @@ export default async function recruiterInfoLoader(): Promise<{
       headers: { Authorization: `Bearer ${getAccessToken()}` },
     });
 
-    console.log(res);
-
     const [
-      positionRes,
-      salaryRes,
       fieldRes,
       experienceRes,
       workModeRes,
       locationRes,
       majorRes,
     ]: AxiosResponse[] = await Promise.all([
-      api.get("/positions"),
-      api.get("/salary-ranges"),
       api.get("/fields"),
       api.get("/experience-ranges"),
       api.get("/work-modes"),
@@ -39,8 +31,6 @@ export default async function recruiterInfoLoader(): Promise<{
       api.get("/majors"),
     ]);
 
-    const positions = positionRes.data?.data?.positions || [];
-    const salaryRanges = salaryRes.data?.data?.salary_ranges || [];
     const fields = fieldRes.data?.data?.fields || [];
     const experienceRanges = experienceRes.data?.data?.experience_ranges || [];
     const workModes = workModeRes.data?.data?.work_modes || [];
@@ -50,8 +40,6 @@ export default async function recruiterInfoLoader(): Promise<{
     const companyInfo = res.data.data.company as CompanyInfo;
     return {
       companyInfo,
-      positions,
-      salaryRanges,
       fields,
       experienceRanges,
       workModes,
@@ -61,8 +49,6 @@ export default async function recruiterInfoLoader(): Promise<{
   } catch (err) {
     return {
       companyInfo: null,
-      positions: [],
-      salaryRanges: [],
       fields: [],
       experienceRanges: [],
       workModes: [],

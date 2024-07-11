@@ -6,6 +6,7 @@ import { Slider } from "@components/ui";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { NearJobSection } from "@features/job";
+import { PlanSection } from "@features/plan";
 
 function HomePage() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function HomePage() {
         )}
         <Slider />
         <NearJobSection />
+        <PlanSection />
       </Container>
     </React.Fragment>
   );

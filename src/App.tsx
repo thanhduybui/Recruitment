@@ -29,7 +29,6 @@ import {
 } from "react-router-dom";
 import {
   findJobPageLoader,
-  positionLoader,
   recruiterInfoLoader,
   companyDetailLoader,
 } from "@services";
@@ -87,7 +86,6 @@ const router = createBrowserRouter(
           path="register"
           element={<EmployerRegisterPage />}
           id="recruiterRegister"
-          loader={positionLoader}
         />
         <Route element={<ProtectedRoute allowRole="RECRUITER" />}>
           <Route

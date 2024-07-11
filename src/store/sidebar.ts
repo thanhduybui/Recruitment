@@ -13,7 +13,6 @@ interface SidebarState {
 
 const getInitialState = (): SidebarState => {
   const role = getUserRole();
-  console.log(role);
   if (role === Roles.ADMIN) {
     return { tabIndex: adminTabIndex.ADMIN_SALARY };
   } else if (role === Roles.CANDIDATE) {

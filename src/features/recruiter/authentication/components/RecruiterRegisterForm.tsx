@@ -10,13 +10,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import ViewCompactOutlinedIcon from "@mui/icons-material/ViewCompactOutlined";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import Button from "@mui/material/Button";
 import { Gender, InputConstants } from "@data/constants";
 import { FormEvent, useState } from "react";
 import { useRecruiterFormValid, RecruiterRegisterInfo } from "..";
-import { useNavigate, useRouteLoaderData } from "react-router-dom";
-import { Option } from "@data/interface";
+import { useNavigate } from "react-router-dom";
+
 import api from "@utils/axios";
 import Cookies from "js-cookie";
 import { AxiosError, AxiosResponse } from "axios";
@@ -29,10 +28,7 @@ export default function RecruiterRegisterForm() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [gender, setGender] = useState("MALE");
-  const positions: Option[] = useRouteLoaderData(
-    "recruiterRegister"
-  ) as Option[];
-  console.log(positions);
+
   const navigate = useNavigate();
 
   const info: RecruiterRegisterInfo = {
@@ -149,12 +145,6 @@ export default function RecruiterRegisterForm() {
             inputChange={(e) => handleInputChange(e, setPhoneNumber)}
             placeholder="Nhập số điện thoại"
             startIcon={<LocalPhoneOutlinedIcon />}
-          />
-          <SearchSelect
-            startIcon={<LocationOnOutlinedIcon />}
-            label="Vị trí làm việc"
-            required
-            options={positions}
           />
         </div>
 
