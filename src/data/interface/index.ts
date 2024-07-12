@@ -62,7 +62,7 @@ export type CandidateJob = {
   companyName?: string;
   companyLogo?: string;
   locationId?: string;
-  salaryRange?: string;
+  salary?: string;
   deadline?: number;
   companyImage?: string;
   isFavorite?: boolean;

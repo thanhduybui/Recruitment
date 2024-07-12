@@ -32,9 +32,7 @@ export default function UserDataList(props: UserDataListProps) {
   const [totalPages, setTotalPages] = useState(0);
   const [_, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [searchUsers, setSearchUsers] = useState<UserDataRowType[]>(
-    props.searchUsers || []
-  );
+
   const type = useSelector((state: RootState) => state.userFilterTab.tabIndex);
 
   console.log(props.searchUsers);

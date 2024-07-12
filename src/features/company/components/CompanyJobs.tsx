@@ -53,7 +53,7 @@ export default function CompanyJobs({ jobs }: CompanyJobsProps) {
               title={job.title}
               companyLogo={job.companyImage}
               companyName={job.companyName}
-              salaryRange={job.salaryRange}
+              salary={job.salary}
               deadline={job.restAppliedDays}
               locationId={job.locationId}
               status={job.status}

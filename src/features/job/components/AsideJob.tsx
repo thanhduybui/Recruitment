@@ -43,7 +43,7 @@ export default function AsideJob() {
             title={job.title}
             companyName={job.companyName}
             location={job.locationId}
-            salary={job.salaryRange}
+            salary={job.salary}
             logo={job.companyImage}
           />
         ))}

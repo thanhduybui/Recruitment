@@ -35,7 +35,6 @@ const statusHandler = (status: string) => {
 
 export default function ApplyJobHistory() {
   const [jobApplications, setJobApplications] = useState<JobApplication[]>([]);
-  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchJobApplications = async () => {
@@ -70,7 +69,7 @@ export default function ApplyJobHistory() {
       </div>
       <Box sx={{ marginTop: "2rem", display: "flex" }}>
         <Pagination
-          count={totalPages}
+          count={1}
           shape="rounded"
           color="primary"
           size="medium"

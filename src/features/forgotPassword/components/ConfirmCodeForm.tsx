@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import { toastTifyOptions } from "@utils/toastifyUtils";
 import { AxiosError } from "axios";
 import { ErrorReponseData } from "@data/interface";
-import { Email } from "@mui/icons-material";
 
 type ConfirmCodeFormProps = {
   email: string;

@@ -8,11 +8,9 @@ import { requestJobConfig } from "@features/job";
 import Pagination from "@mui/material/Pagination";
 import { CandidateJob } from "@data/interface";
 import { getAccessToken } from "@utils/authUtils";
-import { requestFilterConfig } from "@features/job";
 
 export default function JobCardContainer() {
   const defaultPage: number = 1;
-  const jobFilter = useSelector((state: RootState) => state.jobFilter);
   const [jobs, setJobs] = useState<CandidateJob[]>([]);
   const dispatch = useDispatch();
   const pagination = useSelector(
@@ -33,30 +31,10 @@ export default function JobCardContainer() {
     }
   };
 
-  const fetchFilterData = async () => {
-    try {
-      const response = await axios(
-        requestFilterConfig(defaultPage, jobFilter, getAccessToken())
-      );
-      const { listData } = response.data.data.jobs;
-
-      setJobs(listData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     // Chỉ gọi fetchData khi component mount lần đầu tiên
     fetchData();
   }, []);
-
-  useEffect(() => {
-    // Gọi fetchFilterData khi jobFilter thay đổi
-    if (jobFilter) {
-      fetchFilterData();
-    }
-  }, [jobFilter]);
 
   const changePageHandler = async (
     _: React.ChangeEvent<unknown>,
@@ -67,8 +45,8 @@ export default function JobCardContainer() {
         requestJobConfig(value, 10, getAccessToken())
       );
 
-      console.log(value);
       const { listData } = response.data.data.jobs;
+      console.log(listData);
 
       setJobs(listData);
     } catch (error) {
@@ -87,7 +65,7 @@ export default function JobCardContainer() {
             companyLogo={job.companyImage}
             companyName={job.companyName}
             locationId={job.locationId}
-            salaryRange={job.salaryRange}
+            salary={job.salary}
             deadline={job.restAppliedDays}
             status={job.status}
             isFavorite={job.isFavorite}

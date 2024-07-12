@@ -23,11 +23,11 @@ export default function JobApplicationCard(props: JobApplicationCardProps) {
   const { id, isBackListed, avatar, name, phone, email, pending } = props;
   const dispatch = useDispatch();
 
-  const onOpenBlacklistDetailModal = (id?: string) => {
+  const onOpenBlacklistDetailModal = () => {
     dispatch(openModal({ modalName: modalName.BLACKLIST_MODAL }));
   };
 
-  const onOpenJobApplicationtDetailModal = async (id?: string) => {
+  const onOpenJobApplicationtDetailModal = async () => {
     dispatch(openModal({ modalName: modalName.JOB_APPLICATION_MODAL }));
     dispatch(setSelectedJobApplication(id ? +id : 0));
     if (pending) {
@@ -91,7 +91,7 @@ export default function JobApplicationCard(props: JobApplicationCardProps) {
               size="small"
               color="error"
               sx={{ borderRadius: "8px" }}
-              onClick={() => onOpenBlacklistDetailModal(id)}
+              onClick={() => onOpenBlacklistDetailModal()}
             >
               <FlagIcon />
             </IconButton>
@@ -99,7 +99,7 @@ export default function JobApplicationCard(props: JobApplicationCardProps) {
         )}
 
         <Button
-          onClick={() => onOpenJobApplicationtDetailModal(id)}
+          onClick={() => onOpenJobApplicationtDetailModal()}
           variant="contained"
           color="primary"
           size="small"

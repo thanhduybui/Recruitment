@@ -86,7 +86,7 @@ export default function FavoriteJobs() {
                 companyLogo={job.companyImage}
                 companyName={job.companyName}
                 locationId={job.locationId}
-                salaryRange={job.salaryRange}
+                salary={job.salary}
                 deadline={job.restAppliedDays}
                 isFavorite={true}
                 isHot={job.isHot}

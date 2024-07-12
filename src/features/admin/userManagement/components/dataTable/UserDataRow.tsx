@@ -21,11 +21,11 @@ type UserGridProps = {
 export default function UserDataRow(props: UserGridProps) {
   const dispatch = useDispatch();
 
-  const onClickSeeDetailHandler = (id: string | undefined) => {
+  const onClickSeeDetailHandler = () => {
     dispatch(openModal({ modalName: modalName.USER_DETAIL_MODAL }));
   };
 
-  const handleDeleteUser = (id: string | undefined) => {
+  const handleDeleteUser = () => {
     dispatch(openModal({ modalName: modalName.CONFIRM_DELETE_MODAL }));
   };
   return (
@@ -43,12 +43,12 @@ export default function UserDataRow(props: UserGridProps) {
         {!props.isHead && (
           <div className="flex gap-2 min-w-[150px] max-w-[150px]">
             <Tooltip title="Xem chi tiết">
-              <IconButton onClick={() => onClickSeeDetailHandler(props.id)}>
+              <IconButton onClick={() => onClickSeeDetailHandler()}>
                 <RemoveRedEyeRoundedIcon color="success" />
               </IconButton>
             </Tooltip>
             <Tooltip title="Xoá người dùng">
-              <IconButton onClick={() => handleDeleteUser(props.id)}>
+              <IconButton onClick={() => handleDeleteUser()}>
                 <DeleteOutlineOutlinedIcon color="error" />
               </IconButton>
             </Tooltip>

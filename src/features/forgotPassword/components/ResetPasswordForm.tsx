@@ -21,7 +21,7 @@ export default function ResetPasswordForm() {
 
   const hanldeResetPasswordButtonClick = async () => {
     try {
-      const res = await api.post("auth/forget-password/create-password", {
+      await api.post("auth/forget-password/create-password", {
         password: password,
         confirmPassword: confirmPassword,
         email: email,

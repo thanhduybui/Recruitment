@@ -194,7 +194,7 @@ export default function JobCard(props: JobCardProps) {
               fontWeight: 600,
             }}
           >
-            {props.salaryRange}
+            {props.salary === null ? "Thoả thuận" : `${props.salary} VNĐ`}
           </Typography>
         </div>
 

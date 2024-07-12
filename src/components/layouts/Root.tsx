@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { logout } from "@store/auth";
 import useUserProfile from "@hooks/useUserProfile";
 import { setUserAvatar } from "@store/avatar";
-import { ModalConfirmDelete } from "@components/ui/modal";
 
 export default function Root() {
   const token = useRouteLoaderData("root");

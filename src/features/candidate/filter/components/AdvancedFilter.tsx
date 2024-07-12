@@ -1,8 +1,6 @@
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import { NormalSelect, SearchSelect } from "@components/form";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
-import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
-import ChairAltOutlinedIcon from "@mui/icons-material/ChairAltOutlined";
 import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
 import { postTypes } from "@data/api";
 import { useRouteLoaderData } from "react-router-dom";

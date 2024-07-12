@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux";
 import { openModal } from "@store/modal";
 import { modalName } from "@data/constants";
 import { setCVIdToDelete } from "@store/deleteCvId";
-import ViewCvModal from "./ViewCvModal";
 import { Link } from "react-router-dom";
 
 type CvProps = {

@@ -1,4 +1,3 @@
-import ViewCvModal from "@features/candidate/cv/components/ViewCvModal";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ModalsState {

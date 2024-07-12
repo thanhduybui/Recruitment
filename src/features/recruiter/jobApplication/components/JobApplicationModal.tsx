@@ -64,7 +64,7 @@ export default function JobApplicationModal() {
           headers: { Authorization: `Bearer ${getAccessToken()}` },
         }
       );
-      toast.success("Đánh dấu hồ sơ phù hợp thành công", toastTifyOptions);
+      toast.success(res.data.message, toastTifyOptions);
     } catch (error) {
       toast.error("Thử lại sau", toastTifyOptions);
       console.error("Error approving job application", error);

@@ -24,6 +24,12 @@ export default function RecommendedJobCard(props: RecommendJobCardProps) {
     props.companyName && props.companyName.length > 40
       ? props.companyName.substring(0, 40) + "..." // Nếu độ dài lớn hơn 100, cắt chuỗi và thêm dấu "..."
       : props.companyName;
+
+  const limitedTitle =
+    props.title && props.title.length > 50
+      ? props.title.substring(0, 50) + "..."
+      : props.title;
+
   return (
     <Link to={`/job-detail/${props.id}`}>
       <div className="flex flex-col p-2 pl-3 border border-gray-100 rounded-md">
@@ -41,7 +47,7 @@ export default function RecommendedJobCard(props: RecommendJobCardProps) {
                 component="p"
                 sx={{ fontSize: "0.8rem", fontWeight: 600 }}
               >
-                {props.title}
+                {limitedTitle}
               </Typography>
             </Tooltip>
             <Tooltip title={props.companyName} placement="top">
@@ -59,7 +65,7 @@ export default function RecommendedJobCard(props: RecommendJobCardProps) {
 
         <div className="flex items-center gap-3 text-gray-200">
           <RecommendJobDetail
-            text={`${props.salary}`}
+            text={props.salary === null ? "Thỏa thuận" : props.salary + " VNĐ"}
             tooltip="Mức lương"
             icon={<MonetizationOnIcon fontSize="small" />}
           />

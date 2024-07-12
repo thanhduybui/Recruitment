@@ -1,9 +1,4 @@
-import {
-  FormHeader,
-  RadioButtonGroup,
-  SearchSelect,
-  TextInput,
-} from "@components/form";
+import { FormHeader, RadioButtonGroup, TextInput } from "@components/form";
 import { TextHeading } from "@components/heading";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -71,9 +66,9 @@ export default function RecruiterRegisterForm() {
         },
       });
     } catch (error) {
-      console.log(error);
       const typeError = error as AxiosError;
       const message = typeError.response?.data;
+      console.log(message);
     }
   };
 

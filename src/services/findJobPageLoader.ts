@@ -3,8 +3,6 @@ import api from "@utils/axios";
 import { AxiosResponse } from "axios";
 
 export default async function findJobPageLoader(): Promise<{
-  positions: Option[];
-  salaryRanges: Option[];
   locations: Option[];
   fields: Option[];
   experienceRanges: Option[];
@@ -13,16 +11,12 @@ export default async function findJobPageLoader(): Promise<{
 } | null> {
   try {
     const [
-      positionRes,
-      salaryRes,
       locationRes,
       fieldRes,
       experienceRes,
       workModeRes,
       majorRes,
     ]: AxiosResponse[] = await Promise.all([
-      api.get("/positions"),
-      api.get("/salary-ranges"),
       api.get("/locations"),
       api.get("/fields"),
       api.get("/experience-ranges"),
@@ -30,8 +24,6 @@ export default async function findJobPageLoader(): Promise<{
       api.get("majors"),
     ]);
 
-    const positions = positionRes.data?.data?.positions || [];
-    const salaryRanges = salaryRes.data?.data?.salary_ranges || [];
     const locations = locationRes.data?.data?.locations || [];
     const fields = fieldRes.data?.data?.fields || [];
     const experienceRanges = experienceRes.data?.data?.experience_ranges || [];
@@ -39,8 +31,6 @@ export default async function findJobPageLoader(): Promise<{
     const majors = majorRes.data?.data?.majors || [];
 
     return {
-      positions,
-      salaryRanges,
       locations,
       fields,
       experienceRanges,
@@ -48,10 +38,7 @@ export default async function findJobPageLoader(): Promise<{
       majors,
     };
   } catch (err) {
-    console.error("Error fetching data:", err);
     return {
-      positions: [],
-      salaryRanges: [],
       locations: [],
       fields: [],
       experienceRanges: [],

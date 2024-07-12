@@ -34,6 +34,7 @@ export default function AddJobMain() {
   const [experience, setExperience] = useState("0");
   const [field, setField] = useState("0");
   const [major, setMajor] = useState("0");
+  const [salary, setSalary] = useState<number | null>(null);
   const [wordMode, setWorkMode] = useState("0");
   const [slot, setSlot] = useState<string>("");
   const [location, setLocation] = useState("0");
@@ -76,6 +77,7 @@ export default function AddJobMain() {
       location_id: location,
       work_mode_id: wordMode,
       slots: +slot,
+      salary: salary,
       company_id: companyInfo.id,
       work_time: workTimeRef.current?.value,
       work_location: workLocationRef.current?.value,
@@ -150,7 +152,11 @@ export default function AddJobMain() {
               options={locations}
               onSelect={(option) => setLocation(option.id)}
             />
-            <TextInput label="Mức lương" type="number" />
+            <TextInput
+              label="Mức lương"
+              type="number"
+              inputChange={(e) => setSalary(+e.target.value)}
+            />
             <NormalSelect
               label="Mức kinh nghiệm"
               options={experienceRanges}

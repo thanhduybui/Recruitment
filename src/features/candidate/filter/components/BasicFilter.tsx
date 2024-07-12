@@ -18,9 +18,8 @@ export default function BasicFilter() {
   const [keyword, setKeyword] = useState("");
   const jobFilter = useSelector((state: RootState) => state.jobFilter);
 
-  const { experienceRanges, salaryRanges, locations } = data as {
+  const { experienceRanges, locations } = data as {
     experienceRanges: Option[];
-    salaryRanges: Option[];
     locations: Option[];
   };
 
@@ -32,9 +31,9 @@ export default function BasicFilter() {
     dispatch(setJobFilter({ ...jobFilter, experienceRange: option.id }));
   };
 
-  const onSalarySelectHandler = (option: Option) => {
-    dispatch(setJobFilter({ ...jobFilter, salaryRange: option.id }));
-  };
+  // const onSalarySelectHandler = (option: Option) => {
+  //   dispatch(setJobFilter({ ...jobFilter, salaryRange: option.id }));
+  // };
 
   const onSearchKeywordHandler = () => {
     dispatch(setJobFilter({ ...jobFilter, searchKeyword: keyword }));
@@ -82,9 +81,7 @@ export default function BasicFilter() {
       <div className="col-span-2">
         <NormalSelect
           bold
-          options={salaryRanges}
-          initValue={{ id: "0", name: "Tất cả mức lương" }}
-          onSelect={(option: Option) => onSalarySelectHandler(option)}
+          options={experienceRanges}
           startIcon={
             <AttachMoneyOutlinedIcon
               sx={{ width: "24px", height: "24px" }}
