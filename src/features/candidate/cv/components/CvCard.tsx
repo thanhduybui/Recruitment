@@ -12,6 +12,11 @@ import { openModal } from "@store/modal";
 import { modalName } from "@data/constants";
 import { setCVIdToDelete } from "@store/deleteCvId";
 import { Link } from "react-router-dom";
+import api from "@utils/axios";
+import { getAccessToken } from "@utils/authUtils";
+import { toast } from "react-toastify";
+import { toastTifyOptions } from "@utils/toastifyUtils";
+import { AxiosError } from "axios";
 
 type CvProps = {
   id: number;
@@ -19,6 +24,7 @@ type CvProps = {
   default?: boolean;
   upload?: boolean;
   url?: string;
+  reloadPage?: () => void;
 };
 
 const IconButtonStyles = {
@@ -50,13 +56,33 @@ export default function Cv(props: CvProps) {
     dispatch(setCVIdToDelete(props.id));
   };
 
+  const hanleSetDefaultCV = async (id: number) => {
+    try {
+      const res = await api.put(
+        `/cv/${id}/default`,
+        {},
+        { headers: { Authorization: `Bearer ${getAccessToken()}` } }
+      );
+      console.log(res.data);
+      props.reloadPage && props.reloadPage();
+      toast.success(res.data.message, toastTifyOptions);
+    } catch (error) {
+      const typedError = error as AxiosError;
+      const data = typedError.response?.data as {
+        message: string;
+        status: number;
+      };
+      toast.error(data.message, toastTifyOptions);
+    }
+  };
+
   return (
     <div
       className="border-2 border-primary-500 rounded-md z-0"
       style={backgroundStyle}
     >
       <div className="p-2 flex flex-col justify-between bg-gradient-to-t from-gray-300 to-transparent w-full h-40">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between hover:cursor-pointer ">
           {props.default ? (
             <Chip
               label="CV chính"
@@ -69,6 +95,7 @@ export default function Cv(props: CvProps) {
               label="Đặt làm CV chính"
               size="small"
               icon={<StarBorderOutlinedIcon color="secondary" />}
+              onClick={() => hanleSetDefaultCV(props.id)}
               sx={chipStyles}
             />
           )}

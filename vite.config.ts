@@ -7,6 +7,13 @@ export default defineConfig(({ mode }) => {
   return {
     server: {
       host: true,
+      watch: {
+        usePolling: true, // Bật chế độ polling để theo dõi file thay đổi
+      },
+      port: 5173,
+      hmr: {
+        clientPort: 5173, // Đảm bảo HMR sử dụng đúng port
+      },
     },
     plugins: [react()],
     define: {

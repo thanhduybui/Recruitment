@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { InformModal } from "@components/ui/modal";
 import { openModal } from "@store/modal";
 import { modalName } from "@data/constants";
+import role from "@store/role";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -59,7 +60,6 @@ export default function RegisterForm() {
   };
 
   const hanldeClick = () => {
-    console.log(email, passwordValue, confirmPassword);
     api
       .post("/auth/register", {
         fullName: fullName,

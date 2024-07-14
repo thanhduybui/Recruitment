@@ -18,6 +18,9 @@ import { UploadCVModal } from "@features/candidate/cv";
 import DeleteCVModal from "./DeleteCVModal";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
+import { toast } from "react-toastify";
+import { toastTifyOptions } from "@utils/toastifyUtils";
+import { AxiosError } from "axios";
 
 export default function CvLib() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -43,8 +46,13 @@ export default function CvLib() {
         },
       });
       setCvList(res.data.data.cvs);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      const typedError = error as AxiosError;
+      const data = typedError.response?.data as {
+        message: string;
+        status: number;
+      };
+      toast.error(data.message, toastTifyOptions);
     }
   };
 
@@ -119,6 +127,7 @@ export default function CvLib() {
             url={cv.cvUrl}
             default={cv.isDefault}
             upload
+            reloadPage={reloadPageHandler}
           />
         ))}
       </CvLibContainer>
